@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Libero\Browser\:
+        resource: '../src/*'
+        exclude: '../src/{Kernel.php}'
