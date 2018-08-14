@@ -8,7 +8,7 @@ services:
             args:
                 composer_dev_arg: ${COMPOSER_DEV_ARG}
         image: libero/browser_composer:${IMAGE_TAG}
-        command: 'true'
+        command: /bin/true
     fpm:
         build:
             context: .
