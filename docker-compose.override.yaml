@@ -3,6 +3,7 @@ version: '3'
 services:
     composer:
         volumes:
+            - ./config/:/app/config/
             - ./composer.json:/app/composer.json
             - ./composer.lock:/app/composer.lock
             - ./symfony.lock:/app/symfony.lock
