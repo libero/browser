@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.3/phpunit.xsd"
+         colors="true" bootstrap="vendor/autoload.php">
+
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <env name="APP_DEBUG" value="1"/>
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_SECRET" value="s$cretf0rt3st"/>
+        <env name="KERNEL_CLASS" value="Libero\Browser\Kernel"/>
+        <env name="SHELL_VERBOSITY" value="-1"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Libero Browser">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
+
+</phpunit>

@@ -1,0 +1,9 @@
+ARG image_tag=latest
+
+FROM libero/browser:${image_tag}
+
+COPY phpunit.xml.dist \
+    ./
+COPY tests/ tests/
+
+CMD ["vendor/bin/phpunit"]
