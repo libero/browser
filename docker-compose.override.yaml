@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    composer:
+        volumes:
+            - ./config/:/app/config/
+            - ./composer.json:/app/composer.json
+            - ./composer.lock:/app/composer.lock
+            - ./symfony.lock:/app/symfony.lock
+            - vendor:/app/vendor
+    fpm:
+        volumes:
+            - ./:/var/www/html/
+            - /var/www/html/var
+            - vendor:/var/www/html/vendor
+
+volumes:
+    vendor:
