@@ -7,8 +7,11 @@ services: docker
 install:
     - docker-compose build
 
-script:
+before_script:
     - docker-compose up -d
+
+script:
+    - nc -z localhost 8080
 
 after_script:
     - docker-compose down
