@@ -1,0 +1,17 @@
+sudo: required
+
+language: minimal
+
+services: docker
+
+install:
+    - docker-compose build
+
+before_script:
+    - docker-compose up -d
+
+script:
+    - nc -z localhost 8080
+
+after_script:
+    - docker-compose down
