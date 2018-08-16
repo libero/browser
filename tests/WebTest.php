@@ -2,10 +2,9 @@
 
 namespace tests\Libero\Browser;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class WebTest extends BaseWebTestCase
+final class WebTest extends WebTestCase
 {
     /**
      * @test
@@ -14,8 +13,8 @@ final class WebTest extends BaseWebTestCase
     {
         $client = static::createClient();
 
-        $this->expectException(NotFoundHttpException::class);
-
         $client->request('GET', '/');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 }
