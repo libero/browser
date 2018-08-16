@@ -1,0 +1,14 @@
+FROM composer:1.7.1
+
+ARG composer_dev_arg
+
+COPY composer.json \
+    composer.lock \
+    symfony.lock \
+    ./
+
+RUN composer --no-interaction install ${composer_dev_arg} --ignore-platform-reqs --no-autoloader --no-suggest --prefer-dist
+
+COPY src/ src/
+
+RUN composer --no-interaction dump-autoload ${composer_dev_arg} --classmap-authoritative

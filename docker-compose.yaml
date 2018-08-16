@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    composer:
+        build:
+            context: .
+            dockerfile: Dockerfile.composer
+            args:
+                composer_dev_arg: ${COMPOSER_DEV_ARG:-}
+        image: libero/browser_composer:${IMAGE_TAG:-master}
+        command: /bin/true
+    fpm:
+        build:
+            context: .
+            args:
+                image_tag: ${IMAGE_TAG:-master}
+        image: libero/browser:${IMAGE_TAG:-master}
+        depends_on:
+            - composer
+    web:
+        image: nginx:1.15.2-alpine
+        volumes:
+            - .docker/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 8080:80
+        depends_on:
+            - fpm
