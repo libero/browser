@@ -25,3 +25,12 @@ services:
             - 8080:80
         depends_on:
             - fpm
+    ci:
+        build:
+            context: .
+            dockerfile: Dockerfile.ci
+            args:
+                image_tag: ${IMAGE_TAG:-master}
+        image: libero/browser_ci:${IMAGE_TAG:-master}
+        depends_on:
+            - fpm

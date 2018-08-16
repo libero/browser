@@ -5,13 +5,14 @@ language: minimal
 services: docker
 
 install:
-    - docker-compose build
+    - docker-compose -f docker-compose.yaml build
 
 before_script:
-    - docker-compose up -d
+    - docker-compose -f docker-compose.yaml up -d web
 
 script:
     - nc -z localhost 8080
+    - docker-compose -f docker-compose.yaml run ci
 
 after_script:
-    - docker-compose down
+    - docker-compose -f docker-compose.yaml down
