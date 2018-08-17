@@ -1,5 +1,11 @@
-content:
-    path: /content/{id}
-    controller: Libero\ContentPageBundle\Controller\ContentController
+article:
+    path: /articles/{id}
+    controller: libero.content_page.controller.content.scholarly_article
+    requirements:
+        id: '[A-Za-z0-9\-._]+'
+
+blog-article:
+    path: /blog/{id}
+    controller: libero.content_page.controller.content.blog_article
     requirements:
         id: '[A-Za-z0-9\-._]+'
