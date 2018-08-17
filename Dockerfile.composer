@@ -7,6 +7,8 @@ COPY composer.json \
     symfony.lock \
     ./
 
+COPY vendor-extra/ vendor-extra/
+
 RUN composer --no-interaction install ${composer_dev_arg} --ignore-platform-reqs --no-autoloader --no-suggest --prefer-dist
 
 COPY src/ src/
