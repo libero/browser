@@ -1,0 +1,5 @@
+content:
+    path: /content/{id}
+    controller: Libero\ContentPageBundle\Controller\ContentController
+    requirements:
+        id: '[A-Za-z0-9\-._]+'

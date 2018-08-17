@@ -18,7 +18,8 @@
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.1",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "^4.1",
+        "wikimedia/composer-merge-plugin": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3",
@@ -31,6 +32,13 @@
         "symfony/polyfill-php56": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php71": "*"
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "vendor-extra/*/composer.json"
+            ]
+        }
     },
     "config": {
         "platform": {
