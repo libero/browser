@@ -10,7 +10,7 @@ final class WebTest extends WebTestCase
      * @test
      * @dataProvider idProvider
      */
-    public function it_shows_a_scholarly_articles(string $id) : void
+    public function it_shows_scholarly_articles(string $id) : void
     {
         $client = static::createClient();
 
@@ -26,7 +26,7 @@ final class WebTest extends WebTestCase
      * @test
      * @dataProvider idProvider
      */
-    public function it_shows_a_blog_articles(string $id) : void
+    public function it_shows_blog_articles(string $id) : void
     {
         $client = static::createClient();
 
