@@ -1,0 +1,24 @@
+{
+    "name": "libero/content-page-bundle",
+    "description": "A Libero content page",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Libero\\ContentPageBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "symfony/config": "^4.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/http-foundation": "^4.1",
+        "symfony/http-kernel": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

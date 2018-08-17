@@ -17,11 +17,15 @@
         <testsuite name="Libero Browser">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="ContentPageBundle">
+            <directory>vendor-extra/ContentPageBundle/tests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
             <directory>src</directory>
+            <directory>vendor-extra/ContentPageBundle/src</directory>
         </whitelist>
     </filter>
 

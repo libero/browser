@@ -12,3 +12,4 @@ COPY public/ public/
 COPY config/ config/
 COPY --from=composer /app/vendor/ vendor/
 COPY src/ src/
+COPY vendor-extra/ vendor-extra/
