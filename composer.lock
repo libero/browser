@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e3b3c7238329e3f9016bc5ec50b6dc9",
+    "content-hash": "df773ab4a17b82868a21f8a1b87d49cf",
     "packages": [
         {
             "name": "libero/content-page-bundle",
-            "version": "0.0.1",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "058a5cb5a849122e6e57382b0cf5a15853bd6259",
+                "reference": "a334e0f10e447c85dbc6a543dc9d0864a458139a",
                 "shasum": null
             },
             "require": {
@@ -26,6 +26,11 @@
                 "phpunit/phpunit": "^7.3"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Libero\\ContentPageBundle\\": "src/"
@@ -2789,7 +2794,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "libero/content-page-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
