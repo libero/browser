@@ -38,9 +38,6 @@
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php71": "*"
     },
-    "scripts": {
-        "test": "phpunit"
-    },
     "repositories": [
         {
             "type": "path",
