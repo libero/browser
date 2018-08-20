@@ -19,7 +19,7 @@ final class ContentPageExtension extends Extension
 
         foreach ($config['pages'] as $name => $page) {
             $this->addPage($name, $page, $container);
-        }  
+        }
     }
 
     private function addPage(string $name, array $config, ContainerBuilder $container) : void
