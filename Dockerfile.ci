@@ -2,7 +2,8 @@ ARG image_tag=latest
 
 FROM libero/browser:${image_tag}
 
-COPY phpunit.xml.dist \
+COPY phpcs.xml.dist \
+    phpunit.xml.dist \
     ./
 COPY tests/ tests/
 
