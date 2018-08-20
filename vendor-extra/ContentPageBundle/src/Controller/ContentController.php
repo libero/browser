@@ -15,7 +15,7 @@ final class ContentController
 
     public function __invoke(string $id) : Response
     {
-        $xmlString = $this->article->getData();
+        $xmlString = $this->article->getData('body');
         $document = FluentDOM::load($xmlString);
         $document->registerNamespace('a', 'http://libero.pub');
 
