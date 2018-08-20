@@ -19,16 +19,16 @@ final class ContentPageExtension extends Extension
 
         foreach ($config['pages'] as $name => $page) {
             $this->addPage($name, $page, $container);
-        }
+        }  
     }
 
     private function addPage(string $name, array $config, ContainerBuilder $container) : void
     {
         $id = sprintf(self::CONTENT_CONTROLLER_ID, $name);
         $definition = new Definition(ContentController::class);
-
+       
+        $definition->setAutowired(true);
         $definition->addTag('controller.service_arguments');
-
         $container->setDefinition($id, $definition);
     }
 }
