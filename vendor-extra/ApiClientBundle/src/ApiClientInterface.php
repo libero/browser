@@ -7,5 +7,5 @@ use Psr\Http\Message\RequestInterface;
 
 interface ApiClientInterface
 {
-    public function send(RequestInterface $request) : PromiseInterface;
+    public function getData();
 }

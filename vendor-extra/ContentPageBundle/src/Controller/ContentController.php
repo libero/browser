@@ -4,6 +4,7 @@ namespace Libero\ContentPageBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Libero\ApiClientBundle\ApiClientInterface;
+use FluentDOM;
 
 final class ContentController
 {
@@ -14,6 +15,14 @@ final class ContentController
 
     public function __invoke(string $id) : Response
     {
-        return new Response($id, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+        $xmlString = $this->article->getData();
+        $document = FluentDOM::load($xmlString);
+        $document->registerNamespace('a', 'http://libero.pub');
+
+        foreach ($document('/a:body/a:section') as $section) {
+            $title = $section('string(a:title)');
+        }
+
+        return new Response($title, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
 }

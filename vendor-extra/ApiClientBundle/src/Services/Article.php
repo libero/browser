@@ -10,20 +10,13 @@ use Psr\Http\Message\ResponseInterface;
 
 final class Article implements ApiClientInterface
 {
-    public function __constructor()
+    public function __construct(ReadData $client)
     {
-        $this->client =  new Client();
-        $this->request = new Request('GET', 'http://httpbin.org');
+        $this->client =  $client;
     }
 
-    public function send(RequestInterface $request) : PromiseInterface
+    public function getData(string $data = 'body')
     {
-        return $this->client
-            ->sendAsync($request)
-            ->then(
-                function (ResponseInterface $e) : XmlResponse {
-                    return new XmlResponse($this->stopwatch, $e);
-                }
-            );
+        return $this->client->send($data);
     }
 }
