@@ -8,9 +8,10 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class Article implements ApiClientInterface {
-
-    public function __constructor () {
+final class Article implements ApiClientInterface
+{
+    public function __constructor()
+    {
         $this->client =  new Client();
         $this->request = new Request('GET', 'http://httpbin.org');
     }

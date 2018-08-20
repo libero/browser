@@ -10,10 +10,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 
-
 final class ApiClientExtension extends Extension
 {
-
     private const API_CLIENT_ARTICLE_ID = 'libero.api_client.article';
 
     public function load(array $configs, ContainerBuilder $container)
