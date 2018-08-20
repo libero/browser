@@ -12,7 +12,8 @@ before_script:
 
 script:
     - nc -z localhost 8080
-    - docker-compose -f docker-compose.yaml run ci
+    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpunit
+    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpcs
 
 after_script:
     - docker-compose -f docker-compose.yaml down
