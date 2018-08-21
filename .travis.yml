@@ -4,6 +4,9 @@ language: minimal
 
 services: docker
 
+env: 
+    - IMAGE_TAG=$TRAVIS_COMMIT 
+
 install:
     - docker-compose -f docker-compose.yaml build
 
@@ -17,3 +20,8 @@ script:
 
 after_script:
     - docker-compose -f docker-compose.yaml down
+    # should be executed only if $TRAVIS_BRANCH = master
+    - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+    # tag temporarily as liberoadmin
+    - docker tag libero/browser:$IMAGE_TAG liberoadmin/browser:$IMAGE_TAG
+    - docker push liberoadmin/browser:$IMAGE_TAG
