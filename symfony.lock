@@ -2,6 +2,9 @@
     "doctrine/instantiator": {
         "version": "1.1.0"
     },
+    "league/flysystem": {
+        "version": "1.0.45"
+    },
     "myclabs/deep-copy": {
         "version": "1.8.1"
     },
