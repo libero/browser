@@ -24,4 +24,6 @@ script:
 
 after_script:
     - docker-compose -f docker-compose.yaml down
+
+after_success:
     - .travis/push-image.sh
