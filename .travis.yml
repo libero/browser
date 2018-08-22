@@ -22,8 +22,8 @@ script:
     - docker-compose -f docker-compose.yaml run ci vendor/bin/phpunit
     - docker-compose -f docker-compose.yaml run ci vendor/bin/phpcs
 
-after_script:
-    - docker-compose -f docker-compose.yaml down
-
 after_success:
     - .travis/push-image.sh
+
+after_script:
+    - docker-compose -f docker-compose.yaml down
