@@ -2,7 +2,7 @@
 set -e
 
 if [ "$TRAVIS_BRANCH" = master ]; then
-    docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+    echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin 
 
     # tag temporarily as liberoadmin due to lack of `libero/` availability
     docker tag libero/browser:$IMAGE_TAG liberoadmin/browser:$IMAGE_TAG
