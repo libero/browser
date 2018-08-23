@@ -21,7 +21,7 @@ final class FlysystemClient implements HttpClientInterface
     public function send() : PromiseInterface
     {
         $result = $this->client->read('front.xml');
-        return GuzzleHttp\Promise\promise_for($result);
+        return \GuzzleHttp\Promise\promise_for($result);
     }
 
     public static function buildClient(array $config = [])

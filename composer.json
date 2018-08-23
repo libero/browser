@@ -15,6 +15,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "guzzlehttp/guzzle": "^6.3",
         "league/flysystem": "^1.0",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
