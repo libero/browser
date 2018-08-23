@@ -1,5 +1,5 @@
 <?php
-namespace Libero\Libero\HttpClientBundle\Http;
+namespace Libero\HttpClientBundle\Http;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;

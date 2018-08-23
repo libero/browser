@@ -3,7 +3,7 @@ namespace Libero\ApiClientBundle\Services;
 
 use League\Flysystem\Filesystem;
 
-final class MockDataAdapter implements HttpClientInterface
+final class FlysystemClient implements HttpClientInterface
 {
     private $client;
 
@@ -17,13 +17,12 @@ final class MockDataAdapter implements HttpClientInterface
 
     public function send(RequestInterface $request)
     {
-        $promise = $this->client->read(__DIR__.'/../Resources/front.xml');
-        return new Promise($promise, $request);
+        $result = $this->client->read(__DIR__.'/../Resources/front.xml');
+        return new Promise\promise_for($result);
     }
 
     private static function buildClient(array $config = [])
     {
-
         $adapter = new Local(__DIR__ . '/uploads');
         return new Filesystem($adapter);
     }

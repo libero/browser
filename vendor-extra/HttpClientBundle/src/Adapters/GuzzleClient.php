@@ -2,12 +2,12 @@
 namespace Libero\HttpClientBundle\Adapter;
 
 use Libero\HttpClientBundle\Http\HttpClient;
-use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\RequestInterface;
 
-final class GuzzleAdapter implements HttpClientInterface
+final class GuzzleClient implements HttpClientInterface
 {
     private $client;
 
@@ -29,6 +29,6 @@ final class GuzzleAdapter implements HttpClientInterface
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
         $config = array_merge(['handler' => $handlerStack], $config);
-        return new GuzzleClient($config);
+        return new Client($config);
     }
 }
