@@ -1,11 +1,11 @@
 {
-    "name": "libero/api-client-bundle",
-    "description": "A Libero api client",
+    "name": "libero/http-client-bundle",
+    "description": "A Libero http client",
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Libero\\ApiClientBundle\\": "src/"
+            "Libero\\HttpClientBundle\\": "src/"
         }
     },
     "require": {

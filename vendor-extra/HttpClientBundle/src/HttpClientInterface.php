@@ -1,11 +1,11 @@
 <?php
-namespace Libero\HttpClientBundle\Http;
+namespace Libero\HttpClientBundle;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 
 interface HttpClientInterface
 {
-    public function send(RequestInterface $request) : PromiseInterface;
-    public static function buildClient(array $config = []) : void;
+    public function send() : PromiseInterface;
+    public static function buildClient(array $config = []);
 }

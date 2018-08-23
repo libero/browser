@@ -1,7 +1,7 @@
 <?php
-namespace Libero\HttpClientBundle\Adapter;
+namespace Libero\HttpClientBundle\Clients;
 
-use Libero\HttpClientBundle\Http\HttpClient;
+use Libero\HttpClientBundle\HttpClientInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
@@ -25,7 +25,7 @@ final class GuzzleClient implements HttpClientInterface
         return new Promise($promise, $request);
     }
 
-    private static function buildClient(array $config = [])
+    public static function buildClient(array $config = [])
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
         $config = array_merge(['handler' => $handlerStack], $config);
