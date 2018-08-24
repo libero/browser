@@ -19,6 +19,6 @@ final class ContentController
 
         $response = $promise->wait();
 
-        return new Response($response, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+        return new Response($id, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
 }
