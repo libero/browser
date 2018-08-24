@@ -30,6 +30,7 @@ final class ContentPageExtension extends Extension
 
         $definition->setArgument(0, new Reference('Libero\ApiClientBundle\HttpClient\HttpClient'));
         $definition->addTag('controller.service_arguments');
+
         $container->setDefinition($id, $definition);
     }
 }
