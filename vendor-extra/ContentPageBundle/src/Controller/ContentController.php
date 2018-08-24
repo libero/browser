@@ -10,7 +10,7 @@ final class ContentController
     public function __invoke(string $id) : Response
     {
         $client = new FlysystemClient();
-        print_r($client->send());
+        // print_r($client->send());
         return new Response($id, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
 }
