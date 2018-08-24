@@ -4,6 +4,13 @@ language: minimal
 
 services: docker
 
+branches:
+    only:
+        - master
+
+env: 
+    - IMAGE_TAG=$TRAVIS_COMMIT 
+
 install:
     - docker-compose -f docker-compose.yaml build
 
@@ -12,7 +19,11 @@ before_script:
 
 script:
     - nc -z localhost 8080
-    - docker-compose -f docker-compose.yaml run ci
+    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpunit
+    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpcs
+
+after_success:
+    - .travis/push-image.sh
 
 after_script:
     - docker-compose -f docker-compose.yaml down

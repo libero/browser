@@ -12,7 +12,10 @@
         "version": "1.4.2"
     },
     "league/flysystem": {
-        "version": "1.0.45"
+        "version": "1.0.46"
+    },
+    "libero/content-page-bundle": {
+        "version": "1.0.x-dev"
     },
     "myclabs/deep-copy": {
         "version": "1.8.1"
@@ -107,6 +110,9 @@
     "sebastian/version": {
         "version": "2.0.1"
     },
+    "squizlabs/php_codesniffer": {
+        "version": "3.3.1"
+    },
     "symfony/browser-kit": {
         "version": "v4.1.3"
     },
@@ -196,8 +202,5 @@
     },
     "webmozart/assert": {
         "version": "1.3.0"
-    },
-    "wikimedia/composer-merge-plugin": {
-        "version": "v1.4.1"
     }
 }
