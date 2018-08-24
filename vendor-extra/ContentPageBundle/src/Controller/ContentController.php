@@ -7,7 +7,8 @@ use Libero\HttpClientBundle\HttpClientInterface;
 
 final class ContentController
 {
-    public function __construct (HttpClientInterface $client) {
+    public function __construct(HttpClientInterface $client)
+    {
         $this->client = $client;
     }
 

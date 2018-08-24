@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Libero\HttpClientBundle\Clients\FlysystemClient;
 use Libero\HttpClientBundle\HttpClientInterface;
 
-
 final class HttpClientExtension extends Extension
 {
 
