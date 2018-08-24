@@ -2,24 +2,34 @@
 
 namespace Libero\ContentPageBundle\Controller;
 
+use FluentDOM;
+use GuzzleHttp\Psr7\Request;
+use Libero\ApiClientBundle\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
-use Libero\HttpClientBundle\HttpClientInterface;
 
 final class ContentController
 {
-    public function __construct(HttpClientInterface $client)
+    private $client;
+
+    public function __construct(HttpClient $client)
     {
         $this->client = $client;
     }
 
     public function __invoke(string $id) : Response
     {
-        $promise = $this->client->send()->then(function ($result) {
-            return $result;
-        });
+        return $this->client
+            ->send(new Request('GET', "{$id}/versions/latest/front"))
+            ->then(
+                function (string $front) {
+                    $front = FluentDOM::load($front);
+                    $front->registerNamespace('libero', 'http://libero.pub');
 
-        $response = $promise->wait();
+                    $title = $front('string(/libero:front/libero:title)');
 
-        return new Response($id, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+                    return new Response($title, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+                }
+            )
+            ->wait();
     }
 }

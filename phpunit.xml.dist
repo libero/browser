@@ -17,19 +17,19 @@
         <testsuite name="Libero Browser">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="ApiClientBundle">
+            <directory>vendor-extra/ApiClientBundle/tests</directory>
+        </testsuite>
         <testsuite name="ContentPageBundle">
             <directory>vendor-extra/ContentPageBundle/tests</directory>
-        </testsuite>
-        <testsuite name="HttpClientBundle">
-            <directory>vendor-extra/HttpClientBundle/tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
             <directory>src</directory>
+            <directory>vendor-extra/ApiClientBundle/src</directory>
             <directory>vendor-extra/ContentPageBundle/src</directory>
-            <directory>vendor-extra/HttpClientBundle/src</directory>
         </whitelist>
     </filter>
 

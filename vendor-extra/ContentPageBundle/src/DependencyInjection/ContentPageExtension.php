@@ -5,6 +5,7 @@ namespace Libero\ContentPageBundle\DependencyInjection;
 use Libero\ContentPageBundle\Controller\ContentController;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class ContentPageExtension extends Extension
@@ -27,7 +28,7 @@ final class ContentPageExtension extends Extension
         $id = sprintf(self::CONTENT_CONTROLLER_ID, $name);
         $definition = new Definition(ContentController::class);
 
-        $definition->setAutowired(true);
+        $definition->setArgument(0, new Reference('Libero\ApiClientBundle\HttpClient\HttpClient'));
         $definition->addTag('controller.service_arguments');
         $container->setDefinition($id, $definition);
     }

@@ -2,8 +2,8 @@
     "doctrine/instantiator": {
         "version": "1.1.0"
     },
-    "guzzlehttp/guzzle": {
-        "version": "6.3.3"
+    "fluentdom/fluentdom": {
+        "version": "7.0.0"
     },
     "guzzlehttp/promises": {
         "version": "v1.3.1"
@@ -14,10 +14,10 @@
     "league/flysystem": {
         "version": "1.0.46"
     },
-    "libero/content-page-bundle": {
+    "libero/api-client-bundle": {
         "version": "1.0.x-dev"
     },
-    "libero/http-client-bundle": {
+    "libero/content-page-bundle": {
         "version": "1.0.x-dev"
     },
     "myclabs/deep-copy": {

@@ -19,7 +19,7 @@ final class WebTest extends WebTestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/plain; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame($id, $response->getContent());
+        $this->assertSame('Coordination in Centralized and Decentralized Systems', $response->getContent());
     }
 
     /**
@@ -35,7 +35,7 @@ final class WebTest extends WebTestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/plain; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame($id, $response->getContent());
+        $this->assertSame('Coordination in Centralized and Decentralized Systems', $response->getContent());
     }
 
     public function idProvider() : iterable
