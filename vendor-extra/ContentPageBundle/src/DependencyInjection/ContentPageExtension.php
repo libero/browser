@@ -27,8 +27,8 @@ final class ContentPageExtension extends Extension
         $id = sprintf(self::CONTENT_CONTROLLER_ID, $name);
         $definition = new Definition(ContentController::class);
 
+        $definition->setAutowired(true);
         $definition->addTag('controller.service_arguments');
-
         $container->setDefinition($id, $definition);
     }
 }
