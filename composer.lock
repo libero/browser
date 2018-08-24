@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "294546329cb79877bcdf1dcf6177f1b7",
+    "content-hash": "d5518478ec594d1aeec9dfb725c10ad0",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -305,6 +305,41 @@
                 "MIT"
             ],
             "description": "A Libero content page"
+        },
+        {
+            "name": "libero/http-client-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor-extra/HttpClientBundle",
+                "reference": "70788e1c442299f811ba3a95e2ab70ad5382c736",
+                "shasum": null
+            },
+            "require": {
+                "php": "^7.2",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
+                "symfony/http-foundation": "^4.1",
+                "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Libero\\HttpClientBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Libero http client"
         },
         {
             "name": "psr/cache",
@@ -3176,7 +3211,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "libero/content-page-bundle": 20
+        "libero/content-page-bundle": 20,
+        "libero/http-client-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

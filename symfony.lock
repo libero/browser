@@ -17,6 +17,9 @@
     "libero/content-page-bundle": {
         "version": "1.0.x-dev"
     },
+    "libero/http-client-bundle": {
+        "version": "1.0.x-dev"
+    },
     "myclabs/deep-copy": {
         "version": "1.8.1"
     },
