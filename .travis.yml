@@ -27,3 +27,9 @@ after_success:
 
 after_script:
     - docker-compose -f docker-compose.yaml down
+
+deploy:
+    provider: script
+    script: .travis/downstream-environments.sh $TRAVIS_COMMIT
+    on:
+        branch: master
