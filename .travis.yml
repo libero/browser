@@ -30,6 +30,6 @@ after_script:
 
 deploy:
     provider: script
-    script: .travis/downstream.sh $TRAVIS_COMMIT
+    script: .travis/downstream-environments.sh $TRAVIS_COMMIT
     on:
         branch: master
