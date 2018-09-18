@@ -2,10 +2,10 @@
 set -e
 
 body='{
-	"request": {
-		"branch":"master",
-		"message":"browser new version: '"$1"'"
-	}
+    "request": {
+        "branch":"master",
+        "message":"browser new version: '"$1"'"
+    }
 }'
 
 curl -s -X POST \
