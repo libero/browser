@@ -4,7 +4,7 @@ set -e
 body='{
     "request": {
         "branch":"master",
-        "message":"browser new version: '"$1"'"
+        "message":"Update Browser to '"$1"'"
     }
 }'
 
