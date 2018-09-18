@@ -27,3 +27,7 @@ after_success:
 
 after_script:
     - docker-compose -f docker-compose.yaml down
+
+deploy:
+    provider: script
+    script: .travis/downstream.sh $TRAVIS_COMMIT
