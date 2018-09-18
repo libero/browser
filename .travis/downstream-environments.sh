@@ -3,8 +3,8 @@ set -e
 
 body='{
     "request": {
-        "branch":"master",
-        "message":"Update Browser to '"$1"'"
+        "branch": "master",
+        "message": "Update Browser to '"$1"'"
     }
 }'
 
