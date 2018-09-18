@@ -31,3 +31,5 @@ after_script:
 deploy:
     provider: script
     script: .travis/downstream.sh $TRAVIS_COMMIT
+    on:
+        branch: master
