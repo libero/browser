@@ -8,18 +8,19 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "tests\\Libero\\Browser\\": "tests/"
+            "tests\\Libero\\Browser\\": "tests/",
+            "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/"
         }
     },
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
-        "ext-iconv": "*",
+        "ext-mbstring": "*",
         "libero/content-page-bundle": "^1.0@dev",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
         "symfony/dependency-injection": "^4.1",
-        "symfony/flex": "^1.0",
+        "symfony/flex": "^1.1",
         "symfony/framework-bundle": "^4.1",
         "symfony/http-foundation": "^4.1",
         "symfony/http-kernel": "^4.1",
@@ -27,17 +28,17 @@
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.3",
-        "squizlabs/php_codesniffer": "^3.3",
+        "libero/coding-standard": "^0.3",
+        "phpstan/phpstan": "^0.10",
+        "phpstan/phpstan-phpunit": "^0.10",
+        "phpstan/phpstan-symfony": "^0.10",
+        "phpunit/phpunit": "^7.4",
         "symfony/browser-kit": "^4.1",
         "symfony/debug": "^4.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php56": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php71": "*"
+        "symfony/polyfill-mbstring": "*"
     },
     "repositories": [
         {
@@ -46,9 +47,11 @@
         }
     ],
     "config": {
-        "platform": {
-            "php": "7.2.8"
-        },
         "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": true
+        }
     }
 }

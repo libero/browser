@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Libero\Browser\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +13,7 @@ $debug = (bool) ($_SERVER['APP_DEBUG'] ?? ('prod' !== $env));
 
 if ($debug) {
     umask(0000);
+
     Debug::enable();
 }
 
