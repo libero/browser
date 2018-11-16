@@ -1,15 +1,10 @@
-version: '3'
+version: '3.4'
 
 services:
-    composer:
+    app:
+        build:
+            target: dev
         volumes:
             - ./:/app
-            - vendor:/app/vendor
-    fpm:
-        volumes:
-            - ./:/var/www/html/
-            - /var/www/html/var
-            - vendor:/var/www/html/vendor
-
-volumes:
-    vendor:
+            - /app/var
+            - /app/vendor
