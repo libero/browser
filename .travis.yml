@@ -4,33 +4,32 @@ language: minimal
 
 services: docker
 
-branches:
-    only:
-        - master
-
-env: 
-    - IMAGE_TAG=$TRAVIS_COMMIT 
+env:
+    global:
+        - APP_SECRET=secret
+        - IMAGE_TAG=$TRAVIS_COMMIT
 
 install:
-    - docker-compose -f docker-compose.yaml build
-
-before_script:
-    - docker-compose -f docker-compose.yaml up -d web
+    - travis_retry docker-compose --file docker-compose.yaml build
+    - travis_retry docker-compose --file docker-compose.yaml --file docker-compose.test.yaml build
 
 script:
-    - nc -z localhost 8080
-    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpunit
-    - docker-compose -f docker-compose.yaml run ci vendor/bin/phpcs
-    - docker-compose -f docker-compose.yaml run ci sh -c "bin/console cache:warmup --no-optional-warmers && vendor/bin/phpstan analyse"
+    - .travis/smoke-test.sh
+    - docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app vendor/bin/phpunit
+    - docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app vendor/bin/phpcs -p
+    - docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run -e APP_ENV=dev app sh -c "bin/console cache:warmup --no-optional-warmers && vendor/bin/phpstan analyse"
 
 after_success:
     - .travis/push-image.sh
-
-after_script:
-    - docker-compose -f docker-compose.yaml down
 
 deploy:
     provider: script
     script: .travis/downstream-environments.sh $TRAVIS_COMMIT
     on:
         branch: master
+
+if: |
+    branch = master OR \
+    branch =~ /^(?:[0-9]|[1-9][0-9]*)\.(?:[0-9]|[1-9][0-9]*)$/ OR \
+    tag IS present OR \
+    type = pull_request
