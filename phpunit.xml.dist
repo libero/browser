@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.3/phpunit.xsd"
-         colors="true" bootstrap="vendor/autoload.php">
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.4/phpunit.xsd" colors="true"
+    bootstrap="vendor/autoload.php">
 
     <php>
-        <ini name="error_reporting" value="-1"/>
-        <env name="APP_DEBUG" value="1"/>
         <env name="APP_ENV" value="test"/>
-        <env name="APP_SECRET" value="s$cretf0rt3st"/>
+        <env name="APP_SECRET" value="foobarbazqux"/>
         <env name="KERNEL_CLASS" value="Libero\Browser\Kernel"/>
         <env name="SHELL_VERBOSITY" value="-1"/>
     </php>
 
     <testsuites>
-        <testsuite name="Libero Browser">
-            <directory>tests</directory>
+        <testsuite name="Browser">
+            <directory suffix=".php">tests</directory>
         </testsuite>
         <testsuite name="ContentPageBundle">
-            <directory>vendor-extra/ContentPageBundle/tests</directory>
+            <directory suffix=".php">vendor-extra/ContentPageBundle/tests</directory>
         </testsuite>
     </testsuites>
 

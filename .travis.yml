@@ -21,6 +21,7 @@ script:
     - nc -z localhost 8080
     - docker-compose -f docker-compose.yaml run ci vendor/bin/phpunit
     - docker-compose -f docker-compose.yaml run ci vendor/bin/phpcs
+    - docker-compose -f docker-compose.yaml run ci sh -c "bin/console cache:warmup --no-optional-warmers && vendor/bin/phpstan analyse"
 
 after_success:
     - .travis/push-image.sh
