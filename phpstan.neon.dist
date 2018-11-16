@@ -1,0 +1,18 @@
+parameters:
+    ignoreErrors:
+        - '~^.*(?=.* Symfony\\Component\\Config\\Definition\\Builder)(?=.*( |:{2})end\(\)).*$~'
+    level: max
+    paths:
+        - bin/console
+        - config/bundles.php
+        - public/index.php
+        - src
+        - tests
+        - vendor-extra
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/dev/srcDevDebugProjectContainer.xml
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon

@@ -67,6 +67,7 @@ RUN touch .phpcs-cache && \
     chown www-data:www-data .phpcs-cache
 COPY tests/ tests/
 COPY phpcs.xml.dist \
+    phpstan.neon.dist \
     phpunit.xml.dist \
     ./
 COPY --from=composer-dev /app/vendor/ vendor/
