@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Libero\ApiClientBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

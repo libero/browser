@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace tests\Libero\ContentPageBundle\Controller;
 
 use League\Flysystem\Adapter\Local;
