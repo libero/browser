@@ -14,7 +14,7 @@ install:
     - travis_retry docker-compose --file docker-compose.yaml --file docker-compose.test.yaml build
 
 script:
-    - .travis/test/smoke
+    - .travis/smoke-test.sh
     - docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app vendor/bin/phpunit
     - docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app vendor/bin/phpcs -p
 
