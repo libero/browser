@@ -20,7 +20,7 @@ RUN composer --no-interaction dump-autoload --classmap-authoritative
 #
 # Stage: Production environment
 #
-FROM php:7.2.11-fpm-alpine as prod
+FROM php:7.2.11-fpm-alpine AS prod
 
 WORKDIR /app
 
@@ -57,7 +57,7 @@ RUN composer --no-interaction install --ignore-platform-reqs --no-suggest --pref
 #
 # Stage: Test environment
 #
-FROM prod as test
+FROM prod AS test
 
 ENV APP_ENV=test
 
@@ -78,7 +78,7 @@ USER www-data
 #
 # Stage: Development environment
 #
-FROM test as dev
+FROM test AS dev
 
 ENV APP_ENV=dev
 
