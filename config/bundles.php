@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    Csa\Bundle\GuzzleBundle\CsaGuzzleBundle::class => ['all' => true],
     Libero\ContentPageBundle\ContentPageBundle::class => ['all' => true],
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
 ];

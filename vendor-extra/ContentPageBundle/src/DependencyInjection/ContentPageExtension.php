@@ -8,6 +8,7 @@ use Libero\ContentPageBundle\Controller\ContentController;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use function sprintf;
 
@@ -20,6 +21,7 @@ final class ContentPageExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
 
         foreach ($config['pages'] as $name => $page) {
+            $page['client'] = $config['client'];
             $this->addPage($name, $page, $container);
         }
     }
@@ -29,6 +31,8 @@ final class ContentPageExtension extends Extension
         $id = sprintf(self::CONTENT_CONTROLLER_ID, $name);
         $definition = new Definition(ContentController::class);
 
+        $definition->setArgument(0, new Reference($config['client']));
+        $definition->setArgument(1, $config['service']);
         $definition->addTag('controller.service_arguments');
 
         $container->setDefinition($id, $definition);

@@ -16,6 +16,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-mbstring": "*",
+        "csa/guzzle-bundle": "^3.1",
         "libero/content-page-bundle": "^1.0@dev",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
@@ -29,12 +30,14 @@
     },
     "require-dev": {
         "libero/coding-standard": "^0.3",
+        "php-vfs/php-vfs": "^1.4",
         "phpstan/phpstan": "^0.10",
         "phpstan/phpstan-phpunit": "^0.10",
         "phpstan/phpstan-symfony": "^0.10",
         "phpunit/phpunit": "^7.4",
         "symfony/browser-kit": "^4.1",
-        "symfony/debug": "^4.1"
+        "symfony/debug": "^4.1",
+        "symfony/filesystem": "^4.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",

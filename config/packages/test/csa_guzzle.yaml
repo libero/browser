@@ -1,0 +1,9 @@
+parameters:
+    env(API_URI): 'http://localhost'
+    guzzle_mocks: '%kernel.project_dir%/var/fixtures/guzzle'
+
+csa_guzzle:
+    mock:
+        mode: replay
+        request_headers_blacklist: ['User-Agent']
+        storage_path: '%guzzle_mocks%'
