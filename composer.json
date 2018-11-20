@@ -1,4 +1,6 @@
 {
+    "name": "libero/browser",
+    "description": "TODO",
     "type": "project",
     "license": "MIT",
     "autoload": {

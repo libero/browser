@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42f66fc7ae7004bd849c53ba057b8f53",
+    "content-hash": "41ecd0dc630fa0e2e3fcccc531245f61",
     "packages": [
         {
             "name": "libero/content-page-bundle",
