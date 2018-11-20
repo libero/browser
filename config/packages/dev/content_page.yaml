@@ -1,4 +1,6 @@
 content_page:
     pages:
         blog_article:
+            path: '/blog/{id}'
         scholarly_article:
+            path: '/articles/{id}'

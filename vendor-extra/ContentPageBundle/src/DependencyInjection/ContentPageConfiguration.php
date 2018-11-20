@@ -39,6 +39,9 @@ final class ContentPageConfiguration implements ConfigurationInterface
         $pagesNode
             ->arrayPrototype()
                 ->children()
+                    ->scalarNode('path')
+                        ->isRequired()
+                    ->end()
                 ->end()
             ->end()
         ;
