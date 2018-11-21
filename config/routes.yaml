@@ -1,7 +1,3 @@
-article:
-    path: /articles/{id}
-    controller: libero.content_page.controller.content.scholarly_article
-
-blog-article:
-    path: /blog/{id}
-    controller: libero.content_page.controller.content.blog_article
+content_page:
+    resource: .
+    type: content_page

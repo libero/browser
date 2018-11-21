@@ -1,7 +1,8 @@
 content_page:
-    client: 'csa_guzzle.client.libero_api'
     pages:
         blog_article:
+            path: '/blog/{id}'
             service: 'blog-articles'
         scholarly_article:
+            path: '/articles/{id}'
             service: 'scholarly-articles'
