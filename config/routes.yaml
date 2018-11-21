@@ -1,7 +1,3 @@
 content_page:
     resource: .
     type: content_page
-
-error:
-    path: /error
-    controller: Libero\Browser\Controller\ErrorController
