@@ -7,3 +7,8 @@ services:
     Libero\Browser\:
         resource: '../src/*'
         exclude: '../src/{Kernel.php}'
+
+    Libero\Browser\Controller\:
+        resource: '../src/Controller'
+        tags:
+            - name: controller.service_arguments
