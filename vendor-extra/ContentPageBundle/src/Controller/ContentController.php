@@ -10,6 +10,6 @@ final class ContentController
 {
     public function __invoke(string $id) : Response
     {
-        return new Response($id, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+        return new Response("<html><body>${id}</body></html>");
     }
 }
