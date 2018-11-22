@@ -11,6 +11,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use function sprintf;
 
@@ -27,6 +28,8 @@ final class ContentPageExtension extends Extension
 
         foreach ($config['pages'] as $name => $page) {
             $config['pages'][$name]['name'] = $name;
+            $page['client'] = $config['client'];
+
             $this->addPage($name, $page, $container);
         }
 
@@ -38,6 +41,8 @@ final class ContentPageExtension extends Extension
         $id = sprintf(self::CONTENT_CONTROLLER_ID, $name);
         $definition = new Definition(ContentController::class);
 
+        $definition->setArgument(0, new Reference($config['client']));
+        $definition->setArgument(1, $config['service']);
         $definition->addTag('controller.service_arguments');
 
         $container->setDefinition($id, $definition);
