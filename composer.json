@@ -25,6 +25,7 @@
         "symfony/http-foundation": "^4.1",
         "symfony/http-kernel": "^4.1",
         "symfony/routing": "^4.1",
+        "symfony/twig-bundle": "^4.1",
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
@@ -34,11 +35,14 @@
         "phpstan/phpstan-symfony": "^0.10",
         "phpunit/phpunit": "^7.4",
         "symfony/browser-kit": "^4.1",
-        "symfony/debug": "^4.1"
+        "symfony/debug": "^4.1",
+        "symfony/dom-crawler": "^4.1",
+        "symfony/web-profiler-bundle": "^4.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-mbstring": "*"
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php72": "*"
     },
     "repositories": [
         {

@@ -6,6 +6,8 @@ namespace tests\Libero\ContentPageBundle\Controller;
 
 use Libero\ContentPageBundle\Controller\ContentController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\Request;
 
 final class ContentControllerTest extends WebTestCase
 {
@@ -18,10 +20,12 @@ final class ContentControllerTest extends WebTestCase
         $controller = new ContentController();
 
         $response = $controller($id);
+        $response->prepare(new Request());
+        $crawler = new Crawler($response->getContent());
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('text/plain', $response->headers->get('Content-Type'));
-        $this->assertSame($id, $response->getContent());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertSame($id, $crawler->text());
     }
 
     public function idProvider() : iterable
