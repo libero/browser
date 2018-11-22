@@ -1,6 +1,9 @@
+parameters:
+    libero.api_url: '%env(API_URI)%'
+
 csa_guzzle:
     clients:
         libero_api:
             config:
-                base_uri: '%env(API_URI)%'
+                base_uri: '%libero.api_url%'
     profiler: '%kernel.debug%'

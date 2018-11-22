@@ -4,6 +4,4 @@ services:
     app:
         build:
             target: test
-        environment:
-            API_URI: http://localhost
         image: libero/browser:${IMAGE_TAG:-master}-test

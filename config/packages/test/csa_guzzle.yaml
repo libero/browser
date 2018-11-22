@@ -1,6 +1,6 @@
 parameters:
-    env(API_URI): 'http://localhost'
     guzzle_mocks: '%kernel.project_dir%/var/fixtures/guzzle'
+    libero.api_url: 'http://localhost'
 
 csa_guzzle:
     mock:
