@@ -39,12 +39,12 @@ XML
             )
         );
 
-        $client->request('GET', "/articles/{$id}");
+        $crawler = $client->request('GET', "/articles/{$id}");
         $response = $client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('text/plain; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Scholarly article {$id}", $response->getContent());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertSame("Scholarly article {$id}", $crawler->text());
     }
 
     /**
@@ -76,12 +76,12 @@ XML
             )
         );
 
-        $client->request('GET', "/blog/{$id}");
+        $crawler = $client->request('GET', "/blog/{$id}");
         $response = $client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('text/plain; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Blog article {$id}", $response->getContent());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertSame("Blog article {$id}", $crawler->text());
     }
 
     public function idProvider() : iterable

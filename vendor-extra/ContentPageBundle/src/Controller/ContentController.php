@@ -37,13 +37,14 @@ final class ContentController
                     $dom = FluentDOM::load((string) $response->getBody());
                     $dom->registerNamespace('libero', 'http://libero.pub');
 
+                    /** @var string $title */
                     $title = $dom('string(/libero:item/libero:front/libero:title)');
 
                     if ('' === $title) {
                         throw new UnexpectedValueException('Could not find a title');
                     }
 
-                    return new Response($title, Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+                    return new Response("<html><body>${title}</body></html>");
                 }
             )
             ->wait();

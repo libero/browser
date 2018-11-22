@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace tests\Libero\ContentPageBundle\Controller;
 
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response;
 use Libero\ContentPageBundle\Controller\ContentController;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\Request;
 use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use UnexpectedValueException;
 
@@ -25,7 +27,7 @@ final class ContentControllerTest extends TestCase
         $controller = new ContentController($this->client, 'service');
 
         $this->mock->save(
-            new Request(
+            new Psr7Request(
                 'GET',
                 "service/items/{$id}/versions/latest",
                 ['Accept' => 'application/xml']
@@ -46,10 +48,12 @@ XML
         );
 
         $response = $controller($id);
+        $response->prepare(new Request());
+        $crawler = new Crawler($response->getContent());
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('text/plain', $response->headers->get('Content-Type'));
-        $this->assertSame("Article ${id}", $response->getContent());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertSame("Article ${id}", $crawler->text());
     }
 
     public function idProvider() : iterable
@@ -66,7 +70,7 @@ XML
         $controller = new ContentController($this->client, 'service');
 
         $this->mock->save(
-            new Request(
+            new Psr7Request(
                 'GET',
                 'service/items/id/versions/latest',
                 ['Accept' => 'application/xml']
@@ -98,7 +102,7 @@ XML
         $controller = new ContentController($this->client, 'service');
 
         $this->mock->save(
-            new Request(
+            new Psr7Request(
                 'GET',
                 'service/items/id/versions/latest',
                 ['Accept' => 'application/xml']
