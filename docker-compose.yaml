@@ -4,8 +4,8 @@ services:
     api:
         image: liberoadmin/dummy-api:5cbf7f0741e50c6bcffa3791462701eff56b5b42
         volumes:
-            - ./api/content_api.yaml:/app/config/packages/content_api.yaml
-            - ./api/data:/app/data/
+            - ./.docker/api/content_api.yaml:/app/config/packages/content_api.yaml
+            - ./.docker/api/data:/app/data/
             - public-api:/app/public/
     app:
         build:
