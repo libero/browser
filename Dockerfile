@@ -42,6 +42,7 @@ COPY --from=composer /app/vendor/ vendor/
 COPY vendor-extra/ vendor-extra/
 
 USER www-data
+HEALTHCHECK --interval=5s CMD sh -c 'nc -z localhost 9000'
 
 
 
