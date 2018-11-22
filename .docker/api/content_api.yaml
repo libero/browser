@@ -1,0 +1,22 @@
+content_api:
+    services:
+        blog-articles:
+            items: libero.dummy_api.content_api.blog_articles
+        scholarly-articles:
+            items: libero.dummy_api.content_api.scholarly_articles
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    libero.dummy_api.content_api.blog_articles:
+        class: Libero\ContentApiBundle\Adapter\FilesystemItems
+        arguments:
+            - '%kernel.data_dir%/blog-articles'
+
+    libero.dummy_api.content_api.scholarly_articles:
+        class: Libero\ContentApiBundle\Adapter\FilesystemItems
+        arguments:
+            - '%kernel.data_dir%/scholarly-articles'

@@ -6,6 +6,8 @@ Libero browser
 Getting started
 ---------------
 
+To run a website reading from two content services (`blog-articles` and `scholarly-articles`):
+
 1. Create `config/packages/content_page.yaml`:
 
     ```yaml
@@ -13,8 +15,10 @@ Getting started
         pages:
             blog_article:
                 path: '/blog/{id}'
+                service: 'blog-articles'
             scholarly_article:
                 path: '/articles/{id}'
+                service: 'scholarly-articles'
     ```
 
 2. Run `docker-compose -f docker-compose.yaml down --v && docker-compose -f docker-compose.yaml up --build`.

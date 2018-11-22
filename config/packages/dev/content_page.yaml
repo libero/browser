@@ -2,5 +2,7 @@ content_page:
     pages:
         blog_article:
             path: '/blog/{id}'
+            service: 'blog-articles'
         scholarly_article:
             path: '/articles/{id}'
+            service: 'scholarly-articles'
