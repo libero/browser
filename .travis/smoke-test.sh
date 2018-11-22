@@ -9,6 +9,6 @@ function finish {
 trap finish EXIT
 
 docker-compose --file docker-compose.yaml up -d web
-.scripts/docker/wait-healthy browser_app_1
+.scripts/docker/wait-healthy.sh browser_app_1
 docker-compose --file docker-compose.yaml exec app bin/console --version
 nc -z localhost 8080
