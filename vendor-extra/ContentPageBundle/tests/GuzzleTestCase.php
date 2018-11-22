@@ -33,7 +33,7 @@ trait GuzzleTestCase
         $stack->push(
             new MockMiddleware(
                 $this->mock = new MockStorageAdapter(
-                    $this->filesystem->path(''),
+                    $this->filesystem->root()->url(),
                     ['User-Agent']
                 ),
                 'replay'
