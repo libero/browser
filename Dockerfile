@@ -64,12 +64,16 @@ ENV APP_ENV=test
 
 USER root
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN touch .phpcs-cache && \
     chown www-data:www-data .phpcs-cache
 COPY tests/ tests/
-COPY phpcs.xml.dist \
+COPY composer.json \
+    composer.lock \
+    phpcs.xml.dist \
     phpstan.neon.dist \
     phpunit.xml.dist \
+    symfony.lock \
     ./
 COPY --from=composer-dev /app/vendor/ vendor/
 
@@ -88,8 +92,3 @@ USER root
 ENV COMPOSER_ALLOW_SUPERUSER=true
 
 COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY composer.json \
-    composer.lock \
-    symfony.lock \
-    ./
