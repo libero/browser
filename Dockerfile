@@ -41,6 +41,8 @@ COPY config/ config/
 COPY --from=composer /app/vendor/ vendor/
 COPY vendor-extra/ vendor-extra/
 
+RUN bin/console assets:install && rm -rf var/*
+
 USER www-data
 HEALTHCHECK --interval=5s CMD sh -c 'nc -z localhost 9000'
 
@@ -76,6 +78,8 @@ COPY composer.json \
     symfony.lock \
     ./
 COPY --from=composer-dev /app/vendor/ vendor/
+
+RUN bin/console assets:install && rm -rf var/*
 
 USER www-data
 

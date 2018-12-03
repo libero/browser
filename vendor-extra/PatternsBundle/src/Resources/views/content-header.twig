@@ -1,0 +1,24 @@
+<div class="content-header"{% include '@Patterns/_attributes.twig' %}>
+
+    {% block content %}
+
+        <div class="content-header__body">
+
+            {% with contentTitle only %}
+
+                {% block title %}
+
+                    {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title']) }) %}
+                    {% set level = 1 %}
+
+                    {% include '@Patterns/heading.twig' %}
+
+                {% endblock %}
+
+            {% endwith %}
+
+        </div>
+
+    {% endblock %}
+
+</div>

@@ -5,23 +5,32 @@ declare(strict_types=1);
 namespace Libero\ContentPageBundle\Controller;
 
 use FluentDOM;
+use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
+use Libero\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
+use Punic\Misc;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 use UnexpectedValueException;
 
 final class ContentController
 {
     private $client;
+    private $converter;
     private $service;
+    private $twig;
 
-    public function __construct(ClientInterface $client, string $service)
+    public function __construct(ClientInterface $client, string $service, Environment $twig, ViewConverter $converter)
     {
         $this->client = $client;
         $this->service = $service;
+        $this->twig = $twig;
+        $this->converter = $converter;
     }
 
-    public function __invoke(string $id) : Response
+    public function __invoke(Request $request, string $id) : Response
     {
         return $this->client
             ->requestAsync(
@@ -33,18 +42,29 @@ final class ContentController
                 ]
             )
             ->then(
-                function (ResponseInterface $response) {
+                function (ResponseInterface $response) use ($request) {
                     $dom = FluentDOM::load((string) $response->getBody());
                     $dom->registerNamespace('libero', 'http://libero.pub');
 
-                    /** @var string $title */
-                    $title = $dom('string(/libero:item/libero:front/libero:title)');
+                    $front = $dom('/libero:item/libero:front[1]')->item(0);
 
-                    if ('' === $title) {
-                        throw new UnexpectedValueException('Could not find a title');
+                    if (!$front instanceof Element) {
+                        throw new UnexpectedValueException('Could not find a front');
                     }
 
-                    return new Response("<html><body>${title}</body></html>");
+                    $context = [
+                        'lang' => $request->getLocale(),
+                        'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
+                    ];
+
+                    $title = $this->converter->convert($front, '@Patterns/content-header.twig', $context);
+
+                    return new Response(
+                        $this->twig->render(
+                            'page.html.twig',
+                            $context + ['main' => [$title]]
+                        )
+                    );
                 }
             )
             ->wait();

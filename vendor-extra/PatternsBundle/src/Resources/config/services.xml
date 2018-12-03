@@ -8,10 +8,26 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\ContentPageBundle\Routing\ContentPageRouteLoader"
-            class="Libero\ContentPageBundle\Routing\ContentPageRouteLoader">
-            <argument type="collection"/>
-            <tag name="routing.loader"/>
+        <service id="Libero\PatternsBundle\ViewConverter\FrontContentHeaderVisitor"
+            class="Libero\PatternsBundle\ViewConverter\FrontContentHeaderVisitor">
+            <argument type="service" id="Libero\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\PatternsBundle\ViewConverter\LangVisitor"
+            class="Libero\PatternsBundle\ViewConverter\LangVisitor">
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\PatternsBundle\ViewConverter\Inline\ItalicVisitor"
+            class="Libero\PatternsBundle\ViewConverter\Inline\ItalicVisitor">
+            <argument type="service" id="Libero\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter.inline"/>
+        </service>
+
+        <service id="Libero\PatternsBundle\ViewConverter\Inline\LangVisitor"
+            class="Libero\PatternsBundle\ViewConverter\Inline\LangVisitor">
+            <tag name="libero.view_converter.inline"/>
         </service>
 
         <service id="Libero\Views\ViewConverterRegistry"

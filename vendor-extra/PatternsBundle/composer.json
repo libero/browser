@@ -1,0 +1,26 @@
+{
+    "name": "libero/patterns-bundle",
+    "description": "Libero patterns",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Libero\\PatternsBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "libero/views": "^1.0@dev",
+        "symfony/config": "^4.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/http-kernel": "^4.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

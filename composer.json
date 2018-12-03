@@ -9,7 +9,8 @@
     "autoload-dev": {
         "psr-4": {
             "tests\\Libero\\Browser\\": "tests/",
-            "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/"
+            "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
+            "tests\\Libero\\PatternsBundle\\": "vendor-extra/PatternsBundle/tests/"
         }
     },
     "require": {
@@ -18,6 +19,10 @@
         "ext-mbstring": "*",
         "csa/guzzle-bundle": "^3.1",
         "libero/content-page-bundle": "^1.0@dev",
+        "libero/patterns-bundle": "^1.0@dev",
+        "libero/views": "^1.0@dev",
+        "lstrojny/functional-php": "^1.8",
+        "symfony/asset": "^4.1",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",
         "symfony/dependency-injection": "^4.1",
@@ -28,7 +33,8 @@
         "symfony/monolog-bundle": "^3.3",
         "symfony/routing": "^4.1",
         "symfony/twig-bundle": "^4.1",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "^4.1",
+        "twig/twig": "^2.5"
     },
     "require-dev": {
         "csa/guzzle-cache-middleware": "^1.0",

@@ -47,6 +47,15 @@
     "libero/content-page-bundle": {
         "version": "1.0.x-dev"
     },
+    "libero/patterns-bundle": {
+        "version": "1.0.x-dev"
+    },
+    "libero/views": {
+        "version": "1.0.x-dev"
+    },
+    "lstrojny/functional-php": {
+        "version": "1.8.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -151,6 +160,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "punic/punic": {
+        "version": "3.3.0"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"

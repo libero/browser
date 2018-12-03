@@ -1,0 +1,5 @@
+<h{{ level|default(1) }}{% include '@Patterns/_attributes.twig' %}>
+
+  {%- include '@Patterns/_text.twig' with {nodes: text} only -%}
+
+</h{{ level|default(1) }}>

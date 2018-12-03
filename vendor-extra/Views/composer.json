@@ -1,0 +1,24 @@
+{
+    "name": "libero/views",
+    "description": "Views",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Libero\\Views\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "fluentdom/fluentdom": "^7.0",
+        "punic/punic": "^3.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

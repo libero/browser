@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="{{ lang }}" dir="{{ dir }}">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+    <meta name="format-detection" content="telephone=no">
+
+    {% block head %}{% endblock %}
+
+    <link href="{{ asset('bundles/patterns/css/all.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+{% block content %}
+
+    {% include '@Patterns/_text.twig' with {nodes:main} %}
+
+{% endblock %}
+
+</body>
+
+</html>
