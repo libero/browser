@@ -7,10 +7,13 @@ namespace Libero\PatternsBundle\ViewConverter\Inline;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
 use Libero\Views\InlineViewConverterVisitor;
+use Libero\Views\LangAttributes;
 use Libero\Views\View;
 
 final class LangVisitor implements InlineViewConverterVisitor
 {
+    use LangAttributes;
+
     public function visit(ChildNode $object, View $view, array &$context = []) : View
     {
         if (!$object instanceof Element) {
@@ -26,14 +29,12 @@ final class LangVisitor implements InlineViewConverterVisitor
             return $view;
         }
 
-        $context['lang'] = $lang;
-        $context['dir'] = 'ltr';
-
         $arguments = [
-            'attributes' => [
-                'lang' => $context['lang'],
-                'dir' => $context['dir'],
-            ],
+            'attributes' => $this->addLangAttribute(
+                $object,
+                $context,
+                $view->getArgument('attributes') ?? []
+            ),
         ];
 
         return $view->withArguments($arguments);

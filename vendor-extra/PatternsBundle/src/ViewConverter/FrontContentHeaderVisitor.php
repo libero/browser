@@ -33,6 +33,8 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
+        $this->addLangAttribute($object, $context);
+
         $title = $object('libero:title[1]')->item(0);
 
         if (!$title instanceof Element) {
