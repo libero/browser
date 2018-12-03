@@ -57,12 +57,12 @@ final class ContentController
                         'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
                     ];
 
-                    $title = $this->converter->convert($front, '@Patterns/content-header.twig', $context);
+                    $header = $this->converter->convert($front, '@Patterns/content-header.twig', $context);
 
                     return new Response(
                         $this->twig->render(
                             'page.html.twig',
-                            $context + ['main' => [$title]]
+                            $context + ['main' => [$header]]
                         )
                     );
                 }
