@@ -43,11 +43,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
         $arguments = [
             'contentTitle' => [
-                'attributes' => $this->addLangAttribute(
-                    $title,
-                    $titleContext,
-                    $view->getArgument('attributes') ?? []
-                ),
+                'attributes' => $this->addLangAttribute($title, $titleContext),
                 'text' => map(
                     $title,
                     function (ChildNode $node) use ($titleContext) : ?View {
