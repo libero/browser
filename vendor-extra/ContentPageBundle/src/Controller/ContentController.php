@@ -73,7 +73,13 @@ final class ContentController
                     return new Response(
                         $this->twig->render(
                             $this->template,
-                            array_merge($context, ['content' => [$header]])
+                            array_merge(
+                                $context,
+                                [
+                                    'title' => $front('string(libero:title[1])'),
+                                    'content' => [$header],
+                                ]
+                            )
                         )
                     );
                 }

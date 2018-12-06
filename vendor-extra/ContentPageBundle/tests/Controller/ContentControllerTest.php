@@ -63,6 +63,7 @@ XML
                     [
                         'lang' => 'en',
                         'dir' => 'ltr',
+                        'title' => "Article {$id}",
                         'content' => [
                             [
                                 'template' => '@LiberoPatterns/content-header.html.twig',
