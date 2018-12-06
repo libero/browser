@@ -1,6 +1,6 @@
 {
     "name": "libero/browser",
-    "description": "TODO",
+    "description": "Serve content read from a Libero API",
     "type": "project",
     "license": "MIT",
     "autoload": {
