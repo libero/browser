@@ -459,12 +459,14 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "6555bb149c063c69211ae3f97ab7a950aeb31470",
+                "reference": "6d370706505a03e8bf42b6c5fa5d62286168f197",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "guzzlehttp/guzzle": "^6.3",
+                "libero/patterns-bundle": "^1.0@dev",
+                "libero/views": "^1.0@dev",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
                 "punic/punic": "^3.3",
@@ -472,13 +474,16 @@
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-foundation": "^4.1",
                 "symfony/http-kernel": "^4.1",
-                "symfony/routing": "^4.1"
+                "symfony/routing": "^4.1",
+                "twig/twig": "^2.5"
             },
             "require-dev": {
                 "csa/guzzle-cache-middleware": "^1.0",
+                "ext-json": "*",
                 "guzzlehttp/psr7": "^1.4",
                 "php-vfs/php-vfs": "^1.4",
                 "phpunit/phpunit": "^7.3",
+                "symfony/css-selector": "^4.1",
                 "symfony/dom-crawler": "^4.1"
             },
             "type": "symfony-bundle",
@@ -535,12 +540,13 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/Views",
-                "reference": "353ba2c7f86f28843b7a906dbba79d0d8968bedf",
+                "reference": "9c6de63e0c8182b7bbb6d762860caf15bb81df2f",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
-                "php": "^7.2"
+                "php": "^7.2",
+                "punic/punic": "^3.3"
             },
             "type": "library",
             "extra": {
