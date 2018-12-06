@@ -1,6 +1,8 @@
 parameters:
     ignoreErrors:
+        - '~^Cannot call method ([a-z]+)Node\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
         - '~^.*(?=.* Symfony\\Component\\Config\\Definition\\Builder)(?=.*( |:{2})end\(\)).*$~'
+        - '~^Service "csa_guzzle\.mock\.storage" is not registered in the container\.$~'
     level: max
     paths:
         - bin/console

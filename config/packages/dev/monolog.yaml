@@ -1,0 +1,12 @@
+monolog:
+    handlers:
+        console:
+            channels:
+                - '!event'
+            type: console
+        main:
+            channels:
+                - '!event'
+            level: debug
+            path: 'php://stderr'
+            type: stream

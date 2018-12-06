@@ -26,6 +26,9 @@ final class ContentPageConfiguration implements ConfigurationInterface
             ->fixXmlConfig('page')
             ->children()
                 ->append($this->getPagesDefinition())
+                ->scalarNode('client')
+                    ->isRequired()
+                ->end()
             ->end()
         ;
         return $treeBuilder;
@@ -39,6 +42,12 @@ final class ContentPageConfiguration implements ConfigurationInterface
         $pagesNode
             ->arrayPrototype()
                 ->children()
+                    ->scalarNode('path')
+                        ->isRequired()
+                    ->end()
+                    ->scalarNode('service')
+                        ->isRequired()
+                    ->end()
                 ->end()
             ->end()
         ;

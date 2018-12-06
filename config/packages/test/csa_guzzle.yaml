@@ -1,0 +1,9 @@
+parameters:
+    guzzle_mocks: '%kernel.project_dir%/var/fixtures/guzzle'
+    libero.api_url: 'http://localhost'
+
+csa_guzzle:
+    mock:
+        mode: replay
+        request_headers_blacklist: ['User-Agent']
+        storage_path: '%guzzle_mocks%'
