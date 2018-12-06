@@ -10,19 +10,17 @@
 
     <meta name="format-detection" content="telephone=no">
 
-    {% block head %}{% endblock %}
-
     <link href="{{ asset('bundles/liberopatterns/css/all.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
 
-{% block content %}
+{% block content -%}
 
-    {% include '@LiberoPatterns/text.html.twig' with {nodes:main} %}
+    {%- include '@LiberoPatterns/text.html.twig' with {nodes: main} -%}
 
-{% endblock %}
+{%- endblock %}
 
 </body>
 
