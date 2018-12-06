@@ -16,11 +16,7 @@
 
 <body>
 
-{% block content -%}
-
-    {%- include '@LiberoPatterns/text.html.twig' with {nodes: main} -%}
-
-{%- endblock %}
+{% include '@LiberoPatterns/text.html.twig' with {nodes: content} %}
 
 </body>
 

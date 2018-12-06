@@ -73,7 +73,7 @@ final class ContentController
                     return new Response(
                         $this->twig->render(
                             $this->template,
-                            array_merge($context, ['main' => [$header]])
+                            array_merge($context, ['content' => [$header]])
                         )
                     );
                 }
