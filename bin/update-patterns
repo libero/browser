@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -e
+
+function finish {
+    docker rm browser-pattern-library &> /dev/null
+}
+
+trap finish EXIT
+
+cd "$(dirname "$0")/.."
+
+if ! [[ -d var/pattern-library ]]; then
+    git clone git@github.com:libero/pattern-library.git var/pattern-library
+fi
+
+cd var/pattern-library
+git reset --hard
+git clean -d --force
+
+git checkout master
+git fetch origin pull/22/head:pr-22
+git checkout pr-22
+
+docker-compose --file docker-compose.yml --file docker-compose.ci.yml build gulp
+rm -rf export/*
+docker run --name browser-pattern-library pattern-library_gulp npx gulp exportPatterns
+docker cp browser-pattern-library:/app/export/. export/
+
+cd ../..
+
+rsync --archive --delete var/pattern-library/export/css/ vendor-extra/LiberoPatternsBundle/src/Resources/public/css --exclude sass
+rsync --archive --delete var/pattern-library/export/fonts/ vendor-extra/LiberoPatternsBundle/src/Resources/public/fonts
+rsync --archive --delete var/pattern-library/export/templates/ vendor-extra/LiberoPatternsBundle/src/Resources/views
