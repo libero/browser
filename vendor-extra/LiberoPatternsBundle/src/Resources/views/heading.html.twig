@@ -1,0 +1,5 @@
+<h{{ level|default(1) }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+
+</h{{ level|default(1) }}>

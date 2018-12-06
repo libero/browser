@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\PatternsBundle\ViewConverter\Inline;
+namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;

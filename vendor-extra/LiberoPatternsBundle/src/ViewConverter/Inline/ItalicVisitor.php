@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\PatternsBundle\ViewConverter\Inline;
+namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
@@ -26,12 +26,12 @@ final class ItalicVisitor implements InlineViewConverterVisitor
             return $view;
         }
 
-        if ($view->getTemplate() && '@Patterns/italic.twig' !== !$view->getTemplate()) {
+        if ($view->getTemplate() && '@LiberoPatterns/italic.html.twig' !== !$view->getTemplate()) {
             return $view;
         }
 
         if (!$view->getTemplate()) {
-            $view = $view->withTemplate('@Patterns/italic.twig');
+            $view = $view->withTemplate('@LiberoPatterns/italic.html.twig');
         }
 
         $arguments = [];

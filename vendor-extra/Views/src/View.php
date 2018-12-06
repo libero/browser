@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Libero\Views;
 
+use JsonSerializable;
 use function array_merge_recursive;
 
-final class View
+final class View implements JsonSerializable
 {
     private $arguments;
     private $template;
@@ -61,5 +62,13 @@ final class View
         $view->template = $template;
 
         return $view;
+    }
+
+    public function jsonSerialize() : array
+    {
+        return [
+            'template' => $this->template,
+            'arguments' => $this->arguments,
+        ];
     }
 }

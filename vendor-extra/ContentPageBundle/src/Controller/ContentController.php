@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\ContentPageBundle\Controller;
 
+use DOMNodeList;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
@@ -14,20 +15,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use UnexpectedValueException;
+use function array_merge;
 
 final class ContentController
 {
     private $client;
     private $converter;
     private $service;
+    private $template;
     private $twig;
 
-    public function __construct(ClientInterface $client, string $service, Environment $twig, ViewConverter $converter)
-    {
+    public function __construct(
+        ClientInterface $client,
+        string $service,
+        Environment $twig,
+        ViewConverter $converter,
+        string $template
+    ) {
         $this->client = $client;
         $this->service = $service;
         $this->twig = $twig;
         $this->converter = $converter;
+        $this->template = $template;
     }
 
     public function __invoke(Request $request, string $id) : Response
@@ -46,7 +55,9 @@ final class ContentController
                     $dom = FluentDOM::load((string) $response->getBody());
                     $dom->registerNamespace('libero', 'http://libero.pub');
 
-                    $front = $dom('/libero:item/libero:front[1]')->item(0);
+                    /** @var DOMNodeList|Element[] $frontList */
+                    $frontList = $dom('/libero:item/libero:front[1]');
+                    $front = $frontList->item(0);
 
                     if (!$front instanceof Element) {
                         throw new UnexpectedValueException('Could not find a front');
@@ -57,12 +68,12 @@ final class ContentController
                         'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
                     ];
 
-                    $header = $this->converter->convert($front, '@Patterns/content-header.twig', $context);
+                    $header = $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $context);
 
                     return new Response(
                         $this->twig->render(
-                            'page.html.twig',
-                            $context + ['main' => [$header]]
+                            $this->template,
+                            array_merge($context, ['main' => [$header]])
                         )
                     );
                 }

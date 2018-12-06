@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\PatternsBundle\ViewConverter;
+namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\Views\LangAttributes;

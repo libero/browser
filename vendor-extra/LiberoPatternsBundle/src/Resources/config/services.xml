@@ -8,25 +8,25 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\PatternsBundle\ViewConverter\FrontContentHeaderVisitor"
-            class="Libero\PatternsBundle\ViewConverter\FrontContentHeaderVisitor">
+        <service id="Libero\LiberoPatternsBundle\ViewConverter\FrontContentHeaderVisitor"
+            class="Libero\LiberoPatternsBundle\ViewConverter\FrontContentHeaderVisitor">
             <argument type="service" id="Libero\Views\InlineViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
 
-        <service id="Libero\PatternsBundle\ViewConverter\LangVisitor"
-            class="Libero\PatternsBundle\ViewConverter\LangVisitor">
+        <service id="Libero\LiberoPatternsBundle\ViewConverter\LangVisitor"
+            class="Libero\LiberoPatternsBundle\ViewConverter\LangVisitor">
             <tag name="libero.view_converter" priority="100"/>
         </service>
 
-        <service id="Libero\PatternsBundle\ViewConverter\Inline\ItalicVisitor"
-            class="Libero\PatternsBundle\ViewConverter\Inline\ItalicVisitor">
+        <service id="Libero\LiberoPatternsBundle\ViewConverter\Inline\ItalicVisitor"
+            class="Libero\LiberoPatternsBundle\ViewConverter\Inline\ItalicVisitor">
             <argument type="service" id="Libero\Views\InlineViewConverter"/>
             <tag name="libero.view_converter.inline"/>
         </service>
 
-        <service id="Libero\PatternsBundle\ViewConverter\Inline\LangVisitor"
-            class="Libero\PatternsBundle\ViewConverter\Inline\LangVisitor">
+        <service id="Libero\LiberoPatternsBundle\ViewConverter\Inline\LangVisitor"
+            class="Libero\LiberoPatternsBundle\ViewConverter\Inline\LangVisitor">
             <tag name="libero.view_converter.inline" priority="100"/>
         </service>
 

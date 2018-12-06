@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Libero\PatternsBundle\ViewConverter;
+namespace Libero\LiberoPatternsBundle\ViewConverter;
 
+use DOMNodeList;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
 use Libero\Views\InlineViewConverter;
@@ -25,7 +26,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
     public function visit(Element $object, View $view, array &$context = []) : View
     {
-        if ('@Patterns/content-header.twig' !== $view->getTemplate()) {
+        if ('@LiberoPatterns/content-header.html.twig' !== $view->getTemplate()) {
             return $view;
         }
 
@@ -33,7 +34,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        $title = $object('libero:title[1]')->item(0);
+        /** @var DOMNodeList|Element[] $titleList */
+        $titleList = $object('libero:title[1]');
+        $title = $titleList->item(0);
 
         if (!$title instanceof Element) {
             return $view;

@@ -33,7 +33,6 @@ final class WebTest extends WebTestCase
         <id>{$id}</id>
         <title>Scholarly article {$id}</title>
     </front>
-
 </item>
 XML
             )
@@ -44,7 +43,7 @@ XML
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Scholarly article {$id}", $crawler->text());
+        $this->assertSame("Scholarly article {$id}", $crawler->filter('.content-header__title')->text());
     }
 
     /**
@@ -81,7 +80,7 @@ XML
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Blog article {$id}", $crawler->text());
+        $this->assertSame("Blog article {$id}", $crawler->filter('.content-header__title')->text());
     }
 
     public function idProvider() : iterable

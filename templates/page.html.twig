@@ -12,7 +12,7 @@
 
     {% block head %}{% endblock %}
 
-    <link href="{{ asset('bundles/patterns/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/liberopatterns/css/all.css') }}" rel="stylesheet">
 
 </head>
 
@@ -20,7 +20,7 @@
 
 {% block content %}
 
-    {% include '@Patterns/_text.twig' with {nodes:main} %}
+    {% include '@LiberoPatterns/text.html.twig' with {nodes:main} %}
 
 {% endblock %}
 

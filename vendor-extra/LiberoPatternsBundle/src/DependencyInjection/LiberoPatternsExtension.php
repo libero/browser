@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Libero\PatternsBundle\DependencyInjection;
+namespace Libero\LiberoPatternsBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class PatternsExtension extends Extension
+final class LiberoPatternsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container) : void
     {
@@ -19,6 +19,6 @@ final class PatternsExtension extends Extension
 
     public function getAlias() : string
     {
-        return 'patterns';
+        return 'libero_patterns';
     }
 }

@@ -1,0 +1,11 @@
+{%- for name, value in attributes|default({}) if value is not same as(false) -%}
+
+  {{- ' ' ~ name -}}
+
+  {%- if value is iterable -%}
+    ="{{ value|join(' ') }}"
+  {%- elseif value is not same as(true) -%}
+    ="{{ value }}"
+  {%- endif -%}
+
+{%- endfor -%}

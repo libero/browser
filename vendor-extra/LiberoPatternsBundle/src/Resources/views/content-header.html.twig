@@ -1,0 +1,22 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) %}
+
+<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {% block body %}
+
+    {% with contentTitle only %}
+
+      {% block title %}
+
+        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title']) }) %}
+        {% set level = 1 %}
+
+        {% include '@LiberoPatterns/heading.html.twig' %}
+
+      {% endblock %}
+
+    {% endwith %}
+
+  {% endblock %}
+
+</div>
