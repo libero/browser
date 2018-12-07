@@ -3,6 +3,8 @@ Libero browser
 
 [![Build Status](https://travis-ci.com/libero/browser.svg?branch=master)](https://travis-ci.com/libero/browser)
 
+Serve content read from a Libero API to the public.
+
 Getting started
 ---------------
 
