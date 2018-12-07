@@ -1,7 +1,29 @@
 #!/bin/bash
 set -e
 
-output=$(docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app composer update libero/content-page-bundle --with-dependencies --dry-run --no-ansi)
-echo "${output}"
+function finish {
+    docker-compose --file docker-compose.yaml --file docker-compose.test.yaml down --volumes
+}
 
-[[ ${output} =~ "Nothing to install or update" ]]
+trap finish EXIT
+
+cd "$(dirname "$0")/.."
+
+while IFS=$'\n' read -r line; do packages+=("$line"); done < <(< composer.lock jq --raw-output '.packages[] | select(.dist.url | startswith("./vendor-extra/")) .name')
+
+output=$(docker-compose --file docker-compose.yaml --file docker-compose.test.yaml run app composer update --dry-run --no-ansi)
+
+failures=0
+for package in "${packages[@]}";
+do
+    echo "Checking ${package}"
+    if [[ ${output} == *"Updating ${package}"* ]]
+    then
+        echo "Needs to be updated"
+        ((failures++))
+    else
+        echo "Up to date"
+    fi
+done
+
+[[ ${failures} == 0 ]]
