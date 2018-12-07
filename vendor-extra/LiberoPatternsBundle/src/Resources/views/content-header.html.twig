@@ -1,6 +1,6 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header', 'wrapper']) }) %}
 
-<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+<header {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
   {%- block body -%}
 
@@ -37,4 +37,4 @@
 
   {%- endblock -%}
 
-</div>
+</header>
