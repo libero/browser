@@ -6,6 +6,7 @@ namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\Views\InlineViewConverter;
 use Libero\Views\InlineViewConverterVisitor;
 use Libero\Views\View;
@@ -20,7 +21,7 @@ final class ItalicVisitor implements InlineViewConverterVisitor
         $this->inlineConverter = $inlineConverter;
     }
 
-    public function visit(ChildNode $object, View $view, array &$context = []) : View
+    public function visit(NonDocumentTypeChildNode $object, View $view, array &$context = []) : View
     {
         if (!$object instanceof Element || 'i' !== $object->nodeName || 'http://libero.pub' !== $object->namespaceURI) {
             return $view;

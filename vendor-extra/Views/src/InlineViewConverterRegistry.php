@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\Views;
 
-use FluentDOM\DOM\Node\ChildNode;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 
 final class InlineViewConverterRegistry implements InlineViewConverter
 {
@@ -22,7 +22,7 @@ final class InlineViewConverterRegistry implements InlineViewConverter
         }
     }
 
-    public function convert(ChildNode $object, array $context = []) : View
+    public function convert(NonDocumentTypeChildNode $object, array $context = []) : View
     {
         $view = new View('', ['attributes' => []]);
 

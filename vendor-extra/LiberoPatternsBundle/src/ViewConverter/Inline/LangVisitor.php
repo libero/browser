@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\ChildNode;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\Views\InlineViewConverterVisitor;
 use Libero\Views\LangAttributes;
 use Libero\Views\View;
@@ -14,7 +14,7 @@ final class LangVisitor implements InlineViewConverterVisitor
 {
     use LangAttributes;
 
-    public function visit(ChildNode $object, View $view, array &$context = []) : View
+    public function visit(NonDocumentTypeChildNode $object, View $view, array &$context = []) : View
     {
         if (!$object instanceof Element) {
             return $view;
