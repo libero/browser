@@ -2,7 +2,7 @@
 set -e
 
 function finish {
-    docker rm browser-pattern-library &> /dev/null
+    docker rm browser-pattern-library &> /dev/null || true
 }
 
 trap finish EXIT
