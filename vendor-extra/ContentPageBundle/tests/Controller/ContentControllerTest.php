@@ -39,12 +39,12 @@ final class ContentControllerTest extends TestCase
                 [],
                 <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<libero:item xmlns:libero="http://libero.pub">
-    <libero:front xml:lang="en">
-        <libero:id>{$id}</libero:id>
-        <libero:title>Article {$id}</libero:title>
-    </libero:front>
-</libero:item>
+<item xmlns="http://libero.pub">
+    <front xml:lang="en">
+        <id>{$id}</id>
+        <title>Article {$id}</title>
+    </front>
+</item>
 XML
             )
         );
