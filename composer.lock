@@ -459,7 +459,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "0113b2f981a07386ddd0c732fbabe9f0494ff2c7",
+                "reference": "eae70ec7d4f419d8b0c2e54437f6220f38cc5f83",
                 "shasum": null
             },
             "require": {
@@ -467,17 +467,20 @@
                 "guzzlehttp/guzzle": "^6.3",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
+                "punic/punic": "^3.3",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-foundation": "^4.1",
                 "symfony/http-kernel": "^4.1",
-                "symfony/routing": "^4.1"
+                "symfony/routing": "^4.1",
+                "twig/twig": "^2.5"
             },
             "require-dev": {
                 "csa/guzzle-cache-middleware": "^1.0",
                 "guzzlehttp/psr7": "^1.4",
                 "php-vfs/php-vfs": "^1.4",
                 "phpunit/phpunit": "^7.3",
+                "symfony/css-selector": "^4.1",
                 "symfony/dom-crawler": "^4.1"
             },
             "type": "symfony-bundle",
@@ -813,6 +816,80 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "punic/punic",
+            "version": "3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/punic/punic.git",
+                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/punic/punic/zipball/db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
+                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "replace": {
+                "punic/calendar": "*",
+                "punic/common": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.2.*",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.4"
+            },
+            "bin": [
+                "bin/punic-data"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Punic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michele Locati",
+                    "email": "mlocati@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Remo Laubacher",
+                    "email": "remo.laubacher@gmail.com",
+                    "role": "Collaborator, motivator and perfectionist supporter"
+                },
+                {
+                    "name": "Christian Schmidt",
+                    "email": "github@chsc.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP-Unicode CLDR",
+            "homepage": "https://github.com/punic/punic",
+            "keywords": [
+                "calendar",
+                "cldr",
+                "date",
+                "date-time",
+                "i18n",
+                "internationalization",
+                "l10n",
+                "localization",
+                "php",
+                "time",
+                "translate",
+                "translations",
+                "unicode"
+            ],
+            "time": "2018-12-07T16:55:52+00:00"
         },
         {
             "name": "symfony/cache",
@@ -3972,80 +4049,6 @@
                 "xunit"
             ],
             "time": "2018-11-14T16:52:02+00:00"
-        },
-        {
-            "name": "punic/punic",
-            "version": "3.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/punic/punic.git",
-                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
-                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "replace": {
-                "punic/calendar": "*",
-                "punic/common": "*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "2.2.*",
-                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.4"
-            },
-            "bin": [
-                "bin/punic-data"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Punic\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michele Locati",
-                    "email": "mlocati@gmail.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Remo Laubacher",
-                    "email": "remo.laubacher@gmail.com",
-                    "role": "Collaborator, motivator and perfectionist supporter"
-                },
-                {
-                    "name": "Christian Schmidt",
-                    "email": "github@chsc.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP-Unicode CLDR",
-            "homepage": "https://github.com/punic/punic",
-            "keywords": [
-                "calendar",
-                "cldr",
-                "date",
-                "date-time",
-                "i18n",
-                "internationalization",
-                "l10n",
-                "localization",
-                "php",
-                "time",
-                "translate",
-                "translations",
-                "unicode"
-            ],
-            "time": "2018-12-07T16:55:52+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
