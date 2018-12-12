@@ -29,6 +29,9 @@ final class ContentPageConfiguration implements ConfigurationInterface
                 ->scalarNode('client')
                     ->isRequired()
                 ->end()
+                ->scalarNode('page_template')
+                    ->isRequired()
+                ->end()
             ->end()
         ;
         return $treeBuilder;

@@ -29,6 +29,7 @@ final class ContentPageExtension extends Extension
         foreach ($config['pages'] as $name => $page) {
             $config['pages'][$name]['name'] = $name;
             $page['client'] = $config['client'];
+            $page['page_template'] = $config['page_template'];
 
             $this->addPage($name, $page, $container);
         }
@@ -43,6 +44,8 @@ final class ContentPageExtension extends Extension
 
         $definition->setArgument(0, new Reference($config['client']));
         $definition->setArgument(1, $config['service']);
+        $definition->setArgument(2, new Reference('twig'));
+        $definition->setArgument(3, $config['page_template']);
         $definition->addTag('controller.service_arguments');
 
         $container->setDefinition($id, $definition);
