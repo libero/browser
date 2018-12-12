@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# Updates local copy of the Libero patterns (in vendor-extra/LiberoPatternsBundle/src/Resources)
+#
+# Clones and builds the Pattern Library (https://github.com/libero/pattern-library), then copies the CSS, fonts and templates.
+
 function finish {
     docker rm browser-pattern-library &> /dev/null || true
 }
