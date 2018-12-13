@@ -35,17 +35,18 @@ final class ItalicVisitor implements InlineViewConverterVisitor
             $view = $view->withTemplate('@LiberoPatterns/italic.html.twig');
         }
 
-        $arguments = [];
+        if ($view->hasArgument('text')) {
+            return $view;
+        }
 
-        if (!$view->hasArgument('text')) {
-            $arguments['text'] = map(
+        return $view->withArgument(
+            'text',
+            map(
                 $object,
                 function (ChildNode $node) use ($context) : ?View {
                     return $this->inlineConverter->convert($node, $context);
                 }
-            );
-        }
-
-        return $view->withArguments($arguments);
+            )
+        );
     }
 }

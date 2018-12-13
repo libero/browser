@@ -19,14 +19,13 @@ final class LangVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        return $view->withArguments(
-            [
-                'attributes' => $this->addLangAttribute(
-                    $object,
-                    $context,
-                    $view->getArgument('attributes') ?? []
-                ),
-            ]
+        return $view->withArgument(
+            'attributes',
+            $this->addLangAttribute(
+                $object,
+                $context,
+                $view->getArgument('attributes') ?? []
+            )
         );
     }
 }

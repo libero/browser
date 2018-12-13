@@ -29,14 +29,13 @@ final class LangVisitor implements InlineViewConverterVisitor
             return $view;
         }
 
-        $arguments = [
-            'attributes' => $this->addLangAttribute(
+        return $view->withArgument(
+            'attributes',
+            $this->addLangAttribute(
                 $object,
                 $context,
                 $view->getArgument('attributes') ?? []
-            ),
-        ];
-
-        return $view->withArguments($arguments);
+            )
+        );
     }
 }
