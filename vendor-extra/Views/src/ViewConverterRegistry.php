@@ -5,21 +5,15 @@ declare(strict_types=1);
 namespace Libero\Views;
 
 use FluentDOM\DOM\Element;
+use function array_push;
 
 final class ViewConverterRegistry implements ViewConverter
 {
     private $visitors = [];
 
-    public function add(ViewConverterVisitor $visitor) : void
+    public function add(ViewConverterVisitor ...$visitors) : void
     {
-        $this->visitors[] = $visitor;
-    }
-
-    public function addMany(iterable $visitors) : void
-    {
-        foreach ($visitors as $visitor) {
-            $this->add($visitor);
-        }
+        array_push($this->visitors, ...$visitors);
     }
 
     public function convert(Element $object, string $template, array $context = []) : View

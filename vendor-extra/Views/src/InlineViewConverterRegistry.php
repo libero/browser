@@ -5,21 +5,15 @@ declare(strict_types=1);
 namespace Libero\Views;
 
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
+use function array_push;
 
 final class InlineViewConverterRegistry implements InlineViewConverter
 {
     private $visitors = [];
 
-    public function add(InlineViewConverterVisitor $visitor) : void
+    public function add(InlineViewConverterVisitor ...$visitors) : void
     {
-        $this->visitors[] = $visitor;
-    }
-
-    public function addMany(iterable $visitors) : void
-    {
-        foreach ($visitors as $visitor) {
-            $this->add($visitor);
-        }
+        array_push($this->visitors, ...$visitors);
     }
 
     public function convert(NonDocumentTypeChildNode $object, array $context = []) : View
