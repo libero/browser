@@ -7,9 +7,9 @@ namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
-use Libero\Views\InlineViewConverter;
-use Libero\Views\InlineViewConverterVisitor;
-use Libero\Views\View;
+use Libero\ViewsBundle\Views\InlineViewConverter;
+use Libero\ViewsBundle\Views\InlineViewConverterVisitor;
+use Libero\ViewsBundle\Views\View;
 use function Functional\map;
 
 final class ItalicVisitor implements InlineViewConverterVisitor

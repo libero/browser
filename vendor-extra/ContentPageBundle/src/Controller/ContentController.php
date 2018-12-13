@@ -8,7 +8,7 @@ use DOMNodeList;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
-use Libero\Views\ViewConverter;
+use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
 use Punic\Misc;
 use Symfony\Component\HttpFoundation\Request;

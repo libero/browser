@@ -7,10 +7,10 @@ namespace Libero\LiberoPatternsBundle\ViewConverter;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\ChildNode;
-use Libero\Views\InlineViewConverter;
-use Libero\Views\LangAttributes;
-use Libero\Views\View;
-use Libero\Views\ViewConverterVisitor;
+use Libero\ViewsBundle\Views\InlineViewConverter;
+use Libero\ViewsBundle\Views\LangAttributes;
+use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use function Functional\map;
 
 final class FrontContentHeaderVisitor implements ViewConverterVisitor

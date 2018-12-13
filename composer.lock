@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26485e260d8e3fd6b7a015b2a0c35512",
+    "content-hash": "776f17f67ab71384b45dfc4c427badf2",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -459,14 +459,14 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "2f1f2751e020202b4bdd6dd492a081b6696e302c",
+                "reference": "4d1302334eb105bb19074a1590271de3dd056f84",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "guzzlehttp/guzzle": "^6.3",
                 "libero/patterns-bundle": "^1.0@dev",
-                "libero/views": "^1.0@dev",
+                "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
                 "punic/punic": "^3.3",
@@ -507,11 +507,11 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "bcd27beb7de13176565130277070591e37253a05",
+                "reference": "2b0e705c1728700b47f9ab15549241f6fa003e6e",
                 "shasum": null
             },
             "require": {
-                "libero/views": "^1.0@dev",
+                "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
@@ -534,20 +534,23 @@
             "description": "Libero patterns"
         },
         {
-            "name": "libero/views",
+            "name": "libero/views-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "./vendor-extra/Views",
-                "reference": "9c6de63e0c8182b7bbb6d762860caf15bb81df2f",
+                "url": "./vendor-extra/ViewsBundle",
+                "reference": "752cdb064a86dba6cd0b01e0a1a87f30c22144c6",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "php": "^7.2",
-                "punic/punic": "^3.3"
+                "punic/punic": "^3.3",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
+                "symfony/http-kernel": "^4.1"
             },
-            "type": "library",
+            "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
@@ -555,13 +558,13 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Libero\\Views\\": "src/"
+                    "Libero\\ViewsBundle\\": "src/"
                 }
             },
             "license": [
                 "MIT"
             ],
-            "description": "Views"
+            "description": "Views bundle"
         },
         {
             "name": "lstrojny/functional-php",
@@ -5366,7 +5369,7 @@
     "stability-flags": {
         "libero/content-page-bundle": 20,
         "libero/patterns-bundle": 20,
-        "libero/views": 20
+        "libero/views-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

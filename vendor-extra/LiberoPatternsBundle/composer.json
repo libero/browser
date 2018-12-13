@@ -10,7 +10,7 @@
     },
     "require": {
         "php": "^7.2",
-        "libero/views": "^1.0@dev",
+        "libero/views-bundle": "^1.0@dev",
         "symfony/config": "^4.1",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1"

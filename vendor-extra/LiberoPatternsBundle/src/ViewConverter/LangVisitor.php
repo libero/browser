@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
-use Libero\Views\LangAttributes;
-use Libero\Views\View;
-use Libero\Views\ViewConverterVisitor;
+use Libero\ViewsBundle\Views\LangAttributes;
+use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
 final class LangVisitor implements ViewConverterVisitor
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\Views;
+namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 

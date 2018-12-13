@@ -10,7 +10,7 @@
 
         <service id="Libero\LiberoPatternsBundle\ViewConverter\FrontContentHeaderVisitor"
             class="Libero\LiberoPatternsBundle\ViewConverter\FrontContentHeaderVisitor">
-            <argument type="service" id="Libero\Views\InlineViewConverter"/>
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
 
@@ -21,26 +21,13 @@
 
         <service id="Libero\LiberoPatternsBundle\ViewConverter\Inline\ItalicVisitor"
             class="Libero\LiberoPatternsBundle\ViewConverter\Inline\ItalicVisitor">
-            <argument type="service" id="Libero\Views\InlineViewConverter"/>
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
             <tag name="libero.view_converter.inline"/>
         </service>
 
         <service id="Libero\LiberoPatternsBundle\ViewConverter\Inline\LangVisitor"
             class="Libero\LiberoPatternsBundle\ViewConverter\Inline\LangVisitor">
             <tag name="libero.view_converter.inline" priority="100"/>
-        </service>
-
-        <service id="Libero\Views\ViewConverterRegistry"
-            class="Libero\Views\ViewConverterRegistry"/>
-
-        <service id="Libero\Views\ViewConverter"
-            alias="Libero\Views\ViewConverterRegistry"/>
-
-        <service id="Libero\Views\InlineViewConverterRegistry"
-            class="Libero\Views\InlineViewConverterRegistry"/>
-
-        <service id="Libero\Views\InlineViewConverter"
-            alias="Libero\Views\InlineViewConverterRegistry">
         </service>
 
     </services>

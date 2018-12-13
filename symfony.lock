@@ -50,7 +50,7 @@
     "libero/patterns-bundle": {
         "version": "1.0.x-dev"
     },
-    "libero/views": {
+    "libero/views-bundle": {
         "version": "1.0.x-dev"
     },
     "lstrojny/functional-php": {

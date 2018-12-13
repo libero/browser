@@ -6,7 +6,7 @@ namespace Libero\ContentPageBundle\DependencyInjection;
 
 use Libero\ContentPageBundle\Controller\ContentController;
 use Libero\ContentPageBundle\Routing\ContentPageRouteLoader;
-use Libero\Views\ViewConverter;
+use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

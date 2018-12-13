@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Libero\LiberoPatternsBundle\DependencyInjection\Compiler;
+namespace Libero\ViewsBundle\DependencyInjection\Compiler;
 
-use Libero\Views\InlineViewConverterRegistry;
+use Libero\ViewsBundle\Views\InlineViewConverterRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
