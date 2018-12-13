@@ -1,3 +1,4 @@
 twig:
     debug: '%kernel.debug%'
+    default_path: '%kernel.project_dir%/templates'
     strict_variables: '%kernel.debug%'

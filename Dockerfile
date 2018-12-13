@@ -37,6 +37,7 @@ COPY .docker/php.ini ${PHP_INI_DIR}/conf.d/00-app.ini
 COPY bin/ bin/
 COPY src/ src/
 COPY public/ public/
+COPY templates/ templates/
 COPY config/ config/
 COPY --from=composer /app/vendor/ vendor/
 COPY vendor-extra/ vendor-extra/

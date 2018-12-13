@@ -25,7 +25,7 @@ trait GuzzleTestCase
     /**
      * @before
      */
-    public function setUpGuzzle() : void
+    final public function setUpGuzzle() : void
     {
         $this->filesystem = new FileSystem();
 
