@@ -25,7 +25,7 @@ final class InlineViewConverterRegistry implements InlineViewConverter
         }
 
         if (!$view->getTemplate()) {
-            return new View('@LiberoPatterns\text.html.twig', ['nodes' => (string) $object]);
+            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $object]);
         }
 
         return $view;
