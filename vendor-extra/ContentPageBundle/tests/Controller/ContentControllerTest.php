@@ -21,16 +21,16 @@ final class ContentControllerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider idProvider
+     * @dataProvider pageProvider
      */
-    public function it_returns_the_title(string $id) : void
+    public function it_returns_the_title(Request $request, array $twigContext) : void
     {
         $controller = $this->createContentController();
 
         $this->mock->save(
             new Psr7Request(
                 'GET',
-                "service/items/{$id}/versions/latest",
+                "service/items/id/versions/latest",
                 ['Accept' => 'application/xml']
             ),
             new Psr7Response(
@@ -40,36 +40,44 @@ final class ContentControllerTest extends TestCase
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
     <front xml:lang="en">
-        <id>{$id}</id>
-        <title>Article {$id}</title>
+        <id>id</id>
+        <title>Title</title>
     </front>
 </item>
 XML
             )
         );
 
-        $response = $controller(new Request(), $id);
-        $response->prepare(new Request());
+        $response = $controller($request, 'id');
+        $response->prepare($request);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertTwigRender(
-            [
-                'template.html.twig',
-                [
-                    'lang' => 'en',
-                    'dir' => 'ltr',
-                    'title' => "Article {$id}",
-                ],
-            ],
-            $response->getContent()
-        );
+        $this->assertTwigRender(['template.html.twig', $twigContext], $response->getContent());
     }
 
-    public function idProvider() : iterable
+    public function pageProvider() : iterable
     {
-        yield 'ID foo' => ['foo'];
-        yield 'ID bar' => ['bar'];
+        yield 'en request' => [
+            new Request(),
+            [
+                'lang' => 'en',
+                'dir' => 'ltr',
+                'title' => 'Title',
+            ],
+        ];
+
+        $arabicRequest = new Request();
+        $arabicRequest->setLocale('ar-EG');
+
+        yield 'ar-EG request' => [
+            $arabicRequest,
+            [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
+                'title' => 'Title',
+            ],
+        ];
     }
 
     /**
