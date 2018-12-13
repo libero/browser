@@ -14,28 +14,6 @@
             <tag name="routing.loader"/>
         </service>
 
-        <service id="Libero\Views\ViewConverterRegistry"
-            class="Libero\Views\ViewConverterRegistry">
-            <call method="addMany">
-                <argument type="tagged" tag="libero.view_converter"/>
-            </call>
-        </service>
-
-        <service id="Libero\Views\ViewConverter"
-            alias="Libero\Views\ViewConverterRegistry">
-        </service>
-
-        <service id="Libero\Views\InlineViewConverterRegistry"
-            class="Libero\Views\InlineViewConverterRegistry">
-            <call method="addMany">
-                <argument type="tagged" tag="libero.view_converter.inline"/>
-            </call>
-        </service>
-
-        <service id="Libero\Views\InlineViewConverter"
-            alias="Libero\Views\InlineViewConverterRegistry">
-        </service>
-
     </services>
 
 </container>
