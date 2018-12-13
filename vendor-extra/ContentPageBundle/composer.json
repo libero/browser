@@ -24,7 +24,6 @@
         "twig/twig": "^2.5"
     },
     "require-dev": {
-        "ext-json": "*",
         "csa/guzzle-cache-middleware": "^1.0",
         "guzzlehttp/psr7": "^1.4",
         "php-vfs/php-vfs": "^1.4",
