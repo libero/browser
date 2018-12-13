@@ -6,22 +6,17 @@ namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use DOMNodeList;
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\ChildNode;
-use Libero\ViewsBundle\Views\InlineViewConverter;
-use Libero\ViewsBundle\Views\LangAttributes;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
-use function Functional\map;
 
 final class FrontContentHeaderVisitor implements ViewConverterVisitor
 {
-    use LangAttributes;
+    private $converter;
 
-    private $inlineConverter;
-
-    public function __construct(InlineViewConverter $inlineConverter)
+    public function __construct(ViewConverter $converter)
     {
-        $this->inlineConverter = $inlineConverter;
+        $this->converter = $converter;
     }
 
     public function visit(Element $object, View $view, array &$context = []) : View
@@ -42,20 +37,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        $titleContext = $context;
-
-        $arguments = [
-            'contentTitle' => [
-                'attributes' => $this->addLangAttribute($title, $titleContext),
-                'text' => map(
-                    $title,
-                    function (ChildNode $node) use ($titleContext) : ?View {
-                        return $this->inlineConverter->convert($node, $titleContext);
-                    }
-                ),
-            ],
-        ];
-
-        return $view->withArguments($arguments);
+        return $view->withArgument(
+            'contentTitle',
+            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+        );
     }
 }

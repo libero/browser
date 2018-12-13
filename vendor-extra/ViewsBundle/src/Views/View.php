@@ -38,6 +38,11 @@ final class View implements JsonSerializable
         return $this->template;
     }
 
+    public function withArgument(string $key, $value) : View
+    {
+        return $this->withArguments([$key => $value]);
+    }
+
     public function withArguments(array $arguments) : View
     {
         if ($arguments === $this->arguments || !$arguments) {
