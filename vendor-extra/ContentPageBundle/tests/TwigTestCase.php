@@ -14,7 +14,7 @@ trait TwigTestCase
     /**
      * @return Environment&MockObject
      */
-    public function createTwig() : Environment
+    final public function createTwig() : Environment
     {
         $twig = $this->createMock(Environment::class);
 
