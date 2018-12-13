@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c24d230a4f5bc5554168059ad00fc21c",
+    "content-hash": "26485e260d8e3fd6b7a015b2a0c35512",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -459,14 +459,12 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "6d370706505a03e8bf42b6c5fa5d62286168f197",
+                "reference": "eae70ec7d4f419d8b0c2e54437f6220f38cc5f83",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "guzzlehttp/guzzle": "^6.3",
-                "libero/patterns-bundle": "^1.0@dev",
-                "libero/views": "^1.0@dev",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
                 "punic/punic": "^3.3",
@@ -479,7 +477,6 @@
             },
             "require-dev": {
                 "csa/guzzle-cache-middleware": "^1.0",
-                "ext-json": "*",
                 "guzzlehttp/psr7": "^1.4",
                 "php-vfs/php-vfs": "^1.4",
                 "phpunit/phpunit": "^7.3",
@@ -566,16 +563,16 @@
         },
         {
             "name": "lstrojny/functional-php",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lstrojny/functional-php.git",
-                "reference": "7d677bbc1dbf8338946cd3b31f0d5c2beb2b5a26"
+                "reference": "f5b3b4424dcddb406d3dcfcae0d1bc0060099a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lstrojny/functional-php/zipball/7d677bbc1dbf8338946cd3b31f0d5c2beb2b5a26",
-                "reference": "7d677bbc1dbf8338946cd3b31f0d5c2beb2b5a26",
+                "url": "https://api.github.com/repos/lstrojny/functional-php/zipball/f5b3b4424dcddb406d3dcfcae0d1bc0060099a78",
+                "reference": "f5b3b4424dcddb406d3dcfcae0d1bc0060099a78",
                 "shasum": ""
             },
             "require": {
@@ -701,7 +698,7 @@
             "keywords": [
                 "functional"
             ],
-            "time": "2018-03-19T16:14:14+00:00"
+            "time": "2018-12-03T16:47:05+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1023,16 +1020,16 @@
         },
         {
             "name": "punic/punic",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/punic/punic.git",
-                "reference": "d31ec0bec7bad65105876812cc5b0106ae095e34"
+                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/punic/punic/zipball/d31ec0bec7bad65105876812cc5b0106ae095e34",
-                "reference": "d31ec0bec7bad65105876812cc5b0106ae095e34",
+                "url": "https://api.github.com/repos/punic/punic/zipball/db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
+                "reference": "db3b99397e7ede380eb8b27b08d7f7a95d85d7db",
                 "shasum": ""
             },
             "require": {
@@ -1093,11 +1090,11 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2018-11-23T10:02:50+00:00"
+            "time": "2018-12-07T16:55:52+00:00"
         },
         {
             "name": "symfony/asset",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/asset.git",
@@ -2293,16 +2290,16 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v4.1.8",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "7d46939a25e76d7395b17219c9befcd16c6b2226"
+                "reference": "8a3fa53045d70efc5659f8fc43a630df938804b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/7d46939a25e76d7395b17219c9befcd16c6b2226",
-                "reference": "7d46939a25e76d7395b17219c9befcd16c6b2226",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/8a3fa53045d70efc5659f8fc43a630df938804b2",
+                "reference": "8a3fa53045d70efc5659f8fc43a630df938804b2",
                 "shasum": ""
             },
             "require": {
@@ -2363,7 +2360,7 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-11-11T19:51:29+00:00"
+            "time": "2018-10-30T17:00:46+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -5022,16 +5019,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.1.8",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "9e4dc57949853315561f0cd5eb84d0707465502a"
+                "reference": "aa9fa526ba1b2ec087ffdfb32753803d999fcfcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/9e4dc57949853315561f0cd5eb84d0707465502a",
-                "reference": "9e4dc57949853315561f0cd5eb84d0707465502a",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/aa9fa526ba1b2ec087ffdfb32753803d999fcfcd",
+                "reference": "aa9fa526ba1b2ec087ffdfb32753803d999fcfcd",
                 "shasum": ""
             },
             "require": {
@@ -5040,7 +5037,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -5071,7 +5068,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2018-11-11T19:51:29+00:00"
+            "time": "2018-11-11T19:52:12+00:00"
         },
         {
             "name": "symfony/dom-crawler",

@@ -51,7 +51,7 @@ final class ContentController
                 ]
             )
             ->then(
-                function (ResponseInterface $response) use ($request) {
+                function (ResponseInterface $response) use ($request) : Response {
                     $dom = FluentDOM::load((string) $response->getBody());
                     $dom->registerNamespace('libero', 'http://libero.pub');
 

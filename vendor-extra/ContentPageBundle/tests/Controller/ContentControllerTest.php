@@ -14,7 +14,6 @@ use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use tests\Libero\ContentPageBundle\TwigTestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use UnexpectedValueException;
-use function GuzzleHttp\json_encode;
 
 final class ContentControllerTest extends TestCase
 {
@@ -24,16 +23,16 @@ final class ContentControllerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider idProvider
+     * @dataProvider pageProvider
      */
-    public function it_returns_the_title(string $id) : void
+    public function it_returns_the_title(Request $request, array $twigContext) : void
     {
         $controller = $this->createContentController();
 
         $this->mock->save(
             new Psr7Request(
                 'GET',
-                "service/items/{$id}/versions/latest",
+                'service/items/id/versions/latest',
                 ['Accept' => 'application/xml']
             ),
             new Psr7Response(
@@ -43,50 +42,68 @@ final class ContentControllerTest extends TestCase
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub">
     <libero:front xml:lang="en">
-        <libero:id>{$id}</libero:id>
-        <libero:title>Article {$id}</libero:title>
+        <libero:id>id</libero:id>
+        <libero:title>Title</libero:title>
     </libero:front>
 </libero:item>
 XML
             )
         );
 
-        $response = $controller(new Request(), $id);
-        $response->prepare(new Request());
+        $response = $controller($request, 'id');
+        $response->prepare($request);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(
-                [
-                    'template.html.twig',
+        $this->assertTwigRender(['template.html.twig', $twigContext], $response->getContent());
+    }
+
+    public function pageProvider() : iterable
+    {
+        yield 'en request' => [
+            new Request(),
+            [
+                'lang' => 'en',
+                'dir' => 'ltr',
+                'title' => 'Title',
+                'content' => [
                     [
-                        'lang' => 'en',
-                        'dir' => 'ltr',
-                        'title' => "Article {$id}",
-                        'content' => [
-                            [
-                                'template' => '@LiberoPatterns/content-header.html.twig',
-                                'arguments' => [
-                                    'element' => '/libero:item/libero:front',
-                                    'context' => [
-                                        'lang' => 'en',
-                                        'dir' => 'ltr',
-                                    ],
-                                ],
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'element' => '/libero:item/libero:front',
+                            'context' => [
+                                'lang' => 'en',
+                                'dir' => 'ltr',
                             ],
                         ],
                     ],
-                ]
-            ),
-            $response->getContent()
-        );
-    }
+                ],
+            ],
+        ];
 
-    public function idProvider() : iterable
-    {
-        yield 'ID foo' => ['foo'];
-        yield 'ID bar' => ['bar'];
+        $arabicRequest = new Request();
+        $arabicRequest->setLocale('ar-EG');
+
+        yield 'ar-EG request' => [
+            $arabicRequest,
+            [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
+                'title' => 'Title',
+                'content' => [
+                    [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'element' => '/libero:item/libero:front',
+                            'context' => [
+                                'lang' => 'ar-EG',
+                                'dir' => 'rtl',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -124,7 +141,7 @@ XML
     /**
      * @test
      */
-    public function it_fails_if_it_does_not_find_the_front() : void
+    public function it_fails_if_it_does_not_find_the_title() : void
     {
         $controller = $this->createContentController();
 
