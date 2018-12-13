@@ -30,7 +30,7 @@ final class ContentControllerTest extends TestCase
         $this->mock->save(
             new Psr7Request(
                 'GET',
-                "service/items/id/versions/latest",
+                'service/items/id/versions/latest',
                 ['Accept' => 'application/xml']
             ),
             new Psr7Response(
