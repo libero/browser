@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use tests\Libero\ContentPageBundle\TwigTestCase;
 use UnexpectedValueException;
-use function GuzzleHttp\json_encode;
 
 final class ContentControllerTest extends TestCase
 {
@@ -54,17 +53,15 @@ XML
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(
+        $this->assertTwigRender(
+            [
+                'template.html.twig',
                 [
-                    'template.html.twig',
-                    [
-                        'lang' => 'en',
-                        'dir' => 'ltr',
-                        'title' => "Article {$id}",
-                    ],
-                ]
-            ),
+                    'lang' => 'en',
+                    'dir' => 'ltr',
+                    'title' => "Article {$id}",
+                ],
+            ],
             $response->getContent()
         );
     }
