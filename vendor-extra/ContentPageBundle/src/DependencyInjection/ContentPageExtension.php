@@ -46,8 +46,8 @@ final class ContentPageExtension extends Extension
         $definition->setArgument(0, new Reference($config['client']));
         $definition->setArgument(1, $config['service']);
         $definition->setArgument(2, new Reference('twig'));
-        $definition->setArgument(3, new Reference(ViewConverter::class));
-        $definition->setArgument(4, $config['page_template']);
+        $definition->setArgument(3, $config['page_template']);
+        $definition->setArgument(4, new Reference(ViewConverter::class));
         $definition->addTag('controller.service_arguments');
 
         $container->setDefinition($id, $definition);

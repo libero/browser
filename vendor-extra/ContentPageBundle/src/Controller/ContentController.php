@@ -29,14 +29,14 @@ final class ContentController
         ClientInterface $client,
         string $service,
         Environment $twig,
-        ViewConverter $converter,
-        string $template
+        string $template,
+        ViewConverter $converter
     ) {
         $this->client = $client;
         $this->service = $service;
         $this->twig = $twig;
-        $this->converter = $converter;
         $this->template = $template;
+        $this->converter = $converter;
     }
 
     public function __invoke(Request $request, string $id) : Response

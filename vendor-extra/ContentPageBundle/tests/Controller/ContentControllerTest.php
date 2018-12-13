@@ -175,8 +175,8 @@ XML
             $this->client,
             $service,
             $this->createTwig(),
-            $this->createConverter(),
-            $template
+            $template,
+            $this->createConverter()
         );
     }
 }
