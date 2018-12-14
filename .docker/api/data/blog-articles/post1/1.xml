@@ -2,7 +2,7 @@
 
 <item xmlns="http://libero.pub">
 
-    <front>
+    <front xml:lang="en">
 
         <id>post1</id>
         <title>Post 1</title>
