@@ -99,3 +99,6 @@ USER root
 ENV COMPOSER_ALLOW_SUPERUSER=true
 
 COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
+
+RUN bin/console assets:install && \
+    rm -rf var/*
