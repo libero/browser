@@ -3,7 +3,7 @@ set -e
 
 # Updates local copy of the Libero patterns (in vendor-extra/LiberoPatternsBundle/src/Resources)
 #
-# Clones and builds the Pattern Library (https://github.com/libero/pattern-library), then copies the CSS and fonts.
+# Clones and builds the Pattern Library (https://github.com/libero/pattern-library), then copies the CSS, fonts and templates.
 
 function finish {
     docker rm browser-pattern-library &> /dev/null || true
@@ -31,3 +31,4 @@ cd ../..
 
 rsync --archive --delete var/pattern-library/export/css/ vendor-extra/LiberoPatternsBundle/src/Resources/public/css --exclude sass
 rsync --archive --delete var/pattern-library/export/fonts/ vendor-extra/LiberoPatternsBundle/src/Resources/public/fonts
+rsync --archive --delete var/pattern-library/export/templates/ vendor-extra/LiberoPatternsBundle/src/Resources/views
