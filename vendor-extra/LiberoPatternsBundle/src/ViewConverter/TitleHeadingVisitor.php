@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\ChildNode;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\InlineViewConverter;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
@@ -30,11 +30,15 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
             return $view;
         }
 
+        if ($view->hasArgument('text')) {
+            return $view;
+        }
+
         return $view->withArgument(
             'text',
             map(
                 $object,
-                function (ChildNode $node) use ($context) : ?View {
+                function (NonDocumentTypeChildNode $node) use ($context) : ?View {
                     return $this->inlineConverter->convert($node, $context);
                 }
             )

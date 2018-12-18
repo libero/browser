@@ -31,12 +31,12 @@ final class ItalicVisitor implements InlineViewConverterVisitor
             return $view;
         }
 
-        if (!$view->getTemplate()) {
-            $view = $view->withTemplate('@LiberoPatterns/italic.html.twig');
-        }
-
         if ($view->hasArgument('text')) {
             return $view;
+        }
+
+        if (!$view->getTemplate()) {
+            $view = $view->withTemplate('@LiberoPatterns/italic.html.twig');
         }
 
         return $view->withArgument(

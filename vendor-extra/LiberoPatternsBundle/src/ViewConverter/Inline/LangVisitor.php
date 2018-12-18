@@ -20,12 +20,7 @@ final class LangVisitor implements InlineViewConverterVisitor
             return $view;
         }
 
-        if (!empty($view->getArgument('attributes')['lang'])) {
-            return $view;
-        }
-
-        $lang = $object->getAttribute('xml:lang');
-        if (!$lang || $lang === ($context['lang'] ?? null)) {
+        if ($view->hasArgument('attributes') && !empty($view->getArgument('attributes')['lang'])) {
             return $view;
         }
 

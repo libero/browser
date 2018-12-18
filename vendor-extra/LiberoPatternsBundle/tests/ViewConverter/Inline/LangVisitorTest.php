@@ -2,16 +2,35 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\LiberoPatternsBundle\ViewConverter;
+namespace tests\Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\LiberoPatternsBundle\ViewConverter\LangVisitor;
+use FluentDOM\DOM\Text;
+use Libero\LiberoPatternsBundle\ViewConverter\Inline\LangVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 
 final class LangVisitorTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_it_is_not_an_element() : void
+    {
+        $visitor = new LangVisitor();
+
+        $xml = FluentDOM::load('<foo>bar</foo>');
+        /** @var Text $node */
+        $node = $xml->documentElement->firstChild;
+
+        $newContext = [];
+        $view = $visitor->visit($node, new View('template'), $newContext);
+
+        $this->assertEmpty($view->getArgument('attributes'));
+        $this->assertEmpty($newContext);
+    }
+
     /**
      * @test
      */
