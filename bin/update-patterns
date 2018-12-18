@@ -18,6 +18,7 @@ mkdir -p var/pattern-library && cd "$_"
 if ! [[ -d .git ]]; then
     git clone git@github.com:libero/pattern-library.git .
 else
+    git fetch
     git reset --hard origin/master
     git clean -d --force
 fi

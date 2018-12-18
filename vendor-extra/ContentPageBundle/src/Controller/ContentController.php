@@ -8,7 +8,6 @@ use DOMNodeList;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
-use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
 use Punic\Misc;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,6 @@ use function array_merge;
 final class ContentController
 {
     private $client;
-    private $converter;
     private $service;
     private $template;
     private $twig;
@@ -29,14 +27,12 @@ final class ContentController
         ClientInterface $client,
         string $service,
         Environment $twig,
-        string $template,
-        ViewConverter $converter
+        string $template
     ) {
         $this->client = $client;
         $this->service = $service;
         $this->twig = $twig;
         $this->template = $template;
-        $this->converter = $converter;
     }
 
     public function __invoke(Request $request, string $id) : Response
@@ -63,12 +59,35 @@ final class ContentController
                         throw new UnexpectedValueException('Could not find a front');
                     }
 
+                    /** @var string $title */
+                    $title = $front('string(libero:title)');
+
+                    if ('' === $title) {
+                        throw new UnexpectedValueException('Could not find a title');
+                    }
+
                     $context = [
                         'lang' => $request->getLocale(),
-                        'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
+                        'dir' => $this->getDirection($request->getLocale()),
                     ];
 
-                    $header = $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $context);
+                    $contentHeader = [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'attributes' => [],
+                            'contentTitle' => [
+                                'text' => $title,
+                            ],
+                        ],
+                    ];
+
+                    if ($context['lang'] !== $frontLang = $front->getAttribute('xml:lang')) {
+                        $contentHeader['arguments']['attributes']['lang'] = $frontLang;
+
+                        if ($context['dir'] !== $frontDir = $this->getDirection($frontLang)) {
+                            $contentHeader['arguments']['attributes']['dir'] = $frontDir;
+                        }
+                    }
 
                     return new Response(
                         $this->twig->render(
@@ -76,8 +95,8 @@ final class ContentController
                             array_merge(
                                 $context,
                                 [
-                                    'title' => $front('string(libero:title[1])'),
-                                    'content' => [$header],
+                                    'title' => $title,
+                                    'content' => [$contentHeader],
                                 ]
                             )
                         )
@@ -85,5 +104,10 @@ final class ContentController
                 }
             )
             ->wait();
+    }
+
+    private function getDirection(?string $locale) : string
+    {
+        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
     }
 }

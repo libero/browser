@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "776f17f67ab71384b45dfc4c427badf2",
+    "content-hash": "795a9dbbd5db66aa811c6b346004da46",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -459,14 +459,13 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "4d1302334eb105bb19074a1590271de3dd056f84",
+                "reference": "d097c786e9110b86760a5d0f697629de191aa760",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "guzzlehttp/guzzle": "^6.3",
                 "libero/patterns-bundle": "^1.0@dev",
-                "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
                 "punic/punic": "^3.3",
@@ -507,18 +506,12 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "2be986a829ddfaeabcfae10fd2cb6a5c5402137b",
+                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69",
                 "shasum": null
             },
             "require": {
-                "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
-                "symfony/config": "^4.1",
-                "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.3"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -535,181 +528,6 @@
                 "MIT"
             ],
             "description": "Libero patterns"
-        },
-        {
-            "name": "libero/views-bundle",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./vendor-extra/ViewsBundle",
-                "reference": "a0bb7eb5e432b0f74b1fec7688de98a93bcfa3cf",
-                "shasum": null
-            },
-            "require": {
-                "fluentdom/fluentdom": "^7.0",
-                "php": "^7.2",
-                "punic/punic": "^3.3",
-                "symfony/config": "^4.1",
-                "symfony/dependency-injection": "^4.1",
-                "symfony/http-kernel": "^4.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.3"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Libero\\ViewsBundle\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Views bundle"
-        },
-        {
-            "name": "lstrojny/functional-php",
-            "version": "1.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lstrojny/functional-php.git",
-                "reference": "f5b3b4424dcddb406d3dcfcae0d1bc0060099a78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lstrojny/functional-php/zipball/f5b3b4424dcddb406d3dcfcae0d1bc0060099a78",
-                "reference": "f5b3b4424dcddb406d3dcfcae0d1bc0060099a78",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Functional\\": "src/Functional"
-                },
-                "files": [
-                    "src/Functional/Average.php",
-                    "src/Functional/ButLast.php",
-                    "src/Functional/Capture.php",
-                    "src/Functional/ConstFunction.php",
-                    "src/Functional/CompareOn.php",
-                    "src/Functional/CompareObjectHashOn.php",
-                    "src/Functional/Compose.php",
-                    "src/Functional/Concat.php",
-                    "src/Functional/Contains.php",
-                    "src/Functional/Curry.php",
-                    "src/Functional/CurryN.php",
-                    "src/Functional/Difference.php",
-                    "src/Functional/DropFirst.php",
-                    "src/Functional/DropLast.php",
-                    "src/Functional/Each.php",
-                    "src/Functional/Equal.php",
-                    "src/Functional/ErrorToException.php",
-                    "src/Functional/Every.php",
-                    "src/Functional/False.php",
-                    "src/Functional/Falsy.php",
-                    "src/Functional/Filter.php",
-                    "src/Functional/First.php",
-                    "src/Functional/FirstIndexOf.php",
-                    "src/Functional/FlatMap.php",
-                    "src/Functional/Flatten.php",
-                    "src/Functional/Flip.php",
-                    "src/Functional/GreaterThan.php",
-                    "src/Functional/GreaterThanOrEqual.php",
-                    "src/Functional/Group.php",
-                    "src/Functional/Head.php",
-                    "src/Functional/Id.php",
-                    "src/Functional/IfElse.php",
-                    "src/Functional/Identical.php",
-                    "src/Functional/IndexesOf.php",
-                    "src/Functional/Intersperse.php",
-                    "src/Functional/Invoke.php",
-                    "src/Functional/InvokeFirst.php",
-                    "src/Functional/InvokeIf.php",
-                    "src/Functional/InvokeLast.php",
-                    "src/Functional/Invoker.php",
-                    "src/Functional/Last.php",
-                    "src/Functional/LastIndexOf.php",
-                    "src/Functional/LessThan.php",
-                    "src/Functional/LessThanOrEqual.php",
-                    "src/Functional/LexicographicCompare.php",
-                    "src/Functional/Map.php",
-                    "src/Functional/Match.php",
-                    "src/Functional/Maximum.php",
-                    "src/Functional/Memoize.php",
-                    "src/Functional/Minimum.php",
-                    "src/Functional/None.php",
-                    "src/Functional/Not.php",
-                    "src/Functional/PartialAny.php",
-                    "src/Functional/PartialLeft.php",
-                    "src/Functional/PartialMethod.php",
-                    "src/Functional/PartialRight.php",
-                    "src/Functional/Partition.php",
-                    "src/Functional/Pick.php",
-                    "src/Functional/Pluck.php",
-                    "src/Functional/Poll.php",
-                    "src/Functional/Product.php",
-                    "src/Functional/Ratio.php",
-                    "src/Functional/ReduceLeft.php",
-                    "src/Functional/ReduceRight.php",
-                    "src/Functional/Reindex.php",
-                    "src/Functional/Reject.php",
-                    "src/Functional/Retry.php",
-                    "src/Functional/Select.php",
-                    "src/Functional/SelectKeys.php",
-                    "src/Functional/SequenceConstant.php",
-                    "src/Functional/SequenceExponential.php",
-                    "src/Functional/SequenceLinear.php",
-                    "src/Functional/Some.php",
-                    "src/Functional/Sort.php",
-                    "src/Functional/Sum.php",
-                    "src/Functional/SuppressError.php",
-                    "src/Functional/Tap.php",
-                    "src/Functional/Tail.php",
-                    "src/Functional/TailRecursion.php",
-                    "src/Functional/True.php",
-                    "src/Functional/Truthy.php",
-                    "src/Functional/Unique.php",
-                    "src/Functional/With.php",
-                    "src/Functional/Zip.php",
-                    "src/Functional/ZipAll.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lars Strojny",
-                    "email": "lstrojny@php.net",
-                    "homepage": "http://usrportage.de"
-                },
-                {
-                    "name": "Max Beutel",
-                    "email": "nash12@gmail.com"
-                }
-            ],
-            "description": "Functional primitives for PHP",
-            "keywords": [
-                "functional"
-            ],
-            "time": "2018-12-03T16:47:05+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5374,8 +5192,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "libero/content-page-bundle": 20,
-        "libero/patterns-bundle": 20,
-        "libero/views-bundle": 20
+        "libero/patterns-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -18,12 +18,6 @@
         <testsuite name="ContentPageBundle">
             <directory suffix=".php">vendor-extra/ContentPageBundle/tests</directory>
         </testsuite>
-        <testsuite name="LiberoPatternsBundle">
-            <directory suffix=".php">vendor-extra/LiberoPatternsBundle/tests</directory>
-        </testsuite>
-        <testsuite name="ViewsBundle">
-            <directory suffix=".php">vendor-extra/ViewsBundle/tests</directory>
-        </testsuite>
     </testsuites>
 
     <filter>
