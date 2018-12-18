@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\ViewsBundle\Views;
+namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Punic\Misc;

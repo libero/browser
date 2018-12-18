@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\LangAttributes;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 

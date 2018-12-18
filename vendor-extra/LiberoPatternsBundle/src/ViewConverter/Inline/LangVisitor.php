@@ -6,8 +6,8 @@ namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
+use Libero\LiberoPatternsBundle\ViewConverter\LangAttributes;
 use Libero\ViewsBundle\Views\InlineViewConverterVisitor;
-use Libero\ViewsBundle\Views\LangAttributes;
 use Libero\ViewsBundle\Views\View;
 
 final class LangVisitor implements InlineViewConverterVisitor
