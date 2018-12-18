@@ -42,6 +42,9 @@ COPY config/ config/
 COPY --from=composer /app/vendor/ vendor/
 COPY vendor-extra/ vendor-extra/
 
+RUN bin/console assets:install && \
+    rm -rf var/*
+
 USER www-data
 HEALTHCHECK --interval=5s CMD sh -c 'nc -z localhost 9000'
 
@@ -78,6 +81,9 @@ COPY composer.json \
     ./
 COPY --from=composer-dev /app/vendor/ vendor/
 
+RUN bin/console assets:install && \
+    rm -rf var/*
+
 USER www-data
 
 
@@ -93,3 +99,6 @@ USER root
 ENV COMPOSER_ALLOW_SUPERUSER=true
 
 COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
+
+RUN bin/console assets:install && \
+    rm -rf var/*

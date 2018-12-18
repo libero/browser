@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -e
+
+# Updates local copy of the Libero patterns (in vendor-extra/LiberoPatternsBundle/src/Resources)
+#
+# Clones and builds the Pattern Library (https://github.com/libero/pattern-library), then copies the CSS and fonts.
+
+function finish {
+    docker rm browser-pattern-library &> /dev/null || true
+}
+
+trap finish EXIT
+
+cd "$(dirname "$0")/.."
+
+mkdir -p var/pattern-library && cd "$_"
+
+if ! [[ -d .git ]]; then
+    git clone git@github.com:libero/pattern-library.git .
+else
+    git reset --hard origin/master
+    git clean -d --force
+fi
+
+docker-compose --file docker-compose.yml --file docker-compose.ci.yml build gulp
+rm -rf export/*
+docker run --name browser-pattern-library pattern-library_gulp npx gulp exportPatterns
+docker cp browser-pattern-library:/app/export/. export/
+
+cd ../..
+
+rsync --archive --delete var/pattern-library/export/css/ vendor-extra/LiberoPatternsBundle/src/Resources/public/css --exclude sass
+rsync --archive --delete var/pattern-library/export/fonts/ vendor-extra/LiberoPatternsBundle/src/Resources/public/fonts
