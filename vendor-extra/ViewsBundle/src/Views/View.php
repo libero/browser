@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use JsonSerializable;
-use function array_merge_recursive;
+use function array_replace_recursive;
 
 final class View implements JsonSerializable
 {
@@ -25,7 +25,7 @@ final class View implements JsonSerializable
 
     public function getArgument(string $key)
     {
-        return $this->arguments[$key];
+        return $this->arguments[$key] ?? null;
     }
 
     public function getArguments() : array
@@ -51,7 +51,7 @@ final class View implements JsonSerializable
 
         $view = clone $this;
 
-        $view->arguments = array_merge_recursive($view->arguments, $arguments);
+        $view->arguments = array_replace_recursive($view->arguments, $arguments);
 
         return $view;
     }

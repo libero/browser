@@ -507,7 +507,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "2b0e705c1728700b47f9ab15549241f6fa003e6e",
+                "reference": "2be986a829ddfaeabcfae10fd2cb6a5c5402137b",
                 "shasum": null
             },
             "require": {
@@ -516,6 +516,9 @@
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -539,7 +542,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ViewsBundle",
-                "reference": "752cdb064a86dba6cd0b01e0a1a87f30c22144c6",
+                "reference": "a0bb7eb5e432b0f74b1fec7688de98a93bcfa3cf",
                 "shasum": null
             },
             "require": {
@@ -549,6 +552,9 @@
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
             },
             "type": "symfony-bundle",
             "extra": {
