@@ -12,12 +12,14 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use tests\Libero\ContentPageBundle\TwigTestCase;
+use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use UnexpectedValueException;
 
 final class ContentControllerTest extends TestCase
 {
     use GuzzleTestCase;
     use TwigTestCase;
+    use ViewConvertingTestCase;
 
     /**
      * @test
@@ -38,12 +40,12 @@ final class ContentControllerTest extends TestCase
                 [],
                 <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub">
-    <front xml:lang="en">
-        <id>id</id>
-        <title>Title</title>
-    </front>
-</item>
+<libero:item xmlns:libero="http://libero.pub">
+    <libero:front xml:lang="en">
+        <libero:id>id</libero:id>
+        <libero:title>Title</libero:title>
+    </libero:front>
+</libero:item>
 XML
             )
         );
@@ -68,34 +70,10 @@ XML
                     [
                         'template' => '@LiberoPatterns/content-header.html.twig',
                         'arguments' => [
-                            'attributes' => [],
-                            'contentTitle' => [
-                                'text' => 'Title',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ];
-
-        $frenchRequest = new Request();
-        $frenchRequest->setLocale('fr');
-
-        yield 'fr request' => [
-            $frenchRequest,
-            [
-                'lang' => 'fr',
-                'dir' => 'ltr',
-                'title' => 'Title',
-                'content' => [
-                    [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
-                        'arguments' => [
-                            'attributes' => [
+                            'element' => '/libero:item/libero:front',
+                            'context' => [
                                 'lang' => 'en',
-                            ],
-                            'contentTitle' => [
-                                'text' => 'Title',
+                                'dir' => 'ltr',
                             ],
                         ],
                     ],
@@ -116,12 +94,10 @@ XML
                     [
                         'template' => '@LiberoPatterns/content-header.html.twig',
                         'arguments' => [
-                            'attributes' => [
-                                'lang' => 'en',
-                                'dir' => 'ltr',
-                            ],
-                            'contentTitle' => [
-                                'text' => 'Title',
+                            'element' => '/libero:item/libero:front',
+                            'context' => [
+                                'lang' => 'ar-EG',
+                                'dir' => 'rtl',
                             ],
                         ],
                     ],
@@ -165,7 +141,7 @@ XML
     /**
      * @test
      */
-    public function it_fails_if_it_does_not_find_the_front() : void
+    public function it_fails_if_it_does_not_find_the_title() : void
     {
         $controller = $this->createContentController();
 
@@ -191,39 +167,6 @@ XML
         $controller(new Request(), 'id');
     }
 
-    /**
-     * @test
-     */
-    public function it_fails_if_it_does_not_find_the_title() : void
-    {
-        $controller = $this->createContentController();
-
-        $this->mock->save(
-            new Psr7Request(
-                'GET',
-                'service/items/id/versions/latest',
-                ['Accept' => 'application/xml']
-            ),
-            new Psr7Response(
-                200,
-                [],
-                <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub">
-    <front xml:lang="en">
-        <id>id</id>
-    </front>
-</item>
-XML
-            )
-        );
-
-        $this->expectException(UnexpectedValueException::class);
-        $this->expectExceptionMessage('Could not find a title');
-
-        $controller(new Request(), 'id');
-    }
-
     private function createContentController(
         string $service = 'service',
         string $template = 'template.html.twig'
@@ -232,7 +175,8 @@ XML
             $this->client,
             $service,
             $this->createTwig(),
-            $template
+            $template,
+            $this->createConverter()
         );
     }
 }

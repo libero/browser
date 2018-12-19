@@ -1,18 +1,16 @@
 {
-    "name": "libero/patterns-bundle",
-    "description": "Libero patterns",
+    "name": "libero/views-bundle",
+    "description": "Views bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Libero\\LiberoPatternsBundle\\": "src/"
+            "Libero\\ViewsBundle\\": "src/"
         }
     },
     "require": {
         "php": "^7.2",
-        "libero/views-bundle": "^1.0@dev",
-        "lstrojny/functional-php": "^1.9",
-        "punic/punic": "^3.3",
+        "fluentdom/fluentdom": "^7.0",
         "symfony/config": "^4.1",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1"
