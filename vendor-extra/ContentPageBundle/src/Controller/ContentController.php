@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Libero\ContentPageBundle\Controller;
 
+use DOMNodeList;
 use FluentDOM;
+use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Punic\Misc;
@@ -49,8 +51,16 @@ final class ContentController
                     $dom = FluentDOM::load((string) $response->getBody());
                     $dom->registerNamespace('libero', 'http://libero.pub');
 
+                    /** @var DOMNodeList|Element[] $frontList */
+                    $frontList = $dom('/libero:item/libero:front[1]');
+                    $front = $frontList->item(0);
+
+                    if (!$front instanceof Element) {
+                        throw new UnexpectedValueException('Could not find a front');
+                    }
+
                     /** @var string $title */
-                    $title = $dom('string(/libero:item/libero:front/libero:title)');
+                    $title = $front('string(libero:title)');
 
                     if ('' === $title) {
                         throw new UnexpectedValueException('Could not find a title');
@@ -58,8 +68,26 @@ final class ContentController
 
                     $context = [
                         'lang' => $request->getLocale(),
-                        'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
+                        'dir' => $this->getDirection($request->getLocale()),
                     ];
+
+                    $contentHeader = [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'attributes' => [],
+                            'contentTitle' => [
+                                'text' => $title,
+                            ],
+                        ],
+                    ];
+
+                    if ($context['lang'] !== $frontLang = $front->getAttribute('xml:lang')) {
+                        $contentHeader['arguments']['attributes']['lang'] = $frontLang;
+
+                        if ($context['dir'] !== $frontDir = $this->getDirection($frontLang)) {
+                            $contentHeader['arguments']['attributes']['dir'] = $frontDir;
+                        }
+                    }
 
                     return new Response(
                         $this->twig->render(
@@ -68,6 +96,7 @@ final class ContentController
                                 $context,
                                 [
                                     'title' => $title,
+                                    'content' => [$contentHeader],
                                 ]
                             )
                         )
@@ -75,5 +104,10 @@ final class ContentController
                 }
             )
             ->wait();
+    }
+
+    private function getDirection(?string $locale) : string
+    {
+        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
     }
 }

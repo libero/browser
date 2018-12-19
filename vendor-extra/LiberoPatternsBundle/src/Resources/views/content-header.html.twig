@@ -1,0 +1,40 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header', 'wrapper']) }) %}
+
+<header {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- block body -%}
+
+    {%- with contentTitle only -%}
+
+      {%- block title -%}
+
+        {% set length = include('@LiberoPatterns/heading.html.twig')|striptags|trim|length %}
+
+        {% if length < 20 %}
+          {% set lengthClass = 'xx-short' %}
+        {% elseif length < 36 %}
+          {% set lengthClass = 'x-short' %}
+        {% elseif length < 46 %}
+          {% set lengthClass = 'short' %}
+        {% elseif length < 57 %}
+          {% set lengthClass = 'medium' %}
+        {% elseif length < 80 %}
+          {% set lengthClass = 'long' %}
+        {% elseif length < 120 %}
+          {% set lengthClass = 'x-long' %}
+        {% else %}
+          {% set lengthClass = 'xx-long' %}
+        {% endif %}
+
+        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
+        {% set level = 1 %}
+
+        {% include '@LiberoPatterns/heading.html.twig' %}
+
+      {%- endblock -%}
+
+    {%- endwith -%}
+
+  {%- endblock -%}
+
+</header>

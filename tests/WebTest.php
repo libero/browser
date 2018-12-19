@@ -44,7 +44,7 @@ XML
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Scholarly article {$id}", trim($crawler->filter('body')->text()));
+        $this->assertSame("Scholarly article {$id}", trim($crawler->filter('.content-header__title')->text()));
     }
 
     /**
@@ -81,7 +81,7 @@ XML
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
-        $this->assertSame("Blog article {$id}", trim($crawler->filter('body')->text()));
+        $this->assertSame("Blog article {$id}", trim($crawler->filter('.content-header__title')->text()));
     }
 
     public function idProvider() : iterable

@@ -64,6 +64,42 @@ XML
                 'lang' => 'en',
                 'dir' => 'ltr',
                 'title' => 'Title',
+                'content' => [
+                    [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'attributes' => [],
+                            'contentTitle' => [
+                                'text' => 'Title',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $frenchRequest = new Request();
+        $frenchRequest->setLocale('fr');
+
+        yield 'fr request' => [
+            $frenchRequest,
+            [
+                'lang' => 'fr',
+                'dir' => 'ltr',
+                'title' => 'Title',
+                'content' => [
+                    [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'attributes' => [
+                                'lang' => 'en',
+                            ],
+                            'contentTitle' => [
+                                'text' => 'Title',
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
 
@@ -76,6 +112,20 @@ XML
                 'lang' => 'ar-EG',
                 'dir' => 'rtl',
                 'title' => 'Title',
+                'content' => [
+                    [
+                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'arguments' => [
+                            'attributes' => [
+                                'lang' => 'en',
+                                'dir' => 'ltr',
+                            ],
+                            'contentTitle' => [
+                                'text' => 'Title',
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
     }
@@ -115,7 +165,7 @@ XML
     /**
      * @test
      */
-    public function it_fails_if_it_does_not_find_the_title() : void
+    public function it_fails_if_it_does_not_find_the_front() : void
     {
         $controller = $this->createContentController();
 
@@ -131,6 +181,39 @@ XML
                 <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <foo/>
+XML
+            )
+        );
+
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage('Could not find a front');
+
+        $controller(new Request(), 'id');
+    }
+
+    /**
+     * @test
+     */
+    public function it_fails_if_it_does_not_find_the_title() : void
+    {
+        $controller = $this->createContentController();
+
+        $this->mock->save(
+            new Psr7Request(
+                'GET',
+                'service/items/id/versions/latest',
+                ['Accept' => 'application/xml']
+            ),
+            new Psr7Response(
+                200,
+                [],
+                <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<item xmlns="http://libero.pub">
+    <front xml:lang="en">
+        <id>id</id>
+    </front>
+</item>
 XML
             )
         );
