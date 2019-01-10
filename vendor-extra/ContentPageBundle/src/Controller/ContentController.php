@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Libero\ContentPageBundle\Controller;
 
-use DOMNodeList;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
@@ -53,11 +52,10 @@ final class ContentController
             ->then(
                 function (ResponseInterface $response) use ($request) : Response {
                     $dom = FluentDOM::load((string) $response->getBody());
-                    $dom->registerNamespace('libero', 'http://libero.pub');
+                    $xpath = $dom->xpath();
+                    $xpath->registerNamespace('libero', 'http://libero.pub');
 
-                    /** @var DOMNodeList|Element[] $frontList */
-                    $frontList = $dom('/libero:item/libero:front[1]');
-                    $front = $frontList->item(0);
+                    $front = $xpath->firstOf('/libero:item/libero:front[1]');
 
                     if (!$front instanceof Element) {
                         throw new UnexpectedValueException('Could not find a front');
@@ -76,7 +74,7 @@ final class ContentController
                             array_merge(
                                 $context,
                                 [
-                                    'title' => $front('string(libero:title[1])'),
+                                    'title' => $xpath('string(libero:title[1])', $front),
                                     'content' => [$header],
                                 ]
                             )

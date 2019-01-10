@@ -30,11 +30,11 @@ final class TitleHeadingVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $node */
-        $node = $xml->documentElement->firstChild;
+        /** @var Element $element */
+        $element = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -61,11 +61,11 @@ final class TitleHeadingVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'), $newContext);
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -86,11 +86,15 @@ final class TitleHeadingVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']), $newContext);
+        $view = $visitor->visit(
+            $element,
+            new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']),
+            $newContext
+        );
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
@@ -111,18 +115,18 @@ final class TitleHeadingVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo <bar>baz</bar></title>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
-        $view = $visitor->visit($node, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
-                    new View('child', ['object' => $node->childNodes->item(0), 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => $node->childNodes->item(1), 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => $element->childNodes->item(0), 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => $element->childNodes->item(1), 'context' => ['foo' => 'bar']]),
                 ],
             ],
             $view->getArguments()

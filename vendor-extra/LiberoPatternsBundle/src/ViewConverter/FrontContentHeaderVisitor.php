@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Libero\LiberoPatternsBundle\ViewConverter;
 
-use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\View;
@@ -32,11 +31,10 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $document->xpath()->registerNamespace('libero', 'http://libero.pub');
+        $xpath = $document->xpath();
+        $xpath->registerNamespace('libero', 'http://libero.pub');
 
-        /** @var DOMNodeList|Element[] $titleList */
-        $titleList = $object('libero:title[1]');
-        $title = $titleList->item(0);
+        $title = $xpath->firstOf('libero:title[1]', $object);
 
         if (!$title instanceof Element) {
             return $view;

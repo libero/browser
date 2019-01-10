@@ -39,11 +39,11 @@ final class LangVisitorTest extends TestCase
         $visitor = new LangVisitor();
 
         $xml = FluentDOM::load('<foo><bar>baz</bar></foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement->firstElementChild;
+        /** @var Element $node */
+        $node = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($node, new View('template'), $newContext);
 
         $this->assertEmpty($view->getArgument('attributes'));
         $this->assertEmpty($newContext);
@@ -57,11 +57,11 @@ final class LangVisitorTest extends TestCase
         $visitor = new LangVisitor();
 
         $xml = FluentDOM::load('<foo xml:lang="fr">bar</foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        /** @var Element $node */
+        $node = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($element, new View('template', ['attributes' => ['lang' => 'en']]), $newContext);
+        $view = $visitor->visit($node, new View('template', ['attributes' => ['lang' => 'en']]), $newContext);
 
         $this->assertSame(['lang' => 'en'], $view->getArgument('attributes'));
         $this->assertEmpty($newContext);
@@ -81,11 +81,11 @@ final class LangVisitorTest extends TestCase
         $visitor = new LangVisitor();
 
         $xml = FluentDOM::load($xml);
-        /** @var Element $element */
-        $element = $xml->xpath()->firstOf($selector);
+        /** @var Element $node */
+        $node = $xml->xpath()->firstOf($selector);
 
         $newContext = $context;
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($node, new View('template'), $newContext);
 
         $this->assertSame($expectedAttributes, $view->getArgument('attributes'), 'Attributes do not match');
         $this->assertSame($expectedContext, $newContext, 'Context does not match');
@@ -271,12 +271,12 @@ final class LangVisitorTest extends TestCase
         $visitor = new LangVisitor();
 
         $xml = FluentDOM::load('<foo xml:lang="en">bar</foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        /** @var Element $node */
+        $node = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
         $view = $visitor->visit(
-            $element,
+            $node,
             new View('template', ['attributes' => ['foo' => 'bar'], 'foo' => 'bar']),
             $newContext
         );

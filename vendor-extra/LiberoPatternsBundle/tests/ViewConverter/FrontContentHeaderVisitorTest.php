@@ -29,11 +29,11 @@ final class FrontContentHeaderVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $node */
-        $node = $xml->documentElement->firstChild;
+        /** @var Element $element */
+        $element = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -60,11 +60,11 @@ final class FrontContentHeaderVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<front xmlns="http://libero.pub"><title>foo</title></front>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'), $newContext);
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -85,12 +85,12 @@ final class FrontContentHeaderVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<front xmlns="http://libero.pub">foo</front>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit(
-            $node,
+            $element,
             new View('@LiberoPatterns/content-header.html.twig'),
             $newContext
         );
@@ -114,12 +114,12 @@ final class FrontContentHeaderVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<front xmlns="http://libero.pub"><title>foo</title></front>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit(
-            $node,
+            $element,
             new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar']),
             $newContext
         );
@@ -143,17 +143,17 @@ final class FrontContentHeaderVisitorTest extends TestCase
         );
 
         $xml = FluentDOM::load('<front xmlns="http://libero.pub"><title>foo</title></front>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
-        $view = $visitor->visit($node, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'object' => $node->childNodes->item(0),
+                    'object' => $element->childNodes->item(0),
                     'template' => '@LiberoPatterns/heading.html.twig',
                     'context' => ['foo' => 'bar'],
                 ],

@@ -21,7 +21,7 @@ final class LangVisitorTest extends TestCase
 
         $xml = FluentDOM::load('<foo><bar>baz</bar></foo>');
         /** @var Element $element */
-        $element = $xml->documentElement->firstElementChild;
+        $element = $xml->documentElement->firstChild;
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
