@@ -15,13 +15,13 @@ final class LangVisitorTest extends TestCase
     /**
      * @test
      */
-    public function it_does_nothing_if_there_is_no_xml_lang_attribute() : void
+    public function it_does_nothing_if_there_is_no_lang() : void
     {
         $visitor = new LangVisitor();
 
-        $xml = FluentDOM::load('<foo>bar</foo>');
+        $xml = FluentDOM::load('<foo><bar>baz</bar></foo>');
         /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $xml->documentElement->firstElementChild;
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -54,6 +54,7 @@ final class LangVisitorTest extends TestCase
      */
     public function it_sets_the_language_and_direction(
         string $xml,
+        string $selector,
         array $expectedAttributes,
         array $context,
         array $expectedContext
@@ -62,7 +63,7 @@ final class LangVisitorTest extends TestCase
 
         $xml = FluentDOM::load($xml);
         /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $xml->xpath()->firstOf($selector);
 
         $newContext = $context;
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -75,48 +76,168 @@ final class LangVisitorTest extends TestCase
     {
         yield 'en with no context' => [
             '<foo xml:lang="en">bar</foo>',
+            '/foo',
+            ['lang' => 'en', 'dir' => 'ltr'],
+            [],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'inheriting en with no context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'en', 'dir' => 'ltr'],
+            [],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'becoming en with no context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'en', 'dir' => 'ltr'],
             [],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'en with en context' => [
             '<foo xml:lang="en">bar</foo>',
+            '/foo',
+            [],
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'inheriting en with en context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            [],
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'becoming en with en context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en">baz</bar></foo>',
+            '/foo/bar',
             [],
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'en with ar context' => [
             '<foo xml:lang="en">bar</foo>',
+            '/foo',
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'inheriting en with ar context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'becoming en with ar context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'en with fr context' => [
             '<foo xml:lang="en">bar</foo>',
+            '/foo',
+            ['lang' => 'en'],
+            ['lang' => 'fr', 'dir' => 'ltr'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'inheriting en with fr context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'en'],
+            ['lang' => 'fr', 'dir' => 'ltr'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+        ];
+        yield 'becoming en with fr context' => [
+            '<foo xml:lang="ar"><bar xml:lang="en">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'en'],
             ['lang' => 'fr', 'dir' => 'ltr'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'ar with no context' => [
             '<foo xml:lang="ar">bar</foo>',
+            '/foo',
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            [],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'inheriting ar with no context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            [],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'becoming ar with no context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'ar', 'dir' => 'rtl'],
             [],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];
         yield 'ar with ar context' => [
             '<foo xml:lang="ar">bar</foo>',
+            '/foo',
+            [],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'inheriting ar with ar context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            [],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'becoming ar with ar context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar">baz</bar></foo>',
+            '/foo/bar',
             [],
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];
         yield 'ar with en context' => [
             '<foo xml:lang="ar">bar</foo>',
+            '/foo',
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'inheriting ar with en context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'ar', 'dir' => 'rtl'],
+            ['lang' => 'en', 'dir' => 'ltr'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'becoming ar with en context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];
         yield 'ar with he context' => [
             '<foo xml:lang="ar">bar</foo>',
+            '/foo',
+            ['lang' => 'ar'],
+            ['lang' => 'he', 'dir' => 'rtl'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'inheriting ar with he context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar"><baz>qux</baz></bar></foo>',
+            '/foo/bar/baz',
+            ['lang' => 'ar'],
+            ['lang' => 'he', 'dir' => 'rtl'],
+            ['lang' => 'ar', 'dir' => 'rtl'],
+        ];
+        yield 'becoming ar with he context' => [
+            '<foo xml:lang="en"><bar xml:lang="ar">baz</bar></foo>',
+            '/foo/bar',
             ['lang' => 'ar'],
             ['lang' => 'he', 'dir' => 'rtl'],
             ['lang' => 'ar', 'dir' => 'rtl'],
