@@ -6,27 +6,19 @@ namespace Libero\ViewsBundle\DependencyInjection\Compiler;
 
 use Libero\ViewsBundle\Views\InlineViewConverterRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use function array_keys;
-use function array_map;
 
 final class AddInlineViewConvertersPass implements CompilerPassInterface
 {
+    use PriorityTaggedServiceTrait;
+
     public function process(ContainerBuilder $container) : void
     {
         $registry = $container->findDefinition(InlineViewConverterRegistry::class);
 
-        $viewConverters = array_keys($container->findTaggedServiceIds('libero.view_converter.inline'));
+        $viewConverters = $this->findAndSortTaggedServices('libero.view_converter.inline', $container);
 
-        $registry->addMethodCall(
-            'add',
-            array_map(
-                function (string $id) : Reference {
-                    return new Reference($id);
-                },
-                $viewConverters
-            )
-        );
+        $registry->addMethodCall('add', $viewConverters);
     }
 }
