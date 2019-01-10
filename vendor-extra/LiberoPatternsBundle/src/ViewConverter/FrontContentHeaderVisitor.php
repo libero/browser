@@ -26,7 +26,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        if ('front' !== $object->nodeName || 'http://libero.pub' !== $object->namespaceURI) {
+        if ('front' !== $object->localName || 'http://libero.pub' !== $object->namespaceURI) {
             return $view;
         }
 

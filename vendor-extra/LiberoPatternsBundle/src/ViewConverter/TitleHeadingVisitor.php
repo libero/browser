@@ -26,7 +26,7 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        if ('title' !== $object->nodeName || 'http://libero.pub' !== $object->namespaceURI) {
+        if ('title' !== $object->localName || 'http://libero.pub' !== $object->namespaceURI) {
             return $view;
         }
 

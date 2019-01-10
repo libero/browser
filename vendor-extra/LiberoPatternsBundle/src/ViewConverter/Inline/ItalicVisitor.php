@@ -23,7 +23,8 @@ final class ItalicVisitor implements InlineViewConverterVisitor
 
     public function visit(NonDocumentTypeChildNode $object, View $view, array &$context = []) : View
     {
-        if (!$object instanceof Element || 'i' !== $object->nodeName || 'http://libero.pub' !== $object->namespaceURI) {
+        if (!$object instanceof Element || 'i' !== $object->localName ||
+            'http://libero.pub' !== $object->namespaceURI) {
             return $view;
         }
 
