@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<item xmlns="http://libero.pub">
+<article xml:lang="en" xmlns="http://jats.nlm.nih.gov">
 
-    <front xml:lang="en">
+    <front>
 
-        <id>article1</id>
-        <title>Article 1</title>
+        <article-meta>
+
+            <title-group>
+                <article-title>Article 1</article-title>
+            </title-group>
+
+        </article-meta>
 
     </front>
 
-</item>
+</article>
