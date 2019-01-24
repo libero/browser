@@ -63,7 +63,7 @@ final class ContentController
 
                     $context = [
                         'lang' => $request->getLocale(),
-                        'dir' => 'right-to-left' === Misc::getCharacterOrder($request->getLocale()) ? 'rtl' : 'ltr',
+                        'dir' => $this->getDirection($request->getLocale()),
                     ];
 
                     $header = $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $context);
@@ -83,5 +83,10 @@ final class ContentController
                 }
             )
             ->wait();
+    }
+
+    private function getDirection(string $locale) : string
+    {
+        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
     }
 }
