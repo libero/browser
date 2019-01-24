@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\ChildNode;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\InlineViewConverter;
 use Libero\ViewsBundle\Views\InlineViewConverterVisitor;
+use Libero\ViewsBundle\Views\SimplifiedInlineElementVisitor;
 use Libero\ViewsBundle\Views\View;
-use function Functional\map;
 
 final class ItalicVisitor implements InlineViewConverterVisitor
 {
+    use SimplifiedInlineElementVisitor;
+
     private $inlineConverter;
 
     public function __construct(InlineViewConverter $inlineConverter)
@@ -21,33 +21,23 @@ final class ItalicVisitor implements InlineViewConverterVisitor
         $this->inlineConverter = $inlineConverter;
     }
 
-    public function visit(NonDocumentTypeChildNode $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        if (!$object instanceof Element || 'i' !== $object->localName ||
-            'http://libero.pub' !== $object->namespaceURI) {
-            return $view;
-        }
+        return $view->withArgument('text', $this->inlineConverter->convertChildren($object, $context));
+    }
 
-        if ($view->getTemplate() && '@LiberoPatterns/italic.html.twig' !== !$view->getTemplate()) {
-            return $view;
-        }
+    protected function expectedTemplate() : string
+    {
+        return '@LiberoPatterns/italic.html.twig';
+    }
 
-        if ($view->hasArgument('text')) {
-            return $view;
-        }
+    protected function expectedElement() : string
+    {
+        return '{http://libero.pub}i';
+    }
 
-        if (!$view->getTemplate()) {
-            $view = $view->withTemplate('@LiberoPatterns/italic.html.twig');
-        }
-
-        return $view->withArgument(
-            'text',
-            map(
-                $object,
-                function (ChildNode $node) use ($context) : ?View {
-                    return $this->inlineConverter->convert($node, $context);
-                }
-            )
-        );
+    protected function unexpectedArguments() : array
+    {
+        return ['text'];
     }
 }

@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\InlineViewConverter;
+use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
-use function Functional\map;
 
 final class TitleHeadingVisitor implements ViewConverterVisitor
 {
+    use SimplifiedVisitor;
+
     private $inlineConverter;
 
     public function __construct(InlineViewConverter $inlineConverter)
@@ -20,28 +21,23 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
         $this->inlineConverter = $inlineConverter;
     }
 
-    public function visit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        if ('@LiberoPatterns/heading.html.twig' !== $view->getTemplate()) {
-            return $view;
-        }
+        return $view->withArgument('text', $this->inlineConverter->convertChildren($object, $context));
+    }
 
-        if ('title' !== $object->localName || 'http://libero.pub' !== $object->namespaceURI) {
-            return $view;
-        }
+    protected function expectedTemplate() : string
+    {
+        return '@LiberoPatterns/heading.html.twig';
+    }
 
-        if ($view->hasArgument('text')) {
-            return $view;
-        }
+    protected function expectedElement() : string
+    {
+        return '{http://libero.pub}title';
+    }
 
-        return $view->withArgument(
-            'text',
-            map(
-                $object,
-                function (NonDocumentTypeChildNode $node) use ($context) : ?View {
-                    return $this->inlineConverter->convert($node, $context);
-                }
-            )
-        );
+    protected function unexpectedArguments() : array
+    {
+        return ['text'];
     }
 }

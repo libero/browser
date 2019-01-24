@@ -11,7 +11,6 @@
     "require": {
         "php": "^7.2",
         "libero/views-bundle": "^1.0@dev",
-        "lstrojny/functional-php": "^1.9",
         "punic/punic": "^3.3",
         "symfony/config": "^4.1",
         "symfony/dependency-injection": "^4.1",

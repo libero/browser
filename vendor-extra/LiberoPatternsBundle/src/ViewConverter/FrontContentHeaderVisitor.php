@@ -6,12 +6,15 @@ namespace Libero\LiberoPatternsBundle\ViewConverter;
 
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
 final class FrontContentHeaderVisitor implements ViewConverterVisitor
 {
+    use SimplifiedVisitor;
+
     private $converter;
 
     public function __construct(ViewConverter $converter)
@@ -19,16 +22,8 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    public function visit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        if ('@LiberoPatterns/content-header.html.twig' !== $view->getTemplate()) {
-            return $view;
-        }
-
-        if ('front' !== $object->localName || 'http://libero.pub' !== $object->namespaceURI) {
-            return $view;
-        }
-
         /** @var Document $document */
         $document = $object->ownerDocument;
         $xpath = $document->xpath();
@@ -40,13 +35,24 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        if ($view->hasArgument('contentTitle')) {
-            return $view;
-        }
-
         return $view->withArgument(
             'contentTitle',
             $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
         );
+    }
+
+    protected function expectedTemplate() : string
+    {
+        return '@LiberoPatterns/content-header.html.twig';
+    }
+
+    protected function expectedElement() : string
+    {
+        return '{http://libero.pub}front';
+    }
+
+    protected function unexpectedArguments() : array
+    {
+        return ['contentTitle'];
     }
 }
