@@ -10,7 +10,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use function array_keys;
-use function is_string;
 
 final class ContentHandlerPass implements CompilerPassInterface
 {
@@ -26,11 +25,7 @@ final class ContentHandlerPass implements CompilerPassInterface
 
     private function addHandler(Definition $controller, array $handlers) : void
     {
-        $alias = $controller->getArgument(4);
-
-        if (!is_string($alias)) {
-            return;
-        }
+        $alias = $controller->getTag('libero.content_page.controller')[0]['handler'];
 
         foreach ($handlers as $handler => $tags) {
             if ($tags[0]['alias'] === $alias) {
