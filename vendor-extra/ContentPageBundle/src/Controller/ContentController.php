@@ -87,6 +87,6 @@ final class ContentController
 
     private function getDirection(string $locale) : string
     {
-        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
+        return 'right-to-left' === Misc::getCharacterOrder($locale) ? 'rtl' : 'ltr';
     }
 }
