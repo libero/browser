@@ -50,6 +50,9 @@
     "libero/jats-content-bundle": {
         "version": "1.0.x-dev"
     },
+    "libero/libero-content-bundle": {
+        "version": "1.0.x-dev"
+    },
     "libero/patterns-bundle": {
         "version": "1.0.x-dev"
     },

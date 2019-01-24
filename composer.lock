@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5adfe7c8ef0d60a2c89ce8b897142cf",
+    "content-hash": "5ef35fe52de5abd913fa6271a980c274",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -538,6 +538,42 @@
                 "MIT"
             ],
             "description": "JATS content handler"
+        },
+        {
+            "name": "libero/libero-content-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor-extra/LiberoContentBundle",
+                "reference": "79978650d8cb75ed754ff49a20f2e7581534f856",
+                "shasum": null
+            },
+            "require": {
+                "fluentdom/fluentdom": "^7.0",
+                "libero/content-page-bundle": "^1.0@dev",
+                "php": "^7.2",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
+                "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Libero\\LiberoContentBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Libero content handler"
         },
         {
             "name": "libero/patterns-bundle",
@@ -5232,6 +5268,7 @@
     "stability-flags": {
         "libero/content-page-bundle": 20,
         "libero/jats-content-bundle": 20,
+        "libero/libero-content-bundle": 20,
         "libero/patterns-bundle": 20
     },
     "prefer-stable": false,

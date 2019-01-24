@@ -21,6 +21,9 @@
         <testsuite name="JatsContentBundle">
             <directory suffix=".php">vendor-extra/JatsContentBundle/tests</directory>
         </testsuite>
+        <testsuite name="LiberoContentBundle">
+            <directory suffix=".php">vendor-extra/LiberoContentBundle/tests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
@@ -28,6 +31,7 @@
             <directory>src</directory>
             <directory>vendor-extra/ContentPageBundle/src</directory>
             <directory>vendor-extra/JatsContentBundle/src</directory>
+            <directory>vendor-extra/LiberoContentBundle/src</directory>
         </whitelist>
     </filter>
 

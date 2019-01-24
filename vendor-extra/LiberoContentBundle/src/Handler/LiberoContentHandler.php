@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Libero\ContentPageBundle\Handler;
+namespace Libero\LiberoContentBundle\Handler;
 
 use FluentDOM\DOM\Attribute;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Xpath;
+use Libero\ContentPageBundle\Handler\ContentHandler;
 use UnexpectedValueException;
 use function array_merge;
 use function Libero\ContentPageBundle\text_direction;

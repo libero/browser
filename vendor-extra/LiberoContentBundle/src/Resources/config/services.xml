@@ -8,10 +8,9 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\ContentPageBundle\Routing\ContentPageRouteLoader"
-            class="Libero\ContentPageBundle\Routing\ContentPageRouteLoader">
-            <argument type="collection"/>
-            <tag name="routing.loader"/>
+        <service id="Libero\LiberoContentBundle\Handler\LiberoContentHandler"
+            class="Libero\LiberoContentBundle\Handler\LiberoContentHandler">
+            <tag name="libero.content_page.handler" alias="libero"/>
         </service>
 
     </services>

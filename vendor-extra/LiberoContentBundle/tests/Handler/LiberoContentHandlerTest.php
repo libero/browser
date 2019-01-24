@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\ContentPageBundle\Handler;
+namespace tests\Libero\LiberoContentBundle\Handler;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Handler\ContentHandler;
-use Libero\ContentPageBundle\Handler\LiberoContentHandler;
+use Libero\LiberoContentBundle\Handler\LiberoContentHandler;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 

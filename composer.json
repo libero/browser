@@ -12,7 +12,8 @@
         "psr-4": {
             "tests\\Libero\\Browser\\": "tests/",
             "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
-            "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/"
+            "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/",
+            "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/"
         }
     },
     "require": {
@@ -22,6 +23,7 @@
         "csa/guzzle-bundle": "^3.1",
         "libero/content-page-bundle": "^1.0@dev",
         "libero/jats-content-bundle": "^1.0@dev",
+        "libero/libero-content-bundle": "^1.0@dev",
         "libero/patterns-bundle": "^1.0@dev",
         "symfony/asset": "^4.1",
         "symfony/config": "^4.1",

@@ -46,7 +46,7 @@ final class ContentPageConfiguration implements ConfigurationInterface
             ->arrayPrototype()
                 ->children()
                     ->scalarNode('handler')
-                        ->defaultValue('libero')
+                        ->isRequired()
                     ->end()
                     ->scalarNode('path')
                         ->isRequired()
