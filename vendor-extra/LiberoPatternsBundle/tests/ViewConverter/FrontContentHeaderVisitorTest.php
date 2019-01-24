@@ -136,7 +136,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor(
             new CallbackViewConverter(
-                function (Element $object, string $template, array $context) : View {
+                function (Element $object, ?string $template, array $context) : View {
                     return new View('child', ['object' => $object, 'template' => $template, 'context' => $context]);
                 }
             )

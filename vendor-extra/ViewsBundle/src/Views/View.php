@@ -12,7 +12,7 @@ final class View implements JsonSerializable
     private $arguments;
     private $template;
 
-    public function __construct(string $template, array $arguments = [])
+    public function __construct(?string $template, array $arguments = [])
     {
         $this->template = $template;
         $this->arguments = $arguments;
@@ -33,7 +33,7 @@ final class View implements JsonSerializable
         return $this->arguments;
     }
 
-    public function getTemplate() : string
+    public function getTemplate() : ?string
     {
         return $this->template;
     }

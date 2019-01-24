@@ -34,9 +34,9 @@ final class ItalicVisitorTest extends TestCase
         $node = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View(''), $newContext);
+        $view = $visitor->visit($node, new View(null), $newContext);
 
-        $this->assertSame('', $view->getTemplate());
+        $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($newContext);
     }
@@ -91,9 +91,9 @@ final class ItalicVisitorTest extends TestCase
         $node = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('', ['text' => 'bar']), $newContext);
+        $view = $visitor->visit($node, new View(null, ['text' => 'bar']), $newContext);
 
-        $this->assertSame('', $view->getTemplate());
+        $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($newContext);
     }
@@ -116,7 +116,7 @@ final class ItalicVisitorTest extends TestCase
         $node = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
-        $view = $visitor->visit($node, new View(''), $newContext);
+        $view = $visitor->visit($node, new View(null), $newContext);
 
         $this->assertSame('@LiberoPatterns/italic.html.twig', $view->getTemplate());
         $this->assertEquals(

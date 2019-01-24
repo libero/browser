@@ -21,7 +21,7 @@ final class InlineViewConverterRegistry implements InlineViewConverter
 
     public function convert(NonDocumentTypeChildNode $object, array $context = []) : View
     {
-        $view = new View('', ['attributes' => []]);
+        $view = new View(null, ['attributes' => []]);
 
         foreach ($this->visitors as $visitor) {
             $view = $visitor->visit($object, $view, $context);

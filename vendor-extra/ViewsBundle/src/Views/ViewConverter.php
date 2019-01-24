@@ -8,5 +8,5 @@ use FluentDOM\DOM\Element;
 
 interface ViewConverter
 {
-    public function convert(Element $object, string $template, array $context = []) : View;
+    public function convert(Element $object, ?string $template, array $context = []) : View;
 }

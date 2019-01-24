@@ -16,7 +16,7 @@ final class CallbackViewConverter implements ViewConverter
         $this->callback = $callback;
     }
 
-    public function convert(Element $object, string $template, array $context = []) : View
+    public function convert(Element $object, ?string $template, array $context = []) : View
     {
         return call_user_func($this->callback, $object, $template, $context);
     }
