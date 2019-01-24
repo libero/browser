@@ -14,11 +14,6 @@
             <tag name="routing.loader"/>
         </service>
 
-        <service id="Libero\ContentPageBundle\Handler\JatsContentHandler"
-                class="Libero\ContentPageBundle\Handler\JatsContentHandler">
-            <tag name="libero.content_page.handler" alias="jats"/>
-        </service>
-
         <service id="Libero\ContentPageBundle\Handler\LiberoContentHandler"
                 class="Libero\ContentPageBundle\Handler\LiberoContentHandler">
             <tag name="libero.content_page.handler" alias="libero"/>

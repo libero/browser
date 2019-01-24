@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\ContentPageBundle\Handler;
+namespace tests\Libero\JatsContentBundle\Handler;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;

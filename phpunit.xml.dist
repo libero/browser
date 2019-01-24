@@ -18,12 +18,16 @@
         <testsuite name="ContentPageBundle">
             <directory suffix=".php">vendor-extra/ContentPageBundle/tests</directory>
         </testsuite>
+        <testsuite name="JatsContentBundle">
+            <directory suffix=".php">vendor-extra/JatsContentBundle/tests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
             <directory>src</directory>
             <directory>vendor-extra/ContentPageBundle/src</directory>
+            <directory>vendor-extra/JatsContentBundle/src</directory>
         </whitelist>
     </filter>
 

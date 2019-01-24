@@ -47,6 +47,9 @@
     "libero/content-page-bundle": {
         "version": "1.0.x-dev"
     },
+    "libero/jats-content-bundle": {
+        "version": "1.0.x-dev"
+    },
     "libero/patterns-bundle": {
         "version": "1.0.x-dev"
     },
