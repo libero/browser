@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<article xml:lang="en" xmlns="http://jats.nlm.nih.gov">
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
 
-    <front>
+    <meta>
 
-        <article-meta>
+        <id>article1</id>
 
-            <title-group>
-                <article-title>Article 1</article-title>
-            </title-group>
+    </meta>
 
-        </article-meta>
+    <jats:article>
 
-    </front>
+        <jats:front>
 
-</article>
+            <jats:article-meta>
+
+                <jats:title-group>
+                    <jats:article-title>Article 1</jats:article-title>
+                </jats:title-group>
+
+            </jats:article-meta>
+
+        </jats:front>
+
+    </jats:article>
+
+</item>

@@ -16,10 +16,6 @@ final class LiberoContentHandler implements ContentHandler
 {
     public function handle(Element $documentElement, array $context) : array
     {
-        if ('item' !== $documentElement->localName || 'http://libero.pub' !== $documentElement->namespaceURI) {
-            return [];
-        }
-
         /** @var Document $document */
         $document = $documentElement->ownerDocument;
         $xpath = $document->xpath();

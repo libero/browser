@@ -4,5 +4,6 @@ content_page:
             path: '/blog/{id}'
             service: 'blog-articles'
         scholarly_article:
+            handler: 'jats'
             path: '/articles/{id}'
             service: 'scholarly-articles'

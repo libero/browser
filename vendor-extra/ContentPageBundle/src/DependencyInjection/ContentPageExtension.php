@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\ContentPageBundle\DependencyInjection;
 
 use Libero\ContentPageBundle\Controller\ContentController;
-use Libero\ContentPageBundle\Handler\ContentHandler;
 use Libero\ContentPageBundle\Routing\ContentPageRouteLoader;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
@@ -47,8 +46,9 @@ final class ContentPageExtension extends Extension
         $definition->setArgument(1, $config['service']);
         $definition->setArgument(2, new Reference('twig'));
         $definition->setArgument(3, $config['page_template']);
-        $definition->setArgument(4, new Reference(ContentHandler::class));
+        $definition->setArgument(4, $config['handler']);
         $definition->addTag('controller.service_arguments');
+        $definition->addTag('libero.content_page.controller');
 
         $container->setDefinition($id, $definition);
     }

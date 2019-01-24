@@ -43,15 +43,20 @@ final class JatsContentHandlerTest extends TestCase
         yield 'en request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xml:lang="en" xmlns="http://jats.nlm.nih.gov">
-    <front>
-        <article-meta>
-            <title-group>
-                <article-title>Title</article-title>
-            </title-group>
-        </article-meta>
-    </front>
-</article>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</item>
 XML
             ,
             [
@@ -80,15 +85,20 @@ XML
         yield 'fr request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xml:lang="en" xmlns="http://jats.nlm.nih.gov">
-    <front>
-        <article-meta>
-            <title-group>
-                <article-title>Title</article-title>
-            </title-group>
-        </article-meta>
-    </front>
-</article>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</item>
 XML
             ,
             [
@@ -119,15 +129,20 @@ XML
         yield 'ar-EG request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xml:lang="en" xmlns="http://jats.nlm.nih.gov">
-    <front>
-        <article-meta>
-            <title-group>
-                <article-title>Title</article-title>
-            </title-group>
-        </article-meta>
-    </front>
-</article>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</item>
 XML
             ,
             [
@@ -159,15 +174,20 @@ XML
         yield 'complex locales' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xml:lang="ar" xmlns="http://jats.nlm.nih.gov">
-    <front>
-        <article-meta>
-            <title-group>
-                <article-title xml:lang="de">Title</article-title>
-            </title-group>
-        </article-meta>
-    </front>
-</article>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article xml:lang="ar">
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title xml:lang="de">Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</item>
 XML
             ,
             [
@@ -202,28 +222,6 @@ XML
 
     /**
      * @test
-     * @dataProvider elementProvider
-     */
-    public function it_does_nothing_if_it_is_not_a_jats_item_element(string $xml) : void
-    {
-        $handler = new JatsContentHandler();
-
-        $document = FluentDOM::load($xml);
-        /** @var Element $documentElement */
-        $documentElement = $document->documentElement;
-
-        $this->assertSame([], $handler->handle($documentElement, ['foo' => 'bar']));
-    }
-
-    public function elementProvider() : iterable
-    {
-        yield 'no namespace' => ['<article>foo</article>'];
-        yield 'different namespace' => ['<article xmlns="http://example.com">foo</article>'];
-        yield 'different element' => ['<foo xmlns="http://jats.nlm.nih.gov">bar</foo>'];
-    }
-
-    /**
-     * @test
      */
     public function it_fails_if_it_does_not_find_the_front() : void
     {
@@ -232,7 +230,12 @@ XML
         $document = FluentDOM::load(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xml:lang="en" xmlns="http://jats.nlm.nih.gov"/>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article/>
+</item>
 XML
         );
         /** @var Element $documentElement */
@@ -254,13 +257,18 @@ XML
         $document = FluentDOM::load(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<article xmlns="http://jats.nlm.nih.gov">
-    <front>
-        <article-meta>
-            <title-group/>
-        </article-meta>
-    </front>
-</article>
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <meta>
+        <id>id</id>
+    </meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group/>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</item>
 XML
         );
         /** @var Element $documentElement */

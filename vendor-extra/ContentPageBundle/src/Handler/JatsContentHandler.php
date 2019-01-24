@@ -16,16 +16,23 @@ final class JatsContentHandler implements ContentHandler
 {
     public function handle(Element $documentElement, array $context) : array
     {
-        if ('article' !== $documentElement->localName || 'http://jats.nlm.nih.gov' !== $documentElement->namespaceURI) {
-            return [];
-        }
-
         /** @var Document $document */
         $document = $documentElement->ownerDocument;
         $xpath = $document->xpath();
+        $xpath->registerNamespace('libero', 'http://libero.pub');
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        $front = $xpath->firstOf('/jats:article/jats:front');
+        $article = $xpath->firstOf('/libero:item/jats:article');
+
+        if (!$article instanceof Element) {
+            throw new UnexpectedValueException('Could not find an article');
+        }
+
+        if (!$article->hasAttribute('xml:lang')) {
+            $article->setAttribute('xml:lang', 'en');
+        }
+
+        $front = $xpath->firstOf('jats:front', $article);
 
         if (!$front instanceof Element) {
             throw new UnexpectedValueException('Could not find a front');

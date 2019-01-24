@@ -44,8 +44,10 @@ final class LiberoContentHandlerTest extends TestCase
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
-    <front xml:lang="en">
+    <meta>
         <id>id</id>
+    </meta>
+    <front xml:lang="en">
         <title>Title</title>
     </front>
 </item>
@@ -78,8 +80,10 @@ XML
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
-    <front xml:lang="en">
+    <meta>
         <id>id</id>
+    </meta>
+    <front xml:lang="en">
         <title>Title</title>
     </front>
 </item>
@@ -114,8 +118,10 @@ XML
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
-    <front xml:lang="en">
+    <meta>
         <id>id</id>
+    </meta>
+    <front xml:lang="en">
         <title>Title</title>
     </front>
 </item>
@@ -150,28 +156,6 @@ XML
 
     /**
      * @test
-     * @dataProvider elementProvider
-     */
-    public function it_does_nothing_if_it_is_not_a_libero_item_element(string $xml) : void
-    {
-        $handler = new LiberoContentHandler();
-
-        $document = FluentDOM::load($xml);
-        /** @var Element $documentElement */
-        $documentElement = $document->documentElement;
-
-        $this->assertSame([], $handler->handle($documentElement, ['foo' => 'bar']));
-    }
-
-    public function elementProvider() : iterable
-    {
-        yield 'no namespace' => ['<item>foo</item>'];
-        yield 'different namespace' => ['<item xmlns="http://example.com">foo</item>'];
-        yield 'different element' => ['<foo xmlns="http://libero.pub">bar</foo>'];
-    }
-
-    /**
-     * @test
      */
     public function it_fails_if_it_does_not_find_the_front() : void
     {
@@ -180,7 +164,11 @@ XML
         $document = FluentDOM::load(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub"/>
+<item xmlns="http://libero.pub">
+    <meta>
+        <id>id</id>
+    </meta>
+</item>
 XML
         );
         /** @var Element $documentElement */
@@ -203,9 +191,10 @@ XML
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
-    <front xml:lang="en">
+    <meta>
         <id>id</id>
-    </front>
+    </meta>
+    <front xml:lang="en"/>
 </item>
 XML
         );
