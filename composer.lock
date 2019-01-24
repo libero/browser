@@ -459,7 +459,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "d097c786e9110b86760a5d0f697629de191aa760",
+                "reference": "a3fcb88b7d0984a24ab8b3cadf5d245242b14099",
                 "shasum": null
             },
             "require": {
@@ -493,7 +493,10 @@
             "autoload": {
                 "psr-4": {
                     "Libero\\ContentPageBundle\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "license": [
                 "MIT"
@@ -506,14 +509,13 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "217d263e3f5bb85b89e38024133f08e81c545cc9",
+                "reference": "ae44c71f27f7d8ba5cad9624cc585169b71e8dcd",
                 "shasum": null
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "libero/content-page-bundle": "^1.0@dev",
                 "php": "^7.2",
-                "punic/punic": "^3.3",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"

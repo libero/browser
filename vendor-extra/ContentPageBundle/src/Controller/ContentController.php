@@ -8,10 +8,10 @@ use FluentDOM;
 use GuzzleHttp\ClientInterface;
 use Libero\ContentPageBundle\Handler\ContentHandler;
 use Psr\Http\Message\ResponseInterface;
-use Punic\Misc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+use function Libero\ContentPageBundle\text_direction;
 
 final class ContentController
 {
@@ -52,7 +52,7 @@ final class ContentController
 
                     $context = [
                         'lang' => $request->getLocale(),
-                        'dir' => $this->getDirection($request->getLocale()),
+                        'dir' => text_direction($request->getLocale()),
                     ];
 
                     return new Response(
@@ -64,10 +64,5 @@ final class ContentController
                 }
             )
             ->wait();
-    }
-
-    private function getDirection(?string $locale) : string
-    {
-        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
     }
 }

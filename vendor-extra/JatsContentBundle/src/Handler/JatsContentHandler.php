@@ -9,9 +9,9 @@ use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Xpath;
 use Libero\ContentPageBundle\Handler\ContentHandler;
-use Punic\Misc;
 use UnexpectedValueException;
 use function array_merge;
+use function Libero\ContentPageBundle\text_direction;
 
 final class JatsContentHandler implements ContentHandler
 {
@@ -75,11 +75,6 @@ final class JatsContentHandler implements ContentHandler
         );
     }
 
-    private function getDirection(?string $locale) : string
-    {
-        return 'right-to-left' === Misc::getCharacterOrder($locale ?? 'en') ? 'rtl' : 'ltr';
-    }
-
     private function determineLangAndDir(Xpath $xpath, Element $element, array $context) : array
     {
         $return = [];
@@ -93,7 +88,7 @@ final class JatsContentHandler implements ContentHandler
         if ($context['lang'] !== $newLang->nodeValue) {
             $return['lang'] = $newLang->nodeValue;
 
-            if ($context['dir'] !== $newDir = $this->getDirection($return['lang'])) {
+            if ($context['dir'] !== $newDir = text_direction($return['lang'])) {
                 $return['dir'] = $newDir;
             }
         }

@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Libero\\ContentPageBundle\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "require": {
         "php": "^7.2",
