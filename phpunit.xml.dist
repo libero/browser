@@ -18,8 +18,11 @@
         <testsuite name="ContentPageBundle">
             <directory suffix=".php">vendor-extra/ContentPageBundle/tests</directory>
         </testsuite>
-        <testsuite name="LiberoPatternsBundle">
-            <directory suffix=".php">vendor-extra/LiberoPatternsBundle/tests</directory>
+        <testsuite name="JatsContentBundle">
+            <directory suffix=".php">vendor-extra/JatsContentBundle/tests</directory>
+        </testsuite>
+        <testsuite name="LiberoContentBundle">
+            <directory suffix=".php">vendor-extra/LiberoContentBundle/tests</directory>
         </testsuite>
         <testsuite name="ViewsBundle">
             <directory suffix=".php">vendor-extra/ViewsBundle/tests</directory>
@@ -30,6 +33,9 @@
         <whitelist>
             <directory>src</directory>
             <directory>vendor-extra/ContentPageBundle/src</directory>
+            <directory>vendor-extra/JatsContentBundle/src</directory>
+            <directory>vendor-extra/LiberoContentBundle/src</directory>
+            <directory>vendor-extra/ViewsBundle/src</directory>
         </whitelist>
     </filter>
 

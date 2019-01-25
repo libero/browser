@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <defaults public="false"/>
+
+        <service id="Libero\LiberoContentBundle\Handler\LiberoContentHandler"
+            class="Libero\LiberoContentBundle\Handler\LiberoContentHandler">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.content_page.handler" alias="libero"/>
+        </service>
+
+        <service id="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor"
+            class="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor"
+            class="Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\LiberoContentBundle\ViewConverter\Inline\ItalicVisitor"
+            class="Libero\LiberoContentBundle\ViewConverter\Inline\ItalicVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter.inline"/>
+        </service>
+
+    </services>
+
+</container>

@@ -49,6 +49,7 @@ final class ContentPageExtension extends Extension
         $definition->setArgument(3, $config['page_template']);
         $definition->setArgument(4, new Reference(ViewConverter::class));
         $definition->addTag('controller.service_arguments');
+        $definition->addTag('libero.content_page.controller', ['handler' => $config['handler']]);
 
         $container->setDefinition($id, $definition);
     }
