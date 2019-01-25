@@ -14,7 +14,6 @@
             "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
             "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/",
             "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/",
-            "tests\\Libero\\LiberoPatternsBundle\\": "vendor-extra/LiberoPatternsBundle/tests/",
             "tests\\Libero\\ViewsBundle\\": "vendor-extra/ViewsBundle/tests/"
         }
     },
