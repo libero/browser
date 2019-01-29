@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
+use function is_string;
 use function sprintf;
 
 trait SimplifiedVisitor
@@ -15,7 +16,10 @@ trait SimplifiedVisitor
             return $view;
         }
 
-        if ($this->expectedElement() !== sprintf('{%s}%s', $object->namespaceURI, $object->localName)) {
+        $expectedElement = $this->expectedElement();
+        $actualElement = sprintf('{%s}%s', $object->namespaceURI, $object->localName);
+
+        if (is_string($expectedElement) && $expectedElement !== $actualElement) {
             return $view;
         }
 
@@ -32,7 +36,10 @@ trait SimplifiedVisitor
 
     abstract protected function expectedTemplate() : string;
 
-    abstract protected function expectedElement() : string;
+    protected function expectedElement() : ?string
+    {
+        return null;
+    }
 
     /**
      * @return array<string>

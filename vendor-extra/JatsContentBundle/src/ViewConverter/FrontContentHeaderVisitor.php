@@ -29,15 +29,15 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         $xpath = $document->xpath();
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        $titleGroup = $xpath->firstOf('jats:article-meta/jats:title-group', $object);
+        $title = $xpath->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
 
-        if (!$titleGroup instanceof Element) {
+        if (!$title instanceof Element) {
             return $view;
         }
 
         return $view->withArgument(
             'contentTitle',
-            $this->converter->convert($titleGroup, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
         );
     }
 

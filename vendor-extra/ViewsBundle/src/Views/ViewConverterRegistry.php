@@ -18,7 +18,7 @@ final class ViewConverterRegistry implements ViewConverter
 
     public function convert(Element $object, ?string $template, array $context = []) : View
     {
-        $view = new View($template, ['attributes' => []]);
+        $view = new View($template, []);
 
         foreach ($this->visitors as $visitor) {
             $view = $visitor->visit($object, $view, $context);

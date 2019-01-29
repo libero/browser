@@ -185,11 +185,14 @@ XML
         /** @var Element $articleMeta */
         $articleMeta = $element->childNodes->item(0);
 
+        /** @var Element $titleGroup */
+        $titleGroup = $articleMeta->childNodes->item(0);
+
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'object' => $articleMeta->childNodes->item(0),
+                    'object' => $titleGroup->childNodes->item(0),
                     'template' => '@LiberoPatterns/heading.html.twig',
                     'context' => ['foo' => 'bar'],
                 ],

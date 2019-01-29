@@ -14,14 +14,14 @@
             <tag name="libero.content_page.handler" alias="jats"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
-            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+        <service id="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor">
             <tag name="libero.view_converter"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\TitleGroupHeadingVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\TitleGroupHeadingVisitor">
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
 

@@ -26,7 +26,7 @@ final class LangVisitorTest extends TestCase
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
 
-        $this->assertEmpty($view->getArgument('attributes'));
+        $this->assertFalse($view->hasArgument('attributes'));
         $this->assertEmpty($newContext);
     }
 
@@ -55,7 +55,7 @@ final class LangVisitorTest extends TestCase
     public function it_sets_the_language_and_direction(
         string $xml,
         string $selector,
-        array $expectedAttributes,
+        ?array $expectedAttributes,
         array $context,
         array $expectedContext
     ) : void {
@@ -98,21 +98,21 @@ final class LangVisitorTest extends TestCase
         yield 'en with en context' => [
             '<foo xml:lang="en">bar</foo>',
             '/foo',
-            [],
+            null,
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'inheriting en with en context' => [
             '<foo xml:lang="ar"><bar xml:lang="en"><baz>qux</baz></bar></foo>',
             '/foo/bar/baz',
-            [],
+            null,
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
         yield 'becoming en with en context' => [
             '<foo xml:lang="ar"><bar xml:lang="en">baz</bar></foo>',
             '/foo/bar',
-            [],
+            null,
             ['lang' => 'en', 'dir' => 'ltr'],
             ['lang' => 'en', 'dir' => 'ltr'],
         ];
@@ -182,21 +182,21 @@ final class LangVisitorTest extends TestCase
         yield 'ar with ar context' => [
             '<foo xml:lang="ar">bar</foo>',
             '/foo',
-            [],
+            null,
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];
         yield 'inheriting ar with ar context' => [
             '<foo xml:lang="en"><bar xml:lang="ar"><baz>qux</baz></bar></foo>',
             '/foo/bar/baz',
-            [],
+            null,
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];
         yield 'becoming ar with ar context' => [
             '<foo xml:lang="en"><bar xml:lang="ar">baz</bar></foo>',
             '/foo/bar',
-            [],
+            null,
             ['lang' => 'ar', 'dir' => 'rtl'],
             ['lang' => 'ar', 'dir' => 'rtl'],
         ];

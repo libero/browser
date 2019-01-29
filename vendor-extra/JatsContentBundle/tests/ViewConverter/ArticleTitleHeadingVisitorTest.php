@@ -6,19 +6,19 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\JatsContentBundle\ViewConverter\TitleGroupHeadingVisitor;
+use Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 
-final class TitleGroupHeadingVisitorTest extends TestCase
+final class ArticleTitleHeadingVisitorTest extends TestCase
 {
     /**
      * @test
      * @dataProvider nodeProvider
      */
-    public function it_does_nothing_if_it_is_not_a_jats_title_group_element(string $xml) : void
+    public function it_does_nothing_if_it_is_not_a_jats_article_title_element(string $xml) : void
     {
-        $visitor = new TitleGroupHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor();
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -34,7 +34,7 @@ final class TitleGroupHeadingVisitorTest extends TestCase
 
     public function nodeProvider() : iterable
     {
-        yield 'different namespace' => ['<title-group xmlns="http://example.com">foo</title-group>'];
+        yield 'different namespace' => ['<article-title xmlns="http://example.com">foo</article-title>'];
         yield 'different element' => ['<foo xmlns="http://jats.nlm.nih.gov">foo</foo>'];
     }
 
@@ -43,16 +43,9 @@ final class TitleGroupHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new TitleGroupHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor();
 
-        $xml = FluentDOM::load(
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<title-group xmlns="http://jats.nlm.nih.gov">
-    <article-title>foo</article-title>
-</title-group>
-XML
-        );
+        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -69,39 +62,9 @@ XML
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new TitleGroupHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor();
 
-        $xml = FluentDOM::load(
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<title-group xmlns="http://jats.nlm.nih.gov">
-    <article-title>foo</article-title>
-</title-group>
-XML
-        );
-        /** @var Element $element */
-        $element = $xml->documentElement;
-
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']),
-            $newContext
-        );
-
-        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
-        $this->assertSame(['text' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
-    }
-
-    /**
-     * @test
-     */
-    public function it_does_nothing_if_does_not_find_the_title() : void
-    {
-        $visitor = new TitleGroupHeadingVisitor();
-
-        $xml = FluentDOM::load('<title-group xmlns="http://jats.nlm.nih.gov"/>');
+        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -122,24 +85,14 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new TitleGroupHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor();
 
-        $xml = FluentDOM::load(
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<title-group xmlns="http://jats.nlm.nih.gov">
-    <article-title>foo <bar>baz</bar></article-title>
-</title-group>
-XML
-        );
+        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo <bar>baz</bar></article-title>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
-
-        /** @var Element $titleGroup */
-        $titleGroup = $element->childNodes->item(0);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(['text' => 'foo baz'], $view->getArguments());

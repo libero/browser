@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class TitleGroupHeadingVisitor implements ViewConverterVisitor
+final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
 {
     use SimplifiedVisitor;
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
-
-        $title = $xpath->firstOf('jats:article-title', $object);
-
-        if (!$title instanceof Element) {
-            return $view;
-        }
-
-        return $view->withArgument('text', (string) $title);
+        return $view->withArgument('text', (string) $object);
     }
 
     protected function expectedTemplate() : string
@@ -37,7 +25,7 @@ final class TitleGroupHeadingVisitor implements ViewConverterVisitor
 
     protected function expectedElement() : string
     {
-        return '{http://jats.nlm.nih.gov}title-group';
+        return '{http://jats.nlm.nih.gov}article-title';
     }
 
     protected function unexpectedArguments() : array
