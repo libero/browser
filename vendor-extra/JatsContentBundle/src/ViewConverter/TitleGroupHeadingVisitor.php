@@ -6,7 +6,6 @@ namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\InlineViewConverter;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
@@ -14,13 +13,6 @@ use Libero\ViewsBundle\Views\ViewConverterVisitor;
 final class TitleGroupHeadingVisitor implements ViewConverterVisitor
 {
     use SimplifiedVisitor;
-
-    private $inlineConverter;
-
-    public function __construct(InlineViewConverter $inlineConverter)
-    {
-        $this->inlineConverter = $inlineConverter;
-    }
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
@@ -35,7 +27,7 @@ final class TitleGroupHeadingVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        return $view->withArgument('text', $this->inlineConverter->convertChildren($title, $context));
+        return $view->withArgument('text', (string) $title);
     }
 
     protected function expectedTemplate() : string

@@ -6,11 +6,8 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\JatsContentBundle\ViewConverter\TitleGroupHeadingVisitor;
-use Libero\ViewsBundle\Views\CallbackInlineViewConverter;
 use Libero\ViewsBundle\Views\View;
-use LogicException;
 use PHPUnit\Framework\TestCase;
 
 final class TitleGroupHeadingVisitorTest extends TestCase
@@ -21,13 +18,7 @@ final class TitleGroupHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_title_group_element(string $xml) : void
     {
-        $visitor = new TitleGroupHeadingVisitor(
-            new CallbackInlineViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new TitleGroupHeadingVisitor();
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -52,13 +43,7 @@ final class TitleGroupHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new TitleGroupHeadingVisitor(
-            new CallbackInlineViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new TitleGroupHeadingVisitor();
 
         $xml = FluentDOM::load(
             <<<XML
@@ -84,13 +69,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new TitleGroupHeadingVisitor(
-            new CallbackInlineViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new TitleGroupHeadingVisitor();
 
         $xml = FluentDOM::load(
             <<<XML
@@ -120,13 +99,7 @@ XML
      */
     public function it_does_nothing_if_does_not_find_the_title() : void
     {
-        $visitor = new TitleGroupHeadingVisitor(
-            new CallbackInlineViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new TitleGroupHeadingVisitor();
 
         $xml = FluentDOM::load('<title-group xmlns="http://jats.nlm.nih.gov"/>');
         /** @var Element $element */
@@ -149,13 +122,7 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new TitleGroupHeadingVisitor(
-            new CallbackInlineViewConverter(
-                function (NonDocumentTypeChildNode $object, array $context) : View {
-                    return new View('child', ['object' => $object, 'context' => $context]);
-                }
-            )
-        );
+        $visitor = new TitleGroupHeadingVisitor();
 
         $xml = FluentDOM::load(
             <<<XML
@@ -175,15 +142,7 @@ XML
         $titleGroup = $element->childNodes->item(0);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
-        $this->assertEquals(
-            [
-                'text' => [
-                    new View('child', ['object' => $titleGroup->childNodes->item(0), 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => $titleGroup->childNodes->item(1), 'context' => ['foo' => 'bar']]),
-                ],
-            ],
-            $view->getArguments()
-        );
+        $this->assertEquals(['text' => 'foo baz'], $view->getArguments());
         $this->assertSame(['foo' => 'bar'], $newContext);
     }
 }
