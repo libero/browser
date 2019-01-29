@@ -26,6 +26,12 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\Inline\ItalicVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\Inline\ItalicVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter.inline"/>
+        </service>
+
     </services>
 
 </container>
