@@ -16,9 +16,11 @@ To run a website reading from two content services (`blog-articles` and `scholar
     content_page:
         pages:
             blog_article:
+                handler: 'libero'
                 path: '/blog/{id}'
                 service: 'blog-articles'
             scholarly_article:
+                handler: 'libero'
                 path: '/articles/{id}'
                 service: 'scholarly-articles'
     ```

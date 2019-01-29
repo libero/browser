@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "795a9dbbd5db66aa811c6b346004da46",
+    "content-hash": "5ef35fe52de5abd913fa6271a980c274",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -459,7 +459,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "d097c786e9110b86760a5d0f697629de191aa760",
+                "reference": "a3fcb88b7d0984a24ab8b3cadf5d245242b14099",
                 "shasum": null
             },
             "require": {
@@ -493,12 +493,87 @@
             "autoload": {
                 "psr-4": {
                     "Libero\\ContentPageBundle\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "license": [
                 "MIT"
             ],
             "description": "A Libero content page"
+        },
+        {
+            "name": "libero/jats-content-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor-extra/JatsContentBundle",
+                "reference": "ae44c71f27f7d8ba5cad9624cc585169b71e8dcd",
+                "shasum": null
+            },
+            "require": {
+                "fluentdom/fluentdom": "^7.0",
+                "libero/content-page-bundle": "^1.0@dev",
+                "php": "^7.2",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
+                "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Libero\\JatsContentBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "JATS content handler"
+        },
+        {
+            "name": "libero/libero-content-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor-extra/LiberoContentBundle",
+                "reference": "79978650d8cb75ed754ff49a20f2e7581534f856",
+                "shasum": null
+            },
+            "require": {
+                "fluentdom/fluentdom": "^7.0",
+                "libero/content-page-bundle": "^1.0@dev",
+                "php": "^7.2",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
+                "symfony/http-kernel": "^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Libero\\LiberoContentBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Libero content handler"
         },
         {
             "name": "libero/patterns-bundle",
@@ -5192,6 +5267,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "libero/content-page-bundle": 20,
+        "libero/jats-content-bundle": 20,
+        "libero/libero-content-bundle": 20,
         "libero/patterns-bundle": 20
     },
     "prefer-stable": false,
