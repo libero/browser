@@ -14,13 +14,11 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use tests\Libero\ContentPageBundle\TwigTestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
 final class ContentControllerTest extends TestCase
 {
     use GuzzleTestCase;
     use TwigTestCase;
-    use ViewConvertingTestCase;
 
     /**
      * @test
