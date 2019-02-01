@@ -9,16 +9,19 @@ use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
 final class ArticleTitleHeadingVisitorTest extends TestCase
 {
+    use ViewConvertingTestCase;
+
     /**
      * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_article_title_element(string $xml) : void
     {
-        $visitor = new ArticleTitleHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -43,7 +46,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
@@ -62,7 +65,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
@@ -85,9 +88,15 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor();
+        $visitor = new ArticleTitleHeadingVisitor($this->createInlineConverter());
 
-        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo <bar>baz</bar></article-title>');
+        $xml = FluentDOM::load(
+            <<<XML
+<jats:article-title xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:article-title>
+XML
+        );
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -95,7 +104,16 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
-        $this->assertEquals(['text' => 'foo baz'], $view->getArguments());
+        $this->assertEquals(
+            [
+                'text' => [
+                    new View('child', ['object' => '/jats:article-title/text()[1]', 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => '/jats:article-title/jats:italic', 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => '/jats:article-title/text()[2]', 'context' => ['foo' => 'bar']]),
+                ],
+            ],
+            $view->getArguments()
+        );
         $this->assertSame(['foo' => 'bar'], $newContext);
     }
 }

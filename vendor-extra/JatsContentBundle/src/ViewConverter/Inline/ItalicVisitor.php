@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Libero\JatsContentBundle\ViewConverter;
+namespace Libero\JatsContentBundle\ViewConverter\Inline;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\InlineViewConverter;
-use Libero\ViewsBundle\Views\SimplifiedVisitor;
+use Libero\ViewsBundle\Views\InlineViewConverterVisitor;
+use Libero\ViewsBundle\Views\SimplifiedInlineElementVisitor;
 use Libero\ViewsBundle\Views\View;
-use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
+final class ItalicVisitor implements InlineViewConverterVisitor
 {
-    use SimplifiedVisitor;
+    use SimplifiedInlineElementVisitor;
 
     private $inlineConverter;
 
@@ -28,12 +28,12 @@ final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
 
     protected function expectedTemplate() : string
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/italic.html.twig';
     }
 
     protected function expectedElement() : string
     {
-        return '{http://jats.nlm.nih.gov}article-title';
+        return '{http://jats.nlm.nih.gov}italic';
     }
 
     protected function unexpectedArguments() : array

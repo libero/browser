@@ -14,9 +14,20 @@
         <service id="Libero\ViewsBundle\Views\ViewConverter"
             alias="Libero\ViewsBundle\Views\ViewConverterRegistry"/>
 
+        <service id="Libero\ViewsBundle\Views\InlineViewConverterRegistry"
+            class="Libero\ViewsBundle\Views\InlineViewConverterRegistry"/>
+
+        <service id="Libero\ViewsBundle\Views\InlineViewConverter"
+            alias="Libero\ViewsBundle\Views\InlineViewConverterRegistry"/>
+
         <service id="Libero\ViewsBundle\ViewConverter\LangVisitor"
             class="Libero\ViewsBundle\ViewConverter\LangVisitor">
             <tag name="libero.view_converter" priority="100"/>
+        </service>
+
+        <service id="Libero\ViewsBundle\ViewConverter\Inline\LangVisitor"
+            class="Libero\ViewsBundle\ViewConverter\Inline\LangVisitor">
+            <tag name="libero.view_converter.inline" priority="100"/>
         </service>
 
     </services>

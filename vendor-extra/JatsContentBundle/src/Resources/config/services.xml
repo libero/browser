@@ -16,6 +16,7 @@
 
         <service id="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor"
             class="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
 
@@ -23,6 +24,12 @@
             class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\Inline\ItalicVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\Inline\ItalicVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\InlineViewConverter"/>
+            <tag name="libero.view_converter.inline"/>
         </service>
 
     </services>

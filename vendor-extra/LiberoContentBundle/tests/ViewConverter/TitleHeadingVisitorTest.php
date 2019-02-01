@@ -9,16 +9,19 @@ use FluentDOM\DOM\Element;
 use Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
 final class TitleHeadingVisitorTest extends TestCase
 {
+    use ViewConvertingTestCase;
+
     /**
      * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_libero_title_element(string $xml) : void
     {
-        $visitor = new TitleHeadingVisitor();
+        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -43,7 +46,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new TitleHeadingVisitor();
+        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
         /** @var Element $element */
@@ -62,7 +65,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new TitleHeadingVisitor();
+        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
         /** @var Element $element */
@@ -85,9 +88,15 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new TitleHeadingVisitor();
+        $visitor = new TitleHeadingVisitor($this->createInlineConverter());
 
-        $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo <bar>baz</bar></title>');
+        $xml = FluentDOM::load(
+            <<<XML
+<libero:title xmlns:libero="http://libero.pub"> 
+    foo <libero:i>bar</libero:i> baz
+</libero:title>
+XML
+        );
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -95,7 +104,16 @@ final class TitleHeadingVisitorTest extends TestCase
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
-        $this->assertEquals(['text' => 'foo baz',], $view->getArguments());
+        $this->assertEquals(
+            [
+                'text' => [
+                    new View('child', ['object' => '/libero:title/text()[1]', 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => '/libero:title/libero:i', 'context' => ['foo' => 'bar']]),
+                    new View('child', ['object' => '/libero:title/text()[2]', 'context' => ['foo' => 'bar']]),
+                ],
+            ],
+            $view->getArguments()
+        );
         $this->assertSame(['foo' => 'bar'], $newContext);
     }
 }
