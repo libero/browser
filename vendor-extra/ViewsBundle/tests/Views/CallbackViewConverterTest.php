@@ -9,7 +9,6 @@ use Libero\ViewsBundle\Views\CallbackViewConverter;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use PHPUnit\Framework\TestCase;
-use function compact;
 
 final class CallbackViewConverterTest extends TestCase
 {
@@ -34,12 +33,12 @@ final class CallbackViewConverterTest extends TestCase
     {
         $handler = new CallbackViewConverter(
             function (Element $object, ?string $template, array $context = []) : View {
-                return new View('template', compact('object', 'context'));
+                return new View($template, $context + ['element' => $object]);
             }
         );
 
         $element = new Element('foo');
-        $expected = new View('template', ['object' => $element, 'context' => ['bar' => 'baz'],]);
+        $expected = new View('template', ['bar' => 'baz', 'element' => $element]);
 
         $this->assertEquals($expected, $handler->convert($element, 'template', ['bar' => 'baz']));
     }
