@@ -34,19 +34,12 @@ final class CallbackViewConverterTest extends TestCase
     {
         $handler = new CallbackViewConverter(
             function (Element $object, ?string $template, array $context = []) : View {
-                return new View('template', compact('object', 'template', 'context'));
+                return new View('template', compact('object', 'context'));
             }
         );
 
         $element = new Element('foo');
-        $expected = new View(
-            'template',
-            [
-                'object' => $element,
-                'template' => 'template',
-                'context' => ['bar' => 'baz'],
-            ]
-        );
+        $expected = new View('template', ['object' => $element, 'context' => ['bar' => 'baz'],]);
 
         $this->assertEquals($expected, $handler->convert($element, 'template', ['bar' => 'baz']));
     }
