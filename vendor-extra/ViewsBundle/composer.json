@@ -1,18 +1,16 @@
 {
-    "name": "libero/jats-content-bundle",
-    "description": "JATS content handler",
+    "name": "libero/views-bundle",
+    "description": "Views bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Libero\\JatsContentBundle\\": "src/"
+            "Libero\\ViewsBundle\\": "src/"
         }
     },
     "require": {
         "php": "^7.2",
         "fluentdom/fluentdom": "^7.0",
-        "libero/content-page-bundle": "^1.0@dev",
-        "libero/views-bundle": "^1.0@dev",
         "symfony/config": "^4.1",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1"

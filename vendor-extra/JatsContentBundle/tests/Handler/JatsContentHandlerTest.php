@@ -8,17 +8,30 @@ use FluentDOM;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Handler\ContentHandler;
 use Libero\JatsContentBundle\Handler\JatsContentHandler;
+use Libero\ViewsBundle\Views\CallbackViewConverter;
+use Libero\ViewsBundle\Views\View;
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use UnexpectedValueException;
+use function GuzzleHttp\json_encode;
 
 final class JatsContentHandlerTest extends TestCase
 {
+    use ViewConvertingTestCase;
+
     /**
      * @test
      */
     public function it_is_a_content_handler() : void
     {
-        $handler = new JatsContentHandler();
+        $handler = new JatsContentHandler(
+            new CallbackViewConverter(
+                function () : View {
+                    throw new LogicException();
+                }
+            )
+        );
 
         $this->assertInstanceOf(ContentHandler::class, $handler);
     }
@@ -29,13 +42,16 @@ final class JatsContentHandlerTest extends TestCase
      */
     public function it_returns_the_title(string $xml, array $context, array $expected) : void
     {
-        $handler = new JatsContentHandler();
+        $handler = new JatsContentHandler($this->createConverter());
 
         $document = FluentDOM::load($xml);
         /** @var Element $documentElement */
         $documentElement = $document->documentElement;
 
-        $this->assertSame($expected, $handler->handle($documentElement, $context));
+        $this->assertJsonStringEqualsJsonString(
+            json_encode($expected),
+            json_encode($handler->handle($documentElement, $context))
+        );
     }
 
     public function pageProvider() : iterable
@@ -43,10 +59,10 @@ final class JatsContentHandlerTest extends TestCase
         yield 'en request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <meta>
-        <id>id</id>
-    </meta>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
     <jats:article>
         <jats:front>
             <jats:article-meta>
@@ -56,7 +72,7 @@ final class JatsContentHandlerTest extends TestCase
             </jats:article-meta>
         </jats:front>
     </jats:article>
-</item>
+</libero:item>
 XML
             ,
             [
@@ -66,15 +82,15 @@ XML
             [
                 'lang' => 'en',
                 'dir' => 'ltr',
-                'title' => 'Title',
+                'title' => null,
                 'content' => [
                     [
                         'template' => '@LiberoPatterns/content-header.html.twig',
                         'arguments' => [
-                            'attributes' => [],
-                            'contentTitle' => [
-                                'attributes' => [],
-                                'text' => 'Title',
+                            'element' => '/libero:item/jats:article/jats:front',
+                            'context' => [
+                                'lang' => 'en',
+                                'dir' => 'ltr',
                             ],
                         ],
                     ],
@@ -85,10 +101,10 @@ XML
         yield 'fr request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <meta>
-        <id>id</id>
-    </meta>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
     <jats:article>
         <jats:front>
             <jats:article-meta>
@@ -98,7 +114,7 @@ XML
             </jats:article-meta>
         </jats:front>
     </jats:article>
-</item>
+</libero:item>
 XML
             ,
             [
@@ -108,17 +124,15 @@ XML
             [
                 'lang' => 'fr',
                 'dir' => 'ltr',
-                'title' => 'Title',
+                'title' => null,
                 'content' => [
                     [
                         'template' => '@LiberoPatterns/content-header.html.twig',
                         'arguments' => [
-                            'attributes' => [
-                                'lang' => 'en',
-                            ],
-                            'contentTitle' => [
-                                'attributes' => [],
-                                'text' => 'Title',
+                            'element' => '/libero:item/jats:article/jats:front',
+                            'context' => [
+                                'lang' => 'fr',
+                                'dir' => 'ltr',
                             ],
                         ],
                     ],
@@ -129,10 +143,10 @@ XML
         yield 'ar-EG request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <meta>
-        <id>id</id>
-    </meta>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
     <jats:article>
         <jats:front>
             <jats:article-meta>
@@ -142,7 +156,7 @@ XML
             </jats:article-meta>
         </jats:front>
     </jats:article>
-</item>
+</libero:item>
 XML
             ,
             [
@@ -152,66 +166,15 @@ XML
             [
                 'lang' => 'ar-EG',
                 'dir' => 'rtl',
-                'title' => 'Title',
+                'title' => null,
                 'content' => [
                     [
                         'template' => '@LiberoPatterns/content-header.html.twig',
                         'arguments' => [
-                            'attributes' => [
-                                'lang' => 'en',
-                                'dir' => 'ltr',
-                            ],
-                            'contentTitle' => [
-                                'attributes' => [],
-                                'text' => 'Title',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ];
-
-        yield 'complex locales' => [
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <meta>
-        <id>id</id>
-    </meta>
-    <jats:article xml:lang="ar">
-        <jats:front>
-            <jats:article-meta>
-                <jats:title-group>
-                    <jats:article-title xml:lang="de">Title</jats:article-title>
-                </jats:title-group>
-            </jats:article-meta>
-        </jats:front>
-    </jats:article>
-</item>
-XML
-            ,
-            [
-                'lang' => 'en',
-                'dir' => 'ltr',
-            ],
-            [
-                'lang' => 'en',
-                'dir' => 'ltr',
-                'title' => 'Title',
-                'content' => [
-                    [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
-                        'arguments' => [
-                            'attributes' => [
-                                'lang' => 'ar',
+                            'element' => '/libero:item/jats:article/jats:front',
+                            'context' => [
+                                'lang' => 'ar-EG',
                                 'dir' => 'rtl',
-                            ],
-                            'contentTitle' => [
-                                'attributes' => [
-                                    'lang' => 'de',
-                                    'dir' => 'ltr',
-                                ],
-                                'text' => 'Title',
                             ],
                         ],
                     ],
@@ -225,7 +188,13 @@ XML
      */
     public function it_fails_if_it_does_not_find_the_front() : void
     {
-        $handler = new JatsContentHandler();
+        $handler = new JatsContentHandler(
+            new CallbackViewConverter(
+                function () : View {
+                    throw new LogicException();
+                }
+            )
+        );
 
         $document = FluentDOM::load(
             <<<XML
@@ -243,39 +212,6 @@ XML
 
         $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage('Could not find a front');
-
-        $handler->handle($documentElement, []);
-    }
-
-    /**
-     * @test
-     */
-    public function it_fails_if_it_does_not_find_the_title() : void
-    {
-        $handler = new JatsContentHandler();
-
-        $document = FluentDOM::load(
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <meta>
-        <id>id</id>
-    </meta>
-    <jats:article>
-        <jats:front>
-            <jats:article-meta>
-                <jats:title-group/>
-            </jats:article-meta>
-        </jats:front>
-    </jats:article>
-</item>
-XML
-        );
-        /** @var Element $documentElement */
-        $documentElement = $document->documentElement;
-
-        $this->expectException(UnexpectedValueException::class);
-        $this->expectExceptionMessage('Could not find a title');
 
         $handler->handle($documentElement, []);
     }

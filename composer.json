@@ -13,7 +13,8 @@
             "tests\\Libero\\Browser\\": "tests/",
             "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
             "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/",
-            "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/"
+            "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/",
+            "tests\\Libero\\ViewsBundle\\": "vendor-extra/ViewsBundle/tests/"
         }
     },
     "require": {
@@ -25,6 +26,7 @@
         "libero/jats-content-bundle": "^1.0@dev",
         "libero/libero-content-bundle": "^1.0@dev",
         "libero/patterns-bundle": "^1.0@dev",
+        "libero/views-bundle": "^1.0@dev",
         "symfony/asset": "^4.1",
         "symfony/config": "^4.1",
         "symfony/console": "^4.1",

@@ -24,6 +24,9 @@
         <testsuite name="LiberoContentBundle">
             <directory suffix=".php">vendor-extra/LiberoContentBundle/tests</directory>
         </testsuite>
+        <testsuite name="ViewsBundle">
+            <directory suffix=".php">vendor-extra/ViewsBundle/tests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
@@ -32,6 +35,7 @@
             <directory>vendor-extra/ContentPageBundle/src</directory>
             <directory>vendor-extra/JatsContentBundle/src</directory>
             <directory>vendor-extra/LiberoContentBundle/src</directory>
+            <directory>vendor-extra/ViewsBundle/src</directory>
         </whitelist>
     </filter>
 
