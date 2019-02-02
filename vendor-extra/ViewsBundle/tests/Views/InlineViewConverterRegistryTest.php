@@ -6,8 +6,7 @@ namespace tests\Libero\ViewsBundle\Views;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
-use Libero\ViewsBundle\ViewConverter\Inline\CallbackVisitor;
+use Libero\ViewsBundle\ViewConverter\CallbackVisitor;
 use Libero\ViewsBundle\Views\InlineViewConverter;
 use Libero\ViewsBundle\Views\InlineViewConverterRegistry;
 use Libero\ViewsBundle\Views\View;
@@ -53,12 +52,12 @@ final class InlineViewConverterRegistryTest extends TestCase
 
         $handler->add(
             new CallbackVisitor(
-                function (NonDocumentTypeChildNode $object, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'foo')->withArgument('foo', 'foo');
                 }
             ),
             new CallbackVisitor(
-                function (NonDocumentTypeChildNode $object, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'bar')->withArgument('bar', 'bar');
                 }
             )
@@ -66,7 +65,7 @@ final class InlineViewConverterRegistryTest extends TestCase
 
         $handler->add(
             new CallbackVisitor(
-                function (NonDocumentTypeChildNode $object, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'baz')->withArgument('baz', 'baz');
                 }
             )

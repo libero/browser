@@ -6,7 +6,6 @@ namespace tests\Libero\LiberoContentBundle\ViewConverter\Inline;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\LiberoContentBundle\ViewConverter\Inline\ItalicVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -25,11 +24,11 @@ final class ItalicVisitorTest extends TestCase
         $visitor = new ItalicVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var NonDocumentTypeChildNode $node */
-        $node = $xml->documentElement->firstChild;
+        /** @var Element $element */
+        $element = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View(null), $newContext);
+        $view = $visitor->visit($element, new View(null), $newContext);
 
         $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -38,7 +37,6 @@ final class ItalicVisitorTest extends TestCase
 
     public function nodeProvider() : iterable
     {
-        yield 'non-element' => ['foo'];
         yield 'different namespace' => ['<i xmlns="http://example.com">foo</i>'];
         yield 'different element' => ['<b xmlns="http://libero.pub">foo</b>'];
     }
@@ -51,11 +49,11 @@ final class ItalicVisitorTest extends TestCase
         $visitor = new ItalicVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'), $newContext);
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
@@ -70,11 +68,11 @@ final class ItalicVisitorTest extends TestCase
         $visitor = new ItalicVisitor($this->createFailingInlineConverter());
 
         $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit($node, new View(null, ['text' => 'bar']), $newContext);
+        $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
 
         $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
@@ -95,11 +93,11 @@ final class ItalicVisitorTest extends TestCase
 </libero:i>
 XML
         );
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        /** @var Element $element */
+        $element = $xml->documentElement;
 
         $newContext = ['foo' => 'bar'];
-        $view = $visitor->visit($node, new View(null), $newContext);
+        $view = $visitor->visit($element, new View(null), $newContext);
 
         $this->assertSame('@LiberoPatterns/italic.html.twig', $view->getTemplate());
         $this->assertEquals(

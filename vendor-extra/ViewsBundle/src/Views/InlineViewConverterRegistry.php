@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
+use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use function array_push;
 
@@ -11,13 +12,17 @@ final class InlineViewConverterRegistry implements InlineViewConverter
 {
     private $visitors = [];
 
-    public function add(InlineViewConverterVisitor ...$visitors) : void
+    public function add(ViewConverterVisitor ...$visitors) : void
     {
         array_push($this->visitors, ...$visitors);
     }
 
     public function convert(NonDocumentTypeChildNode $object, array $context = []) : View
     {
+        if (!$object instanceof Element) {
+            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $object]);
+        }
+
         $view = new View(null, []);
 
         foreach ($this->visitors as $visitor) {

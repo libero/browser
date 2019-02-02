@@ -7,14 +7,14 @@ namespace Libero\LiberoContentBundle\ViewConverter\Inline;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsInlineNodes;
 use Libero\ViewsBundle\Views\InlineViewConverter;
-use Libero\ViewsBundle\Views\InlineViewConverterVisitor;
-use Libero\ViewsBundle\Views\SimplifiedInlineElementVisitor;
+use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class ItalicVisitor implements InlineViewConverterVisitor
+final class ItalicVisitor implements ViewConverterVisitor
 {
     use ConvertsInlineNodes;
-    use SimplifiedInlineElementVisitor;
+    use SimplifiedVisitor;
 
     private $inlineConverter;
 
@@ -28,12 +28,12 @@ final class ItalicVisitor implements InlineViewConverterVisitor
         return $view->withArgument('text', $this->convertInlineNodes($object, $context));
     }
 
-    protected function expectedTemplate() : string
+    protected function possibleTemplate() : ?string
     {
         return '@LiberoPatterns/italic.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : ?string
     {
         return '{http://libero.pub}i';
     }

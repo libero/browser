@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
+use UnexpectedValueException;
 use function is_string;
 use function sprintf;
 
@@ -12,7 +13,9 @@ trait SimplifiedVisitor
 {
     final public function visit(Element $object, View $view, array &$context = []) : View
     {
-        if ($this->expectedTemplate() !== $view->getTemplate()) {
+        $currentTemplate = $view->getTemplate();
+
+        if (is_string($currentTemplate) && $this->expectedTemplate() !== $currentTemplate) {
             return $view;
         }
 
@@ -29,12 +32,28 @@ trait SimplifiedVisitor
             }
         }
 
+        if (null === $currentTemplate) {
+            if (null === $this->possibleTemplate()) {
+                throw new UnexpectedValueException();
+            }
+
+            $view = $view->withTemplate($this->possibleTemplate());
+        }
+
         return $this->doVisit($object, $view, $context);
     }
 
     abstract protected function doVisit(Element $object, View $view, array &$context = []) : View;
 
-    abstract protected function expectedTemplate() : string;
+    protected function expectedTemplate() : ?string
+    {
+        return null;
+    }
+
+    protected function possibleTemplate() : ?string
+    {
+        return null;
+    }
 
     protected function expectedElement() : ?string
     {
