@@ -44,7 +44,7 @@ final class ItalicVisitorTest extends TestCase
     /**
      * @test
      */
-    public function it_does_nothing_if_there_is_already_a_template_set() : void
+    public function it_does_nothing_if_is_not_the_italic_template() : void
     {
         $visitor = new ItalicVisitor($this->createFailingInlineConverter());
 
