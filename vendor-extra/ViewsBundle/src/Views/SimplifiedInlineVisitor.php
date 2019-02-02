@@ -8,18 +8,17 @@ use FluentDOM\DOM\Element;
 use function is_string;
 use function sprintf;
 
-trait SimplifiedVisitor
+trait SimplifiedInlineVisitor
 {
     final public function visit(Element $object, View $view, array &$context = []) : View
     {
-        if ($this->expectedTemplate() !== $view->getTemplate()) {
+        $currentTemplate = $view->getTemplate();
+
+        if (is_string($currentTemplate) && $this->possibleTemplate() !== $currentTemplate) {
             return $view;
         }
 
-        $expectedElement = $this->expectedElement();
-        $actualElement = sprintf('{%s}%s', $object->namespaceURI, $object->localName);
-
-        if (is_string($expectedElement) && $expectedElement !== $actualElement) {
+        if ($this->expectedElement() !== sprintf('{%s}%s', $object->namespaceURI, $object->localName)) {
             return $view;
         }
 
@@ -29,17 +28,18 @@ trait SimplifiedVisitor
             }
         }
 
+        if (null === $currentTemplate) {
+            $view = $view->withTemplate($this->possibleTemplate());
+        }
+
         return $this->doVisit($object, $view, $context);
     }
 
     abstract protected function doVisit(Element $object, View $view, array &$context = []) : View;
 
-    abstract protected function expectedTemplate() : string;
+    abstract protected function possibleTemplate() : string;
 
-    protected function expectedElement() : ?string
-    {
-        return null;
-    }
+    abstract protected function expectedElement() : string;
 
     /**
      * @return array<string>
