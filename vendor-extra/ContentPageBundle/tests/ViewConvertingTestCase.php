@@ -12,20 +12,17 @@ use LogicException;
 
 trait ViewConvertingTestCase
 {
-    final protected function createDumpingConverter(bool $includeTemplate = false) : ViewConverter
+    final protected function createDumpingConverter() : ViewConverter
     {
         return new CallbackViewConverter(
-            function (Element $object, ?string $template, array $context) use ($includeTemplate) : View {
+            function (Element $object, ?string $template, array $context) : View {
                 $arguments = [
                     'element' => $object->getNodePath(),
+                    'template' => $template,
                     'context' => $context,
                 ];
 
-                if ($includeTemplate) {
-                    $arguments['template'] = $template;
-                }
-
-                return new View($template, $arguments);
+                return new View(null, $arguments);
             }
         );
     }

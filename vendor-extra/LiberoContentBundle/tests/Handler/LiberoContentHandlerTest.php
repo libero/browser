@@ -70,9 +70,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/libero:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'en',
                                 'dir' => 'ltr',
@@ -106,9 +107,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/libero:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'fr',
                                 'dir' => 'ltr',
@@ -142,9 +144,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/libero:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'ar-EG',
                                 'dir' => 'rtl',

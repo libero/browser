@@ -111,7 +111,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter(true));
+        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
