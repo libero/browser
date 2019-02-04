@@ -18,6 +18,15 @@
                     <jats:article-title>Article 1</jats:article-title>
                 </jats:title-group>
 
+                <jats:article-categories>
+                    <jats:subj-group subj-group-type="heading">
+                        <jats:subject>Cell Biology</jats:subject>
+                    </jats:subj-group>
+                    <jats:subj-group subj-group-type="heading">
+                        <jats:subject>Plant Biology</jats:subject>
+                    </jats:subj-group>
+                </jats:article-categories>
+
             </jats:article-meta>
 
         </jats:front>
