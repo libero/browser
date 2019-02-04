@@ -103,9 +103,9 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View('child', ['object' => '/libero:i/text()[1]', 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => '/libero:i/libero:b', 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => '/libero:i/text()[2]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/libero:i/text()[1]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/libero:i/libero:b', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/libero:i/text()[2]', 'context' => ['foo' => 'bar']]),
                 ],
             ],
             $view->getArguments()

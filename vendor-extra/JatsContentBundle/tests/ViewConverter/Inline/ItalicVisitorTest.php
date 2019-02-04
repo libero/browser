@@ -103,9 +103,9 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View('child', ['object' => '/jats:italic/text()[1]', 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => '/jats:italic/jats:bold', 'context' => ['foo' => 'bar']]),
-                    new View('child', ['object' => '/jats:italic/text()[2]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/jats:italic/text()[1]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/jats:italic/jats:bold', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/jats:italic/text()[2]', 'context' => ['foo' => 'bar']]),
                 ],
             ],
             $view->getArguments()

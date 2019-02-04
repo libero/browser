@@ -15,20 +15,14 @@ use LogicException;
 
 trait ViewConvertingTestCase
 {
-    final protected function createConverter(bool $includeTemplate = false) : ViewConverter
+    final protected function createDumpingConverter() : ViewConverter
     {
         return new CallbackViewConverter(
-            function (Element $object, ?string $template, array $context) use ($includeTemplate) : View {
-                $arguments = [
-                    'element' => $object->getNodePath(),
-                    'context' => $context,
-                ];
-
-                if ($includeTemplate) {
-                    $arguments['template'] = $template;
-                }
-
-                return new View($template, $arguments);
+            function (Element $object, ?string $template, array $context) : View {
+                return new View(
+                    null,
+                    ['element' => $object->getNodePath(), 'template' => $template, 'context' => $context]
+                );
             }
         );
     }
@@ -46,12 +40,7 @@ trait ViewConvertingTestCase
     {
         return new CallbackInlineViewConverter(
             function (NonDocumentTypeChildNode $object, array $context) : View {
-                $arguments = [
-                    'object' => $object->getNodePath(),
-                    'context' => $context,
-                ];
-
-                return new View('child', $arguments);
+                return new View(null, ['object' => $object->getNodePath(), 'context' => $context]);
             }
         );
     }
