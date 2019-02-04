@@ -96,20 +96,20 @@ XML
         /** @var Element $element */
         $element = $xml->documentElement;
 
-        $newContext = ['foo' => 'bar'];
+        $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View(null), $newContext);
 
         $this->assertSame('@LiberoPatterns/italic.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
-                    new View(null, ['object' => '/libero:i/text()[1]', 'context' => ['foo' => 'bar']]),
-                    new View(null, ['object' => '/libero:i/libero:b', 'context' => ['foo' => 'bar']]),
-                    new View(null, ['object' => '/libero:i/text()[2]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/libero:i/text()[1]', 'context' => ['qux' => 'quux']]),
+                    new View(null, ['object' => '/libero:i/libero:b', 'context' => ['qux' => 'quux']]),
+                    new View(null, ['object' => '/libero:i/text()[2]', 'context' => ['qux' => 'quux']]),
                 ],
             ],
             $view->getArguments()
         );
-        $this->assertSame(['foo' => 'bar'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $newContext);
     }
 }

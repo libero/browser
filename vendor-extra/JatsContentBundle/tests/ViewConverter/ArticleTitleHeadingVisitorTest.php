@@ -100,20 +100,20 @@ XML
         /** @var Element $element */
         $element = $xml->documentElement;
 
-        $newContext = ['foo' => 'bar'];
+        $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
-                    new View(null, ['object' => '/jats:article-title/text()[1]', 'context' => ['foo' => 'bar']]),
-                    new View(null, ['object' => '/jats:article-title/jats:italic', 'context' => ['foo' => 'bar']]),
-                    new View(null, ['object' => '/jats:article-title/text()[2]', 'context' => ['foo' => 'bar']]),
+                    new View(null, ['object' => '/jats:article-title/text()[1]', 'context' => ['qux' => 'quux']]),
+                    new View(null, ['object' => '/jats:article-title/jats:italic', 'context' => ['qux' => 'quux']]),
+                    new View(null, ['object' => '/jats:article-title/text()[2]', 'context' => ['qux' => 'quux']]),
                 ],
             ],
             $view->getArguments()
         );
-        $this->assertSame(['foo' => 'bar'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $newContext);
     }
 }
