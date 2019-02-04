@@ -16,13 +16,10 @@ trait ViewConvertingTestCase
     {
         return new CallbackViewConverter(
             function (Element $object, ?string $template, array $context) : View {
-                $arguments = [
-                    'element' => $object->getNodePath(),
-                    'template' => $template,
-                    'context' => $context,
-                ];
-
-                return new View(null, $arguments);
+                return new View(
+                    null,
+                    ['element' => $object->getNodePath(), 'template' => $template, 'context' => $context]
+                );
             }
         );
     }
