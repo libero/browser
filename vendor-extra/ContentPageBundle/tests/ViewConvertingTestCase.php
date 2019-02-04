@@ -12,7 +12,7 @@ use LogicException;
 
 trait ViewConvertingTestCase
 {
-    final protected function createConverter(bool $includeTemplate = false) : ViewConverter
+    final protected function createDumpingConverter(bool $includeTemplate = false) : ViewConverter
     {
         return new CallbackViewConverter(
             function (Element $object, ?string $template, array $context) use ($includeTemplate) : View {

@@ -133,7 +133,7 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createConverter(true));
+        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter(true));
 
         $xml = FluentDOM::load(
             <<<XML

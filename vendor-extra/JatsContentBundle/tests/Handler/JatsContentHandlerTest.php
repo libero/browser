@@ -33,7 +33,7 @@ final class JatsContentHandlerTest extends TestCase
      */
     public function it_returns_the_title(string $xml, array $context, array $expected) : void
     {
-        $handler = new JatsContentHandler($this->createConverter());
+        $handler = new JatsContentHandler($this->createDumpingConverter());
 
         $document = FluentDOM::load($xml);
         /** @var Element $documentElement */

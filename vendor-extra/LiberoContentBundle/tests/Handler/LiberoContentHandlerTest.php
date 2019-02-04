@@ -33,7 +33,7 @@ final class LiberoContentHandlerTest extends TestCase
      */
     public function it_returns_the_title(string $xml, array $context, array $expected) : void
     {
-        $handler = new LiberoContentHandler($this->createConverter());
+        $handler = new LiberoContentHandler($this->createDumpingConverter());
 
         $document = FluentDOM::load($xml);
         /** @var Element $documentElement */
