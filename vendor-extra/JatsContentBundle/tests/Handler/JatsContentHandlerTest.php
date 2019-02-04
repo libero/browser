@@ -8,9 +8,6 @@ use FluentDOM;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Handler\ContentHandler;
 use Libero\JatsContentBundle\Handler\JatsContentHandler;
-use Libero\ViewsBundle\Views\CallbackViewConverter;
-use Libero\ViewsBundle\Views\View;
-use LogicException;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use UnexpectedValueException;
@@ -25,13 +22,7 @@ final class JatsContentHandlerTest extends TestCase
      */
     public function it_is_a_content_handler() : void
     {
-        $handler = new JatsContentHandler(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $handler = new JatsContentHandler($this->createFailingConverter());
 
         $this->assertInstanceOf(ContentHandler::class, $handler);
     }
@@ -42,7 +33,7 @@ final class JatsContentHandlerTest extends TestCase
      */
     public function it_returns_the_title(string $xml, array $context, array $expected) : void
     {
-        $handler = new JatsContentHandler($this->createConverter());
+        $handler = new JatsContentHandler($this->createDumpingConverter());
 
         $document = FluentDOM::load($xml);
         /** @var Element $documentElement */
@@ -85,9 +76,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'en',
                                 'dir' => 'ltr',
@@ -127,9 +119,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'fr',
                                 'dir' => 'ltr',
@@ -169,9 +162,10 @@ XML
                 'title' => null,
                 'content' => [
                     [
-                        'template' => '@LiberoPatterns/content-header.html.twig',
+                        'template' => null,
                         'arguments' => [
                             'element' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'ar-EG',
                                 'dir' => 'rtl',
@@ -188,13 +182,7 @@ XML
      */
     public function it_fails_if_it_does_not_find_the_front() : void
     {
-        $handler = new JatsContentHandler(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $handler = new JatsContentHandler($this->createFailingConverter());
 
         $document = FluentDOM::load(
             <<<XML
