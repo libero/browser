@@ -157,7 +157,7 @@ XML
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'element' => '/jats:front/jats:article-meta/jats:title-group/jats:article-title',
+                    'node' => '/jats:front/jats:article-meta/jats:title-group/jats:article-title',
                     'template' => '@LiberoPatterns/heading.html.twig',
                     'context' => ['bar' => 'baz'],
                 ],

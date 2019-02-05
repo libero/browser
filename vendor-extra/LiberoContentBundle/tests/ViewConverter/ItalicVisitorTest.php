@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\LiberoContentBundle\ViewConverter\Inline;
+namespace tests\Libero\LiberoContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\LiberoContentBundle\ViewConverter\Inline\ItalicVisitor;
+use Libero\LiberoContentBundle\ViewConverter\ItalicVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
@@ -21,7 +21,7 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_libero_italic_element(string $xml) : void
     {
-        $visitor = new ItalicVisitor($this->createFailingInlineConverter());
+        $visitor = new ItalicVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -46,7 +46,7 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_italic_template() : void
     {
-        $visitor = new ItalicVisitor($this->createFailingInlineConverter());
+        $visitor = new ItalicVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
         /** @var Element $element */
@@ -65,7 +65,7 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new ItalicVisitor($this->createFailingInlineConverter());
+        $visitor = new ItalicVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
         /** @var Element $element */
@@ -84,7 +84,7 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_sets_the_template_and_text_argument() : void
     {
-        $visitor = new ItalicVisitor($this->createInlineConverter());
+        $visitor = new ItalicVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -103,9 +103,18 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View(null, ['object' => '/libero:i/text()[1]', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/libero:i/libero:b', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/libero:i/text()[2]', 'context' => ['qux' => 'quux']]),
+                    new View(
+                        null,
+                        ['node' => '/libero:i/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
+                    new View(
+                        null,
+                        ['node' => '/libero:i/libero:b', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
+                    new View(
+                        null,
+                        ['node' => '/libero:i/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
                 ],
             ],
             $view->getArguments()

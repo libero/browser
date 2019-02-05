@@ -8,5 +8,5 @@ use FluentDOM\DOM\Element;
 
 interface ViewConverterVisitor
 {
-    public function visit(Element $object, View $view, array &$context = []) : View;
+    public function visit(Element $element, View $view, array &$context = []) : View;
 }

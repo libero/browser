@@ -21,7 +21,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_article_title_element(string $xml) : void
     {
-        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -46,7 +46,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
@@ -65,7 +65,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new ArticleTitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
         /** @var Element $element */
@@ -88,7 +88,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new ArticleTitleHeadingVisitor($this->createInlineConverter());
+        $visitor = new ArticleTitleHeadingVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -107,9 +107,30 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View(null, ['object' => '/jats:article-title/text()[1]', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/jats:article-title/jats:italic', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/jats:article-title/text()[2]', 'context' => ['qux' => 'quux']]),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:article-title/text()[1]',
+                            'template' => null,
+                            'context' => ['qux' => 'quux'],
+                        ]
+                    ),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:article-title/jats:italic',
+                            'template' => null,
+                            'context' => ['qux' => 'quux'],
+                        ]
+                    ),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:article-title/text()[2]',
+                            'template' => null,
+                            'context' => ['qux' => 'quux'],
+                        ]
+                    ),
                 ],
             ],
             $view->getArguments()

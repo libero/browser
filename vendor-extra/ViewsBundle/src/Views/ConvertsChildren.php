@@ -9,16 +9,16 @@ use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use function array_map;
 use function iterator_to_array;
 
-trait ConvertsInlineNodes
+trait ConvertsChildren
 {
-    /** @var InlineViewConverter */
-    private $inlineConverter;
+    /** @var ViewConverter */
+    private $converter;
 
-    final protected function convertInlineNodes(Element $object, array $context = []) : array
+    final protected function convertChildren(Element $object, array $context = []) : array
     {
         return array_map(
             function (NonDocumentTypeChildNode $child) use ($context) : View {
-                return $this->inlineConverter->convert($child, $context);
+                return $this->converter->convert($child, null, $context);
             },
             iterator_to_array($object)
         );

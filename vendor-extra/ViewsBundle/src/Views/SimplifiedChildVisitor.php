@@ -8,7 +8,7 @@ use FluentDOM\DOM\Element;
 use function is_string;
 use function sprintf;
 
-trait SimplifiedInlineVisitor
+trait SimplifiedChildVisitor
 {
     final public function visit(Element $object, View $view, array &$context = []) : View
     {

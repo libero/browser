@@ -21,7 +21,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_libero_title_element(string $xml) : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -46,7 +46,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
         /** @var Element $element */
@@ -65,7 +65,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingInlineConverter());
+        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
         /** @var Element $element */
@@ -88,7 +88,7 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createInlineConverter());
+        $visitor = new TitleHeadingVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -107,9 +107,18 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View(null, ['object' => '/libero:title/text()[1]', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/libero:title/libero:i', 'context' => ['qux' => 'quux']]),
-                    new View(null, ['object' => '/libero:title/text()[2]', 'context' => ['qux' => 'quux']]),
+                    new View(
+                        null,
+                        ['node' => '/libero:title/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
+                    new View(
+                        null,
+                        ['node' => '/libero:title/libero:i', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
+                    new View(
+                        null,
+                        ['node' => '/libero:title/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                    ),
                 ],
             ],
             $view->getArguments()

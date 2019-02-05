@@ -18,7 +18,7 @@ final class CallbackVisitorTest extends TestCase
     public function it_is_a_view_converter_visitor() : void
     {
         $handler = new CallbackVisitor(
-            function (Element $object, View $view, array &$context) : View {
+            function (Element $element, View $view, array &$context) : View {
                 return $view;
             }
         );
@@ -35,14 +35,14 @@ final class CallbackVisitorTest extends TestCase
         $context = ['bar' => 'baz'];
 
         $handler = new CallbackVisitor(
-            function (Element $object, View $view, array &$context) : View {
-                $context['object'] = $object;
+            function (Element $element, View $view, array &$context) : View {
+                $context['element'] = $element;
 
                 return $view->withTemplate('template');
             }
         );
 
         $this->assertEquals(new View('template'), $handler->visit($element, new View(null), $context));
-        $this->assertEquals(['bar' => 'baz', 'object' => $element], $context);
+        $this->assertEquals(['bar' => 'baz', 'element' => $element], $context);
     }
 }

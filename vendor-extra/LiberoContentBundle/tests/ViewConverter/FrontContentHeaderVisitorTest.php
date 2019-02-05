@@ -130,7 +130,7 @@ XML
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'element' => '/libero:front/libero:title',
+                    'node' => '/libero:front/libero:title',
                     'template' => '@LiberoPatterns/heading.html.twig',
                     'context' => ['bar' => 'baz'],
                 ],

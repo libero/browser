@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\ConvertsInlineNodes;
-use Libero\ViewsBundle\Views\InlineViewConverter;
+use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
 final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
 {
-    use ConvertsInlineNodes;
+    use ConvertsChildren;
     use SimplifiedVisitor;
 
-    public function __construct(InlineViewConverter $inlineConverter)
+    public function __construct(ViewConverter $converter)
     {
-        $this->inlineConverter = $inlineConverter;
+        $this->converter = $converter;
     }
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        return $view->withArgument('text', $this->convertInlineNodes($object, $context));
+        return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
     protected function expectedTemplate() : string
