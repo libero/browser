@@ -4,6 +4,16 @@
 
   {%- block body -%}
 
+    {%- with categories|default({}) only -%}
+      {%- block categories -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/tag-list.html.twig' with {list: _context|merge({singleLine: true})} only -%}
+        {%- endif -%}
+
+      {%- endblock categories -%}
+    {%- endwith -%}
+
     {%- with contentTitle only -%}
 
       {%- block title -%}

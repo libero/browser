@@ -1,0 +1,7 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
+
+<p {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+
+  {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} -%}
+
+</p>
