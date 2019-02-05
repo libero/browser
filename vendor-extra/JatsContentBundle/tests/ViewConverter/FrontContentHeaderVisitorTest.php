@@ -7,26 +7,21 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor;
-use Libero\ViewsBundle\Views\CallbackViewConverter;
 use Libero\ViewsBundle\Views\View;
-use LogicException;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
 final class FrontContentHeaderVisitorTest extends TestCase
 {
+    use ViewConvertingTestCase;
+
     /**
      * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $visitor = new FrontContentHeaderVisitor(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -51,13 +46,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_content_header_template() : void
     {
-        $visitor = new FrontContentHeaderVisitor(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -87,13 +76,7 @@ XML
      */
     public function it_does_nothing_if_there_is_no_title_group() : void
     {
-        $visitor = new FrontContentHeaderVisitor(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
         /** @var Element $element */
@@ -116,13 +99,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_a_content_title_set() : void
     {
-        $visitor = new FrontContentHeaderVisitor(
-            new CallbackViewConverter(
-                function () : View {
-                    throw new LogicException();
-                }
-            )
-        );
+        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -156,24 +133,18 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new FrontContentHeaderVisitor(
-            new CallbackViewConverter(
-                function (Element $object, ?string $template, array $context) : View {
-                    return new View('child', ['object' => $object, 'template' => $template, 'context' => $context]);
-                }
-            )
-        );
+        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<front xmlns="http://jats.nlm.nih.gov">
-    <article-meta>
-        <title-group>
-            <article-title>foo</article-title>
-        </title-group>
-    </article-meta>
-</front>
+<jats:front xmlns:jats="http://jats.nlm.nih.gov">
+    <jats:article-meta>
+        <jats:title-group>
+            <jats:article-title>foo</jats:article-title>
+        </jats:title-group>
+    </jats:article-meta>
+</jats:front>
 XML
         );
         /** @var Element $element */
@@ -182,17 +153,11 @@ XML
         $newContext = ['foo' => 'bar'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
 
-        /** @var Element $articleMeta */
-        $articleMeta = $element->childNodes->item(0);
-
-        /** @var Element $titleGroup */
-        $titleGroup = $articleMeta->childNodes->item(0);
-
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'object' => $titleGroup->childNodes->item(0),
+                    'element' => '/jats:front/jats:article-meta/jats:title-group/jats:article-title',
                     'template' => '@LiberoPatterns/heading.html.twig',
                     'context' => ['foo' => 'bar'],
                 ],
