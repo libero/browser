@@ -7,13 +7,15 @@ namespace Libero\JatsContentBundle\Handler;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Handler\ContentHandler;
+use Libero\ViewsBundle\Views\ConvertsChildren;
+use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use UnexpectedValueException;
 use function array_merge;
 
 final class JatsContentHandler implements ContentHandler
 {
-    private $converter;
+    use ConvertsChildren;
 
     public function __construct(ViewConverter $converter)
     {
@@ -46,11 +48,22 @@ final class JatsContentHandler implements ContentHandler
 
         $contentHeader = $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $context);
 
+        $content = [$contentHeader];
+
+        $body = $xpath->firstOf('jats:body', $article);
+
+        if ($body instanceof Element) {
+            $content[] = new View(
+                '@LiberoPatterns/single-column-grid.html.twig',
+                ['content' => $this->convertChildren($body, $context)]
+            );
+        }
+
         return array_merge(
             $context,
             [
                 'title' => $contentHeader->getArgument('contentTitle')['text'],
-                'content' => [$contentHeader],
+                'content' => $content,
             ]
         );
     }
