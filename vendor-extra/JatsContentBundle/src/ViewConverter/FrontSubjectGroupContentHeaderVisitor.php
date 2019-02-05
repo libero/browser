@@ -29,10 +29,26 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $xpath = $document->xpath();
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        // @fixme - add categories as view argument.
-        $categories = $xpath->evaluate('jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type = "heading"]/jats:subject', $object);
+        // @todo - add support for other ways of expressing a subject group in JATS.
+        $groups = $xpath->evaluate('jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type = "heading"]/jats:subject', $object);
 
-        return $view;
+        if (!$groups->count()) {
+            return $view;
+        }
+
+        $items = [];
+        foreach ($groups as $group) {
+            $items[] = [
+                'content' => [
+                    // @todo - needs to support inline HTML.
+                    'text' => (string) $group,
+                ],
+            ];
+        }
+
+        return $view->withArgument('categories', [
+            'items' => $items,
+        ]);
     }
 
     protected function expectedTemplate() : string
