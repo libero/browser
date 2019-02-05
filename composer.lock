@@ -510,7 +510,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "8c71f6f5742f1ed31b40b8a8c7def309b899cb59",
+                "reference": "f929ea612ab7856b64ccd30d0dece4544f3cf615",
                 "shasum": null
             },
             "require": {
@@ -519,6 +519,7 @@
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
+                "symfony/contracts": "^1.0",
                 "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
