@@ -31,7 +31,7 @@ final class JatsContentHandlerTest extends TestCase
      * @test
      * @dataProvider pageProvider
      */
-    public function it_returns_the_title(string $xml, array $context, array $expected) : void
+    public function it_creates_the_page(string $xml, array $context, array $expected) : void
     {
         $handler = new JatsContentHandler($this->createDumpingConverter());
 
@@ -47,7 +47,7 @@ final class JatsContentHandlerTest extends TestCase
 
     public function pageProvider() : iterable
     {
-        yield 'en request' => [
+        yield 'minimum en request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -90,7 +90,83 @@ XML
             ],
         ];
 
-        yield 'fr request' => [
+        yield 'complete en request' => [
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+        <jats:body>
+            <jats:p>Paragraph 1</jats:p>
+            <jats:p>Paragraph 2</jats:p>
+        </jats:body>
+    </jats:article>
+</libero:item>
+XML
+            ,
+            [
+                'lang' => 'en',
+                'dir' => 'ltr',
+            ],
+            [
+                'lang' => 'en',
+                'dir' => 'ltr',
+                'title' => null,
+                'content' => [
+                    [
+                        'template' => null,
+                        'arguments' => [
+                            'node' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
+                            'context' => [
+                                'lang' => 'en',
+                                'dir' => 'ltr',
+                            ],
+                        ],
+                    ],
+                    [
+                        'template' => '@LiberoPatterns/single-column-grid.html.twig',
+                        'arguments' => [
+                            'content' => [
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[1]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'en',
+                                            'dir' => 'ltr',
+                                        ],
+                                    ],
+                                ],
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[2]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'en',
+                                            'dir' => 'ltr',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        yield 'minimum fr request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -133,7 +209,83 @@ XML
             ],
         ];
 
-        yield 'ar-EG request' => [
+        yield 'complete fr request' => [
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+        <jats:body>
+            <jats:p>Paragraph 1</jats:p>
+            <jats:p>Paragraph 2</jats:p>
+        </jats:body>
+    </jats:article>
+</libero:item>
+XML
+            ,
+            [
+                'lang' => 'fr',
+                'dir' => 'ltr',
+            ],
+            [
+                'lang' => 'fr',
+                'dir' => 'ltr',
+                'title' => null,
+                'content' => [
+                    [
+                        'template' => null,
+                        'arguments' => [
+                            'node' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
+                            'context' => [
+                                'lang' => 'fr',
+                                'dir' => 'ltr',
+                            ],
+                        ],
+                    ],
+                    [
+                        'template' => '@LiberoPatterns/single-column-grid.html.twig',
+                        'arguments' => [
+                            'content' => [
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[1]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'fr',
+                                            'dir' => 'ltr',
+                                        ],
+                                    ],
+                                ],
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[2]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'fr',
+                                            'dir' => 'ltr',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        yield 'minimum ar-EG request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -169,6 +321,82 @@ XML
                             'context' => [
                                 'lang' => 'ar-EG',
                                 'dir' => 'rtl',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        yield 'complete ar-EG request' => [
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:title-group>
+                    <jats:article-title>Title</jats:article-title>
+                </jats:title-group>
+            </jats:article-meta>
+        </jats:front>
+        <jats:body>
+            <jats:p>Paragraph 1</jats:p>
+            <jats:p>Paragraph 2</jats:p>
+        </jats:body>
+    </jats:article>
+</libero:item>
+XML
+            ,
+            [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
+            ],
+            [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
+                'title' => null,
+                'content' => [
+                    [
+                        'template' => null,
+                        'arguments' => [
+                            'node' => '/libero:item/jats:article/jats:front',
+                            'template' => '@LiberoPatterns/content-header.html.twig',
+                            'context' => [
+                                'lang' => 'ar-EG',
+                                'dir' => 'rtl',
+                            ],
+                        ],
+                    ],
+                    [
+                        'template' => '@LiberoPatterns/single-column-grid.html.twig',
+                        'arguments' => [
+                            'content' => [
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[1]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'ar-EG',
+                                            'dir' => 'rtl',
+                                        ],
+                                    ],
+                                ],
+                                [
+                                    'template' => null,
+                                    'arguments' => [
+                                        'node' => '/libero:item/jats:article/jats:body/jats:p[2]',
+                                        'template' => null,
+                                        'context' => [
+                                            'lang' => 'ar-EG',
+                                            'dir' => 'rtl',
+                                        ],
+                                    ],
+                                ],
                             ],
                         ],
                     ],
