@@ -65,6 +65,7 @@ XML
                 'context' => [
                     'lang' => 'en',
                     'dir' => 'ltr',
+                    'service' => 'service',
                 ],
                 'element' => '/libero:item',
             ],
@@ -79,6 +80,7 @@ XML
                 'context' => [
                     'lang' => 'fr',
                     'dir' => 'ltr',
+                    'service' => 'service',
                 ],
                 'element' => '/libero:item',
             ],
@@ -93,6 +95,7 @@ XML
                 'context' => [
                     'lang' => 'ar-EG',
                     'dir' => 'rtl',
+                    'service' => 'service',
                 ],
                 'element' => '/libero:item',
             ],

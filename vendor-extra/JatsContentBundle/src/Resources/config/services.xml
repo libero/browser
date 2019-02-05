@@ -20,6 +20,31 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\TitleHeadingVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\TitleHeadingVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\LinkVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\LinkVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter" priority="-10"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor"
             class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>

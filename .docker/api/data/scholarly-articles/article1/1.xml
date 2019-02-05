@@ -18,6 +18,19 @@
                     <jats:article-title>Article 1</jats:article-title>
                 </jats:title-group>
 
+                <jats:kwd-group kwd-group-type="author-keywords">
+                    <jats:kwd>XML</jats:kwd>
+                    <jats:kwd>Housestyle</jats:kwd>
+                    <jats:kwd>eLife</jats:kwd>
+                    <jats:kwd><jats:italic>formatting</jats:italic></jats:kwd>
+                </jats:kwd-group>
+
+                <jats:kwd-group kwd-group-type="research-organism">
+                    <jats:title>Research organism</jats:title>
+                    <jats:kwd>Human</jats:kwd>
+                    <jats:kwd>Machine</jats:kwd>
+                </jats:kwd-group>
+
             </jats:article-meta>
 
         </jats:front>

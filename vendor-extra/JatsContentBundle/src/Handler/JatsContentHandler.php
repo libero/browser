@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\Handler;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Handler\ContentHandler;
+use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use UnexpectedValueException;
 use function array_merge;
@@ -46,11 +47,21 @@ final class JatsContentHandler implements ContentHandler
 
         $contentHeader = $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $context);
 
+        $content = [$contentHeader];
+
+        $tags = $this->converter->convert($front, '@LiberoPatterns/item-tags.html.twig', $context);
+        if ($tags->hasArgument('groups')) {
+            $content[] = new View(
+                '@LiberoPatterns/single-column-grid.html.twig',
+                ['content' => [$tags]]
+            );
+        }
+
         return array_merge(
             $context,
             [
                 'title' => $contentHeader->getArgument('contentTitle')['text'],
-                'content' => [$contentHeader],
+                'content' => $content,
             ]
         );
     }

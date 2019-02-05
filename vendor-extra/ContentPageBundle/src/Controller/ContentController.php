@@ -53,6 +53,7 @@ final class ContentController
                     $context = [
                         'lang' => $request->getLocale(),
                         'dir' => text_direction($request->getLocale()),
+                        'service' => $this->service,
                     ];
 
                     return new Response(

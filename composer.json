@@ -21,6 +21,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-mbstring": "*",
+        "ext-intl": "*",
         "csa/guzzle-bundle": "^3.1",
         "libero/content-page-bundle": "^1.0@dev",
         "libero/jats-content-bundle": "^1.0@dev",
@@ -37,6 +38,7 @@
         "symfony/http-kernel": "^4.1",
         "symfony/monolog-bundle": "^3.3",
         "symfony/routing": "^4.1",
+        "symfony/translation": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symfony/yaml": "^4.1",
         "twig/twig": "^2.5"
