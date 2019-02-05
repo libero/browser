@@ -30,7 +30,10 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
         // @todo - add support for other ways of expressing a subject group in JATS.
-        $groups = $xpath->evaluate('jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type = "heading"]/jats:subject', $object);
+        $groups = $xpath->evaluate(implode('/', [
+            'jats:article-meta/jats:article-categories',
+            'jats:subj-group[@subj-group-type = "heading"]/jats:subject',
+        ]), $object);
 
         if (!$groups->count()) {
             return $view;
