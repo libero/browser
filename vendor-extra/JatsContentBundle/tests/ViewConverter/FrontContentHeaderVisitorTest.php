@@ -150,20 +150,20 @@ XML
         /** @var Element $element */
         $element = $xml->documentElement;
 
-        $newContext = ['foo' => 'bar'];
+        $newContext = ['bar' => 'baz'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'contentTitle' => [
-                    'element' => '/jats:front/jats:article-meta/jats:title-group/jats:article-title',
+                    'node' => '/jats:front/jats:article-meta/jats:title-group/jats:article-title',
                     'template' => '@LiberoPatterns/heading.html.twig',
-                    'context' => ['foo' => 'bar'],
+                    'context' => ['bar' => 'baz'],
                 ],
             ],
             $view->getArguments()
         );
-        $this->assertSame(['foo' => 'bar'], $newContext);
+        $this->assertSame(['bar' => 'baz'], $newContext);
     }
 }

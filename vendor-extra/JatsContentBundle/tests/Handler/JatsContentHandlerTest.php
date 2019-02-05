@@ -78,7 +78,7 @@ XML
                     [
                         'template' => null,
                         'arguments' => [
-                            'element' => '/libero:item/jats:article/jats:front',
+                            'node' => '/libero:item/jats:article/jats:front',
                             'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'en',
@@ -121,7 +121,7 @@ XML
                     [
                         'template' => null,
                         'arguments' => [
-                            'element' => '/libero:item/jats:article/jats:front',
+                            'node' => '/libero:item/jats:article/jats:front',
                             'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'fr',
@@ -164,7 +164,7 @@ XML
                     [
                         'template' => null,
                         'arguments' => [
-                            'element' => '/libero:item/jats:article/jats:front',
+                            'node' => '/libero:item/jats:article/jats:front',
                             'template' => '@LiberoPatterns/content-header.html.twig',
                             'context' => [
                                 'lang' => 'ar-EG',
