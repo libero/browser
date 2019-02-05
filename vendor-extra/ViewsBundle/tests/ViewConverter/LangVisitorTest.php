@@ -255,19 +255,19 @@ final class LangVisitorTest extends TestCase
         /** @var Element $element */
         $element = $xml->documentElement;
 
-        $newContext = ['foo' => 'bar'];
+        $newContext = ['baz' => 'qux'];
         $view = $visitor->visit(
             $element,
-            new View('template', ['attributes' => ['foo' => 'bar'], 'foo' => 'bar']),
+            new View('template', ['attributes' => ['foo' => 'bar'], 'baz' => 'qux']),
             $newContext
         );
 
         $this->assertSame(
-            ['attributes' => ['foo' => 'bar', 'lang' => 'en', 'dir' => 'ltr'], 'foo' => 'bar'],
+            ['attributes' => ['foo' => 'bar', 'lang' => 'en', 'dir' => 'ltr'], 'baz' => 'qux'],
             $view->getArguments()
         );
         $this->assertSame(
-            ['foo' => 'bar', 'lang' => 'en', 'dir' => 'ltr'],
+            ['baz' => 'qux', 'lang' => 'en', 'dir' => 'ltr'],
             $newContext
         );
     }

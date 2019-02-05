@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\ContentPageBundle;
 
-use FluentDOM\DOM\Element;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\CallbackViewConverter;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -15,10 +15,10 @@ trait ViewConvertingTestCase
     final protected function createDumpingConverter() : ViewConverter
     {
         return new CallbackViewConverter(
-            function (Element $object, ?string $template, array $context) : View {
+            function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
                 return new View(
                     null,
-                    ['element' => $object->getNodePath(), 'template' => $template, 'context' => $context]
+                    ['node' => $node->getNodePath(), 'template' => $template, 'context' => $context]
                 );
             }
         );
