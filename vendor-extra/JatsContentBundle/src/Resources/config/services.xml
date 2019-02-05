@@ -19,6 +19,11 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\ArticleCategoriesVisitor"
+                 class="Libero\JatsContentBundle\ViewConverter\ArticleCategoriesVisitor">
+            <tag name="libero.view_converter"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor"
             class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
