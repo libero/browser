@@ -67,12 +67,12 @@ final class ViewConverterRegistryTest extends TestCase
 
         $handler->add(
             new CallbackVisitor(
-                function (Element $element, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'foo')->withArgument('foo', 'foo');
                 }
             ),
             new CallbackVisitor(
-                function (Element $element, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'bar')->withArgument('bar', 'bar');
                 }
             )
@@ -80,7 +80,7 @@ final class ViewConverterRegistryTest extends TestCase
 
         $handler->add(
             new CallbackVisitor(
-                function (Element $element, View $view, array &$context = []) : View {
+                function (Element $object, View $view, array &$context = []) : View {
                     return $view->withTemplate($view->getTemplate().'baz')->withArgument('baz', 'baz');
                 }
             )

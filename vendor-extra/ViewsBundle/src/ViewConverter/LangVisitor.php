@@ -13,15 +13,15 @@ use Punic\Misc;
 
 final class LangVisitor implements ViewConverterVisitor
 {
-    public function visit(Element $element, View $view, array &$context = []) : View
+    public function visit(Element $object, View $view, array &$context = []) : View
     {
         if ($view->hasArgument('attributes') && !empty($view->getArgument('attributes')['lang'])) {
             return $view;
         }
 
         /** @var Document $document */
-        $document = $element->ownerDocument;
-        $lang = $document->xpath()->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $element);
+        $document = $object->ownerDocument;
+        $lang = $document->xpath()->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $object);
 
         if (!$lang instanceof Attribute || $lang->nodeValue === ($context['lang'] ?? null)) {
             return $view;

@@ -18,8 +18,8 @@ final class CallbackVisitor implements ViewConverterVisitor
         $this->callback = $callback;
     }
 
-    public function visit(Element $element, View $view, array &$context = []) : View
+    public function visit(Element $object, View $view, array &$context = []) : View
     {
-        return call_user_func_array($this->callback, [$element, $view, &$context]);
+        return call_user_func_array($this->callback, [$object, $view, &$context]);
     }
 }
