@@ -25,6 +25,12 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
     </services>
 
 </container>
