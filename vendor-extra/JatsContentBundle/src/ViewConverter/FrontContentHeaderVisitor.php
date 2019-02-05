@@ -31,6 +31,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
         $title = $xpath->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
 
+        $categories = $xpath->firstOf('jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type = "heading"]/jats:subject/ancestor::jats:article-categories', $object);
+
+
         if (!$title instanceof Element) {
             return $view;
         }
@@ -38,6 +41,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         return $view->withArgument(
             'contentTitle',
             $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+        )->withArgument(
+            'categories',
+            $this->converter->convert($categories, '@LiberoPatterns/tag-list.html.twig', $context)->getArguments()
         );
     }
 
