@@ -35,24 +35,10 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        $view = $view->withArgument(
+        return $view->withArgument(
             'contentTitle',
             $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
         );
-
-        $categories = [];
-        foreach ($xpath->evaluate('jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type = "heading"]/jats:subject', $object) as $category) {
-            $categories['items'][] = ['content' => ['text' => $category]];
-        }
-
-        if (!empty($categories)) {
-            $view = $view->withArgument(
-                'categories',
-                $categories
-            );
-        }
-
-        return $view;
     }
 
     protected function expectedTemplate() : string
