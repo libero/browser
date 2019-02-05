@@ -56,10 +56,10 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
                 'title',
                 [
                     'text' => $this->translator->trans(
-                        translation_key(
-                            'libero.jats.keyword_group.title.%s',
-                            $object->getAttribute('kwd-group-type')
-                        )
+                        translation_key('libero.jats.keyword_group.title.%s', $object->getAttribute('kwd-group-type')),
+                        [],
+                        null,
+                        $context['lang'] ?? null
                     ),
                 ]
             );
