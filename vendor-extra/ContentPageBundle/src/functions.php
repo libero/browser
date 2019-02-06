@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Punic\Exception\InvalidLocale;
 use Punic\Misc;
 use function array_map;
-use function is_string;
 use function sprintf;
 use function str_replace;
 use function strtolower;
@@ -27,16 +26,13 @@ function text_direction(string $locale) : string
 
 function translation_key(string $text, ...$arguments) : string
 {
-    $arguments = array_map(
-        function ($argument) {
-            if (!is_string($argument)) {
-                return $argument;
-            }
+    return sprintf($text, ...array_map('Libero\ContentPageBundle\normalize_translation_key_part', $arguments));
+}
 
-            return strtolower(str_replace('-', '_', $argument));
-        },
-        $arguments
-    );
-
-    return sprintf($text, ...$arguments);
+/**
+ * @internal
+ */
+function normalize_translation_key_part($part) : string
+{
+    return strtolower(str_replace('-', '_', (string) $part));
 }
