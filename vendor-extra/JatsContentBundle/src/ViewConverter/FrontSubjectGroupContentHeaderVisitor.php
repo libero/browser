@@ -36,7 +36,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
             'jats:subj-group[@subj-group-type = "heading"]/jats:subject',
         ]), $object);
 
-        if (!$groups->count()) {
+        if ($groups instanceof DOMNodeList && $groups->count() === 0) {
             return $view;
         }
 
