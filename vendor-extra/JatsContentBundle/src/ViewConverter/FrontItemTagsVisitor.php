@@ -7,19 +7,18 @@ namespace Libero\JatsContentBundle\ViewConverter;
 use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use function array_map;
 use function count;
-use function iterator_to_array;
 
 final class FrontItemTagsVisitor implements ViewConverterVisitor
 {
+    use ConvertsLists;
     use SimplifiedVisitor;
-
-    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -43,12 +42,10 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         return $view->withArgument(
             'groups',
             array_map(
-                function (Element $keywordGroup) use ($context) {
-                    return $this->converter
-                        ->convert($keywordGroup, '@LiberoPatterns/tag-list.html.twig', $context)
-                        ->getArguments();
+                function (View $link) : array {
+                    return $link->getArguments();
                 },
-                iterator_to_array($keywordGroups)
+                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context)
             )
         );
     }

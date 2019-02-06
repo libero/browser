@@ -7,22 +7,27 @@ namespace Libero\JatsContentBundle\ViewConverter;
 use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
+use Libero\ViewsBundle\Views\TranslatingVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
 use function count;
-use function iterator_to_array;
-use function Libero\ContentPageBundle\translation_key;
 
 final class KeywordGroupTagListVisitor implements ViewConverterVisitor
 {
-    use SimplifiedVisitor;
+    private const DEFAULT_TRANSLATION_KEY = 'libero.jats.keyword_group.title.default';
+    private const TRANSLATION_KEYS = [
+        'author-keywords' => 'libero.jats.keyword_group.title.author_keywords',
+        'research-organism' => 'libero.jats.keyword_group.title.research_organism',
+    ];
 
-    private $converter;
-    private $translator;
+    use ConvertsLists;
+    use SimplifiedVisitor;
+    use TranslatingVisitor;
 
     public function __construct(ViewConverter $converter, TranslatorInterface $translator)
     {
@@ -47,41 +52,24 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         }
 
         if ($title instanceof Element) {
-            $view = $view->withArgument(
-                'title',
-                $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
-            );
+            $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments();
         } else {
-            $view = $view->withArgument(
-                'title',
+            $title = ['text' => $this->translate($this->translationKey($object), $context)];
+        }
+
+        return $view
+            ->withArgument('title', $title)
+            ->withArgument(
+                'list',
                 [
-                    'text' => $this->translator->trans(
-                        translation_key('libero.jats.keyword_group.title.%s', $object->getAttribute('kwd-group-type')),
-                        [],
-                        null,
-                        $context['lang'] ?? null
+                    'items' => array_map(
+                        function (View $link) : array {
+                            return ['content' => $link->getArguments()];
+                        },
+                        $this->convertList($keywords, '@LiberoPatterns/link.html.twig', $context)
                     ),
                 ]
             );
-        }
-
-        return $view->withArgument(
-            'list',
-            [
-                'items' => array_map(
-                    function (Element $keyword) use ($context) {
-                        return [
-                            'content' => $this->converter->convert(
-                                $keyword,
-                                '@LiberoPatterns/link.html.twig',
-                                $context
-                            )->getArguments(),
-                        ];
-                    },
-                    iterator_to_array($keywords)
-                ),
-            ]
-        );
     }
 
     protected function expectedTemplate() : string
@@ -97,5 +85,10 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
     protected function unexpectedArguments() : array
     {
         return ['list'];
+    }
+
+    private function translationKey(Element $element) : string
+    {
+        return self::TRANSLATION_KEYS[$element->getAttribute('kwd-group-type')] ?? self::DEFAULT_TRANSLATION_KEY;
     }
 }
