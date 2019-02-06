@@ -12,7 +12,6 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
-use function array_filter;
 use function array_map;
 use function count;
 
@@ -34,7 +33,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
         /** @var DOMNodeList|Element[] $keywordGroups */
-        $keywordGroups = $xpath->evaluate('jats:article-meta/jats:kwd-group', $object);
+        $keywordGroups = $xpath->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
 
         if (0 === count($keywordGroups)) {
             return $view;
@@ -46,12 +45,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
                 function (View $tagList) : array {
                     return $tagList->getArguments();
                 },
-                array_filter(
-                    $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context),
-                    function (View $tagList) : bool {
-                        return $tagList->hasArgument('list');
-                    }
-                )
+                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context)
             )
         );
     }

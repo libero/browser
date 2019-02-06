@@ -14,14 +14,8 @@
             <tag name="libero.content_page.handler" alias="jats"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor">
-            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
-        </service>
-
-        <service id="Libero\JatsContentBundle\ViewConverter\TitleHeadingVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\TitleHeadingVisitor">
+        <service id="Libero\JatsContentBundle\ViewConverter\HeadingVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\HeadingVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
