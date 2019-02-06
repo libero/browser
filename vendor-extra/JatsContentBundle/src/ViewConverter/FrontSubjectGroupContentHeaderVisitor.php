@@ -10,6 +10,7 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function implode;
 
 final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisitor
 {
