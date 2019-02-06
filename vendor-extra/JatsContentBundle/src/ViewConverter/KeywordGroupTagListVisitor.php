@@ -19,20 +19,17 @@ use function count;
 
 final class KeywordGroupTagListVisitor implements ViewConverterVisitor
 {
-    private const DEFAULT_TRANSLATION_KEY = 'libero.jats.keyword_group.title.default';
-    private const TRANSLATION_KEYS = [
-        'author-keywords' => 'libero.jats.keyword_group.title.author_keywords',
-        'research-organism' => 'libero.jats.keyword_group.title.research_organism',
-    ];
-
     use ConvertsLists;
     use SimplifiedVisitor;
     use TranslatingVisitor;
 
-    public function __construct(ViewConverter $converter, TranslatorInterface $translator)
+    private $translationKeys;
+
+    public function __construct(ViewConverter $converter, TranslatorInterface $translator, array $translationKeys = [])
     {
         $this->converter = $converter;
         $this->translator = $translator;
+        $this->translationKeys = $translationKeys;
     }
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
@@ -51,10 +48,14 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
             return $view;
         }
 
+        $type = $object->getAttribute('kwd-group-type');
+
         if ($title instanceof Element) {
             $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments();
+        } elseif (!isset($this->translationKeys[$type])) {
+            return $view;
         } else {
-            $title = ['text' => $this->translate($this->translationKey($object), $context)];
+            $title = ['text' => $this->translate($this->translationKeys[$type], $context)];
         }
 
         return $view
@@ -85,10 +86,5 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
     protected function unexpectedArguments() : array
     {
         return ['list'];
-    }
-
-    private function translationKey(Element $element) : string
-    {
-        return self::TRANSLATION_KEYS[$element->getAttribute('kwd-group-type')] ?? self::DEFAULT_TRANSLATION_KEY;
     }
 }

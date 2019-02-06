@@ -12,6 +12,7 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function array_filter;
 use function array_map;
 use function count;
 
@@ -42,10 +43,15 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         return $view->withArgument(
             'groups',
             array_map(
-                function (View $link) : array {
-                    return $link->getArguments();
+                function (View $tagList) : array {
+                    return $tagList->getArguments();
                 },
-                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context)
+                array_filter(
+                    $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context),
+                    function (View $tagList) : bool {
+                        return $tagList->hasArgument('list');
+                    }
+                )
             )
         );
     }

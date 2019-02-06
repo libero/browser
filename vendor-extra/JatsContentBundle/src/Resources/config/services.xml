@@ -42,6 +42,11 @@
             class="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
+            <argument type="collection">
+                <!-- Map of @kwd-group-type values to translation keys -->
+                <argument key="author-keywords">libero.jats.keyword_group.title.author_keywords</argument>
+                <argument key="research-organism">libero.jats.keyword_group.title.research_organism</argument>
+            </argument>
             <tag name="libero.view_converter"/>
         </service>
 

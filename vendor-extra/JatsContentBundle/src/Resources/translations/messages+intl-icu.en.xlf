@@ -8,15 +8,11 @@
 
         <body>
 
-            <trans-unit id="1" resname="libero.jats.keyword_group.title.default">
-                <source>Keywords</source>
-            </trans-unit>
-
-            <trans-unit id="2" resname="libero.jats.keyword_group.title.author_keywords">
+            <trans-unit id="1" resname="libero.jats.keyword_group.title.author_keywords">
                 <source>Author keywords</source>
             </trans-unit>
 
-            <trans-unit id="3" resname="libero.jats.keyword_group.title.research_organism">
+            <trans-unit id="2" resname="libero.jats.keyword_group.title.research_organism">
                 <source>Research organism</source>
             </trans-unit>
 
