@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\ViewConverter;
 use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -15,6 +16,7 @@ use function implode;
 
 final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisitor
 {
+    use ConvertsChildren;
     use SimplifiedVisitor;
 
     private $converter;
@@ -45,8 +47,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         foreach ($groups as $group) {
             $items[] = [
                 'content' => [
-                    // @todo - needs to support inline HTML.
-                    'text' => (string) $group,
+                    'text' => $this->convertChildren($group, $context),
                 ],
             ];
         }
