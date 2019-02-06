@@ -20,8 +20,8 @@
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
-        "ext-mbstring": "*",
         "ext-intl": "*",
+        "ext-mbstring": "*",
         "csa/guzzle-bundle": "^3.1",
         "libero/content-page-bundle": "^1.0@dev",
         "libero/jats-content-bundle": "^1.0@dev",
