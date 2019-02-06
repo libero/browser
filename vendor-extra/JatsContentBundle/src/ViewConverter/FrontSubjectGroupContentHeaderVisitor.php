@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\ViewConverter;
 
+use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
@@ -36,7 +37,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
             'jats:subj-group[@subj-group-type = "heading"]/jats:subject',
         ]), $object);
 
-        if ($groups instanceof DOMNodeList && $groups->count() === 0) {
+        if (!$groups instanceof DOMNodeList || $groups->count() === 0) {
             return $view;
         }
 
