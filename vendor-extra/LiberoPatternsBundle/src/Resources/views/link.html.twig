@@ -1,0 +1,11 @@
+{% spaceless %}
+
+  {%- if attributes|default({}).href is defined -%}
+    <a {%- include '@LiberoPatterns/attributes.html.twig' %}>{%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}</a>
+  {%- elseif attributes|default({})|length -%}
+    <span {%- include '@LiberoPatterns/attributes.html.twig' %}>{%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}</span>
+  {%- else -%}
+    {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+  {%- endif -%}
+
+{% endspaceless %}
