@@ -89,7 +89,7 @@ final class BoldVisitorTest extends TestCase
         $xml = FluentDOM::load(
             <<<XML
 <jats:bold xmlns:jats="http://jats.nlm.nih.gov">
-    foo <jats:italic>bar</jats:italic> baz
+    foo <jats:bold>bar</jats:bold> baz
 </jats:bold>
 XML
         );
@@ -109,7 +109,7 @@ XML
                     ),
                     new View(
                         null,
-                        ['node' => '/jats:bold/jats:italic', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/jats:bold/jats:bold', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
