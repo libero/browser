@@ -93,7 +93,7 @@ final class ArticleTitleHeadingVisitorTest extends TestCase
         $xml = FluentDOM::load(
             <<<XML
 <jats:article-title xmlns:jats="http://jats.nlm.nih.gov">
-    foo <jats:italic>bar</jats:italic> baz
+    foo <jats:italic>bar</jats:italic> baz <jats:bold>bold</jats:bold>
 </jats:article-title>
 XML
         );
@@ -127,6 +127,22 @@ XML
                         null,
                         [
                             'node' => '/jats:article-title/text()[2]',
+                            'template' => null,
+                            'context' => ['qux' => 'quux'],
+                        ]
+                    ),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:article-title/jats:bold',
+                            'template' => null,
+                            'context' => ['qux' => 'quux'],
+                        ]
+                    ),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:article-title/text()[3]',
                             'template' => null,
                             'context' => ['qux' => 'quux'],
                         ]
