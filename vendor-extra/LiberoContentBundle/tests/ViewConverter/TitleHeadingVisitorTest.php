@@ -93,7 +93,7 @@ final class TitleHeadingVisitorTest extends TestCase
         $xml = FluentDOM::load(
             <<<XML
 <libero:title xmlns:libero="http://libero.pub"> 
-    foo <libero:i>bar</libero:i> baz
+    foo <libero:italic>bar</libero:italic> baz
 </libero:title>
 XML
         );
@@ -113,7 +113,7 @@ XML
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:title/libero:i', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:title/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,

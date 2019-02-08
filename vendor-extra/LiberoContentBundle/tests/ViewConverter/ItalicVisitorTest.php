@@ -37,8 +37,8 @@ final class ItalicVisitorTest extends TestCase
 
     public function nodeProvider() : iterable
     {
-        yield 'different namespace' => ['<i xmlns="http://example.com">foo</i>'];
-        yield 'different element' => ['<b xmlns="http://libero.pub">foo</b>'];
+        yield 'different namespace' => ['<italic xmlns="http://example.com">foo</italic>'];
+        yield 'different element' => ['<bold xmlns="http://libero.pub">foo</bold>'];
     }
 
     /**
@@ -67,7 +67,7 @@ final class ItalicVisitorTest extends TestCase
     {
         $visitor = new ItalicVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
+        $xml = FluentDOM::load('<italic xmlns="http://libero.pub">foo</italic>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -88,9 +88,9 @@ final class ItalicVisitorTest extends TestCase
 
         $xml = FluentDOM::load(
             <<<XML
-<libero:i xmlns:libero="http://libero.pub">
-    foo <libero:b>bar</libero:b> baz
-</libero:i>
+<libero:italic xmlns:libero="http://libero.pub">
+    foo <libero:bold>bar</libero:bold> baz
+</libero:italic>
 XML
         );
         /** @var Element $element */
@@ -105,15 +105,15 @@ XML
                 'text' => [
                     new View(
                         null,
-                        ['node' => '/libero:i/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:italic/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:i/libero:b', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:italic/libero:bold', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:i/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:italic/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],
             ],
