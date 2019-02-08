@@ -35,7 +35,7 @@ final class ItalicVisitor implements ViewConverterVisitor
 
     protected function expectedElement() : string
     {
-        return '{http://libero.pub}i';
+        return '{http://libero.pub}italic';
     }
 
     protected function unexpectedArguments() : array
