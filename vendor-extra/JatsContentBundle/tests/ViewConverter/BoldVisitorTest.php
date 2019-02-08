@@ -109,7 +109,7 @@ XML
                     ),
                     new View(
                         null,
-                        ['node' => '/jats:bold/jats:bold', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/jats:bold/jats:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
