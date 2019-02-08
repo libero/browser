@@ -35,7 +35,7 @@ final class BoldVisitor implements ViewConverterVisitor
 
     protected function expectedElement() : string
     {
-        return '{http://libero.pub}b';
+        return '{http://libero.pub}bold';
     }
 
     protected function unexpectedArguments() : array

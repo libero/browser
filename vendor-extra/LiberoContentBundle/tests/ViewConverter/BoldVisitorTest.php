@@ -37,8 +37,8 @@ final class BoldVisitorTest extends TestCase
 
     public function nodeProvider() : iterable
     {
-        yield 'different namespace' => ['<b xmlns="http://example.com">foo</b>'];
-        yield 'different element' => ['<i xmlns="http://libero.pub">foo</i>'];
+        yield 'different namespace' => ['<bold xmlns="http://example.com">foo</bold>'];
+        yield 'different element' => ['<italic xmlns="http://libero.pub">foo</italic>'];
     }
 
     /**
@@ -48,7 +48,7 @@ final class BoldVisitorTest extends TestCase
     {
         $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<b xmlns="http://libero.pub">foo</b>');
+        $xml = FluentDOM::load('<bold xmlns="http://libero.pub">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -67,7 +67,7 @@ final class BoldVisitorTest extends TestCase
     {
         $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<b xmlns="http://libero.pub">foo</b>');
+        $xml = FluentDOM::load('<bold xmlns="http://libero.pub">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -88,9 +88,9 @@ final class BoldVisitorTest extends TestCase
 
         $xml = FluentDOM::load(
             <<<XML
-<libero:b xmlns:libero="http://libero.pub">
-    foo <libero:i>bar</libero:i> baz
-</libero:b>
+<libero:bold xmlns:libero="http://libero.pub">
+    foo <libero:italic>bar</libero:italic> baz
+</libero:bold>
 XML
         );
         /** @var Element $element */
@@ -105,15 +105,15 @@ XML
                 'text' => [
                     new View(
                         null,
-                        ['node' => '/libero:b/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:b/libero:i', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:b/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],
             ],
