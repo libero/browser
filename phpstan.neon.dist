@@ -1,5 +1,6 @@
 parameters:
     ignoreErrors:
+        - '~^Access to an undefined property FluentDOM\\DOM\\Xpath::\$registerNodeNamespaces\.$~'
         - '~^Call to an undefined method FluentDOM\\DOM\\Node\\.+?::getNodePath\(\)\.$~'
         - '~^Cannot cast FluentDOM\\DOM\\Node\\.+? to string\.$~'
         - '~^Cannot call method ([a-z]+)Node\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
