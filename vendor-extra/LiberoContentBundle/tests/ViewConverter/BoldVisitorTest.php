@@ -6,12 +6,12 @@ namespace tests\Libero\LiberoContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor;
+use Libero\LiberoContentBundle\ViewConverter\BoldVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
-final class TitleHeadingVisitorTest extends TestCase
+final class BoldVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
 
@@ -19,36 +19,36 @@ final class TitleHeadingVisitorTest extends TestCase
      * @test
      * @dataProvider nodeProvider
      */
-    public function it_does_nothing_if_it_is_not_a_libero_title_element(string $xml) : void
+    public function it_does_nothing_if_it_is_not_a_libero_bold_element(string $xml) : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
         $element = $xml->documentElement->firstChild;
 
         $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View(null), $newContext);
 
-        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
+        $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($newContext);
     }
 
     public function nodeProvider() : iterable
     {
-        yield 'different namespace' => ['<title xmlns="http://example.com">foo</title>'];
-        yield 'different element' => ['<foo xmlns="http://libero.pub">foo</foo>'];
+        yield 'different namespace' => ['<bold xmlns="http://example.com">foo</bold>'];
+        yield 'different element' => ['<italic xmlns="http://libero.pub">foo</italic>'];
     }
 
     /**
      * @test
      */
-    public function it_does_nothing_if_is_not_the_heading_template() : void
+    public function it_does_nothing_if_is_not_the_bold_template() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
+        $xml = FluentDOM::load('<bold xmlns="http://libero.pub">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -65,20 +65,16 @@ final class TitleHeadingVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
+        $xml = FluentDOM::load('<bold xmlns="http://libero.pub">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
         $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
 
-        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
+        $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($newContext);
     }
@@ -86,38 +82,38 @@ final class TitleHeadingVisitorTest extends TestCase
     /**
      * @test
      */
-    public function it_sets_the_text_argument() : void
+    public function it_sets_the_template_and_text_argument() : void
     {
-        $visitor = new TitleHeadingVisitor($this->createDumpingConverter());
+        $visitor = new BoldVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
-<libero:title xmlns:libero="http://libero.pub"> 
+<libero:bold xmlns:libero="http://libero.pub">
     foo <libero:italic>bar</libero:italic> baz
-</libero:title>
+</libero:bold>
 XML
         );
         /** @var Element $element */
         $element = $xml->documentElement;
 
         $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View(null), $newContext);
 
-        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/bold.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
                     new View(
                         null,
-                        ['node' => '/libero:title/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:title/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:title/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/libero:bold/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],
             ],

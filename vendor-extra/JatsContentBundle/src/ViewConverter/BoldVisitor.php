@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\LiberoContentBundle\ViewConverter;
+namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
@@ -11,12 +11,10 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class ItalicVisitor implements ViewConverterVisitor
+final class BoldVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
     use SimplifiedChildVisitor;
-
-    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -30,12 +28,12 @@ final class ItalicVisitor implements ViewConverterVisitor
 
     protected function possibleTemplate() : string
     {
-        return '@LiberoPatterns/italic.html.twig';
+        return '@LiberoPatterns/bold.html.twig';
     }
 
     protected function expectedElement() : string
     {
-        return '{http://libero.pub}italic';
+        return '{http://jats.nlm.nih.gov}bold';
     }
 
     protected function unexpectedArguments() : array

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\LiberoContentBundle\ViewConverter;
+namespace tests\Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\LiberoContentBundle\ViewConverter\ItalicVisitor;
+use Libero\JatsContentBundle\ViewConverter\BoldVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
-final class ItalicVisitorTest extends TestCase
+final class BoldVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
 
@@ -19,9 +19,9 @@ final class ItalicVisitorTest extends TestCase
      * @test
      * @dataProvider nodeProvider
      */
-    public function it_does_nothing_if_it_is_not_a_libero_italic_element(string $xml) : void
+    public function it_does_nothing_if_it_is_not_a_jats_bold_element(string $xml) : void
     {
-        $visitor = new ItalicVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -37,18 +37,18 @@ final class ItalicVisitorTest extends TestCase
 
     public function nodeProvider() : iterable
     {
-        yield 'different namespace' => ['<italic xmlns="http://example.com">foo</italic>'];
-        yield 'different element' => ['<bold xmlns="http://libero.pub">foo</bold>'];
+        yield 'different namespace' => ['<bold xmlns="http://example.com">foo</bold>'];
+        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov">foo</italic>'];
     }
 
     /**
      * @test
      */
-    public function it_does_nothing_if_is_not_the_italic_template() : void
+    public function it_does_nothing_if_is_not_the_bold_template() : void
     {
-        $visitor = new ItalicVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<i xmlns="http://libero.pub">foo</i>');
+        $xml = FluentDOM::load('<bold xmlns="http://jats.nlm.nih.gov">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -65,9 +65,9 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new ItalicVisitor($this->createFailingConverter());
+        $visitor = new BoldVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<italic xmlns="http://libero.pub">foo</italic>');
+        $xml = FluentDOM::load('<bold xmlns="http://jats.nlm.nih.gov">foo</bold>');
         /** @var Element $element */
         $element = $xml->documentElement;
 
@@ -84,13 +84,13 @@ final class ItalicVisitorTest extends TestCase
      */
     public function it_sets_the_template_and_text_argument() : void
     {
-        $visitor = new ItalicVisitor($this->createDumpingConverter());
+        $visitor = new BoldVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
-<libero:italic xmlns:libero="http://libero.pub">
-    foo <libero:bold>bar</libero:bold> baz
-</libero:italic>
+<jats:bold xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:bold>
 XML
         );
         /** @var Element $element */
@@ -99,21 +99,21 @@ XML
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View(null), $newContext);
 
-        $this->assertSame('@LiberoPatterns/italic.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/bold.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
                     new View(
                         null,
-                        ['node' => '/libero:italic/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/jats:bold/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:italic/libero:bold', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/jats:bold/jats:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new View(
                         null,
-                        ['node' => '/libero:italic/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
+                        ['node' => '/jats:bold/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],
             ],
