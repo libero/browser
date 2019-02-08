@@ -19,7 +19,7 @@ final class BoldVisitorTest extends TestCase
      * @test
      * @dataProvider nodeProvider
      */
-    public function it_does_nothing_if_it_is_not_a_jats_italic_element(string $xml) : void
+    public function it_does_nothing_if_it_is_not_a_jats_bold_element(string $xml) : void
     {
         $visitor = new BoldVisitor($this->createFailingConverter());
 
@@ -89,7 +89,7 @@ final class BoldVisitorTest extends TestCase
         $xml = FluentDOM::load(
             <<<XML
 <jats:bold xmlns:jats="http://jats.nlm.nih.gov">
-    foo <jats:bold>bar</jats:bold> baz
+    foo <jats:italic>bar</jats:italic> baz
 </jats:bold>
 XML
         );
