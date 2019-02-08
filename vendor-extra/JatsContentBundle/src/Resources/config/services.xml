@@ -44,6 +44,6 @@
             <tag name="libero.view_converter"/>
         </service>
 
-  </services>
+    </services>
 
 </container>
