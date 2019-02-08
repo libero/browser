@@ -7,7 +7,7 @@ namespace Libero\ContentPageBundle\Event;
 use FluentDOM\DOM\Document;
 use Symfony\Component\EventDispatcher\Event;
 
-class CreateContentPageEvent extends Event
+final class CreateContentPageEvent extends Event
 {
     public const NAME = 'libero.page.content';
 
