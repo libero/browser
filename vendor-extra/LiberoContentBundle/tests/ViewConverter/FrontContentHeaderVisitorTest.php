@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\LiberoContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class FrontContentHeaderVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -23,9 +23,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $element */
-        $element = $xml->documentElement->firstChild;
+        $element = $this->loadXml($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
@@ -48,9 +46,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<front xmlns="http://libero.pub"><title>foo</title></front>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -67,9 +63,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<front xmlns="http://libero.pub">foo</front>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml('<front xmlns="http://libero.pub">foo</front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -90,9 +84,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<front xmlns="http://libero.pub"><title>foo</title></front>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -113,15 +105,13 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadXml(
             <<<XML
 <libero:front xmlns:libero="http://libero.pub">
     <libero:title>foo</libero:title>
 </libero:front>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = ['bar' => 'baz'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);

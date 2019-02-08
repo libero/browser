@@ -4,6 +4,7 @@ parameters:
         - '~^Call to an undefined method FluentDOM\\DOM\\Node\\.+?::getNodePath\(\)\.$~'
         - '~^Cannot cast FluentDOM\\DOM\\Node\\.+? to string\.$~'
         - '~^Cannot call method ([a-z]+)Node\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
+        - '~^Method [^\s]+? should return FluentDOM\\DOM\\Element but returns DOMElement\.$~'
         - '~^Service "csa_guzzle\.mock\.storage" is not registered in the container\.$~'
     level: max
     paths:
