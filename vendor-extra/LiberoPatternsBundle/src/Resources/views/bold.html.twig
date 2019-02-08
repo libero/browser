@@ -1,0 +1,9 @@
+{% spaceless %}
+
+  <b {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+    {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+
+  </b>
+
+{% endspaceless %}

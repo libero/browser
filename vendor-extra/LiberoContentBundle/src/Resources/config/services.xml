@@ -32,6 +32,12 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\LiberoContentBundle\ViewConverter\BoldVisitor"
+            class="Libero\LiberoContentBundle\ViewConverter\BoldVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
     </services>
 
 </container>
