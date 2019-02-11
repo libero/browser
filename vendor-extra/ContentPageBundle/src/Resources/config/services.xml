@@ -8,6 +8,13 @@
 
         <defaults public="false"/>
 
+        <service id="libero.content_page.page.namespace"
+            class="Libero\ContentPageBundle\EventListener\NamespaceListener">
+            <argument>libero</argument>
+            <argument>http://libero.pub</argument>
+            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="1000"/>
+        </service>
+
         <service id="Libero\ContentPageBundle\Routing\ContentPageRouteLoader"
             class="Libero\ContentPageBundle\Routing\ContentPageRouteLoader">
             <argument type="collection"/>
