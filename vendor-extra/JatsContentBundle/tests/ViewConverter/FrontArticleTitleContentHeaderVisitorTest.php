@@ -6,12 +6,12 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM;
 use FluentDOM\DOM\Element;
-use Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor;
+use Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 
-final class FrontContentHeaderVisitorTest extends TestCase
+final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
 
@@ -21,7 +21,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load("<foo>${xml}</foo>");
         /** @var Element $element */
@@ -46,7 +46,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_content_header_template() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -76,7 +76,7 @@ XML
      */
     public function it_does_nothing_if_there_is_no_title_group() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
         /** @var Element $element */
@@ -99,7 +99,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_a_content_title_set() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $xml = FluentDOM::load(
             <<<XML
@@ -133,7 +133,7 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createDumpingConverter());
 
         $xml = FluentDOM::load(
             <<<XML

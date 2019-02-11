@@ -20,8 +20,8 @@
             <tag name="libero.view_converter"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor">
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
