@@ -176,4 +176,33 @@ XML
             ],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function it_does_not_replace_an_existing_title() : void
+    {
+        $listener = new ContentHeaderListener($this->createDumpingConverter());
+
+        $document = FluentDOM::load(
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <libero:front xml:lang="en">
+        <libero:title>New Title</libero:title>
+    </libero:front>
+</libero:item>
+XML
+        );
+        $document->xpath()->registerNodeNamespaces = true;
+
+        $event = new CreateContentPageEvent($document);
+        $event->setTitle('Existing Title');
+        $listener->onCreatePage($event);
+
+        $this->assertSame('Existing Title', $event->getTitle());
+    }
 }

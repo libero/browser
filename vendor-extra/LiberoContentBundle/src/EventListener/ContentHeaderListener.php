@@ -7,6 +7,7 @@ namespace Libero\LiberoContentBundle\EventListener;
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
+use function is_string;
 
 final class ContentHeaderListener
 {
@@ -29,7 +30,7 @@ final class ContentHeaderListener
 
         $title = $xpath->firstOf('libero:title', $front);
 
-        if ($title instanceof Element) {
+        if ($title instanceof Element && !is_string($event->getTitle())) {
             $event->setTitle((string) $title);
         }
 
