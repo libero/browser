@@ -23,7 +23,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml($xml);
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
@@ -46,7 +46,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml('<front xmlns="http://libero.pub"><title>foo</title></front>');
+        $element = $this->loadElement('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -63,7 +63,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml('<front xmlns="http://libero.pub">foo</front>');
+        $element = $this->loadElement('<front xmlns="http://libero.pub">foo</front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -84,7 +84,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml('<front xmlns="http://libero.pub"><title>foo</title></front>');
+        $element = $this->loadElement('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -105,7 +105,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <libero:front xmlns:libero="http://libero.pub">
     <libero:title>foo</libero:title>
