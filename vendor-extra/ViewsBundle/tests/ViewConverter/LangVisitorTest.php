@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\ViewConverter;
 
-use FluentDOM;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\ViewConverter\LangVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class LangVisitorTest extends TestCase
 {
+    use XmlTestCase;
+
     /**
      * @test
      */
@@ -19,9 +21,7 @@ final class LangVisitorTest extends TestCase
     {
         $visitor = new LangVisitor();
 
-        $xml = FluentDOM::load('<foo><bar>baz</bar></foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement->firstChild;
+        $element = $this->loadElement('<foo><bar>baz</bar></foo>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -37,9 +37,7 @@ final class LangVisitorTest extends TestCase
     {
         $visitor = new LangVisitor();
 
-        $xml = FluentDOM::load('<foo xml:lang="fr">bar</foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<foo xml:lang="fr">bar</foo>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template', ['attributes' => ['lang' => 'en']]), $newContext);
@@ -61,9 +59,9 @@ final class LangVisitorTest extends TestCase
     ) : void {
         $visitor = new LangVisitor();
 
-        $xml = FluentDOM::load($xml);
+        $document = $this->loadDocument($xml);
         /** @var Element $element */
-        $element = $xml->xpath()->firstOf($selector);
+        $element = $document->xpath()->firstOf($selector);
 
         $newContext = $context;
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -251,9 +249,7 @@ final class LangVisitorTest extends TestCase
     {
         $visitor = new LangVisitor();
 
-        $xml = FluentDOM::load('<foo xml:lang="en">bar</foo>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<foo xml:lang="en">bar</foo>');
 
         $newContext = ['baz' => 'qux'];
         $view = $visitor->visit(

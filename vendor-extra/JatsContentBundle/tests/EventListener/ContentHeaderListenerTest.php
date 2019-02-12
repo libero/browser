@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use FluentDOM;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\JatsContentBundle\EventListener\ContentHeaderListener;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class ContentHeaderListenerTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -22,7 +23,7 @@ final class ContentHeaderListenerTest extends TestCase
     {
         $listener = new ContentHeaderListener($this->createFailingConverter());
 
-        $document = FluentDOM::load(
+        $document = $this->loadDocument(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -33,7 +34,6 @@ final class ContentHeaderListenerTest extends TestCase
 </libero:item>
 XML
         );
-        $document->xpath()->registerNodeNamespaces = true;
 
         $event = new CreateContentPageEvent($document);
         $originalEvent = clone $event;
@@ -55,10 +55,7 @@ XML
     ) : void {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
-        $document = FluentDOM::load($xml);
-        $document->xpath()->registerNodeNamespaces = true;
-
-        $event = new CreateContentPageEvent($document, $context);
+        $event = new CreateContentPageEvent($this->loadDocument($xml), $context);
         $listener->onCreatePage($event);
 
         $this->assertSame($expectedTitle, $event->getTitle());
@@ -205,7 +202,7 @@ XML
     {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
-        $document = FluentDOM::load(
+        $document = $this->loadDocument(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -224,7 +221,6 @@ XML
 </libero:item>
 XML
         );
-        $document->xpath()->registerNodeNamespaces = true;
 
         $event = new CreateContentPageEvent($document);
         $event->setTitle('Existing Title');
