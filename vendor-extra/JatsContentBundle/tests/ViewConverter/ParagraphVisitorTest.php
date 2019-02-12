@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\ParagraphVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class ParagraphVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -23,9 +23,7 @@ final class ParagraphVisitorTest extends TestCase
     {
         $visitor = new ParagraphVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $element */
-        $element = $xml->documentElement->firstChild;
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View(null), $newContext);
@@ -48,9 +46,7 @@ final class ParagraphVisitorTest extends TestCase
     {
         $visitor = new ParagraphVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -67,9 +63,7 @@ final class ParagraphVisitorTest extends TestCase
     {
         $visitor = new ParagraphVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
@@ -86,15 +80,13 @@ final class ParagraphVisitorTest extends TestCase
     {
         $visitor = new ParagraphVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadElement(
             <<<XML
 <jats:p xmlns:jats="http://jats.nlm.nih.gov">
     foo <jats:bold>bar</jats:bold> baz
 </jats:p>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View(null), $newContext);

@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use FluentDOM;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\JatsContentBundle\EventListener\BodyListener;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 use function array_map;
 
 final class BodyListenerTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -23,7 +24,7 @@ final class BodyListenerTest extends TestCase
     {
         $listener = new BodyListener($this->createFailingConverter());
 
-        $document = FluentDOM::load(
+        $document = $this->loadDocument(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -34,7 +35,6 @@ final class BodyListenerTest extends TestCase
 </libero:item>
 XML
         );
-        $document->xpath()->registerNodeNamespaces = true;
 
         $event = new CreateContentPageEvent($document);
         $originalEvent = clone $event;
@@ -52,8 +52,7 @@ XML
     {
         $listener = new BodyListener($this->createDumpingConverter());
 
-        $document = FluentDOM::load($xml);
-        $document->xpath()->registerNodeNamespaces = true;
+        $document = $this->loadDocument($xml);
 
         $event = new CreateContentPageEvent($document, $context);
         $listener->onCreatePage($event);

@@ -23,7 +23,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml($xml);
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
@@ -46,7 +46,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
@@ -74,7 +74,7 @@ XML
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
+        $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -95,7 +95,7 @@ XML
     {
         $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
@@ -127,7 +127,7 @@ XML
     {
         $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <jats:front xmlns:jats="http://jats.nlm.nih.gov">
