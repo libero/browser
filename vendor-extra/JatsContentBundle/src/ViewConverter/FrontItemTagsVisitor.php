@@ -29,11 +29,9 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
     {
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
         /** @var DOMNodeList|Element[] $keywordGroups */
-        $keywordGroups = $xpath->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
+        $keywordGroups = $document->xpath()->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
 
         if (0 === count($keywordGroups)) {
             return $view;
