@@ -511,10 +511,11 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "52ae2dc3f5ba477660698b59ae3a290d1f9217c2",
+                "reference": "72d2bdc182dad6e2d47ca6aabcbfabe0af73cc83",
                 "shasum": null
             },
             "require": {
+                "ext-dom": "*",
                 "fluentdom/fluentdom": "^7.0",
                 "libero/content-page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
