@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\ViewConverter;
 
-use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function array_map;
+use function count;
 use function implode;
+use function iterator_to_array;
 
 final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisitor
 {
-    use ConvertsChildren;
     use SimplifiedVisitor;
 
     private $converter;
@@ -33,27 +33,22 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $xpath = $document->xpath();
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        // @todo - add support for other ways of expressing a subject group in JATS.
-        $groups = $xpath->evaluate(implode('/', [
+        $subjects = $xpath->evaluate(implode('/', [
             'jats:article-meta/jats:article-categories',
             'jats:subj-group[@subj-group-type = "heading"]/jats:subject',
         ]), $object);
 
-        if (!$groups instanceof DOMNodeList || $groups->count() === 0) {
+        if (0 === count($subjects)) {
             return $view;
         }
 
-        $items = [];
-        foreach ($groups as $group) {
-            $items[] = [
-                'content' => [
-                    'text' => $this->convertChildren($group, $context),
-                ],
-            ];
-        }
-
         return $view->withArgument('categories', [
-            'items' => $items,
+            'items' => array_map(
+                function (string $subject) : array {
+                    return ['content' => ['text' => $subject]];
+                },
+                iterator_to_array($subjects)
+            ),
         ]);
     }
 
