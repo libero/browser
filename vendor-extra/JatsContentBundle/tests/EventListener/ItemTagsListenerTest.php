@@ -66,15 +66,7 @@ XML
             [
                 new View(
                     '@LiberoPatterns/single-column-grid.html.twig',
-                    [
-                    'content' => [
-                        new View(
-                            null,
-                            $expectedItemTags
-                        ),
-                    ],
-
-                    ],
+                    ['content' => [new View(null, $expectedItemTags)]]
                 ),
             ],
             $event->getContent()
