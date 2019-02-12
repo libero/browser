@@ -33,6 +33,13 @@ final class LinkVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/link.html.twig';
     }
 
+    protected function expectedElement() : array
+    {
+        return [
+            '{http://jats.nlm.nih.gov}kwd',
+        ];
+    }
+
     protected function unexpectedArguments() : array
     {
         return ['text'];

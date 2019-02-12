@@ -143,4 +143,21 @@ XML
             ],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_it_is_something_else() : void
+    {
+        $visitor = new HeadingVisitor($this->createFailingConverter());
+
+        $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
+
+        $newContext = [];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+
+        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
+        $this->assertEmpty($view->getArguments());
+        $this->assertEmpty($newContext);
+    }
 }

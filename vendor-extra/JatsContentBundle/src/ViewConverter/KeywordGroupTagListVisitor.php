@@ -76,9 +76,9 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/tag-list.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}kwd-group';
+        return ['{http://jats.nlm.nih.gov}kwd-group'];
     }
 
     protected function unexpectedArguments() : array

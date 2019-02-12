@@ -53,9 +53,9 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/item-tags.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}front';
+        return ['{http://jats.nlm.nih.gov}front'];
     }
 
     protected function unexpectedArguments() : array

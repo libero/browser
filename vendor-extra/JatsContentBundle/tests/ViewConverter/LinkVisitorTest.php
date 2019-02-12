@@ -69,41 +69,6 @@ final class LinkVisitorTest extends TestCase
 
     public function textProvider() : iterable
     {
-        yield 'ext-link' => [
-            <<<XML
-<jats:ext-link xmlns:jats="http://jats.nlm.nih.gov">
-    foo <jats:italic>bar</jats:italic> baz
-</jats:ext-link>
-XML
-            ,
-            [
-                new View(
-                    null,
-                    [
-                        'node' => '/jats:ext-link/text()[1]',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                new View(
-                    null,
-                    [
-                        'node' => '/jats:ext-link/jats:italic',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                new View(
-                    null,
-                    [
-                        'node' => '/jats:ext-link/text()[2]',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
         yield 'kwd' => [
             <<<XML
 <jats:kwd xmlns:jats="http://jats.nlm.nih.gov">
@@ -138,5 +103,22 @@ XML
                 ),
             ],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_it_is_something_else() : void
+    {
+        $visitor = new LinkVisitor($this->createFailingConverter());
+
+        $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
+
+        $newContext = [];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);
+
+        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
+        $this->assertEmpty($view->getArguments());
+        $this->assertEmpty($newContext);
     }
 }

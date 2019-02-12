@@ -44,9 +44,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/content-header.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}front';
+        return ['{http://jats.nlm.nih.gov}front'];
     }
 
     protected function unexpectedArguments() : array

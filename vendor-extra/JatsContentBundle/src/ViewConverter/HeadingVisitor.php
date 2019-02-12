@@ -31,6 +31,14 @@ final class HeadingVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/heading.html.twig';
     }
 
+    protected function expectedElement() : array
+    {
+        return [
+            '{http://jats.nlm.nih.gov}article-title',
+            '{http://jats.nlm.nih.gov}title',
+        ];
+    }
+
     protected function unexpectedArguments() : array
     {
         return ['text'];
