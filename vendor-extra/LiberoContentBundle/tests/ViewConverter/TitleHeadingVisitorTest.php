@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\LiberoContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class TitleHeadingVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -23,9 +23,7 @@ final class TitleHeadingVisitorTest extends TestCase
     {
         $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $element */
-        $element = $xml->documentElement->firstChild;
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
@@ -48,9 +46,7 @@ final class TitleHeadingVisitorTest extends TestCase
     {
         $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<title xmlns="http://libero.pub">foo</title>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -67,9 +63,7 @@ final class TitleHeadingVisitorTest extends TestCase
     {
         $visitor = new TitleHeadingVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<title xmlns="http://libero.pub">foo</title>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<title xmlns="http://libero.pub">foo</title>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -90,15 +84,13 @@ final class TitleHeadingVisitorTest extends TestCase
     {
         $visitor = new TitleHeadingVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadElement(
             <<<XML
 <libero:title xmlns:libero="http://libero.pub"> 
     foo <libero:italic>bar</libero:italic> baz
 </libero:title>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);

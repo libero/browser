@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
-use FluentDOM;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Text;
 use Libero\ViewsBundle\ViewConverter\CallbackVisitor;
@@ -13,9 +12,12 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterRegistry;
 use LogicException;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class ViewConverterRegistryTest extends TestCase
 {
+    use XmlTestCase;
+
     /**
      * @test
      */
@@ -33,9 +35,7 @@ final class ViewConverterRegistryTest extends TestCase
     {
         $handler = new ViewConverterRegistry();
 
-        $xml = FluentDOM::load('<foo>bar <baz>qux</baz> quux</foo>');
-        /** @var Element $node */
-        $node = $xml->documentElement;
+        $node = $this->loadElement('<foo>bar <baz>qux</baz> quux</foo>');
 
         $expected = new View(
             '@LiberoPatterns/text.html.twig',

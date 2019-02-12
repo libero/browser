@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\ViewConverter;
 
+use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
@@ -33,6 +34,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $xpath = $document->xpath();
         $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
+        /** @var DOMNodeList|Element[] $subjects */
         $subjects = $xpath->evaluate(implode('/', [
             'jats:article-meta/jats:article-categories',
             'jats:subj-group[@subj-group-type = "heading"]/jats:subject',

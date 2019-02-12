@@ -21,6 +21,7 @@
         "punic/punic": "^3.3",
         "symfony/config": "^4.1",
         "symfony/dependency-injection": "^4.1",
+        "symfony/event-dispatcher": "^4.1",
         "symfony/http-foundation": "^4.1",
         "symfony/http-kernel": "^4.1",
         "symfony/routing": "^4.1",

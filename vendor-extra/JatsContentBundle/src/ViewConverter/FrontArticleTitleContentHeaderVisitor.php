@@ -26,10 +26,8 @@ final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisito
     {
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        $title = $xpath->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
+        $title = $document->xpath()->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
 
         if (!$title instanceof Element) {
             return $view;

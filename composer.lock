@@ -459,7 +459,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "5d5f5a602452f8f2f39bfa7a90165d87f56b86ec",
+                "reference": "25ce8ce5fa06cc34b3ee6bb25bd8eeefd69ee7ad",
                 "shasum": null
             },
             "require": {
@@ -472,6 +472,7 @@
                 "punic/punic": "^3.3",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-foundation": "^4.1",
                 "symfony/http-kernel": "^4.1",
                 "symfony/routing": "^4.1",
@@ -510,16 +511,18 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "8c71f6f5742f1ed31b40b8a8c7def309b899cb59",
+                "reference": "e4e4c86b305386dc3515f5cf4b1ddf90488af48e",
                 "shasum": null
             },
             "require": {
+                "ext-dom": "*",
                 "fluentdom/fluentdom": "^7.0",
                 "libero/content-page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "require-dev": {
@@ -547,7 +550,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoContentBundle",
-                "reference": "a1872a5839a6cbdb3811dde0ea9c95b10e4420a9",
+                "reference": "b834d04beca9847ee625a5c8016c2c0d4bd17f05",
                 "shasum": null
             },
             "require": {
@@ -557,6 +560,7 @@
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "require-dev": {

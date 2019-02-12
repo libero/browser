@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -23,9 +23,7 @@ final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load("<foo>${xml}</foo>");
-        /** @var Element $element */
-        $element = $xml->documentElement->firstChild;
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
@@ -48,7 +46,7 @@ final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
     {
         $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
@@ -60,8 +58,6 @@ final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 </front>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -78,9 +74,7 @@ XML
     {
         $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -101,7 +95,7 @@ XML
     {
         $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
@@ -113,8 +107,6 @@ XML
 </front>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit(
@@ -135,7 +127,7 @@ XML
     {
         $visitor = new FrontArticleTitleContentHeaderVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <jats:front xmlns:jats="http://jats.nlm.nih.gov">
@@ -147,8 +139,6 @@ XML
 </jats:front>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = ['bar' => 'baz'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
