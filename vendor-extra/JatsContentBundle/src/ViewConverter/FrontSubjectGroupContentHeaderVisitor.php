@@ -7,17 +7,17 @@ namespace Libero\JatsContentBundle\ViewConverter;
 use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use function array_map;
 use function count;
-use function implode;
-use function iterator_to_array;
 
 final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisitor
 {
+    use ConvertsLists;
     use SimplifiedVisitor;
 
     private $converter;
@@ -31,27 +31,28 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
     {
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
         /** @var DOMNodeList|Element[] $subjects */
-        $subjects = $xpath->evaluate(implode('/', [
-            'jats:article-meta/jats:article-categories',
-            'jats:subj-group[@subj-group-type = "heading"]/jats:subject',
-        ]), $object);
+        $subjects = $document->xpath()->evaluate(
+            'jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type="heading"]/jats:subject',
+            $object
+        );
 
         if (0 === count($subjects)) {
             return $view;
         }
 
-        return $view->withArgument('categories', [
-            'items' => array_map(
-                function (string $subject) : array {
-                    return ['content' => ['text' => $subject]];
-                },
-                iterator_to_array($subjects)
-            ),
-        ]);
+        return $view->withArgument(
+            'categories',
+            [
+                'items' => array_map(
+                    function (View $link) : array {
+                        return ['content' => $link->getArguments()];
+                    },
+                    $this->convertList($subjects, '@LiberoPatterns/link.html.twig', $context)
+                ),
+            ]
+        );
     }
 
     protected function expectedTemplate() : string
@@ -59,9 +60,9 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         return '@LiberoPatterns/content-header.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}front';
+        return ['{http://jats.nlm.nih.gov}front'];
     }
 
     protected function unexpectedArguments() : array

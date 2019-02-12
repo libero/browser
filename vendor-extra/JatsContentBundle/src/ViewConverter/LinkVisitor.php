@@ -11,10 +11,12 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
+final class LinkVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
     use SimplifiedVisitor;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -28,12 +30,14 @@ final class ArticleTitleHeadingVisitor implements ViewConverterVisitor
 
     protected function expectedTemplate() : string
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/link.html.twig';
     }
 
     protected function expectedElement() : array
     {
-        return ['{http://jats.nlm.nih.gov}article-title'];
+        return [
+            '{http://jats.nlm.nih.gov}subject',
+        ];
     }
 
     protected function unexpectedArguments() : array
