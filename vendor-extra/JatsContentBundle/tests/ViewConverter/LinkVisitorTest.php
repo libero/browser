@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\LinkVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class LinkVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -22,9 +22,7 @@ final class LinkVisitorTest extends TestCase
     {
         $visitor = new LinkVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -41,9 +39,7 @@ final class LinkVisitorTest extends TestCase
     {
         $visitor = new LinkVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
@@ -61,9 +57,7 @@ final class LinkVisitorTest extends TestCase
     {
         $visitor = new LinkVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load($xml);
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement($xml);
 
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);

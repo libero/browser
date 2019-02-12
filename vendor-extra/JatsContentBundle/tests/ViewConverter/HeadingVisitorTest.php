@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\HeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class HeadingVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -22,9 +22,7 @@ final class HeadingVisitorTest extends TestCase
     {
         $visitor = new HeadingVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -41,9 +39,7 @@ final class HeadingVisitorTest extends TestCase
     {
         $visitor = new HeadingVisitor($this->createFailingConverter());
 
-        $xml = FluentDOM::load('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -65,9 +61,7 @@ final class HeadingVisitorTest extends TestCase
     {
         $visitor = new HeadingVisitor($this->createDumpingConverter());
 
-        $xml = FluentDOM::load($xml);
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadElement($xml);
 
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);

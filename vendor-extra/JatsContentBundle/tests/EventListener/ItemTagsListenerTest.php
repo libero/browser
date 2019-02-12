@@ -25,7 +25,7 @@ final class ItemTagsListenerTest extends TestCase
         $listener = new ItemTagsListener($this->createFailingConverter());
 
         /** @var Document $document */
-        $document = $this->loadXml(
+        $document = $this->loadDocument(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -35,7 +35,7 @@ final class ItemTagsListenerTest extends TestCase
     <jats:article/>
 </libero:item>
 XML
-        )->ownerDocument;
+        );
 
         $event = new CreateContentPageEvent($document);
         $originalEvent = clone $event;
@@ -56,8 +56,7 @@ XML
     ) : void {
         $listener = new ItemTagsListener($this->createDumpingConverter());
 
-        /** @var Document $document */
-        $document = $this->loadXml($xml)->ownerDocument;
+        $document = $this->loadDocument($xml);
 
         $event = new CreateContentPageEvent($document, $context);
         $listener->onCreatePage($event);

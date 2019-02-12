@@ -26,7 +26,7 @@ final class KeywordGroupTagListVisitorTest extends TestCase
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $element = $this->loadXml($xml);
+        $element = $this->loadElement($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);
@@ -49,7 +49,7 @@ final class KeywordGroupTagListVisitorTest extends TestCase
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <kwd-group xmlns="http://jats.nlm.nih.gov">
@@ -75,7 +75,7 @@ XML
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $element = $this->loadXml('<kwd-group xmlns="http://jats.nlm.nih.gov"><x>foo</x></kwd-group>');
+        $element = $this->loadElement('<kwd-group xmlns="http://jats.nlm.nih.gov"><x>foo</x></kwd-group>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -96,7 +96,7 @@ XML
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $element = $this->loadXml(
+        $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <kwd-group xmlns="http://jats.nlm.nih.gov">
@@ -141,7 +141,7 @@ XML
 
         $visitor = new KeywordGroupTagListVisitor($this->createDumpingConverter(), $translator, $translationKeys);
 
-        $element = $this->loadXml($xml);
+        $element = $this->loadElement($xml);
 
         $newContext = ['lang' => 'es'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);
