@@ -6,13 +6,13 @@ namespace Libero\ContentPageBundle\DependencyInjection;
 
 use Libero\ContentPageBundle\Controller\ContentController;
 use Libero\ContentPageBundle\Routing\ContentPageRouteLoader;
-use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use function sprintf;
 
@@ -47,9 +47,8 @@ final class ContentPageExtension extends Extension
         $definition->setArgument(1, $config['service']);
         $definition->setArgument(2, new Reference('twig'));
         $definition->setArgument(3, $config['page_template']);
-        $definition->setArgument(4, new Reference(ViewConverter::class));
+        $definition->setArgument(4, new Reference(EventDispatcherInterface::class));
         $definition->addTag('controller.service_arguments');
-        $definition->addTag('libero.content_page.controller', ['handler' => $config['handler']]);
 
         $container->setDefinition($id, $definition);
     }

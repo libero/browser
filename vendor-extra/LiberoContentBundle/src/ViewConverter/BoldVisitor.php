@@ -11,7 +11,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class ItalicVisitor implements ViewConverterVisitor
+final class BoldVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
     use SimplifiedChildVisitor;
@@ -30,12 +30,12 @@ final class ItalicVisitor implements ViewConverterVisitor
 
     protected function possibleTemplate() : string
     {
-        return '@LiberoPatterns/italic.html.twig';
+        return '@LiberoPatterns/bold.html.twig';
     }
 
     protected function expectedElement() : string
     {
-        return '{http://libero.pub}italic';
+        return '{http://libero.pub}bold';
     }
 
     protected function unexpectedArguments() : array

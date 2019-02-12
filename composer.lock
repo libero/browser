@@ -459,7 +459,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "5d5f5a602452f8f2f39bfa7a90165d87f56b86ec",
+                "reference": "25ce8ce5fa06cc34b3ee6bb25bd8eeefd69ee7ad",
                 "shasum": null
             },
             "require": {
@@ -472,6 +472,7 @@
                 "punic/punic": "^3.3",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-foundation": "^4.1",
                 "symfony/http-kernel": "^4.1",
                 "symfony/routing": "^4.1",
@@ -510,7 +511,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "f929ea612ab7856b64ccd30d0dece4544f3cf615",
+                "reference": "52ae2dc3f5ba477660698b59ae3a290d1f9217c2",
                 "shasum": null
             },
             "require": {
@@ -521,6 +522,7 @@
                 "symfony/config": "^4.1",
                 "symfony/contracts": "^1.0",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "require-dev": {
@@ -548,7 +550,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoContentBundle",
-                "reference": "a1872a5839a6cbdb3811dde0ea9c95b10e4420a9",
+                "reference": "b834d04beca9847ee625a5c8016c2c0d4bd17f05",
                 "shasum": null
             },
             "require": {
@@ -558,6 +560,7 @@
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "require-dev": {

@@ -36,10 +36,8 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
     {
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('jats', 'http://jats.nlm.nih.gov');
 
-        $title = $xpath->firstOf('jats:title', $object);
+        $title = $document->xpath()->firstOf('jats:title', $object);
 
         /** @var DOMNodeList|Element[] $keywords */
         $keywords = $object('jats:kwd');

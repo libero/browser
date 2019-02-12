@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace tests\Libero\ContentPageBundle\Controller;
 
-use FluentDOM\DOM\Element;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use Libero\ContentPageBundle\Controller\ContentController;
-use Libero\ContentPageBundle\Handler\CallbackContentHandler;
+use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use tests\Libero\ContentPageBundle\GuzzleTestCase;
 use tests\Libero\ContentPageBundle\TwigTestCase;
@@ -62,11 +62,14 @@ XML
         yield 'en request' => [
             new Request(),
             [
+                'lang' => 'en',
+                'dir' => 'ltr',
                 'context' => [
                     'lang' => 'en',
                     'dir' => 'ltr',
                 ],
-                'element' => '/libero:item',
+                'title' => 'title',
+                'content' => ['content'],
             ],
         ];
 
@@ -76,11 +79,14 @@ XML
         yield 'fr request' => [
             $frenchRequest,
             [
+                'lang' => 'fr',
+                'dir' => 'ltr',
                 'context' => [
                     'lang' => 'fr',
                     'dir' => 'ltr',
                 ],
-                'element' => '/libero:item',
+                'title' => 'title',
+                'content' => ['content'],
             ],
         ];
 
@@ -90,11 +96,14 @@ XML
         yield 'ar-EG request' => [
             $arabicRequest,
             [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
                 'context' => [
                     'lang' => 'ar-EG',
                     'dir' => 'rtl',
                 ],
-                'element' => '/libero:item',
+                'title' => 'title',
+                'content' => ['content'],
             ],
         ];
     }
@@ -135,16 +144,22 @@ XML
         string $service = 'service',
         string $template = 'template.html.twig'
     ) : ContentController {
+        $dispatcher = new EventDispatcher();
+        $dispatcher->addListener(
+            CreateContentPageEvent::NAME,
+            function (CreateContentPageEvent $event) : void {
+                $event->setContext('context', $event->getContext());
+                $event->setTitle('title');
+                $event->addContent('content');
+            }
+        );
+
         return new ContentController(
             $this->client,
             $service,
             $this->createTwig(),
             $template,
-            new CallbackContentHandler(
-                function (Element $documentElement, array $context) : array {
-                    return ['context' => $context, 'element' => $documentElement->getNodePath()];
-                }
-            )
+            $dispatcher
         );
     }
 }

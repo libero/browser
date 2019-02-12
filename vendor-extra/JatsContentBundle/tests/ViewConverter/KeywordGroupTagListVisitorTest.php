@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use FluentDOM;
-use FluentDOM\DOM\Element;
 use Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -13,10 +11,12 @@ use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
+use tests\Libero\ContentPageBundle\XmlTestCase;
 
 final class KeywordGroupTagListVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
+    use XmlTestCase;
 
     /**
      * @test
@@ -26,9 +26,7 @@ final class KeywordGroupTagListVisitorTest extends TestCase
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $xml = FluentDOM::load($xml);
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml($xml);
 
         $newContext = [];
         $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);
@@ -51,7 +49,7 @@ final class KeywordGroupTagListVisitorTest extends TestCase
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadXml(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <kwd-group xmlns="http://jats.nlm.nih.gov">
@@ -61,8 +59,6 @@ final class KeywordGroupTagListVisitorTest extends TestCase
 </kwd-group>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -79,9 +75,7 @@ XML
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $xml = FluentDOM::load('<kwd-group xmlns="http://jats.nlm.nih.gov"><x>foo</x></kwd-group>');
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml('<kwd-group xmlns="http://jats.nlm.nih.gov"><x>foo</x></kwd-group>');
 
         $newContext = [];
         $view = $visitor->visit(
@@ -102,7 +96,7 @@ XML
     {
         $visitor = new KeywordGroupTagListVisitor($this->createFailingConverter(), new IdentityTranslator());
 
-        $xml = FluentDOM::load(
+        $element = $this->loadXml(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <kwd-group xmlns="http://jats.nlm.nih.gov">
@@ -112,8 +106,6 @@ XML
 </kwd-group>
 XML
         );
-        /** @var Element $element */
-        $element = $xml->documentElement;
 
         $newContext = [];
         $view = $visitor->visit(
@@ -149,9 +141,7 @@ XML
 
         $visitor = new KeywordGroupTagListVisitor($this->createDumpingConverter(), $translator, $translationKeys);
 
-        $xml = FluentDOM::load($xml);
-        /** @var Element $element */
-        $element = $xml->documentElement;
+        $element = $this->loadXml($xml);
 
         $newContext = ['lang' => 'es'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);

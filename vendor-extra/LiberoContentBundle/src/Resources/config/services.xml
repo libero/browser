@@ -8,10 +8,10 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\LiberoContentBundle\Handler\LiberoContentHandler"
-            class="Libero\LiberoContentBundle\Handler\LiberoContentHandler">
+        <service id="Libero\LiberoContentBundle\EventListener\ContentHeaderListener"
+            class="Libero\LiberoContentBundle\EventListener\ContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.content_page.handler" alias="libero"/>
+            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="50"/>
         </service>
 
         <service id="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor"
@@ -28,6 +28,12 @@
 
         <service id="Libero\LiberoContentBundle\ViewConverter\ItalicVisitor"
             class="Libero\LiberoContentBundle\ViewConverter\ItalicVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\LiberoContentBundle\ViewConverter\BoldVisitor"
+            class="Libero\LiberoContentBundle\ViewConverter\BoldVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>

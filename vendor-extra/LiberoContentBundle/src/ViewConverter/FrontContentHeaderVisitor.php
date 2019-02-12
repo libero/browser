@@ -26,10 +26,8 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
     {
         /** @var Document $document */
         $document = $object->ownerDocument;
-        $xpath = $document->xpath();
-        $xpath->registerNamespace('libero', 'http://libero.pub');
 
-        $title = $xpath->firstOf('libero:title[1]', $object);
+        $title = $document->xpath()->firstOf('libero:title[1]', $object);
 
         if (!$title instanceof Element) {
             return $view;
