@@ -1,5 +1,5 @@
 parameters:
-    locale: 'en'
+    env(DEFAULT_LOCALE): 'en'
 
 services:
     _defaults:
