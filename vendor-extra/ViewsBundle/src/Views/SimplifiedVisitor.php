@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
-use function count;
 use function in_array;
 use function sprintf;
 
@@ -17,10 +16,7 @@ trait SimplifiedVisitor
             return $view;
         }
 
-        $expectedElement = $this->expectedElement();
-        $actualElement = sprintf('{%s}%s', $object->namespaceURI, $object->localName);
-
-        if (count($expectedElement) > 0 && !in_array($actualElement, $expectedElement)) {
+        if (!in_array(sprintf('{%s}%s', $object->namespaceURI, $object->localName), $this->expectedElement())) {
             return $view;
         }
 
