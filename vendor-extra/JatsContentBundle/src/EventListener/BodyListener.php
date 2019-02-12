@@ -31,10 +31,12 @@ final class BodyListener
             return;
         }
 
+        $context = ['level' => ($event->getContext()['level'] ?? 1) + 1] + $event->getContext();
+
         $event->addContent(
             new View(
                 '@LiberoPatterns/single-column-grid.html.twig',
-                ['content' => $this->convertChildren($body, $event->getContext())]
+                ['content' => $this->convertChildren($body, $context)]
             )
         );
     }

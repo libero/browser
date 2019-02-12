@@ -27,8 +27,8 @@
             <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="1000"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\ArticleTitleHeadingVisitor">
+        <service id="Libero\JatsContentBundle\ViewConverter\HeadingVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\HeadingVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
@@ -53,6 +53,12 @@
 
         <service id="Libero\JatsContentBundle\ViewConverter\ParagraphVisitor"
             class="Libero\JatsContentBundle\ViewConverter\ParagraphVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\SectionVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\SectionVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="libero.view_converter"/>
         </service>
