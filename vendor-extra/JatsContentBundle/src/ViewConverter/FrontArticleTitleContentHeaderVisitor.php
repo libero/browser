@@ -10,7 +10,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class FrontContentHeaderVisitor implements ViewConverterVisitor
+final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisitor
 {
     use SimplifiedVisitor;
 
@@ -41,9 +41,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/content-header.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}front';
+        return ['{http://jats.nlm.nih.gov}front'];
     }
 
     protected function unexpectedArguments() : array

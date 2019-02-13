@@ -14,6 +14,7 @@ services:
         environment:
             API_URI: http://web:8080
             APP_SECRET:
+            DEFAULT_LOCALE: ${DEFAULT_LOCALE:-en}
         image: libero/browser:${IMAGE_TAG:-master}
         volumes:
             - public-app:/app/public/
