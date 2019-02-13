@@ -6,15 +6,17 @@ namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedVisitor;
+use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class HeadingVisitor implements ViewConverterVisitor
+final class ParagraphVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedVisitor;
+    use SimplifiedChildVisitor;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -23,24 +25,17 @@ final class HeadingVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        if (isset($context['level'])) {
-            $view = $view->withArgument('level', $context['level']);
-        }
-
         return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
-    protected function expectedTemplate() : string
+    protected function possibleTemplate() : string
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/paragraph.html.twig';
     }
 
-    protected function expectedElement() : array
+    protected function expectedElement() : string
     {
-        return [
-            '{http://jats.nlm.nih.gov}article-title',
-            '{http://jats.nlm.nih.gov}title',
-        ];
+        return '{http://jats.nlm.nih.gov}p';
     }
 
     protected function unexpectedArguments() : array
