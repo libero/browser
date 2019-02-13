@@ -7,6 +7,9 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 use Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Translation\IdentityTranslator;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use tests\Libero\ContentPageBundle\XmlTestCase;
 
@@ -21,7 +24,7 @@ final class FrontSubjectGroupContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement($xml);
 
@@ -44,7 +47,7 @@ final class FrontSubjectGroupContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_content_header_template() : void
     {
-        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
@@ -74,7 +77,7 @@ XML
      */
     public function it_does_nothing_if_there_are_no_subject_groups() : void
     {
-        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
@@ -108,7 +111,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_categories_set() : void
     {
-        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
@@ -142,7 +145,16 @@ XML
      */
     public function it_sets_the_categories_argument() : void
     {
-        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createDumpingConverter());
+        $translator = new Translator('en');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource(
+            'array',
+            ['libero.patterns.content_header.categories.label' => 'categories label in es'],
+            'es',
+            'messages'
+        );
+
+        $visitor = new FrontSubjectGroupContentHeaderVisitor($this->createDumpingConverter(), $translator);
 
         $element = $this->loadElement(
             <<<XML
@@ -163,20 +175,23 @@ XML
 XML
         );
 
-        $newContext = ['qux' => 'quux'];
+        $newContext = ['lang' => 'es'];
         $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'categories' => [
+                    'attributes' => [
+                        'aria-label' => 'categories label in es',
+                    ],
                     'items' => [
                         [
                             'content' => [
                                 'node' => '/jats:front/jats:article-meta/jats:article-categories/'
                                     .'jats:subj-group[1]/jats:subject[1]',
                                 'template' => '@LiberoPatterns/link.html.twig',
-                                'context' => ['qux' => 'quux'],
+                                'context' => ['lang' => 'es'],
                             ],
                         ],
                         [
@@ -184,7 +199,7 @@ XML
                                 'node' => '/jats:front/jats:article-meta/jats:article-categories/'
                                     .'jats:subj-group[1]/jats:subject[2]',
                                 'template' => '@LiberoPatterns/link.html.twig',
-                                'context' => ['qux' => 'quux'],
+                                'context' => ['lang' => 'es'],
                             ],
                         ],
                         [
@@ -192,7 +207,7 @@ XML
                                 'node' => '/jats:front/jats:article-meta/jats:article-categories/'
                                     .'jats:subj-group[2]/jats:subject',
                                 'template' => '@LiberoPatterns/link.html.twig',
-                                'context' => ['qux' => 'quux'],
+                                'context' => ['lang' => 'es'],
                             ],
                         ],
                     ],
@@ -200,6 +215,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['qux' => 'quux'], $newContext);
+        $this->assertSame(['lang' => 'es'], $newContext);
     }
 }
