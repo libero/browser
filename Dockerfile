@@ -29,8 +29,16 @@ ENV APP_ENV=prod
 RUN mkdir data var && \
     chown www-data:www-data var
 
-RUN docker-php-ext-install \
-    opcache
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
+    apk add --no-cache \
+        icu-dev \
+    && \
+    docker-php-ext-install \
+        intl \
+        opcache \
+    && \
+    apk del .build-deps && \
+    rm -rf /var/cache/apk/
 
 COPY LICENSE .
 COPY .docker/php.ini ${PHP_INI_DIR}/conf.d/00-app.ini

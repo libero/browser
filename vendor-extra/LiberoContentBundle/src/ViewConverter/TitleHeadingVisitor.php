@@ -31,9 +31,9 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/heading.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://libero.pub}title';
+        return ['{http://libero.pub}title'];
     }
 
     protected function unexpectedArguments() : array

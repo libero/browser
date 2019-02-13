@@ -11,10 +11,12 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class HeadingVisitor implements ViewConverterVisitor
+final class LinkVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
     use SimplifiedVisitor;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -23,23 +25,18 @@ final class HeadingVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        if (isset($context['level'])) {
-            $view = $view->withArgument('level', $context['level']);
-        }
-
         return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
     protected function expectedTemplate() : string
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/link.html.twig';
     }
 
     protected function expectedElement() : array
     {
         return [
-            '{http://jats.nlm.nih.gov}article-title',
-            '{http://jats.nlm.nih.gov}title',
+            '{http://jats.nlm.nih.gov}kwd',
         ];
     }
 

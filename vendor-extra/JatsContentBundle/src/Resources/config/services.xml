@@ -20,6 +20,12 @@
             <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="50"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\ItemTagsListener"
+            class="Libero\JatsContentBundle\EventListener\ItemTagsListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="-10"/>
+        </service>
+
         <service id="libero.jats_content.page.namespace"
             class="Libero\ContentPageBundle\EventListener\NamespaceListener">
             <argument>jats</argument>
@@ -30,6 +36,30 @@
         <service id="Libero\JatsContentBundle\ViewConverter\HeadingVisitor"
             class="Libero\JatsContentBundle\ViewConverter\HeadingVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\LinkVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\LinkVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter" priority="-10"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <argument type="collection">
+                <!-- Map of @kwd-group-type values to translation keys -->
+                <argument key="author-keywords">libero.jats.keyword_group.title.author_keywords</argument>
+                <argument key="research-organism">libero.jats.keyword_group.title.research_organism</argument>
+            </argument>
             <tag name="libero.view_converter"/>
         </service>
 

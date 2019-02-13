@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\ViewConverter;
 
+use DOMNodeList;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function array_map;
+use function count;
 
-final class FrontContentHeaderVisitor implements ViewConverterVisitor
+final class FrontItemTagsVisitor implements ViewConverterVisitor
 {
+    use ConvertsLists;
     use SimplifiedVisitor;
-
-    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -27,21 +30,27 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         /** @var Document $document */
         $document = $object->ownerDocument;
 
-        $title = $document->xpath()->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
+        /** @var DOMNodeList|Element[] $keywordGroups */
+        $keywordGroups = $document->xpath()->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
 
-        if (!$title instanceof Element) {
+        if (0 === count($keywordGroups)) {
             return $view;
         }
 
         return $view->withArgument(
-            'contentTitle',
-            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+            'groups',
+            array_map(
+                function (View $tagList) : array {
+                    return $tagList->getArguments();
+                },
+                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context)
+            )
         );
     }
 
     protected function expectedTemplate() : string
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/item-tags.html.twig';
     }
 
     protected function expectedElement() : array
@@ -51,6 +60,6 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
     protected function unexpectedArguments() : array
     {
-        return ['contentTitle'];
+        return ['groups'];
     }
 }
