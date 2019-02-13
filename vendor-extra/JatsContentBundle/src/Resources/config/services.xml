@@ -45,6 +45,12 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\SupVisitor"
+                 class="Libero\JatsContentBundle\ViewConverter\SupVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
     </services>
 
 </container>
