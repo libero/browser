@@ -1,0 +1,36 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section']) }) -%}
+
+<section {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+
+  {%- with heading|default({}) only -%}
+
+    {%- block heading -%}
+
+      {%- if text is defined -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__heading']) }) -%}
+        {%- set level = level|default(2) -%}
+
+        {%- include '@LiberoPatterns/heading.html.twig' -%}
+
+      {%- endif -%}
+
+    {%- endblock -%}
+
+  {%- endwith -%}
+
+  {%- with {content: content} only -%}
+
+    {%- block content -%}
+
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
+
+      <div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+        {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+      </div>
+
+    {%- endblock -%}
+
+  {%- endwith -%}
+
+</section>

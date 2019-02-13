@@ -6,15 +6,15 @@ namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedVisitor;
+use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class LinkVisitor implements ViewConverterVisitor
+final class ParagraphVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedVisitor;
+    use SimplifiedChildVisitor;
 
     private $converter;
 
@@ -28,17 +28,14 @@ final class LinkVisitor implements ViewConverterVisitor
         return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
-    protected function expectedTemplate() : string
+    protected function possibleTemplate() : string
     {
-        return '@LiberoPatterns/link.html.twig';
+        return '@LiberoPatterns/paragraph.html.twig';
     }
 
-    protected function expectedElement() : array
+    protected function expectedElement() : string
     {
-        return [
-            '{http://jats.nlm.nih.gov}kwd',
-            '{http://jats.nlm.nih.gov}subject',
-        ];
+        return '{http://jats.nlm.nih.gov}p';
     }
 
     protected function unexpectedArguments() : array

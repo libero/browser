@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use Libero\JatsContentBundle\ViewConverter\LinkVisitor;
+use Libero\JatsContentBundle\ViewConverter\HeadingVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use tests\Libero\ContentPageBundle\XmlTestCase;
 
-final class LinkVisitorTest extends TestCase
+final class HeadingVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
     use XmlTestCase;
@@ -18,11 +18,11 @@ final class LinkVisitorTest extends TestCase
     /**
      * @test
      */
-    public function it_does_nothing_if_is_not_the_link_template() : void
+    public function it_does_nothing_if_is_not_the_heading_template() : void
     {
-        $visitor = new LinkVisitor($this->createFailingConverter());
+        $visitor = new HeadingVisitor($this->createFailingConverter());
 
-        $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
+        $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
         $newContext = [];
         $view = $visitor->visit($element, new View('template'), $newContext);
@@ -37,14 +37,18 @@ final class LinkVisitorTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_text_set() : void
     {
-        $visitor = new LinkVisitor($this->createFailingConverter());
+        $visitor = new HeadingVisitor($this->createFailingConverter());
 
-        $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
+        $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
         $newContext = [];
-        $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
+        $view = $visitor->visit(
+            $element,
+            new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']),
+            $newContext
+        );
 
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($newContext);
     }
@@ -53,34 +57,34 @@ final class LinkVisitorTest extends TestCase
      * @test
      * @dataProvider textProvider
      */
-    public function it_sets_the_template_and_text_argument(string $xml, array $expectedText) : void
+    public function it_sets_the_text_argument(string $xml, array $expectedText) : void
     {
-        $visitor = new LinkVisitor($this->createDumpingConverter());
+        $visitor = new HeadingVisitor($this->createDumpingConverter());
 
         $element = $this->loadElement($xml);
 
         $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
-        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(['text' => $expectedText], $view->getArguments());
         $this->assertSame(['qux' => 'quux'], $newContext);
     }
 
     public function textProvider() : iterable
     {
-        yield 'kwd' => [
+        yield 'article-title' => [
             <<<XML
-<jats:kwd xmlns:jats="http://jats.nlm.nih.gov">
+<jats:article-title xmlns:jats="http://jats.nlm.nih.gov">
     foo <jats:italic>bar</jats:italic> baz
-</jats:kwd>
+</jats:article-title>
 XML
             ,
             [
                 new View(
                     null,
                     [
-                        'node' => '/jats:kwd/text()[1]',
+                        'node' => '/jats:article-title/text()[1]',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -88,7 +92,7 @@ XML
                 new View(
                     null,
                     [
-                        'node' => '/jats:kwd/jats:italic',
+                        'node' => '/jats:article-title/jats:italic',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -96,7 +100,7 @@ XML
                 new View(
                     null,
                     [
-                        'node' => '/jats:kwd/text()[2]',
+                        'node' => '/jats:article-title/text()[2]',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -104,18 +108,18 @@ XML
             ],
         ];
 
-        yield 'subject' => [
+        yield 'title' => [
             <<<XML
-<jats:subject xmlns:jats="http://jats.nlm.nih.gov">
+<jats:title xmlns:jats="http://jats.nlm.nih.gov">
     foo <jats:italic>bar</jats:italic> baz
-</jats:subject>
+</jats:title>
 XML
             ,
             [
                 new View(
                     null,
                     [
-                        'node' => '/jats:subject/text()[1]',
+                        'node' => '/jats:title/text()[1]',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -123,7 +127,7 @@ XML
                 new View(
                     null,
                     [
-                        'node' => '/jats:subject/jats:italic',
+                        'node' => '/jats:title/jats:italic',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -131,7 +135,7 @@ XML
                 new View(
                     null,
                     [
-                        'node' => '/jats:subject/text()[2]',
+                        'node' => '/jats:title/text()[2]',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]
@@ -145,14 +149,14 @@ XML
      */
     public function it_does_nothing_if_it_is_something_else() : void
     {
-        $visitor = new LinkVisitor($this->createFailingConverter());
+        $visitor = new HeadingVisitor($this->createFailingConverter());
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
         $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
 
-        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($newContext);
     }
