@@ -37,6 +37,7 @@ final class LinkVisitor implements ViewConverterVisitor
     {
         return [
             '{http://jats.nlm.nih.gov}kwd',
+            '{http://jats.nlm.nih.gov}subject',
         ];
     }
 

@@ -103,6 +103,41 @@ XML
                 ),
             ],
         ];
+
+        yield 'subject' => [
+            <<<XML
+<jats:subject xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:subject>
+XML
+            ,
+            [
+                new View(
+                    null,
+                    [
+                        'node' => '/jats:subject/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new View(
+                    null,
+                    [
+                        'node' => '/jats:subject/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new View(
+                    null,
+                    [
+                        'node' => '/jats:subject/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
     }
 
     /**

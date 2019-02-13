@@ -23,6 +23,12 @@
 
                 </jats:title-group>
 
+                <jats:article-categories>
+                    <jats:subj-group subj-group-type="heading">
+                        <jats:subject>Evolutionary Biology</jats:subject>
+                    </jats:subj-group>
+                </jats:article-categories>
+
                 <jats:kwd-group kwd-group-type="author-keywords">
                     <jats:kwd>XML</jats:kwd>
                     <jats:kwd>Housestyle</jats:kwd>

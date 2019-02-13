@@ -11,7 +11,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class FrontContentHeaderVisitor implements ViewConverterVisitor
+final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisitor
 {
     use SimplifiedVisitor;
 
