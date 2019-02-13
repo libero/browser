@@ -113,7 +113,7 @@ XML
             ],
         ];
 
-        yield 'en request no title' => [
+        yield 'fr request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
@@ -121,91 +121,74 @@ XML
         <libero:id>id</libero:id>
     </libero:meta>
     <jats:article>
-        <jats:front/>
+        <jats:front>
+            <jats:article-meta>
+                <jats:kwd-group kwd-group-type="foo">
+                    <jats:kwd>foo</jats:kwd>
+                </jats:kwd-group>
+                <jats:kwd-group>
+                    <jats:kwd>bar</jats:kwd>
+                </jats:kwd-group>
+                <jats:kwd-group kwd-group-type="baz">
+                    <jats:kwd>baz</jats:kwd>
+                </jats:kwd-group>
+            </jats:article-meta>
+        </jats:front>
     </jats:article>
 </libero:item>
 XML
             ,
             [
-                'lang' => 'en',
+                'lang' => 'fr',
                 'dir' => 'ltr',
             ],
             [
                 'node' => '/libero:item/jats:article/jats:front',
                 'template' => '@LiberoPatterns/item-tags.html.twig',
                 'context' => [
-                    'lang' => 'en',
+                    'lang' => 'fr',
                     'dir' => 'ltr',
                 ],
             ],
         ];
-        /*
-                yield 'fr request' => [
-                    <<<XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-            <libero:meta>
-                <libero:id>id</libero:id>
-            </libero:meta>
-            <jats:article>
-                <jats:front>
-                    <jats:article-meta>
-                        <jats:title-group>
-                            <jats:article-title>Title</jats:article-title>
-                        </jats:title-group>
-                    </jats:article-meta>
-                </jats:front>
-            </jats:article>
-        </libero:item>
-        XML
-                    ,
-                    [
-                        'lang' => 'fr',
-                        'dir' => 'ltr',
-                    ],
-                    'Title',
-                    [
-                        'node' => '/libero:item/jats:article/jats:front',
-                        'template' => '@LiberoPatterns/content-header.html.twig',
-                        'context' => [
-                            'lang' => 'fr',
-                            'dir' => 'ltr',
-                        ],
-                    ],
-                ];
 
-                yield 'ar-EG request' => [
-                    <<<XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-            <libero:meta>
-                <libero:id>id</libero:id>
-            </libero:meta>
-            <jats:article>
-                <jats:front>
-                    <jats:article-meta>
-                        <jats:title-group>
-                            <jats:article-title>Title</jats:article-title>
-                        </jats:title-group>
-                    </jats:article-meta>
-                </jats:front>
-            </jats:article>
-        </libero:item>
-        XML
-                    ,
-                    [
-                        'lang' => 'ar-EG',
-                        'dir' => 'rtl',
-                    ],
-                    'Title',
-                    [
-                        'node' => '/libero:item/jats:article/jats:front',
-                        'template' => '@LiberoPatterns/content-header.html.twig',
-                        'context' => [
-                            'lang' => 'ar-EG',
-                            'dir' => 'rtl',
-                        ],
-                    ],
-                ];*/
+        yield 'ar-EG request' => [
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <jats:article>
+        <jats:front>
+            <jats:article-meta>
+                <jats:kwd-group kwd-group-type="foo">
+                    <jats:kwd>foo</jats:kwd>
+                </jats:kwd-group>
+                <jats:kwd-group>
+                    <jats:kwd>bar</jats:kwd>
+                </jats:kwd-group>
+                <jats:kwd-group kwd-group-type="baz">
+                    <jats:kwd>baz</jats:kwd>
+                </jats:kwd-group>
+            </jats:article-meta>
+        </jats:front>
+    </jats:article>
+</libero:item>
+XML
+            ,
+            [
+                'lang' => 'ar-EG',
+                'dir' => 'rtl',
+            ],
+            [
+                'node' => '/libero:item/jats:article/jats:front',
+                'template' => '@LiberoPatterns/item-tags.html.twig',
+                'context' => [
+                    'lang' => 'ar-EG',
+                    'dir' => 'rtl',
+                ],
+            ],
+        ];
     }
 }
