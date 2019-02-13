@@ -9,14 +9,11 @@ function finish {
     docker rm browser-pattern-library &> /dev/null || true
 }
 
-if [[ $# -eq 0 ]]
-  then
+if [[ $# -eq 0 ]]; then
     commit=origin/master
-elif [[ $# -eq 1 && $1 =~ ^pr-([1-9][0-9])*$ ]]
-  then
+elif [[ $# -eq 1 && $1 =~ ^pr-([1-9][0-9])*$ ]]; then
     pr=${BASH_REMATCH[1]}
-elif [[ $# -eq 1 ]]
-  then
+elif [[ $# -eq 1 ]]; then
     commit=$1
 else
     echo "Usage: $0 COMMITISH"
