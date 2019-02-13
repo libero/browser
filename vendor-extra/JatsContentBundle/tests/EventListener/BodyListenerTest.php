@@ -107,6 +107,7 @@ XML
                     'context' => [
                         'lang' => 'en',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -115,6 +116,7 @@ XML
                     'context' => [
                         'lang' => 'en',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -123,6 +125,7 @@ XML
                     'context' => [
                         'lang' => 'en',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
             ],
@@ -158,6 +161,7 @@ XML
                     'context' => [
                         'lang' => 'fr',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -166,6 +170,7 @@ XML
                     'context' => [
                         'lang' => 'fr',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -174,6 +179,7 @@ XML
                     'context' => [
                         'lang' => 'fr',
                         'dir' => 'ltr',
+                        'level' => 2,
                     ],
                 ],
             ],
@@ -209,6 +215,7 @@ XML
                     'context' => [
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -217,6 +224,7 @@ XML
                     'context' => [
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
+                        'level' => 2,
                     ],
                 ],
                 [
@@ -225,6 +233,7 @@ XML
                     'context' => [
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
+                        'level' => 2,
                     ],
                 ],
             ],
