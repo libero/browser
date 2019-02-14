@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\LiberoContentBundle\ViewConverter;
+namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
@@ -11,7 +11,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class TitleHeadingVisitor implements ViewConverterVisitor
+final class HeadingVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
     use SimplifiedVisitor;
@@ -23,6 +23,10 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
+        if (isset($context['level'])) {
+            $view = $view->withArgument('level', $context['level']);
+        }
+
         return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
@@ -33,7 +37,10 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
 
     protected function expectedElement() : array
     {
-        return ['{http://libero.pub}title'];
+        return [
+            '{http://jats.nlm.nih.gov}article-title',
+            '{http://jats.nlm.nih.gov}title',
+        ];
     }
 
     protected function unexpectedArguments() : array

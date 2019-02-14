@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Libero\LiberoContentBundle\ViewConverter;
+namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedVisitor;
+use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class TitleHeadingVisitor implements ViewConverterVisitor
+final class ParagraphVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedVisitor;
+    use SimplifiedChildVisitor;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -26,14 +28,14 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
         return $view->withArgument('text', $this->convertChildren($object, $context));
     }
 
-    protected function expectedTemplate() : string
+    protected function possibleTemplate() : string
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/paragraph.html.twig';
     }
 
-    protected function expectedElement() : array
+    protected function expectedElement() : string
     {
-        return ['{http://libero.pub}title'];
+        return '{http://jats.nlm.nih.gov}p';
     }
 
     protected function unexpectedArguments() : array
