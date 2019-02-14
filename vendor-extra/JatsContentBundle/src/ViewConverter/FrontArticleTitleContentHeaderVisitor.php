@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\LiberoContentBundle\ViewConverter;
+namespace Libero\JatsContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
@@ -11,7 +11,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 
-final class FrontContentHeaderVisitor implements ViewConverterVisitor
+final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisitor
 {
     use SimplifiedVisitor;
 
@@ -27,7 +27,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         /** @var Document $document */
         $document = $object->ownerDocument;
 
-        $title = $document->xpath()->firstOf('libero:title[1]', $object);
+        $title = $document->xpath()->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
 
         if (!$title instanceof Element) {
             return $view;
@@ -46,7 +46,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
     protected function expectedElement() : array
     {
-        return ['{http://libero.pub}front'];
+        return ['{http://jats.nlm.nih.gov}front'];
     }
 
     protected function unexpectedArguments() : array

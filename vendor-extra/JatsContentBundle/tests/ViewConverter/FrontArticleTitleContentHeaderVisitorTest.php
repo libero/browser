@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
-use Libero\JatsContentBundle\ViewConverter\FrontContentHeaderVisitor;
+use Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
 use tests\Libero\ContentPageBundle\XmlTestCase;
 
-final class FrontContentHeaderVisitorTest extends TestCase
+final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 {
     use ViewConvertingTestCase;
     use XmlTestCase;
@@ -21,7 +21,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $element = $this->loadElement($xml);
 
@@ -44,7 +44,7 @@ final class FrontContentHeaderVisitorTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_content_header_template() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $element = $this->loadElement(
             <<<XML
@@ -72,7 +72,7 @@ XML
      */
     public function it_does_nothing_if_there_is_no_title_group() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
@@ -93,7 +93,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_a_content_title_set() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createFailingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createFailingConverter());
 
         $element = $this->loadElement(
             <<<XML
@@ -125,7 +125,7 @@ XML
      */
     public function it_sets_the_text_argument() : void
     {
-        $visitor = new FrontContentHeaderVisitor($this->createDumpingConverter());
+        $visitor = new FrontArticleTitleContentHeaderVisitor($this->createDumpingConverter());
 
         $element = $this->loadElement(
             <<<XML
