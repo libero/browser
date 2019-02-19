@@ -91,7 +91,7 @@ XML
         $newContext = ['qux' => 'quux'];
         $view = $visitor->visit($element, new View(null), $newContext);
 
-        $this->assertSame('@LiberoPatterns/sup.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/sub.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
