@@ -9,6 +9,21 @@ function finish {
     docker rm browser-pattern-library &> /dev/null || true
 }
 
+if [[ $# -eq 0 ]]; then
+    commit=origin/master
+elif [[ $# -eq 1 && $1 =~ ^pr-([1-9][0-9])*$ ]]; then
+    pr=${BASH_REMATCH[1]}
+elif [[ $# -eq 1 ]]; then
+    commit=$1
+else
+    echo "Usage: $0 COMMITISH"
+    echo "Examples:"
+    echo "master branch: $0"
+    echo "specific commit: $0 fd89896"
+    echo "pull request: $0 pr-50"
+    exit 1
+fi
+
 trap finish EXIT
 
 cd "$(dirname "$0")/.."
@@ -18,9 +33,15 @@ mkdir -p var/pattern-library && cd "$_"
 if ! [[ -d .git ]]; then
     git clone git@github.com:libero/pattern-library.git .
 else
-    git fetch
-    git reset --hard origin/master
     git clean -d --force
+fi
+
+if [[ ${pr+x} ]]; then
+    git fetch origin "+refs/pull/${pr}/merge"
+    git checkout --force --quiet FETCH_HEAD
+else
+    git fetch --all --prune
+    git reset --hard "${commit}"
 fi
 
 docker-compose --file docker-compose.yml --file docker-compose.ci.yml build gulp
