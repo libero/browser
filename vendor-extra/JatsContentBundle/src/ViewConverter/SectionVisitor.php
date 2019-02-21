@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\ViewConverter;
 
 use DOMNodeList;
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\ConvertsChildren;
@@ -32,10 +31,8 @@ final class SectionVisitor implements ViewConverterVisitor
     {
         $context['level'] = $context['level'] ?? 1;
 
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-
-        $heading = $document->xpath()->firstOf('jats:title', $object);
+        $heading = $object->ownerDocument->xpath()
+            ->firstOf('jats:title', $object);
 
         if ($heading instanceof Element) {
             $view = $view->withArgument(

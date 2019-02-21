@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use FluentDOM\DOM\Document;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\JatsContentBundle\EventListener\ItemTagsListener;
 use Libero\ViewsBundle\Views\View;
@@ -24,7 +23,6 @@ final class ItemTagsListenerTest extends TestCase
     {
         $listener = new ItemTagsListener($this->createFailingConverter());
 
-        /** @var Document $document */
         $document = $this->loadDocument(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>

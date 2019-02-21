@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Libero\LiberoContentBundle\ViewConverter;
 
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
@@ -24,10 +23,8 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-
-        $title = $document->xpath()->firstOf('libero:title[1]', $object);
+        $title = $object->ownerDocument->xpath()
+            ->firstOf('libero:title[1]', $object);
 
         if (!$title instanceof Element) {
             return $view;

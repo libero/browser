@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\ViewConverter;
 
 use DOMNodeList;
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
@@ -27,11 +26,9 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-
         /** @var DOMNodeList|Element[] $keywordGroups */
-        $keywordGroups = $document->xpath()->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
+        $keywordGroups = $object->ownerDocument->xpath()
+            ->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
 
         if (0 === count($keywordGroups)) {
             return $view;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\ViewConverter;
 
 use FluentDOM\DOM\Attribute;
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
@@ -19,9 +18,8 @@ final class LangVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-        $lang = $document->xpath()->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $object);
+        $lang = $object->ownerDocument->xpath()
+            ->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $object);
 
         if (!$lang instanceof Attribute || $lang->nodeValue === ($context['lang'] ?? null)) {
             return $view;

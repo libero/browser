@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\ViewConverter;
 
 use DOMNodeList;
-use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedVisitor;
@@ -34,10 +33,8 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view, array &$context = []) : View
     {
-        /** @var Document $document */
-        $document = $object->ownerDocument;
-
-        $title = $document->xpath()->firstOf('jats:title', $object);
+        $title = $object->ownerDocument->xpath()
+            ->firstOf('jats:title', $object);
 
         /** @var DOMNodeList|Element[] $keywords */
         $keywords = $object('jats:kwd');
