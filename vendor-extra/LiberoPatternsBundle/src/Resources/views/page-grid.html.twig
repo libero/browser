@@ -1,0 +1,40 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
+
+{%- if isMain|default(false) -%}
+  {%- set element = 'main' -%}
+  {%- set attributes = attributes|merge({role: 'main' }) -%}
+{%- else -%}
+  {%- set element = 'div' -%}
+{%- endif -%}
+
+<{{ element }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- with {items: items} only -%}
+    {%- block items -%}
+
+      {%- for item in items -%}
+
+        {%- with item only -%}
+          {%- block item -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
+
+            {%- if keylineStart|default(false) -%}
+              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
+            {%- endif -%}
+
+            {%- if keylineEnd|default(false) -%}
+              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
+            {%- endif -%}
+
+            {%- include template|default('@LiberoPatterns/single-column-grid.html.twig') -%}
+
+          {%- endblock item %}
+        {%- endwith -%}
+
+      {%- endfor -%}
+
+    {%- endblock items -%}
+  {%- endwith -%}
+
+</{{ element }}>

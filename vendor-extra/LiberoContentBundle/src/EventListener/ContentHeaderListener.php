@@ -6,6 +6,7 @@ namespace Libero\LiberoContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function is_string;
 
@@ -20,21 +21,31 @@ final class ContentHeaderListener
 
     public function onCreatePage(CreateContentPageEvent $event) : void
     {
-        $xpath = $event->getItem()->xpath();
+        if (is_string($event->getTitle())) {
+            return;
+        }
 
-        $front = $xpath->firstOf('/libero:item/libero:front');
+        $title = $event->getItem()->xpath()
+            ->firstOf('/libero:item/libero:front/libero:title');
+
+        if (!$title instanceof Element) {
+            return;
+        }
+
+        $event->setTitle((string) $title);
+    }
+
+    public function onCreatePageContentHeader(CreateContentPagePartEvent $event) : void
+    {
+        $front = $event->getItem()->xpath()
+            ->firstOf('/libero:item/libero:front');
 
         if (!$front instanceof Element) {
             return;
         }
 
-        $title = $xpath->firstOf('libero:title', $front);
-
-        if ($title instanceof Element && !is_string($event->getTitle())) {
-            $event->setTitle((string) $title);
-        }
-
         $event->addContent(
+            'content',
             $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $event->getContext())
         );
     }

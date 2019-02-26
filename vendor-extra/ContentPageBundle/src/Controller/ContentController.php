@@ -58,7 +58,7 @@ final class ContentController
 
                     $event = new CreateContentPageEvent($document, $context);
                     $this->dispatcher->dispatch($event::NAME, $event);
-
+                //var_dump(json_encode($event->getContent(), JSON_PRETTY_PRINT));die;
                     return new Response(
                         $this->twig->render(
                             $this->template,

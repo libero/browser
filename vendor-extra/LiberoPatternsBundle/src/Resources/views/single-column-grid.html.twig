@@ -1,7 +1,25 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid', 'grid--single-column', 'wrapper']) }) -%}
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-single-column']) }) -%}
 
 <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
-  {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+  {%- with {content: content|default([]), isFull: isFull|default(false)} only -%}
+    {%- block content -%}
+
+      {%- if content|length -%}
+
+        {%- if isFull -%}
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
+        {%- else -%}
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-main']) }) -%}
+        {%- endif -%}
+
+        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock content -%}
+  {%- endwith -%}
 
 </div>

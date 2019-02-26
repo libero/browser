@@ -6,18 +6,23 @@ namespace Libero\ContentPageBundle\Event;
 
 use FluentDOM\DOM\Document;
 use Symfony\Component\EventDispatcher\Event;
+use function array_merge;
 
-final class CreateContentPageEvent extends Event
+final class CreateContentPagePartEvent extends Event
 {
-    public const NAME = 'libero.page.content';
-
     private $content = [];
     private $context;
     private $item;
-    private $title;
+    private $template;
 
-    public function __construct(Document $item, array $context = [])
+    public static function name(string $part) : string
     {
+        return "libero.page.content.${part}";
+    }
+
+    public function __construct(string $template, Document $item, array $context = [])
+    {
+        $this->template = $template;
         $this->item = $item;
         $this->context = $context;
     }
@@ -27,9 +32,9 @@ final class CreateContentPageEvent extends Event
         return $this->content;
     }
 
-    public function addContent(string $template, array $arguments) : void
+    public function addContent(string $where, ...$content) : void
     {
-        $this->content[] = ['template' => $template] + $arguments;
+        $this->content[$where] = array_merge($this->content[$where] ?? [], $content);
     }
 
     public function getContext() : array
@@ -47,13 +52,8 @@ final class CreateContentPageEvent extends Event
         return $this->item;
     }
 
-    public function getTitle() : ?string
+    public function getTemplate() : string
     {
-        return $this->title;
-    }
-
-    public function setTitle(string $title) : void
-    {
-        $this->title = $title;
+        return $this->template;
     }
 }

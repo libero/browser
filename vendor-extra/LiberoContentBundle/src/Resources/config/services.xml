@@ -11,7 +11,8 @@
         <service id="Libero\LiberoContentBundle\EventListener\ContentHeaderListener"
             class="Libero\LiberoContentBundle\EventListener\ContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="50"/>
+            <tag name="kernel.event_listener" event="libero.page.content.content-header" method="onCreatePageContentHeader"/>
+            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage"/>
         </service>
 
         <service id="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor"

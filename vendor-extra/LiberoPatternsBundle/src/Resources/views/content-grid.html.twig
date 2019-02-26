@@ -1,0 +1,61 @@
+{%- set gridBaseName = 'grid-content' -%}
+
+{%- if secondaryContent|default([])|length -%}
+  {%- set gridVariantName = gridBaseName ~ '--has-secondary-content' -%}
+{%- else -%}
+  {%- set gridVariantName = gridBaseName ~ '--no-secondary-content' -%}
+{%- endif -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([gridBaseName, gridVariantName]) }) -%}
+
+<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- with {content: tertiaryContent|default([])} only -%}
+    {%- block tertiaryContent -%}
+
+      {%- if content|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-tertiary-content']) }) -%}
+
+        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock tertiaryContent -%}
+  {%- endwith -%}
+
+  {%- with {content: primaryContent|default([])} only -%}
+    {%- block primaryContent -%}
+
+      {%- if content|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-primary-content']) }) -%}
+
+        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock primaryContent -%}
+  {%- endwith -%}
+
+  {%- with {content: secondaryContent|default([])} only -%}
+    {%- block secondaryContent -%}
+
+      {%- if content|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-secondary-content']) }) -%}
+
+        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock secondaryContent -%}
+  {%- endwith -%}
+
+</div>

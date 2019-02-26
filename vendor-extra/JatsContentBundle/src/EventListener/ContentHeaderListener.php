@@ -6,6 +6,7 @@ namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function is_string;
 
@@ -20,21 +21,31 @@ final class ContentHeaderListener
 
     public function onCreatePage(CreateContentPageEvent $event) : void
     {
-        $xpath = $event->getItem()->xpath();
+        if (is_string($event->getTitle())) {
+            return;
+        }
 
-        $front = $xpath->firstOf('/libero:item/jats:article/jats:front');
+        $title = $event->getItem()->xpath()
+            ->firstOf('/libero:item/jats:article/jats:front/jats:article-meta/jats:title-group/jats:article-title');
+
+        if (!$title instanceof Element) {
+            return;
+        }
+
+        $event->setTitle((string) $title);
+    }
+
+    public function onCreatePageContentHeader(CreateContentPagePartEvent $event) : void
+    {
+        $front = $event->getItem()->xpath()
+            ->firstOf('/libero:item/jats:article/jats:front');
 
         if (!$front instanceof Element) {
             return;
         }
 
-        $title = $xpath->firstOf('jats:article-meta/jats:title-group/jats:article-title', $front);
-
-        if ($title instanceof Element && !is_string($event->getTitle())) {
-            $event->setTitle((string) $title);
-        }
-
         $event->addContent(
+            'content',
             $this->converter->convert($front, '@LiberoPatterns/content-header.html.twig', $event->getContext())
         );
     }

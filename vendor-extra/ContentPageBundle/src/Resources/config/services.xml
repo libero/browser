@@ -15,6 +15,24 @@
             <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="1000"/>
         </service>
 
+        <service id="Libero\ContentPageBundle\EventListener\MainListener"
+            class="Libero\ContentPageBundle\EventListener\MainListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage"/>
+        </service>
+
+        <service id="Libero\ContentPageBundle\EventListener\BodyListener"
+            class="Libero\ContentPageBundle\EventListener\BodyListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.content.main" method="onCreatePagePart"/>
+        </service>
+
+        <service id="Libero\ContentPageBundle\EventListener\ContentHeaderListener"
+            class="Libero\ContentPageBundle\EventListener\ContentHeaderListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.content.main" method="onCreatePagePart" priority="50"/>
+        </service>
+
         <service id="Libero\ContentPageBundle\Routing\ContentPageRouteLoader"
             class="Libero\ContentPageBundle\Routing\ContentPageRouteLoader">
             <argument type="collection"/>

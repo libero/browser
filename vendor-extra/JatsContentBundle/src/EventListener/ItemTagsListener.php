@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
-use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function count;
 
@@ -20,7 +19,7 @@ final class ItemTagsListener
         $this->converter = $converter;
     }
 
-    public function onCreatePage(CreateContentPageEvent $event) : void
+    public function onCreatePageBody(CreateContentPagePartEvent $event) : void
     {
         $front = $event->getItem()->xpath()->firstOf('/libero:item/jats:article/jats:front');
 
@@ -34,6 +33,6 @@ final class ItemTagsListener
             return;
         }
 
-        $event->addContent(new View('@LiberoPatterns/single-column-grid.html.twig', ['content' => [$itemTags]]));
+        $event->addContent('primaryContent', $itemTags);
     }
 }
