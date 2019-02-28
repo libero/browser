@@ -1,0 +1,29 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
+
+<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+  {%- with title|default({}) only -%}
+    {%- block title -%}
+
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__title_text']) }) -%}
+
+      <h{{ level|default(4) }} {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+        {%- with content only -%}
+          {%- block content -%}
+
+            {%- if attributes.href is defined -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__title_text_link']) }) -%}
+            {%- endif -%}
+
+            {%- include '@LiberoPatterns/link.html.twig' -%}
+
+          {%- endblock content -%}
+        {%- endwith -%}
+
+      </h{{ level|default(4) }}>
+
+    {%- endblock title -%}
+  {%- endwith -%}
+
+</div>
