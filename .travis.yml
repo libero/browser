@@ -27,7 +27,7 @@ after_success:
 
 deploy:
     provider: script
-    script: .travis/downstream-environments.sh $TRAVIS_COMMIT
+    script: .scripts/travis/downstream.sh environments "Update browser to $TRAVIS_COMMIT"
     on:
         branch: master
 
