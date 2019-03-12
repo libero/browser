@@ -2,28 +2,26 @@
 
 <div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
 
-  {%- with title|default({}) only -%}
-    {%- block title -%}
+  {%- with {attributes: {class: []}} -%}
+    {%- block header -%}
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__title_text']) }) -%}
+      {%- set attributes = attributes|merge({class: attributes.class|merge(['teaser__header']) }) -%}
+      <header {%- include('@LiberoPatterns/attributes.html.twig') -%}>
 
-      <h{{ level|default(4) }} {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+        {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
+          {%- block heading -%}
 
-        {%- with content only -%}
-          {%- block content -%}
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__heading']) }) -%}
+            {%- set level = level|default(4) -%}
 
-            {%- if attributes.href is defined -%}
-              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__title_text_link']) }) -%}
-            {%- endif -%}
+            {%- include '@LiberoPatterns/heading.html.twig' -%}
 
-            {%- include '@LiberoPatterns/link.html.twig' -%}
-
-          {%- endblock content -%}
+          {%- endblock heading -%}
         {%- endwith -%}
 
-      </h{{ level|default(4) }}>
+      </header>
 
-    {%- endblock title -%}
+    {%- endblock header -%}
   {%- endwith -%}
 
 </div>
