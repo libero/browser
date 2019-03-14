@@ -6,7 +6,9 @@ namespace Libero\ContentPageBundle\EventListener;
 
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
+use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use function array_merge;
 use function count;
 
 final class MainListener
@@ -21,9 +23,9 @@ final class MainListener
     public function onCreatePage(CreateContentPageEvent $event) : void
     {
         $part = new CreateContentPagePartEvent(
-            '@LiberoPatterns/page-grid.html.twig',
+            $grid = '@LiberoPatterns/content-grid.html.twig',
             $event->getItem(),
-            $event->getContext()
+            array_merge($event->getContext(), ['grid' => $event->getContext(), 'area' => 'main'])
         );
 
         $this->dispatcher->dispatch($part::name('main'), $part);
@@ -32,6 +34,6 @@ final class MainListener
             return;
         }
 
-        $event->addContent($part->getTemplate(), ['isMain' => true] + $part->getContent());
+        $event->setContent('main', new View($part->getTemplate(), ['content' => $part->getContent()]));
     }
 }

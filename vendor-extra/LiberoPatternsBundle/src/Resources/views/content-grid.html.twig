@@ -1,61 +1,46 @@
-{%- set gridBaseName = 'grid-content' -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
-{%- if secondaryContent|default([])|length -%}
-  {%- set gridVariantName = gridBaseName ~ '--has-secondary-content' -%}
-{%- else -%}
-  {%- set gridVariantName = gridBaseName ~ '--no-secondary-content' -%}
+{%- set hasSecondary = false -%}
+{%- for area in content if area.area|default('full') == 'secondary' -%}
+  {%- set hasSecondary = true -%}
+{%- endfor -%}
+
+{%- if hasSecondary -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
 {%- endif -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([gridBaseName, gridVariantName]) }) -%}
+<{{ element|default('div') }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
-<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+  {%- for area in content -%}
+    {%- with area only -%}
 
-  {%- with {content: tertiaryContent|default([])} only -%}
-    {%- block tertiaryContent -%}
+      {%- block item -%}
 
-      {%- if content|length -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item']) }) -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-tertiary-content']) }) -%}
+        {%- if area is defined -%}
 
-        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-        </div>
+          {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-      {%- endif -%}
+          <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+            {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+          </div>
 
-    {%- endblock tertiaryContent -%}
-  {%- endwith -%}
+        {%- else -%}
 
-  {%- with {content: primaryContent|default([])} only -%}
-    {%- block primaryContent -%}
+          {%- with arguments|merge({_template: template}) only -%}
 
-      {%- if content|length -%}
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item'])}) -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-primary-content']) }) -%}
+            {%- include _template -%}
 
-        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-        </div>
+          {%- endwith -%}
 
-      {%- endif -%}
+        {%- endif -%}
 
-    {%- endblock primaryContent -%}
-  {%- endwith -%}
+      {%- endblock item -%}
 
-  {%- with {content: secondaryContent|default([])} only -%}
-    {%- block secondaryContent -%}
+    {%- endwith -%}
+  {%- endfor -%}
 
-      {%- if content|length -%}
-
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-secondary-content']) }) -%}
-
-        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-        </div>
-
-      {%- endif -%}
-
-    {%- endblock secondaryContent -%}
-  {%- endwith -%}
-
-</div>
+</{{ element|default('div') }}>

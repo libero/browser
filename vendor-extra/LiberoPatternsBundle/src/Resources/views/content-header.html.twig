@@ -1,4 +1,9 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) %}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
+
+{# Temporary, to show a pattern being able to change its area #}
+{%- if 'content-grid__item' in attributes.class -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--full']) }) -%}
+{%- endif -%}
 
 <header {%- include '@LiberoPatterns/attributes.html.twig' %}>
 

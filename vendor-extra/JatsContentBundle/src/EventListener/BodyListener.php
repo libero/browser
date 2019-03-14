@@ -20,7 +20,7 @@ final class BodyListener
         $this->converter = $converter;
     }
 
-    public function onCreatePageBody(CreateContentPagePartEvent $event) : void
+    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
     {
         $body = $event->getItem()->xpath()
             ->firstOf('/libero:item/jats:article/jats:body');
@@ -29,8 +29,8 @@ final class BodyListener
             return;
         }
 
-        $context = ['level' => ($event->getContext()['level'] ?? 1) + 1] + $event->getContext();
+        $context = ['area' => 'primary', 'level' => ($event->getContext()['level'] ?? 1) + 1] + $event->getContext();
 
-        $event->addContent('primaryContent', ...$this->convertChildren($body, $context));
+        $event->addContent(...$this->convertChildren($body, $context));
     }
 }

@@ -38,9 +38,9 @@ final class ViewConverterRegistry implements ViewConverter
         }
 
         if (!$view->getTemplate()) {
-            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node]);
+            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
         }
 
-        return $view;
+        return $view->withContext($context);
     }
 }

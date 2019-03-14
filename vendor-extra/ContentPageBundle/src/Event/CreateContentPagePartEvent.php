@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Libero\ContentPageBundle\Event;
 
 use FluentDOM\DOM\Document;
+use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
-use function array_merge;
+use function end;
+use function is_array;
+use function is_string;
+use function key;
 
 final class CreateContentPagePartEvent extends Event
 {
@@ -32,9 +36,27 @@ final class CreateContentPagePartEvent extends Event
         return $this->content;
     }
 
-    public function addContent(string $where, ...$content) : void
+    public function addContent(View ...$views) : void
     {
-        $this->content[$where] = array_merge($this->content[$where] ?? [], $content);
+        foreach ($views as $view) {
+            $area = $view->getContext('area');
+
+            if (!is_string($area)) {
+                $this->content[] = $view;
+
+                continue;
+            }
+
+            $last = end($this->content);
+            if (is_array($last) && $area === $last['area']) {
+                $key = key($this->content);
+                $this->content[$key]['content'][] = $view;
+
+                continue;
+            }
+
+            $this->content[] = ['area' => $area, 'content' => [$view]];
+        }
     }
 
     public function getContext() : array

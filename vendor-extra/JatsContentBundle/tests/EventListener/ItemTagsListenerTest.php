@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\JatsContentBundle\EventListener\ItemTagsListener;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -35,10 +35,10 @@ final class ItemTagsListenerTest extends TestCase
 XML
         );
 
-        $event = new CreateContentPageEvent($document);
+        $event = new CreateContentPagePartEvent('template', $document);
         $originalEvent = clone $event;
 
-        $listener->onCreatePage($event);
+        $listener->onCreatePageMain($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -56,18 +56,10 @@ XML
 
         $document = $this->loadDocument($xml);
 
-        $event = new CreateContentPageEvent($document, $context);
-        $listener->onCreatePage($event);
+        $event = new CreateContentPagePartEvent('template', $document, $context);
+        $listener->onCreatePageMain($event);
 
-        $this->assertEquals(
-            [
-                new View(
-                    '@LiberoPatterns/single-column-grid.html.twig',
-                    ['content' => [new View(null, $expectedItemTags)]]
-                ),
-            ],
-            $event->getContent()
-        );
+        $this->assertEquals([new View(null, $expectedItemTags)], $event->getContent());
     }
 
     public function pageProvider() : iterable
@@ -107,6 +99,7 @@ XML
                 'context' => [
                     'lang' => 'en',
                     'dir' => 'ltr',
+                    'area' => 'primary',
                 ],
             ],
         ];
@@ -146,6 +139,7 @@ XML
                 'context' => [
                     'lang' => 'fr',
                     'dir' => 'ltr',
+                    'area' => 'primary',
                 ],
             ],
         ];
@@ -185,6 +179,7 @@ XML
                 'context' => [
                     'lang' => 'ar-EG',
                     'dir' => 'rtl',
+                    'area' => 'primary',
                 ],
             ],
         ];

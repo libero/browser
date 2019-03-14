@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use JsonSerializable;
+use function array_merge;
 use function array_replace_recursive;
 
 final class View implements JsonSerializable
 {
     private $arguments;
+    private $context;
     private $template;
 
-    public function __construct(?string $template, array $arguments = [])
+    public function __construct(?string $template, array $arguments = [], array $context = [])
     {
         $this->template = $template;
         $this->arguments = $arguments;
+        $this->context = $context;
     }
 
     public function hasArgument(string $key) : bool
@@ -36,6 +39,11 @@ final class View implements JsonSerializable
     public function getTemplate() : ?string
     {
         return $this->template;
+    }
+
+    public function getContext(string $key)
+    {
+        return $this->context[$key] ?? null;
     }
 
     public function withArgument(string $key, $value) : View
@@ -65,6 +73,15 @@ final class View implements JsonSerializable
         $view = clone $this;
 
         $view->template = $template;
+
+        return $view;
+    }
+
+    public function withContext(array $context) : View
+    {
+        $view = clone $this;
+
+        $view->context = array_merge($view->context, $context);
 
         return $view;
     }

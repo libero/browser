@@ -1,25 +1,37 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-single-column']) }) -%}
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid']) }) -%}
 
-<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+<{{ element|default('div') }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
-  {%- with {content: content|default([]), isFull: isFull|default(false)} only -%}
-    {%- block content -%}
+  {%- for area in content -%}
+    {%- with area only -%}
 
-      {%- if content|length -%}
+      {%- block item -%}
 
-        {%- if isFull -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item']) }) -%}
+
+        {%- if area is defined -%}
+
+          {%- set attributes = attributes|merge({class: attributes.class|merge(['single-column-grid__item--' ~ area]) }) -%}
+
+          <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+            {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+          </div>
+
         {%- else -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-main']) }) -%}
+
+          {%- with arguments|merge({_template: template}) only -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item'])}) -%}
+
+            {%- include _template -%}
+
+          {%- endwith -%}
+
         {%- endif -%}
 
-        <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-          {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-        </div>
+      {%- endblock item -%}
 
-      {%- endif -%}
+    {%- endwith -%}
+  {%- endfor -%}
 
-    {%- endblock content -%}
-  {%- endwith -%}
-
-</div>
+</{{ element|default('div') }}>

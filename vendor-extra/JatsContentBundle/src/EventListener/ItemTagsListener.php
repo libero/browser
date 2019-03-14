@@ -19,7 +19,7 @@ final class ItemTagsListener
         $this->converter = $converter;
     }
 
-    public function onCreatePageBody(CreateContentPagePartEvent $event) : void
+    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
     {
         $front = $event->getItem()->xpath()->firstOf('/libero:item/jats:article/jats:front');
 
@@ -27,12 +27,14 @@ final class ItemTagsListener
             return;
         }
 
-        $itemTags = $this->converter->convert($front, '@LiberoPatterns/item-tags.html.twig', $event->getContext());
+        $context = ['area' => 'primary'] + $event->getContext();
+
+        $itemTags = $this->converter->convert($front, '@LiberoPatterns/item-tags.html.twig', $context);
 
         if (0 === count($itemTags->getArguments())) {
             return;
         }
 
-        $event->addContent('primaryContent', $itemTags);
+        $event->addContent($itemTags);
     }
 }

@@ -1,40 +1,56 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
 
-{%- if isMain|default(false) -%}
-  {%- set element = 'main' -%}
-  {%- set attributes = attributes|merge({role: 'main' }) -%}
-{%- else -%}
-  {%- set element = 'div' -%}
-{%- endif -%}
+<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
-<{{ element }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+  {%- with start|default({}) only -%}
+    {%- block start -%}
 
-  {%- with {items: items} only -%}
-    {%- block items -%}
+      {%- if template is defined -%}
 
-      {%- for item in items -%}
+        {%- with arguments|merge({_template: template}) only -%}
 
-        {%- with item only -%}
-          {%- block item -%}
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__start'])}) -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
+          {%- include _template -%}
 
-            {%- if keylineStart|default(false) -%}
-              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
-            {%- endif -%}
-
-            {%- if keylineEnd|default(false) -%}
-              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
-            {%- endif -%}
-
-            {%- include template|default('@LiberoPatterns/single-column-grid.html.twig') -%}
-
-          {%- endblock item %}
         {%- endwith -%}
 
-      {%- endfor -%}
+      {%- endif -%}
 
-    {%- endblock items -%}
+    {%- endblock start -%}
   {%- endwith -%}
 
-</{{ element }}>
+  {%- with main only -%}
+    {%- block main -%}
+
+      {%- with arguments|merge({_template: template}) only -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__main']), role: 'main'}) -%}
+        {%- set element = "main" -%}
+
+        {%- include _template -%}
+
+      {%- endwith -%}
+
+    {%- endblock main -%}
+  {%- endwith -%}
+
+  {%- with end|default({}) only -%}
+    {%- block end -%}
+
+      {%- if template is defined -%}
+
+        {%- with arguments|merge({_template: template}) only -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__end'])}) -%}
+
+          {%- include _template -%}
+
+        {%- endwith -%}
+
+      {%- endif -%}
+
+    {%- endblock end -%}
+  {%- endwith -%}
+
+</div>

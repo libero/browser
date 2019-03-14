@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://symfony.com/schema/dic/services"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
@@ -11,20 +11,25 @@
         <service id="Libero\JatsContentBundle\EventListener\BodyListener"
             class="Libero\JatsContentBundle\EventListener\BodyListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content.body" method="onCreatePageBody"/>
+            <tag name="kernel.event_listener" event="libero.page.content.main" method="onCreatePageMain"/>
         </service>
 
         <service id="Libero\JatsContentBundle\EventListener\ContentHeaderListener"
             class="Libero\JatsContentBundle\EventListener\ContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content.content-header" method="onCreatePageContentHeader"/>
+            <tag name="kernel.event_listener" event="libero.page.content.main" method="onCreatePageMain" priority="50"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\TitleListener"
+            class="Libero\JatsContentBundle\EventListener\TitleListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage"/>
         </service>
 
         <service id="Libero\JatsContentBundle\EventListener\ItemTagsListener"
             class="Libero\JatsContentBundle\EventListener\ItemTagsListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content.body" method="onCreatePageBody" priority="-10"/>
+            <tag name="kernel.event_listener" event="libero.page.content.main" method="onCreatePageMain" priority="-10"/>
         </service>
 
         <service id="libero.jats_content.page.namespace"
