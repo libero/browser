@@ -25,12 +25,11 @@ final class FrontItemTagsVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig'));
 
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -59,12 +58,11 @@ final class FrontItemTagsVisitorTest extends TestCase
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -76,16 +74,11 @@ XML
 
         $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/item-tags.html.twig'),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig'));
 
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -108,16 +101,11 @@ XML
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/item-tags.html.twig', ['groups' => 'bar']),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig', ['groups' => 'bar']));
 
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertSame(['groups' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -146,8 +134,8 @@ XML
 XML
         );
 
-        $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig'), $newContext);
+        $context = ['qux' => 'quux'];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -167,6 +155,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['qux' => 'quux'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 }

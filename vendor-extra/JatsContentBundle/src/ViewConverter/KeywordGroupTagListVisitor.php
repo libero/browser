@@ -31,7 +31,7 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         $this->translationKeys = $translationKeys;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
@@ -46,11 +46,12 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         $type = $object->getAttribute('kwd-group-type');
 
         if ($title instanceof Element) {
-            $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments();
+            $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext())
+                ->getArguments();
         } elseif (!isset($this->translationKeys[$type])) {
             return $view;
         } else {
-            $title = ['text' => $this->translate($this->translationKeys[$type], $context)];
+            $title = ['text' => $this->translate($this->translationKeys[$type], $view->getContext())];
         }
 
         return $view
@@ -62,7 +63,7 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
                         function (View $link) : array {
                             return ['content' => $link->getArguments()];
                         },
-                        $this->convertList($keywords, '@LiberoPatterns/link.html.twig', $context)
+                        $this->convertList($keywords, '@LiberoPatterns/link.html.twig', $view->getContext())
                     ),
                 ]
             );

@@ -28,12 +28,11 @@ final class FrontSubjectGroupContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -64,12 +63,11 @@ final class FrontSubjectGroupContentHeaderVisitorTest extends TestCase
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -94,16 +92,11 @@ XML
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/content-header.html.twig'),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -128,16 +121,14 @@ XML
 XML
         );
 
-        $newContext = [];
         $view = $visitor->visit(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['categories' => 'bar']),
-            $newContext
+            new View('@LiberoPatterns/content-header.html.twig', ['categories' => 'bar'])
         );
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertSame(['categories' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -175,8 +166,8 @@ XML
 XML
         );
 
-        $newContext = ['lang' => 'es'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $context = ['lang' => 'es'];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -215,6 +206,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['lang' => 'es'], $newContext);
+        $this->assertSame(['lang' => 'es'], $view->getContext());
     }
 }

@@ -31,7 +31,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $this->translator = $translator;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
         /** @var DOMNodeList|Element[] $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(
@@ -47,13 +47,16 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
             'categories',
             [
                 'attributes' => [
-                    'aria-label' => $this->translate('libero.patterns.content_header.categories.label', $context),
+                    'aria-label' => $this->translate(
+                        'libero.patterns.content_header.categories.label',
+                        $view->getContext()
+                    ),
                 ],
                 'items' => array_map(
                     function (View $link) : array {
                         return ['content' => $link->getArguments()];
                     },
-                    $this->convertList($subjects, '@LiberoPatterns/link.html.twig', $context)
+                    $this->convertList($subjects, '@LiberoPatterns/link.html.twig', $view->getContext())
                 ),
             ]
         );

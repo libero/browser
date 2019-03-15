@@ -24,7 +24,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
         /** @var DOMNodeList|Element[] $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()
@@ -40,7 +40,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
                 function (View $tagList) : array {
                     return $tagList->getArguments();
                 },
-                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $context)
+                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
             )
         );
     }

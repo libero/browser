@@ -25,12 +25,11 @@ final class BoldVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View(null), $newContext);
+        $view = $visitor->visit($element, new View(null));
 
         $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -48,12 +47,11 @@ final class BoldVisitorTest extends TestCase
 
         $element = $this->loadElement('<bold xmlns="http://libero.pub">foo</bold>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -65,12 +63,11 @@ final class BoldVisitorTest extends TestCase
 
         $element = $this->loadElement('<bold xmlns="http://libero.pub">foo</bold>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
+        $view = $visitor->visit($element, new View(null, ['text' => 'bar']));
 
         $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -88,8 +85,9 @@ final class BoldVisitorTest extends TestCase
 XML
         );
 
-        $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View(null), $newContext);
+        $context = ['qux' => 'quux'];
+
+        $view = $visitor->visit($element, new View(null, [], $context));
 
         $this->assertSame('@LiberoPatterns/bold.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -111,6 +109,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['qux' => 'quux'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 }

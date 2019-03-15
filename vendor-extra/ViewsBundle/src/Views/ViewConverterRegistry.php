@@ -28,19 +28,19 @@ final class ViewConverterRegistry implements ViewConverter
                 );
             }
 
-            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node]);
+            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
         }
 
-        $view = new View($template, []);
+        $view = new View($template, [], $context);
 
         foreach ($this->visitors as $visitor) {
-            $view = $visitor->visit($node, $view, $context);
+            $view = $visitor->visit($node, $view);
         }
 
         if (!$view->getTemplate()) {
             return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
         }
 
-        return $view->withContext($context);
+        return $view;
     }
 }

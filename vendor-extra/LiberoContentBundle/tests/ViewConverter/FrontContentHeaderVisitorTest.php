@@ -25,12 +25,11 @@ final class FrontContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -48,12 +47,11 @@ final class FrontContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -65,16 +63,11 @@ final class FrontContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement('<front xmlns="http://libero.pub">foo</front>');
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/content-header.html.twig'),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -86,16 +79,14 @@ final class FrontContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
-        $newContext = [];
         $view = $visitor->visit(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar']),
-            $newContext
+            new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar'])
         );
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertSame(['contentTitle' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -113,8 +104,9 @@ final class FrontContentHeaderVisitorTest extends TestCase
 XML
         );
 
-        $newContext = ['bar' => 'baz'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $context = ['bar' => 'baz'];
+
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -127,6 +119,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['bar' => 'baz'], $newContext);
+        $this->assertSame(['bar' => 'baz'], $view->getContext());
     }
 }
