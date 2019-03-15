@@ -36,37 +36,74 @@ final class ContentController
         $this->dispatcher = $dispatcher;
     }
 
-    public function __invoke(Request $request, string $id) : Response
+    public function __invoke(Request $request, ?string $id = null) : Response
     {
-        return $this->client
-            ->requestAsync(
-                'GET',
-                "{$this->service}/items/{$id}/versions/latest",
-                [
-                    'headers' => ['Accept' => 'application/xml'],
-                    'http_errors' => true,
-                ]
-            )
-            ->then(
-                function (ResponseInterface $response) use ($request) : Response {
-                    $document = FluentDOM::load((string) $response->getBody());
+        if (!$id) {
+            return $this->client
+                ->requestAsync(
+                    'GET',
+                    "{$this->service}/items",
+                    [
+                        'headers' => ['Accept' => 'application/xml'],
+                        'http_errors' => true,
+                    ]
+                )
+                ->then(
+                    function (ResponseInterface $response) use ($request) : Response {
+                        $document = FluentDOM::load((string) $response->getBody());
 
-                    $context = [
-                        'lang' => $request->getLocale(),
-                        'dir' => text_direction($request->getLocale()),
-                    ];
+                        $context = [
+                            'lang' => $request->getLocale(),
+                            'dir' => text_direction($request->getLocale()),
+                        ];
 
-                    $event = new CreateContentPageEvent($document, $context);
-                    $this->dispatcher->dispatch($event::NAME, $event);
+                        $event = new CreateContentPageEvent($document, $context);
+                        $this->dispatcher->dispatch($event::NAME, $event);
 
-                    return new Response(
-                        $this->twig->render(
-                            $this->template,
-                            $event->getContext() + ['title' => $event->getTitle(), 'content' => $event->getContent()]
-                        )
-                    );
-                }
-            )
-            ->wait();
+                        return new Response(
+                            $this->twig->render(
+                                $this->template,
+                                $event->getContext() + ['title' => 'Home', 'content' => $event->getContent()]
+                            )
+                        );
+                    }
+                )
+                ->wait();
+        } else {
+            return $this->client
+                ->requestAsync(
+                    'GET',
+                    "{$this->service}/items/{$id}/versions/latest",
+                    [
+                        'headers' => ['Accept' => 'application/xml'],
+                        'http_errors' => true,
+                    ]
+                )
+                ->then(
+                    function (ResponseInterface $response) use ($request) : Response {
+                        $document = FluentDOM::load((string) $response->getBody());
+
+                        $context = [
+                            'lang' => $request->getLocale(),
+                            'dir' => text_direction($request->getLocale()),
+                        ];
+
+                        $event = new CreateContentPageEvent($document, $context);
+                        $this->dispatcher->dispatch($event::NAME, $event);
+
+                        return new Response(
+                            $this->twig->render(
+                                $this->template,
+                                $event->getContext() + ['title' => $event->getTitle(), 'content' => $event->getContent()]
+                            )
+                        );
+                    }
+                )
+                ->wait();
+        }
+
+
+
+
     }
 }

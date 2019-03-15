@@ -1,5 +1,8 @@
 content_page:
     pages:
+        home_page:
+            path: '/'
+            service: 'scholarly-articles'
         blog_article:
             path: '/blog/{id}'
             service: 'blog-articles'
