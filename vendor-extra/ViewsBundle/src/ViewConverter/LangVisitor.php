@@ -12,7 +12,7 @@ use Punic\Misc;
 
 final class LangVisitor implements ViewConverterVisitor
 {
-    public function visit(Element $object, View $view, array &$context = []) : View
+    public function visit(Element $object, View $view) : View
     {
         if ($view->hasArgument('attributes') && !empty($view->getArgument('attributes')['lang'])) {
             return $view;
@@ -21,18 +21,18 @@ final class LangVisitor implements ViewConverterVisitor
         $lang = $object->ownerDocument->xpath()
             ->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $object);
 
-        if (!$lang instanceof Attribute || $lang->nodeValue === ($context['lang'] ?? null)) {
+        if (!$lang instanceof Attribute || $lang->nodeValue === $view->getContext('lang')) {
             return $view;
         }
 
-        $context['lang'] = $lang->nodeValue;
+        $context = ['lang' => $lang->nodeValue];
         $attributes = ['lang' => $context['lang']];
         $dir = 'right-to-left' === Misc::getCharacterOrder($context['lang']) ? 'rtl' : 'ltr';
-        if (($context['dir'] ?? null) !== $dir) {
+        if ($view->getContext('dir') !== $dir) {
             $context['dir'] = $dir;
             $attributes['dir'] = $dir;
         }
 
-        return $view->withArgument('attributes', $attributes);
+        return $view->withArgument('attributes', $attributes)->withContext($context);
     }
 }

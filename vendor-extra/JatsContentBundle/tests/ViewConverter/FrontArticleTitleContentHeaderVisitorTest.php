@@ -25,12 +25,11 @@ final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -59,12 +58,11 @@ final class FrontArticleTitleContentHeaderVisitorTest extends TestCase
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -76,16 +74,11 @@ XML
 
         $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/content-header.html.twig'),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -107,17 +100,15 @@ XML
 </front>
 XML
         );
-
-        $newContext = [];
+        ;
         $view = $visitor->visit(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar']),
-            $newContext
+            new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar'])
         );
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertSame(['contentTitle' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -140,8 +131,9 @@ XML
 XML
         );
 
-        $newContext = ['bar' => 'baz'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig'), $newContext);
+        $context = ['bar' => 'baz'];
+
+        $view = $visitor->visit($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -154,6 +146,6 @@ XML
             ],
             $view->getArguments()
         );
-        $this->assertSame(['bar' => 'baz'], $newContext);
+        $this->assertSame(['bar' => 'baz'], $view->getContext());
     }
 }

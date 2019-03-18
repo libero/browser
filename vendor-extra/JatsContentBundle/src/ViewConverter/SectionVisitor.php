@@ -13,6 +13,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use function array_map;
+use function is_int;
 use function iterator_to_array;
 
 final class SectionVisitor implements ViewConverterVisitor
@@ -27,9 +28,11 @@ final class SectionVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
-        $context['level'] = $context['level'] ?? 1;
+        if (!is_int($view->getContext('level'))) {
+            $view = $view->withContext(['level' => 1]);
+        }
 
         $heading = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
@@ -37,14 +40,16 @@ final class SectionVisitor implements ViewConverterVisitor
         if ($heading instanceof Element) {
             $view = $view->withArgument(
                 'heading',
-                $this->converter->convert($heading, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+                $this->converter
+                    ->convert($heading, '@LiberoPatterns/heading.html.twig', $view->getContext())
+                    ->getArguments()
             );
         }
 
         /** @var DOMNodeList|Element[] $children */
         $children = $object('*[not(local-name()="title" and namespace-uri()="http://jats.nlm.nih.gov")]');
 
-        $childContext = $context;
+        $childContext = $view->getContext();
         $childContext['level']++;
 
         return $view->withArgument(

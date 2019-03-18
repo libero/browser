@@ -67,28 +67,38 @@ final class ViewConverterRegistryTest extends TestCase
 
         $handler->add(
             new CallbackVisitor(
-                function (Element $object, View $view, array &$context = []) : View {
-                    return $view->withTemplate($view->getTemplate().'foo')->withArgument('foo', 'foo');
+                function (Element $object, View $view) : View {
+                    return $view
+                        ->withTemplate($view->getTemplate().'foo')
+                        ->withArgument('foo', 'foo')
+                        ->withContext(['one' => 'foo']);
                 }
             ),
             new CallbackVisitor(
-                function (Element $object, View $view, array &$context = []) : View {
-                    return $view->withTemplate($view->getTemplate().'bar')->withArgument('bar', 'bar');
+                function (Element $object, View $view) : View {
+                    return $view
+                        ->withTemplate($view->getTemplate().'bar')
+                        ->withArgument('bar', 'bar')
+                        ->withContext(['one' => 'bar']);
                 }
             )
         );
 
         $handler->add(
             new CallbackVisitor(
-                function (Element $object, View $view, array &$context = []) : View {
-                    return $view->withTemplate($view->getTemplate().'baz')->withArgument('baz', 'baz');
+                function (Element $object, View $view) : View {
+                    return $view
+                        ->withTemplate($view->getTemplate().'baz')
+                        ->withArgument('baz', 'baz')
+                        ->withContext(['one' => 'baz']);
                 }
             )
         );
 
-        $this->assertEquals(
-            new View('foobarbaz', ['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz']),
-            $handler->convert(new Element('foo'), null, [])
-        );
+        $view = $handler->convert(new Element('element'), 'template', ['con' => 'text', 'one' => 'two']);
+
+        $this->assertEquals('templatefoobarbaz', $view->getTemplate());
+        $this->assertEquals(['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'], $view->getArguments());
+        $this->assertEquals(['con' => 'text', 'one' => 'baz'], $view->getContext());
     }
 }
