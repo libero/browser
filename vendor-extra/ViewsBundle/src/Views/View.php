@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use JsonSerializable;
-use function array_merge;
 use function array_replace_recursive;
 use function is_string;
 
@@ -40,6 +39,11 @@ final class View implements JsonSerializable
     public function getTemplate() : ?string
     {
         return $this->template;
+    }
+
+    public function hasContext(string $key) : bool
+    {
+        return isset($this->context[$key]);
     }
 
     public function getContext(?string $key = null)
@@ -86,7 +90,7 @@ final class View implements JsonSerializable
     {
         $view = clone $this;
 
-        $view->context = array_merge($view->context, $context);
+        $view->context = array_replace_recursive($view->context, $context);
 
         return $view;
     }

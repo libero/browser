@@ -52,6 +52,29 @@ final class ViewTest extends TestCase
     /**
      * @test
      */
+    public function it_has_context() : void
+    {
+        $view = new View(null, [], ['foo' => 'bar']);
+
+        $this->assertTrue($view->hasContext('foo'));
+        $this->assertFalse($view->hasContext('bar'));
+
+        $this->assertSame('bar', $view->getContext('foo'));
+        $this->assertNull($view->getContext('bar'));
+        $this->assertEquals(['foo' => 'bar'], $view->getContext());
+
+        $view = $view->withContext(['foo' => ['baz' => 'qux']]);
+        $this->assertSame(['baz' => 'qux'], $view->getContext('foo'));
+        $this->assertEquals(['foo' => ['baz' => 'qux']], $view->getContext());
+
+        $view = $view->withContext(['foo' => ['quux' => 'quuz']]);
+        $this->assertSame(['baz' => 'qux', 'quux' => 'quuz'], $view->getContext('foo'));
+        $this->assertEquals(['foo' => ['baz' => 'qux', 'quux' => 'quuz']], $view->getContext());
+    }
+
+    /**
+     * @test
+     */
     public function it_is_json_serializable() : void
     {
         $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);

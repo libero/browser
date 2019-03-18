@@ -10,7 +10,6 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
-use function is_int;
 
 final class HeadingVisitor implements ViewConverterVisitor
 {
@@ -24,7 +23,7 @@ final class HeadingVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view) : View
     {
-        if (is_int($view->getContext('level'))) {
+        if ($view->hasContext('level')) {
             $view = $view->withArgument('level', $view->getContext('level'));
         }
 
