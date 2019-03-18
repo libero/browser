@@ -36,12 +36,14 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        $groups = array_filter(
-            array_map(
-                function (View $tagList) : array {
-                    return $tagList->getArguments();
-                },
-                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
+        $groups = array_values(
+            array_filter(
+                array_map(
+                    function (View $tagList) : array {
+                        return $tagList->getArguments();
+                    },
+                    $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
+                )
             )
         );
 
@@ -49,7 +51,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
             return $view;
         }
 
-        return $view->withArgument('groups', array_values($groups));
+        return $view->withArgument('groups', $groups);
     }
 
     protected function expectedTemplate() : string
