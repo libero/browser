@@ -13,12 +13,12 @@ final class CreateHomePageEvent extends Event
 
     private $content = [];
     private $context;
-    private $item;
+    private $items;
     private $title;
 
-    public function __construct(Document $item, array $context = [])
+    public function __construct(array $items, array $context = [])
     {
-        $this->item = $item;
+        $this->items = $items;
         $this->context = $context;
     }
 
@@ -42,9 +42,9 @@ final class CreateHomePageEvent extends Event
         $this->context[$key] = $value;
     }
 
-    public function getItem() : Document
+    public function getItems() : array
     {
-        return $this->item;
+        return $this->items;
     }
 
     public function getTitle() : ?string
