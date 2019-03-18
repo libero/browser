@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Libero\ContentPageBundle\Controller;
 
 use FluentDOM;
+use FluentDOM\DOM\Document;
+use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateHomePageEvent;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,13 +54,28 @@ final class ContentController
                 ->then(
                     function (ResponseInterface $response) use ($request) : Response {
                         $document = FluentDOM::load((string) $response->getBody());
+                        $document->registerNamespace('libero', 'http://libero.pub');
 
                         $context = [
                             'lang' => $request->getLocale(),
                             'dir' => text_direction($request->getLocale()),
                         ];
 
-                        $event = new CreateContentPageEvent($document, $context);
+                        $list = array_map(function (Element $element) use ($request, $context) {
+                            return $this->client
+                                ->requestAsync(
+                                'GET',
+                                "{$element->getAttribute('service')}/items/{$element->getAttribute('id')}/versions/latest"
+                                )
+                                ->then(
+                                    function (ResponseInterface $response) use ($request, $context) : Document {
+                                        return FluentDOM::load((string) $response->getBody());
+                                    }
+                                )
+                                ->wait();
+                        }, iterator_to_array($document->xpath()->evaluate('libero:item-ref')));
+
+                        $event = new CreateHomePageEvent($list, $context);
                         $this->dispatcher->dispatch($event::NAME, $event);
 
                         return new Response(
