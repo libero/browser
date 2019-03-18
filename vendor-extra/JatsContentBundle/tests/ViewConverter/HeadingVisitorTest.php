@@ -24,12 +24,11 @@ final class HeadingVisitorTest extends TestCase
 
         $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -41,16 +40,11 @@ final class HeadingVisitorTest extends TestCase
 
         $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']));
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -62,13 +56,13 @@ final class HeadingVisitorTest extends TestCase
         $visitor = new HeadingVisitor($this->createDumpingConverter());
 
         $element = $this->loadElement($xml);
+        $context = ['qux' => 'quux'];
 
-        $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(['text' => $expectedText], $view->getArguments());
-        $this->assertSame(['qux' => 'quux'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 
     public function textProvider() : iterable
@@ -153,11 +147,10 @@ XML
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/heading.html.twig'));
 
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 }

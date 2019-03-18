@@ -23,11 +23,10 @@ final class LangVisitorTest extends TestCase
 
         $element = $this->loadElement('<foo><bar>baz</bar></foo>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertFalse($view->hasArgument('attributes'));
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -39,11 +38,10 @@ final class LangVisitorTest extends TestCase
 
         $element = $this->loadElement('<foo xml:lang="fr">bar</foo>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template', ['attributes' => ['lang' => 'en']]), $newContext);
+        $view = $visitor->visit($element, new View('template', ['attributes' => ['lang' => 'en']]));
 
         $this->assertSame(['lang' => 'en'], $view->getArgument('attributes'));
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -63,11 +61,10 @@ final class LangVisitorTest extends TestCase
         /** @var Element $element */
         $element = $document->xpath()->firstOf($selector);
 
-        $newContext = $context;
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template', [], $context));
 
         $this->assertSame($expectedAttributes, $view->getArgument('attributes'), 'Attributes do not match');
-        $this->assertSame($expectedContext, $newContext, 'Context does not match');
+        $this->assertSame($expectedContext, $view->getContext(), 'Context does not match');
     }
 
     public function contextProvider() : iterable
@@ -250,12 +247,11 @@ final class LangVisitorTest extends TestCase
         $visitor = new LangVisitor();
 
         $element = $this->loadElement('<foo xml:lang="en">bar</foo>');
+        $context = ['baz' => 'qux'];
 
-        $newContext = ['baz' => 'qux'];
         $view = $visitor->visit(
             $element,
-            new View('template', ['attributes' => ['foo' => 'bar'], 'baz' => 'qux']),
-            $newContext
+            new View('template', ['attributes' => ['foo' => 'bar'], 'baz' => 'qux'], $context)
         );
 
         $this->assertSame(
@@ -264,7 +260,7 @@ final class LangVisitorTest extends TestCase
         );
         $this->assertSame(
             ['baz' => 'qux', 'lang' => 'en', 'dir' => 'ltr'],
-            $newContext
+            $view->getContext()
         );
     }
 }

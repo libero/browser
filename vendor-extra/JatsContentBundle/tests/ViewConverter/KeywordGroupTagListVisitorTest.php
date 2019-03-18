@@ -28,12 +28,11 @@ final class KeywordGroupTagListVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'));
 
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -60,12 +59,11 @@ final class KeywordGroupTagListVisitorTest extends TestCase
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -77,16 +75,11 @@ XML
 
         $element = $this->loadElement('<kwd-group xmlns="http://jats.nlm.nih.gov"><x>foo</x></kwd-group>');
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/tag-list.html.twig'),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'));
 
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -107,16 +100,11 @@ XML
 XML
         );
 
-        $newContext = [];
-        $view = $visitor->visit(
-            $element,
-            new View('@LiberoPatterns/tag-list.html.twig', ['list' => 'qux']),
-            $newContext
-        );
+        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig', ['list' => 'qux']));
 
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertSame(['list' => 'qux'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -142,13 +130,13 @@ XML
         $visitor = new KeywordGroupTagListVisitor($this->createDumpingConverter(), $translator, $translationKeys);
 
         $element = $this->loadElement($xml);
+        $context = ['lang' => 'es'];
 
-        $newContext = ['lang' => 'es'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/tag-list.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEquals($expectedArguments, $view->getArguments());
-        $this->assertSame(['lang' => 'es'], $newContext);
+        $this->assertSame(['lang' => 'es'], $view->getContext());
     }
 
     public function listProvider() : iterable

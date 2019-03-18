@@ -21,7 +21,7 @@ final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisito
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
@@ -32,7 +32,7 @@ final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisito
 
         return $view->withArgument(
             'contentTitle',
-            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext())->getArguments()
         );
     }
 

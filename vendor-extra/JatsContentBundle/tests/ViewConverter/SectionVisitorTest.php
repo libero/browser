@@ -25,12 +25,11 @@ final class SectionVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View(null), $newContext);
+        $view = $visitor->visit($element, new View(null));
 
         $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     public function nodeProvider() : iterable
@@ -48,12 +47,11 @@ final class SectionVisitorTest extends TestCase
 
         $element = $this->loadElement('<sec xmlns="http://jats.nlm.nih.gov">foo</sec>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -65,12 +63,11 @@ final class SectionVisitorTest extends TestCase
 
         $element = $this->loadElement('<sec xmlns="http://jats.nlm.nih.gov">foo</sec>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View(null, ['content' => 'bar']), $newContext);
+        $view = $visitor->visit($element, new View(null, ['content' => 'bar']));
 
         $this->assertNull($view->getTemplate());
         $this->assertSame(['content' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -82,13 +79,13 @@ final class SectionVisitorTest extends TestCase
         $visitor = new SectionVisitor($this->createDumpingConverter());
 
         $element = $this->loadElement($xml);
+        $context = ['level' => 1];
 
-        $newContext = ['level' => 1];
-        $view = $visitor->visit($element, new View(null), $newContext);
+        $view = $visitor->visit($element, new View(null, [], $context));
 
         $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertEquals($expectedArguments, $view->getArguments());
-        $this->assertSame(['level' => 1], $newContext);
+        $this->assertSame($context, $view->getContext());
     }
 
     public function contentProvider() : iterable

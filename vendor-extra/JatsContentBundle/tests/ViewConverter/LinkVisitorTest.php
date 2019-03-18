@@ -24,12 +24,11 @@ final class LinkVisitorTest extends TestCase
 
         $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('template'), $newContext);
+        $view = $visitor->visit($element, new View('template'));
 
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -41,12 +40,11 @@ final class LinkVisitorTest extends TestCase
 
         $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View(null, ['text' => 'bar']), $newContext);
+        $view = $visitor->visit($element, new View(null, ['text' => 'bar']));
 
         $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 
     /**
@@ -59,12 +57,12 @@ final class LinkVisitorTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $newContext = ['qux' => 'quux'];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);
+        $context = ['qux' => 'quux'];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig', [], $context));
 
         $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
         $this->assertEquals(['text' => $expectedText], $view->getArguments());
-        $this->assertSame(['qux' => 'quux'], $newContext);
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 
     public function textProvider() : iterable
@@ -149,11 +147,10 @@ XML
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $newContext = [];
-        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'), $newContext);
+        $view = $visitor->visit($element, new View('@LiberoPatterns/link.html.twig'));
 
         $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
-        $this->assertEmpty($newContext);
+        $this->assertEmpty($view->getContext());
     }
 }
