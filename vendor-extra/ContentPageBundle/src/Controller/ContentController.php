@@ -71,8 +71,7 @@ final class ContentController
                                     function (ResponseInterface $response) use ($request, $context) : Document {
                                         return FluentDOM::load((string) $response->getBody());
                                     }
-                                )
-                                ->wait();
+                                );
                         }, iterator_to_array($document->xpath()->evaluate('libero:item-ref')));
 
                         $event = new CreateHomePageEvent($list, $context);
