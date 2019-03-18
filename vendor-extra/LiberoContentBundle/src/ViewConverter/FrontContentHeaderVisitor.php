@@ -21,7 +21,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('libero:title[1]', $object);
@@ -32,7 +32,9 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
 
         return $view->withArgument(
             'contentTitle',
-            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $context)->getArguments()
+            $this->converter
+                ->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext())
+                ->getArguments()
         );
     }
 

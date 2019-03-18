@@ -10,7 +10,7 @@ use function sprintf;
 
 trait SimplifiedChildVisitor
 {
-    final public function visit(Element $object, View $view, array &$context = []) : View
+    final public function visit(Element $object, View $view) : View
     {
         $currentTemplate = $view->getTemplate();
 
@@ -32,10 +32,10 @@ trait SimplifiedChildVisitor
             $view = $view->withTemplate($this->possibleTemplate());
         }
 
-        return $this->doVisit($object, $view, $context);
+        return $this->doVisit($object, $view);
     }
 
-    abstract protected function doVisit(Element $object, View $view, array &$context = []) : View;
+    abstract protected function doVisit(Element $object, View $view) : View;
 
     abstract protected function possibleTemplate() : string;
 

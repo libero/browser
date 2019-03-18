@@ -23,9 +23,9 @@ final class ParagraphVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view, array &$context = []) : View
+    protected function doVisit(Element $object, View $view) : View
     {
-        return $view->withArgument('text', $this->convertChildren($object, $context));
+        return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
     protected function possibleTemplate() : string

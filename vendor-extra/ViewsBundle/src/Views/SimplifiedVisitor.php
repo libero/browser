@@ -10,7 +10,7 @@ use function sprintf;
 
 trait SimplifiedVisitor
 {
-    final public function visit(Element $object, View $view, array &$context = []) : View
+    final public function visit(Element $object, View $view) : View
     {
         if ($this->expectedTemplate() !== $view->getTemplate()) {
             return $view;
@@ -26,10 +26,10 @@ trait SimplifiedVisitor
             }
         }
 
-        return $this->doVisit($object, $view, $context);
+        return $this->doVisit($object, $view);
     }
 
-    abstract protected function doVisit(Element $object, View $view, array &$context = []) : View;
+    abstract protected function doVisit(Element $object, View $view) : View;
 
     abstract protected function expectedTemplate() : string;
 
