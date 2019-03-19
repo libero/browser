@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Libero\LiberoPageBundle\Controller;
 
-use InvalidArgumentException;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\LoadPageEvent;
+use Libero\LiberoPageBundle\Exception\NoContentSet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +41,7 @@ final class PageController
         $this->dispatcher->dispatch($createEvent::NAME, $createEvent);
 
         if (0 === count($createEvent->getContent())) {
-            throw new InvalidArgumentException('No content');
+            throw NoContentSet::forPage($request->attributes->get('libero_page'));
         }
 
         return new Response(

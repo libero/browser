@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace tests\Libero\LiberoPageBundle\Controller;
 
-use InvalidArgumentException;
 use Libero\LiberoPageBundle\Controller\PageController;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\LoadPageEvent;
+use Libero\LiberoPageBundle\Exception\NoContentSet;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use tests\Libero\LiberoPageBundle\PageTestCase;
 use tests\Libero\LiberoPageBundle\TwigTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 use function GuzzleHttp\Promise\promise_for;
 
 final class PageControllerTest extends TestCase
 {
+    use PageTestCase;
     use TwigTestCase;
     use XmlTestCase;
 
@@ -51,7 +53,7 @@ final class PageControllerTest extends TestCase
     public function pageProvider() : iterable
     {
         yield 'en request' => [
-            new Request(),
+            $this->createRequest('type'),
             [
                 'lang' => 'en',
                 'dir' => 'ltr',
@@ -64,7 +66,7 @@ final class PageControllerTest extends TestCase
             ],
         ];
 
-        $frenchRequest = new Request();
+        $frenchRequest = $this->createRequest('type');
         $frenchRequest->setLocale('fr');
 
         yield 'fr request' => [
@@ -81,7 +83,7 @@ final class PageControllerTest extends TestCase
             ],
         ];
 
-        $arabicRequest = new Request();
+        $arabicRequest = $this->createRequest('type');
         $arabicRequest->setLocale('ar-EG');
 
         yield 'ar-EG request' => [
@@ -106,10 +108,10 @@ final class PageControllerTest extends TestCase
     {
         $controller = $this->createPageController();
 
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('/No content/');
+        $this->expectException(NoContentSet::class);
+        $this->expectExceptionMessage("No content has been added to type page 'name'");
 
-        $controller(new Request());
+        $controller($this->createRequest('type', 'name'));
     }
 
     private function createPageController(

@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait PageTestCase
 {
-    final protected function createRequest(string $type) : Request
+    final protected function createRequest(string $type, ?string $name = null) : Request
     {
         $request = new Request();
-        $request->attributes->set('libero_page', ['type' => $type]);
+        $request->attributes->set('libero_page', ['type' => $type, 'name' => $name ?? $type]);
 
         return $request;
     }
