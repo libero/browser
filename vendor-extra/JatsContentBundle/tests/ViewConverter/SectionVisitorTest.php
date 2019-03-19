@@ -7,8 +7,8 @@ namespace tests\Libero\JatsContentBundle\ViewConverter;
 use Libero\JatsContentBundle\ViewConverter\SectionVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class SectionVisitorTest extends TestCase
 {

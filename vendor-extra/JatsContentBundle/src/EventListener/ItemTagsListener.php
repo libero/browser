@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -20,9 +20,13 @@ final class ItemTagsListener
         $this->converter = $converter;
     }
 
-    public function onCreatePage(CreateContentPageEvent $event) : void
+    public function onCreatePage(CreatePageEvent $event) : void
     {
-        $front = $event->getItem()->xpath()->firstOf('/libero:item/jats:article/jats:front');
+        if ('content' !== $event->getRequest()->attributes->get('libero_page')['type']) {
+            return;
+        }
+
+        $front = $event->getDocument('content_item')->xpath()->firstOf('/libero:item/jats:article/jats:front');
 
         if (!$front instanceof Element) {
             return;

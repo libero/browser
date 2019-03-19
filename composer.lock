@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c950d2b50b4e9b03a940dbbc21374e2c",
+    "content-hash": "49447afa5630481ed04c6cc25f234464",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -390,32 +390,33 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -445,65 +446,14 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "libero/content-page-bundle",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./vendor-extra/ContentPageBundle",
-                "reference": "25ce8ce5fa06cc34b3ee6bb25bd8eeefd69ee7ad",
-                "shasum": null
-            },
-            "require": {
-                "fluentdom/fluentdom": "^7.0",
-                "guzzlehttp/guzzle": "^6.3",
-                "libero/patterns-bundle": "^1.0@dev",
-                "libero/views-bundle": "^1.0@dev",
-                "php": "^7.2",
-                "psr/http-message": "^1.0",
-                "punic/punic": "^3.3",
-                "symfony/config": "^4.1",
-                "symfony/dependency-injection": "^4.1",
-                "symfony/event-dispatcher": "^4.1",
-                "symfony/http-foundation": "^4.1",
-                "symfony/http-kernel": "^4.1",
-                "symfony/routing": "^4.1",
-                "twig/twig": "^2.5"
-            },
-            "require-dev": {
-                "csa/guzzle-cache-middleware": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
-                "php-vfs/php-vfs": "^1.4",
-                "phpunit/phpunit": "^7.3",
-                "symfony/css-selector": "^4.1",
-                "symfony/dom-crawler": "^4.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Libero\\ContentPageBundle\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A Libero content page"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "libero/jats-content-bundle",
@@ -511,13 +461,12 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "72d2bdc182dad6e2d47ca6aabcbfabe0af73cc83",
-                "shasum": null
+                "reference": "72cb43052a8e012ca574e9d9b3e03059ca56e7f5"
             },
             "require": {
                 "ext-dom": "*",
                 "fluentdom/fluentdom": "^7.0",
-                "libero/content-page-bundle": "^1.0@dev",
+                "libero/page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
@@ -551,12 +500,11 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoContentBundle",
-                "reference": "b834d04beca9847ee625a5c8016c2c0d4bd17f05",
-                "shasum": null
+                "reference": "9f13b48431cc730a3516ddcb7123890c5f2f4c95"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
-                "libero/content-page-bundle": "^1.0@dev",
+                "libero/page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
@@ -584,13 +532,49 @@
             "description": "Libero content handler"
         },
         {
+            "name": "libero/page-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor-extra/LiberoPageBundle",
+                "reference": "404a7a39bdd8bd5d48fe6e55248274dea6caf574"
+            },
+            "require": {
+                "fluentdom/fluentdom": "^7.0",
+                "guzzlehttp/promises": "^1.0",
+                "php": "^7.2",
+                "punic/punic": "^3.3",
+                "symfony/event-dispatcher": "^4.1",
+                "symfony/http-foundation": "^4.1",
+                "symfony/http-kernel": "^4.1",
+                "twig/twig": "^2.5"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Libero\\LiberoPageBundle\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Libero page"
+        },
+        {
             "name": "libero/patterns-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69",
-                "shasum": null
+                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69"
             },
             "require": {
                 "php": "^7.2",
@@ -618,8 +602,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ViewsBundle",
-                "reference": "8f169b7bf3b964e8c8c73bfb587929b70287e692",
-                "shasum": null
+                "reference": "8f169b7bf3b964e8c8c73bfb587929b70287e692"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
@@ -1038,6 +1021,46 @@
                 "unicode"
             ],
             "time": "2018-12-07T16:55:52+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "time": "2016-02-11T07:05:27+00:00"
         },
         {
             "name": "symfony/asset",
@@ -1492,20 +1515,21 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.1.7",
+            "version": "v4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "552541dad078c85d9414b09c041ede488b456cd5"
+                "reference": "3354d2e6af986dd71f68b4e5cf4a933ab58697fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/552541dad078c85d9414b09c041ede488b456cd5",
-                "reference": "552541dad078c85d9414b09c041ede488b456cd5",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/3354d2e6af986dd71f68b4e5cf4a933ab58697fb",
+                "reference": "3354d2e6af986dd71f68b4e5cf4a933ab58697fb",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^7.1.3",
+                "symfony/contracts": "^1.0"
             },
             "conflict": {
                 "symfony/dependency-injection": "<3.4"
@@ -1524,7 +1548,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -1551,7 +1575,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-10T13:52:42+00:00"
+            "time": "2019-02-23T15:17:42+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -5455,9 +5479,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "libero/content-page-bundle": 20,
         "libero/jats-content-bundle": 20,
         "libero/libero-content-bundle": 20,
+        "libero/page-bundle": 20,
         "libero/patterns-bundle": 20,
         "libero/views-bundle": 20
     },

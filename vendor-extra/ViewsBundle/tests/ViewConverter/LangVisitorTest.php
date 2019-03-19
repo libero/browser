@@ -8,7 +8,7 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\ViewConverter\LangVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class LangVisitorTest extends TestCase
 {

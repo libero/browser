@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\JatsContentBundle\EventListener\BodyListener;
+use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 use function array_map;
 
 final class BodyListenerTest extends TestCase
@@ -36,7 +36,7 @@ final class BodyListenerTest extends TestCase
 XML
         );
 
-        $event = new CreateContentPageEvent($document);
+        $event = new CreatePageEvent($document);
         $originalEvent = clone $event;
 
         $listener->onCreatePage($event);
@@ -54,7 +54,7 @@ XML
 
         $document = $this->loadDocument($xml);
 
-        $event = new CreateContentPageEvent($document, $context);
+        $event = new CreatePageEvent($document, $context);
         $listener->onCreatePage($event);
 
         $this->assertEquals(

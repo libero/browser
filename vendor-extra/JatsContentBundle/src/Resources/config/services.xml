@@ -11,26 +11,26 @@
         <service id="Libero\JatsContentBundle\EventListener\BodyListener"
             class="Libero\JatsContentBundle\EventListener\BodyListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
 
         <service id="Libero\JatsContentBundle\EventListener\ContentHeaderListener"
             class="Libero\JatsContentBundle\EventListener\ContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="50"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="50"/>
         </service>
 
         <service id="Libero\JatsContentBundle\EventListener\ItemTagsListener"
             class="Libero\JatsContentBundle\EventListener\ItemTagsListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="-10"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="-10"/>
         </service>
 
         <service id="libero.jats_content.page.namespace"
-            class="Libero\ContentPageBundle\EventListener\NamespaceListener">
+            class="Libero\LiberoPageBundle\EventListener\NamespaceListener">
             <argument>jats</argument>
             <argument>http://jats.nlm.nih.gov</argument>
-            <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="1000"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
         </service>
 
         <service id="Libero\JatsContentBundle\ViewConverter\HeadingVisitor"

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -21,9 +21,13 @@ final class BodyListener
         $this->converter = $converter;
     }
 
-    public function onCreatePage(CreateContentPageEvent $event) : void
+    public function onCreatePage(CreatePageEvent $event) : void
     {
-        $xpath = $event->getItem()->xpath();
+        if ('content' !== $event->getRequest()->attributes->get('libero_page')['type']) {
+            return;
+        }
+
+        $xpath = $event->getDocument('content_item')->xpath();
 
         $body = $xpath->firstOf('/libero:item/jats:article/jats:body');
 

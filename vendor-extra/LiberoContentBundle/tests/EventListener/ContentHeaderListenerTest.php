@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace tests\Libero\LiberoContentBundle\EventListener;
 
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
 use Libero\LiberoContentBundle\EventListener\ContentHeaderListener;
+use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class ContentHeaderListenerTest extends TestCase
 {
@@ -34,7 +34,7 @@ final class ContentHeaderListenerTest extends TestCase
 XML
         );
 
-        $event = new CreateContentPageEvent($document);
+        $event = new CreatePageEvent($document);
         $originalEvent = clone $event;
 
         $listener->onCreatePage($event);
@@ -54,7 +54,7 @@ XML
     ) : void {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
-        $event = new CreateContentPageEvent($this->loadDocument($xml), $context);
+        $event = new CreatePageEvent($this->loadDocument($xml), $context);
         $listener->onCreatePage($event);
 
         $this->assertSame($expectedTitle, $event->getTitle());
@@ -195,7 +195,7 @@ XML
 XML
         );
 
-        $event = new CreateContentPageEvent($document);
+        $event = new CreatePageEvent($document);
         $event->setTitle('Existing Title');
         $listener->onCreatePage($event);
 

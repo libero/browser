@@ -12,7 +12,7 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterRegistry;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class ViewConverterRegistryTest extends TestCase
 {

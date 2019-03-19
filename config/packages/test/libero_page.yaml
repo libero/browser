@@ -1,0 +1,10 @@
+libero_page:
+    pages:
+        blog_article:
+            type: content
+            path: '/blog/{id}'
+            content_service: 'blog-articles'
+        scholarly_article:
+            type: content
+            path: '/articles/{id}'
+            content_service: 'scholarly-articles'
