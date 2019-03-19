@@ -54,7 +54,6 @@ final class ContentController
                 ->then(
                     function (ResponseInterface $response) use ($request) : Response {
                         $document = FluentDOM::load((string) $response->getBody());
-                        $document->registerNamespace('libero', 'http://libero.pub');
 
                         $context = [
                             'lang' => $request->getLocale(),
@@ -72,7 +71,7 @@ final class ContentController
                                         return FluentDOM::load((string) $response->getBody());
                                     }
                                 );
-                        }, iterator_to_array($document->xpath()->evaluate('libero:item-ref')));
+                        }, iterator_to_array($document->getElementsByTagName('item-ref')));
 
                         $event = new CreateHomePageEvent($list, $context);
                         $this->dispatcher->dispatch($event::NAME, $event);
@@ -118,9 +117,5 @@ final class ContentController
                 )
                 ->wait();
         }
-
-
-
-
     }
 }
