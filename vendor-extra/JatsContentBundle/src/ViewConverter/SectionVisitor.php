@@ -29,7 +29,7 @@ final class SectionVisitor implements ViewConverterVisitor
 
     protected function doVisit(Element $object, View $view) : View
     {
-        if ($view->hasContext('level')) {
+        if (!$view->hasContext('level')) {
             $view = $view->withContext(['level' => 1]);
         }
 
