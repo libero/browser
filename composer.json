@@ -11,7 +11,6 @@
     "autoload-dev": {
         "psr-4": {
             "tests\\Libero\\Browser\\": "tests/",
-            "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
             "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/",
             "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/",
             "tests\\Libero\\LiberoPageBundle\\": "vendor-extra/LiberoPageBundle/tests/",
