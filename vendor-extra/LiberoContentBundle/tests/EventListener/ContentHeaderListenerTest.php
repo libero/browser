@@ -8,13 +8,44 @@ use Libero\LiberoContentBundle\EventListener\ContentHeaderListener;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use tests\Libero\LiberoPageBundle\PageTestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class ContentHeaderListenerTest extends TestCase
 {
+    use PageTestCase;
     use ViewConvertingTestCase;
     use XmlTestCase;
+
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_it_is_not_a_content_page() : void
+    {
+        $listener = new ContentHeaderListener($this->createFailingConverter());
+
+        $document = $this->loadDocument(
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <libero:front xml:lang="en">
+        <libero:title>Title</libero:title>
+    </libero:front>
+</libero:item>
+XML
+        );
+
+        $event = new CreatePageEvent($this->createRequest('foo'), ['content_item' => $document]);
+        $originalEvent = clone $event;
+
+        $listener->onCreatePage($event);
+
+        $this->assertEquals($originalEvent, $event);
+    }
 
     /**
      * @test
@@ -34,7 +65,7 @@ final class ContentHeaderListenerTest extends TestCase
 XML
         );
 
-        $event = new CreatePageEvent($document);
+        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
         $listener->onCreatePage($event);
@@ -54,7 +85,11 @@ XML
     ) : void {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
-        $event = new CreatePageEvent($this->loadDocument($xml), $context);
+        $event = new CreatePageEvent(
+            $this->createRequest('content'),
+            ['content_item' => $this->loadDocument($xml)],
+            $context
+        );
         $listener->onCreatePage($event);
 
         $this->assertSame($expectedTitle, $event->getTitle());
@@ -195,7 +230,7 @@ XML
 XML
         );
 
-        $event = new CreatePageEvent($document);
+        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document]);
         $event->setTitle('Existing Title');
         $listener->onCreatePage($event);
 
