@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c950d2b50b4e9b03a940dbbc21374e2c",
+    "content-hash": "daeeb9dfb9177c202b87b50ca635cbd7",
     "packages": [
         {
             "name": "csa/guzzle-bundle",
@@ -216,6 +216,50 @@
             ],
             "description": "A Stopwatch middleware for GuzzleHttp >= 6.0",
             "time": "2017-12-01T11:52:02+00:00"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "2ec4f00ff5fb64de584c8c4aea53bf9053ecb0b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/2ec4f00ff5fb64de584c8c4aea53bf9053ecb0b3",
+                "reference": "2ec4f00ff5fb64de584c8c4aea53bf9053ecb0b3",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "cweagans\\Composer\\Patches"
+            },
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "time": "2018-05-11T18:00:16+00:00"
         },
         {
             "name": "fluentdom/fluentdom",
@@ -459,8 +503,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ContentPageBundle",
-                "reference": "25ce8ce5fa06cc34b3ee6bb25bd8eeefd69ee7ad",
-                "shasum": null
+                "reference": "25ce8ce5fa06cc34b3ee6bb25bd8eeefd69ee7ad"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
@@ -511,8 +554,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "72d2bdc182dad6e2d47ca6aabcbfabe0af73cc83",
-                "shasum": null
+                "reference": "72d2bdc182dad6e2d47ca6aabcbfabe0af73cc83"
             },
             "require": {
                 "ext-dom": "*",
@@ -551,8 +593,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoContentBundle",
-                "reference": "b834d04beca9847ee625a5c8016c2c0d4bd17f05",
-                "shasum": null
+                "reference": "b834d04beca9847ee625a5c8016c2c0d4bd17f05"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
@@ -589,8 +630,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69",
-                "shasum": null
+                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69"
             },
             "require": {
                 "php": "^7.2",
@@ -618,8 +658,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ViewsBundle",
-                "reference": "8f169b7bf3b964e8c8c73bfb587929b70287e692",
-                "shasum": null
+                "reference": "8f169b7bf3b964e8c8c73bfb587929b70287e692"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
@@ -2511,32 +2550,35 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.5.0",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323"
+                "reference": "70c59531da43afe598c66135e39cac39475a2f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6a5f676b77a90823c2d4eaf76137b771adf31323",
-                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/70c59531da43afe598c66135e39cac39475a2f51",
+                "reference": "70c59531da43afe598c66135e39cac39475a2f51",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
                 "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-mbstring": "~1.0"
+                "symfony/polyfill-mbstring": "^1.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.3"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.7-dev"
+                },
+                "patches_applied": {
+                    "Allow Traversable objects to be used in the with tag": "https://github.com/twigphp/Twig/commit/650bc7c262d0c84ece3c472c9302bf416475f72b.patch"
                 }
             },
             "autoload": {
@@ -2574,7 +2616,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-07-13T07:18:09+00:00"
+            "time": "2019-03-12T18:48:26+00:00"
         }
     ],
     "packages-dev": [

@@ -12,8 +12,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
 use function Libero\ContentPageBundle\text_direction;
 
 final class ContentController
@@ -66,7 +64,7 @@ final class ContentController
                             $this->template,
                             $event->getContext() + [
                                 'title' => $event->getTitle(),
-                                'content' => json_decode(json_encode($event->getContent()), true),
+                                'content' => $event->getContent(),
                             ]
                         )
                     );

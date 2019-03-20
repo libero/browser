@@ -23,6 +23,7 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "csa/guzzle-bundle": "^3.1",
+        "cweagans/composer-patches": "^1.6",
         "libero/content-page-bundle": "^1.0@dev",
         "libero/jats-content-bundle": "^1.0@dev",
         "libero/libero-content-bundle": "^1.0@dev",
@@ -41,7 +42,7 @@
         "symfony/translation": "^4.2",
         "symfony/twig-bundle": "^4.1",
         "symfony/yaml": "^4.1",
-        "twig/twig": "^2.5"
+        "twig/twig": "^2.7"
     },
     "require-dev": {
         "csa/guzzle-cache-middleware": "^1.0",
@@ -74,6 +75,12 @@
         "sort-packages": true
     },
     "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "twig/twig": {
+                "Allow Traversable objects to be used in the with tag": "https://github.com/twigphp/Twig/commit/650bc7c262d0c84ece3c472c9302bf416475f72b.patch"
+            }
+        },
         "symfony": {
             "allow-contrib": true
         }

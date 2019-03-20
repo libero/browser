@@ -6,7 +6,9 @@ namespace tests\Libero\ViewsBundle\Views;
 
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use Traversable;
 use function GuzzleHttp\json_encode;
+use function iterator_to_array;
 
 final class ViewTest extends TestCase
 {
@@ -90,5 +92,25 @@ final class ViewTest extends TestCase
         );
 
         $this->assertJsonStringEqualsJsonString($expected, json_encode($view));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_traversable() : void
+    {
+        $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);
+
+        $this->assertInstanceOf(Traversable::class, $view);
+
+        $expected = [
+            'template' => 'template',
+            'arguments' => [
+                'foo' => 'bar',
+                'baz' => ['qux'],
+            ],
+        ];
+
+        $this->assertSame($expected, iterator_to_array($view));
     }
 }
