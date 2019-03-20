@@ -34,6 +34,9 @@ final class MainListener
             return;
         }
 
-        $event->setContent('main', new View($part->getTemplate(), ['content' => $part->getContent()]));
+        $event->setContent(
+            'main',
+            new View($part->getTemplate(), ['content' => $part->getContent()], $part->getContext())
+        );
     }
 }
