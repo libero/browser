@@ -1,7 +1,7 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
 {%- set hasSecondary = false -%}
-{%- for area in content if area.area|default('full') == 'secondary' -%}
+{%- for area in content if area.area|default('full') == 'secondary' and area.content|default([])|length -%}
   {%- set hasSecondary = true -%}
 {%- endfor -%}
 
@@ -20,11 +20,15 @@
 
         {%- if area is defined -%}
 
-          {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
+          {%- if content|default([])|length -%}
 
-          <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-            {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-          </div>
+            {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
+
+            <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+              {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+            </div>
+
+          {%- endif -%}
 
         {%- else -%}
 
