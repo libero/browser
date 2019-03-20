@@ -62,10 +62,7 @@ final class ContentController
                     return new Response(
                         $this->twig->render(
                             $this->template,
-                            $event->getContext() + [
-                                'title' => $event->getTitle(),
-                                'content' => $event->getContent(),
-                            ]
+                            $event->getContext() + ['title' => $event->getTitle(), 'content' => $event->getContent()]
                         )
                     );
                 }
