@@ -25,7 +25,7 @@ final class MainListener
         $part = new CreateContentPagePartEvent(
             $grid = '@LiberoPatterns/content-grid.html.twig',
             $event->getItem(),
-            array_merge($event->getContext(), ['grid' => $event->getContext(), 'area' => 'main'])
+            array_merge($event->getContext(), ['area' => 'main'])
         );
 
         $this->dispatcher->dispatch($part::name('main'), $part);
