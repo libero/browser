@@ -11,7 +11,9 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function array_filter;
 use function array_map;
+use function array_values;
 use function count;
 
 final class FrontItemTagsVisitor implements ViewConverterVisitor
@@ -28,21 +30,28 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
     {
         /** @var DOMNodeList|Element[] $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()
-            ->evaluate('jats:article-meta/jats:kwd-group[@kwd-group-type]', $object);
+            ->evaluate('jats:article-meta/jats:kwd-group', $object);
 
         if (0 === count($keywordGroups)) {
             return $view;
         }
 
-        return $view->withArgument(
-            'groups',
-            array_map(
-                function (View $tagList) : array {
-                    return $tagList->getArguments();
-                },
-                $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
+        $groups = array_values(
+            array_filter(
+                array_map(
+                    function (View $tagList) : array {
+                        return $tagList->getArguments();
+                    },
+                    $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
+                )
             )
         );
+
+        if (0 === count($groups)) {
+            return $view;
+        }
+
+        return $view->withArgument('groups', $groups);
     }
 
     protected function expectedTemplate() : string

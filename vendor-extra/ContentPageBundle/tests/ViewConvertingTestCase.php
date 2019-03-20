@@ -32,4 +32,24 @@ trait ViewConvertingTestCase
             }
         );
     }
+
+    final protected function createFilteringConverter(ViewConverter $converter, callable $filter) : ViewConverter
+    {
+        return new CallbackViewConverter(
+            function (
+                NonDocumentTypeChildNode $node,
+                ?string $template = null,
+                array $context = []
+            ) use (
+                $converter,
+                $filter
+            ) : View {
+                if (false === $filter($node, $template, $context)) {
+                    return new View(null);
+                }
+
+                return $converter->convert($node, $template, $context);
+            }
+        );
+    }
 }
