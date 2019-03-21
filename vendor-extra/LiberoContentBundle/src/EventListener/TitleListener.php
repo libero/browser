@@ -10,14 +10,15 @@ use function is_string;
 
 final class TitleListener
 {
+    private const TITLE_PATH = '/libero:item/libero:front/libero:title';
+
     public function onCreatePage(CreateContentPageEvent $event) : void
     {
         if (is_string($event->getTitle())) {
             return;
         }
 
-        $title = $event->getItem()->xpath()
-            ->firstOf('/libero:item/libero:front/libero:title');
+        $title = $event->getItem()->xpath()->firstOf(self::TITLE_PATH);
 
         if (!$title instanceof Element) {
             return;

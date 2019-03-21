@@ -10,6 +10,8 @@ use Libero\ViewsBundle\Views\ViewConverter;
 
 final class ContentHeaderListener
 {
+    private const FRONT_PATH = '/libero:item/jats:article/jats:front';
+
     private $converter;
 
     public function __construct(ViewConverter $converter)
@@ -19,8 +21,7 @@ final class ContentHeaderListener
 
     public function onCreatePageMain(CreateContentPagePartEvent $event) : void
     {
-        $front = $event->getItem()->xpath()
-            ->firstOf('/libero:item/jats:article/jats:front');
+        $front = $event->getItem()->xpath()->firstOf(self::FRONT_PATH);
 
         if (!$front instanceof Element) {
             return;

@@ -13,6 +13,8 @@ final class BodyListener
 {
     use ConvertsChildren;
 
+    private const BODY_PATH = '/libero:item/jats:article/jats:body';
+
     private $converter;
 
     public function __construct(ViewConverter $converter)
@@ -22,8 +24,7 @@ final class BodyListener
 
     public function onCreatePageMain(CreateContentPagePartEvent $event) : void
     {
-        $body = $event->getItem()->xpath()
-            ->firstOf('/libero:item/jats:article/jats:body');
+        $body = $event->getItem()->xpath()->firstOf(self::BODY_PATH);
 
         if (!$body instanceof Element) {
             return;
