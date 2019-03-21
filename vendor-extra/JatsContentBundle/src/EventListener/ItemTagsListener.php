@@ -9,6 +9,7 @@ use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function count;
+use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
 
 final class ItemTagsListener
 {
@@ -27,7 +28,7 @@ final class ItemTagsListener
             return;
         }
 
-        $context = ['area' => 'primary'] + $event->getContext();
+        $context = ['area' => CONTENT_GRID_PRIMARY] + $event->getContext();
 
         $itemTags = $this->converter->convert($front, '@LiberoPatterns/item-tags.html.twig', $context);
 

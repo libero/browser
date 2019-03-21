@@ -8,6 +8,7 @@ use FluentDOM\DOM\Element;
 use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\ViewConverter;
+use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
 
 final class BodyListener
 {
@@ -30,7 +31,10 @@ final class BodyListener
             return;
         }
 
-        $context = ['area' => 'primary', 'level' => ($event->getContext()['level'] ?? 1) + 1] + $event->getContext();
+        $context = [
+                'area' => CONTENT_GRID_PRIMARY,
+                'level' => ($event->getContext()['level'] ?? 1) + 1,
+            ] + $event->getContext();
 
         $event->addContent(...$this->convertChildren($body, $context));
     }

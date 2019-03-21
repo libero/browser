@@ -630,7 +630,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "f4f95e5e60168b7c4c252d53c5d28d1bdd76ef69"
+                "reference": "5c6c13a71f9a63442979196ce160949c430ddd13"
             },
             "require": {
                 "php": "^7.2",
@@ -645,7 +645,10 @@
             "autoload": {
                 "psr-4": {
                     "Libero\\LiberoPatternsBundle\\": "src/"
-                }
+                },
+                "files": [
+                    "src/constants.php"
+                ]
             },
             "license": [
                 "MIT"
