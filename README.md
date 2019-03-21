@@ -14,7 +14,7 @@ Getting started
 
 ### Configuration
 
-The `dev` environment reads content from a [Libero dummy API](https://github.com/libero/dummy-api).
+The `dev` environment reads content from a [Libero dummy API](https://github.com/libero/dummy-api), using the configuration and data in [`.docker/api`](.docker/api).
 
 Running in production
 ---------------------
