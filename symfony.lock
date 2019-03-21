@@ -20,9 +20,6 @@
     "csa/guzzle-stopwatch-middleware": {
         "version": "v1.0.0"
     },
-    "cweagans/composer-patches": {
-        "version": "1.6.5"
-    },
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.4.4"
     },
