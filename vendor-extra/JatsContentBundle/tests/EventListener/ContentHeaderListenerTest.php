@@ -135,34 +135,6 @@ XML
             ],
         ];
 
-        yield 'en request no title' => [
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
-    <libero:meta>
-        <libero:id>id</libero:id>
-    </libero:meta>
-    <jats:article>
-        <jats:front/>
-    </jats:article>
-</libero:item>
-XML
-            ,
-            [
-                'lang' => 'en',
-                'dir' => 'ltr',
-            ],
-            [
-                'node' => '/libero:item/jats:article/jats:front',
-                'template' => '@LiberoPatterns/content-header.html.twig',
-                'context' => [
-                    'lang' => 'en',
-                    'dir' => 'ltr',
-                    'area' => null,
-                ],
-            ],
-        ];
-
         yield 'fr request' => [
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>

@@ -12,7 +12,6 @@ final class ContentHeaderListener
 {
     private const FRONT_PATH = '/libero:item/libero:front';
 
-
     private $converter;
 
     public function __construct(ViewConverter $converter)

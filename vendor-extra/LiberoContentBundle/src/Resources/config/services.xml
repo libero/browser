@@ -14,6 +14,12 @@
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
         </service>
 
+        <service id="Libero\LiberoContentBundle\EventListener\TitleListener"
+            class="Libero\LiberoContentBundle\EventListener\TitleListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
+        </service>
+
         <service id="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor"
             class="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>

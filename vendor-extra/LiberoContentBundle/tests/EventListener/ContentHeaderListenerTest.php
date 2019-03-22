@@ -77,11 +77,8 @@ XML
      * @test
      * @dataProvider pageProvider
      */
-    public function it_adds_a_content_header(
-        string $xml,
-        array $context,
-        array $expectedContentHeader
-    ) : void {
+    public function it_adds_a_content_header(string $xml, array $context, array $expectedContentHeader) : void
+    {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
         $event = new CreatePagePartEvent(
@@ -107,32 +104,6 @@ XML
     <libero:front xml:lang="en">
         <libero:title>Title</libero:title>
     </libero:front>
-</libero:item>
-XML
-            ,
-            [
-                'lang' => 'en',
-                'dir' => 'ltr',
-            ],
-            [
-                'node' => '/libero:item/libero:front',
-                'template' => '@LiberoPatterns/content-header.html.twig',
-                'context' => [
-                    'lang' => 'en',
-                    'dir' => 'ltr',
-                    'area' => null,
-                ],
-            ],
-        ];
-
-        yield 'en request no title' => [
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<libero:item xmlns:libero="http://libero.pub">
-    <libero:meta>
-        <libero:id>id</libero:id>
-    </libero:meta>
-    <libero:front xml:lang="en"/>
 </libero:item>
 XML
             ,
