@@ -26,13 +26,15 @@ final class TitleListener
 
         if (!is_string($pageTitle)) {
             $event->setTitle($siteName);
+
+            return;
         }
 
         $event->setTitle(
             $this->translate(
                 'libero.page.page_title',
                 $event->getContext(),
-                ['page_title' => $pageTitle, 'site_name' => $siteName]
+                ['{page_title}' => $pageTitle, '{site_name}' => $siteName]
             )
         );
     }
