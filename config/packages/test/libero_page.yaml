@@ -1,5 +1,8 @@
 libero_page:
     pages:
+        homepage:
+            type: homepage
+            path: '/'
         blog_article:
             type: content
             path: '/blog/{id}'
