@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Libero\\LiberoPatternsBundle\\": "src/"
-        }
+        },
+        "files": [
+            "src/constants.php"
+        ]
     },
     "require": {
         "php": "^7.2",

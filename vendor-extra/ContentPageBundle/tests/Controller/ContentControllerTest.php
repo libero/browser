@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use Libero\ContentPageBundle\Controller\ContentController;
 use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +70,12 @@ XML
                     'dir' => 'ltr',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [],
+                    ],
+                ],
             ],
         ];
 
@@ -86,7 +92,12 @@ XML
                     'dir' => 'ltr',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [],
+                    ],
+                ],
             ],
         ];
 
@@ -103,7 +114,12 @@ XML
                     'dir' => 'rtl',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [],
+                    ],
+                ],
             ],
         ];
     }
@@ -150,7 +166,7 @@ XML
             function (CreateContentPageEvent $event) : void {
                 $event->setContext('context', $event->getContext());
                 $event->setTitle('title');
-                $event->addContent('content');
+                $event->setContent('area', new View('template'));
             }
         );
 

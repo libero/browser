@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\ContentPageBundle\Event;
 
 use FluentDOM\DOM\Document;
+use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
 
 final class CreateContentPageEvent extends Event
@@ -27,9 +28,9 @@ final class CreateContentPageEvent extends Event
         return $this->content;
     }
 
-    public function addContent($content) : void
+    public function setContent(string $area, View $view) : void
     {
-        $this->content[] = $content;
+        $this->content[$area] = $view;
     }
 
     public function getContext() : array

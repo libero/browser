@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPageEvent;
+use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
+use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
 
 final class BodyListener
 {
     use ConvertsChildren;
+
+    private const BODY_PATH = '/libero:item/jats:article/jats:body';
 
     private $converter;
 
@@ -21,23 +23,19 @@ final class BodyListener
         $this->converter = $converter;
     }
 
-    public function onCreatePage(CreateContentPageEvent $event) : void
+    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
     {
-        $xpath = $event->getItem()->xpath();
-
-        $body = $xpath->firstOf('/libero:item/jats:article/jats:body');
+        $body = $event->getItem()->xpath()->firstOf(self::BODY_PATH);
 
         if (!$body instanceof Element) {
             return;
         }
 
-        $context = ['level' => ($event->getContext()['level'] ?? 1) + 1] + $event->getContext();
+        $context = [
+                'area' => CONTENT_GRID_PRIMARY,
+                'level' => ($event->getContext()['level'] ?? 1) + 1,
+            ] + $event->getContext();
 
-        $event->addContent(
-            new View(
-                '@LiberoPatterns/single-column-grid.html.twig',
-                ['content' => $this->convertChildren($body, $context)]
-            )
-        );
+        $event->addContent(...$this->convertChildren($body, $context));
     }
 }

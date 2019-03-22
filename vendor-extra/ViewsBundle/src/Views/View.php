@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
+use ArrayIterator;
+use IteratorAggregate;
 use JsonSerializable;
+use Traversable;
 use function array_replace_recursive;
 use function is_string;
 
-final class View implements JsonSerializable
+final class View implements JsonSerializable, IteratorAggregate
 {
     private $arguments;
     private $context;
@@ -101,5 +104,10 @@ final class View implements JsonSerializable
             'template' => $this->template,
             'arguments' => $this->arguments,
         ];
+    }
+
+    public function getIterator() : Traversable
+    {
+        return new ArrayIterator($this->jsonSerialize());
     }
 }
