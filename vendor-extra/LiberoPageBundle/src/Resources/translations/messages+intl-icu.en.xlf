@@ -12,6 +12,10 @@
                 <source>Site Name</source>
             </trans-unit>
 
+            <trans-unit id="2" resname="libero.page.page_title">
+                <source>{page_title} | {site_name}</source>
+            </trans-unit>
+
         </body>
 
     </file>

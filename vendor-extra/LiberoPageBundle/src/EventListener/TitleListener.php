@@ -20,12 +20,20 @@ final class TitleListener
 
     public function onCreatePage(CreatePageEvent $event) : void
     {
-        $title = $event->getTitle();
+        $siteName = $this->translate('libero.page.site_name', $event->getContext());
 
-        if (is_string($title)) {
-            $title .= ' | ';
+        $pageTitle = $event->getTitle();
+
+        if (!is_string($pageTitle)) {
+            $event->setTitle($siteName);
         }
 
-        $event->setTitle($title.$this->translate('libero.page.site_name', $event->getContext()));
+        $event->setTitle(
+            $this->translate(
+                'libero.page.page_title',
+                $event->getContext(),
+                ['page_title' => $pageTitle, 'site_name' => $siteName]
+            )
+        );
     }
 }
