@@ -79,13 +79,12 @@ final class SectionVisitorTest extends TestCase
         $visitor = new SectionVisitor($this->createDumpingConverter());
 
         $element = $this->loadElement($xml);
-        $context = ['level' => 1];
 
-        $view = $visitor->visit($element, new View(null, [], $context));
+        $view = $visitor->visit($element, new View(null));
 
         $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertEquals($expectedArguments, $view->getArguments());
-        $this->assertSame($context, $view->getContext());
+        $this->assertSame(['level' => 1], $view->getContext());
     }
 
     public function contentProvider() : iterable
@@ -155,5 +154,52 @@ XML
                 ],
             ],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_the_current_level() : void
+    {
+        $visitor = new SectionVisitor($this->createDumpingConverter());
+
+        $element = $this->loadElement(
+            <<<XML
+<jats:sec xmlns:jats="http://jats.nlm.nih.gov">
+    <jats:p>foo</jats:p>
+    <jats:p>bar</jats:p>
+</jats:sec>
+XML
+        );
+
+        $context = ['level' => 3];
+
+        $view = $visitor->visit($element, new View(null, [], $context));
+
+        $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
+        $this->assertEquals(
+            [
+                'content' => [
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:sec/jats:p[1]',
+                            'template' => null,
+                            'context' => ['level' => 4],
+                        ]
+                    ),
+                    new View(
+                        null,
+                        [
+                            'node' => '/jats:sec/jats:p[2]',
+                            'template' => null,
+                            'context' => ['level' => 4],
+                        ]
+                    ),
+                ],
+            ],
+            $view->getArguments()
+        );
+        $this->assertSame($context, $view->getContext());
     }
 }

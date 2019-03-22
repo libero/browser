@@ -1,0 +1,56 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
+
+<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- with start|default({}) only -%}
+    {%- block start -%}
+
+      {%- if template is defined -%}
+
+        {%- with arguments|merge({_template: template}) only -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__start'])}) -%}
+
+          {%- include _template -%}
+
+        {%- endwith -%}
+
+      {%- endif -%}
+
+    {%- endblock start -%}
+  {%- endwith -%}
+
+  {%- with main only -%}
+    {%- block main -%}
+
+      {%- with arguments|merge({_template: template}) only -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__main']), role: 'main'}) -%}
+        {%- set element = "main" -%}
+
+        {%- include _template -%}
+
+      {%- endwith -%}
+
+    {%- endblock main -%}
+  {%- endwith -%}
+
+  {%- with end|default({}) only -%}
+    {%- block end -%}
+
+      {%- if template is defined -%}
+
+        {%- with arguments|merge({_template: template}) only -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__end'])}) -%}
+
+          {%- include _template -%}
+
+        {%- endwith -%}
+
+      {%- endif -%}
+
+    {%- endblock end -%}
+  {%- endwith -%}
+
+</div>

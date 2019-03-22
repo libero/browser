@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\ViewConverter;
 
+use FluentDOM\DOM\Element;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -111,9 +113,16 @@ XML
     /**
      * @test
      */
-    public function it_sets_the_groups_argument_with_groups_with_a_type() : void
+    public function it_sets_the_groups_argument_with_converted_kwd_groups() : void
     {
-        $visitor = new FrontItemTagsVisitor($this->createDumpingConverter());
+        $visitor = new FrontItemTagsVisitor(
+            $this->createFilteringConverter(
+                $this->createDumpingConverter(),
+                function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
+                    return $node instanceof Element && $node->hasAttribute('kwd-group-type');
+                }
+            )
+        );
 
         $element = $this->loadElement(
             <<<XML
@@ -155,6 +164,47 @@ XML
             ],
             $view->getArguments()
         );
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_set_the_groups_argument_if_no_kwd_groups_convert() : void
+    {
+        $visitor = new FrontItemTagsVisitor(
+            $this->createFilteringConverter(
+                $this->createDumpingConverter(),
+                function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
+                    return false;
+                }
+            )
+        );
+
+        $element = $this->loadElement(
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<jats:front xmlns:jats="http://jats.nlm.nih.gov">
+    <jats:article-meta>
+        <jats:kwd-group kwd-group-type="foo">
+            <jats:kwd>foo</jats:kwd>
+        </jats:kwd-group>
+        <jats:kwd-group>
+            <jats:kwd>bar</jats:kwd>
+        </jats:kwd-group>
+        <jats:kwd-group kwd-group-type="baz">
+            <jats:kwd>baz</jats:kwd>
+        </jats:kwd-group>
+    </jats:article-meta>
+</jats:front>
+XML
+        );
+
+        $context = ['qux' => 'quux'];
+        $view = $visitor->visit($element, new View('@LiberoPatterns/item-tags.html.twig', [], $context));
+
+        $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
+        $this->assertEmpty($view->getArguments());
         $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace tests\Libero\JatsContentBundle\EventListener;
 
 use Libero\JatsContentBundle\EventListener\BodyListener;
-use Libero\LiberoPageBundle\Event\CreatePageEvent;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\PageTestCase;
@@ -46,10 +46,10 @@ final class BodyListenerTest extends TestCase
 XML
         );
 
-        $event = new CreatePageEvent($this->createRequest('foo'), ['content_item' => $document]);
+        $event = new CreatePagePartEvent('template', $this->createRequest('foo'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
-        $listener->onCreatePage($event);
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -73,10 +73,10 @@ XML
 XML
         );
 
-        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document]);
+        $event = new CreatePagePartEvent('template', $this->createRequest('content'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
-        $listener->onCreatePage($event);
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -91,23 +91,21 @@ XML
 
         $document = $this->loadDocument($xml);
 
-        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document], $context);
-        $listener->onCreatePage($event);
+        $event = new CreatePagePartEvent(
+            'template',
+            $this->createRequest('content'),
+            ['content_item' => $document],
+            $context
+        );
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals(
-            [
-                new View(
-                    '@LiberoPatterns/single-column-grid.html.twig',
-                    [
-                        'content' => array_map(
-                            function (array $block) : View {
-                                return new View(null, $block);
-                            },
-                            $expectedBody
-                        ),
-                    ]
-                ),
-            ],
+            array_map(
+                function (array $block) : View {
+                    return new View(null, $block);
+                },
+                $expectedBody
+            ),
             $event->getContent()
         );
     }
@@ -145,6 +143,7 @@ XML
                         'lang' => 'en',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -154,6 +153,7 @@ XML
                         'lang' => 'en',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -163,6 +163,7 @@ XML
                         'lang' => 'en',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
             ],
@@ -199,6 +200,7 @@ XML
                         'lang' => 'fr',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -208,6 +210,7 @@ XML
                         'lang' => 'fr',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -217,6 +220,7 @@ XML
                         'lang' => 'fr',
                         'dir' => 'ltr',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
             ],
@@ -253,6 +257,7 @@ XML
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -262,6 +267,7 @@ XML
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
                 [
@@ -271,6 +277,7 @@ XML
                         'lang' => 'ar-EG',
                         'dir' => 'rtl',
                         'level' => 2,
+                        'area' => 'primary',
                     ],
                 ],
             ],

@@ -9,30 +9,33 @@ use InvalidArgumentException;
 use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
+use function end;
+use function is_array;
+use function is_string;
+use function key;
 
-final class CreatePageEvent extends Event
+final class CreatePagePartEvent extends Event
 {
-    public const NAME = 'libero.page.create';
-
     private $content = [];
     private $context;
     private $documents;
     private $request;
-    private $title;
+    private $template;
+
+    public static function name(string $part) : string
+    {
+        return "libero.page.create.${part}";
+    }
 
     /**
      * @param array<string,Document> $documents
      */
-    public function __construct(Request $request, array $documents = [], array $context = [])
+    public function __construct(string $template, Request $request, array $documents = [], array $context = [])
     {
+        $this->template = $template;
         $this->request = $request;
         $this->documents = $documents;
         $this->context = $context;
-    }
-
-    public function getRequest() : Request
-    {
-        return $this->request;
     }
 
     public function getContent() : array
@@ -40,9 +43,27 @@ final class CreatePageEvent extends Event
         return $this->content;
     }
 
-    public function setContent(string $area, View $view) : void
+    public function addContent(View ...$views) : void
     {
-        $this->content[$area] = $view;
+        foreach ($views as $view) {
+            $area = $view->getContext('area');
+
+            if (!is_string($area)) {
+                $this->content[] = $view;
+
+                continue;
+            }
+
+            $last = end($this->content);
+            if (is_array($last) && $area === $last['area']) {
+                $key = key($this->content);
+                $this->content[$key]['content'][] = $view;
+
+                continue;
+            }
+
+            $this->content[] = ['area' => $area, 'content' => [$view]];
+        }
     }
 
     public function getContext() : array
@@ -72,13 +93,13 @@ final class CreatePageEvent extends Event
         return $this->documents;
     }
 
-    public function getTitle() : ?string
+    public function getRequest() : Request
     {
-        return $this->title;
+        return $this->request;
     }
 
-    public function setTitle(string $title) : void
+    public function getTemplate() : string
     {
-        $this->title = $title;
+        return $this->template;
     }
 }

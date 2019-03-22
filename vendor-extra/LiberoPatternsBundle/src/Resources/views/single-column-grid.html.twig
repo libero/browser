@@ -1,7 +1,0 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid', 'grid--single-column', 'wrapper']) }) -%}
-
-<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-
-  {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
-
-</div>

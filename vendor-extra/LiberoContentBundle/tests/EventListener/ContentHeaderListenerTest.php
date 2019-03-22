@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace tests\Libero\LiberoContentBundle\EventListener;
 
 use Libero\LiberoContentBundle\EventListener\ContentHeaderListener;
-use Libero\LiberoPageBundle\Event\CreatePageEvent;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\PageTestCase;
@@ -39,10 +39,10 @@ final class ContentHeaderListenerTest extends TestCase
 XML
         );
 
-        $event = new CreatePageEvent($this->createRequest('foo'), ['content_item' => $document]);
+        $event = new CreatePagePartEvent('template', $this->createRequest('foo'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
-        $listener->onCreatePage($event);
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -65,10 +65,10 @@ XML
 XML
         );
 
-        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document]);
+        $event = new CreatePagePartEvent('template', $this->createRequest('content'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
-        $listener->onCreatePage($event);
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -77,22 +77,21 @@ XML
      * @test
      * @dataProvider pageProvider
      */
-    public function it_sets_the_title_and_adds_a_content_header(
+    public function it_adds_a_content_header(
         string $xml,
         array $context,
-        ?string $expectedTitle,
         array $expectedContentHeader
     ) : void {
         $listener = new ContentHeaderListener($this->createDumpingConverter());
 
-        $event = new CreatePageEvent(
+        $event = new CreatePagePartEvent(
+            'template',
             $this->createRequest('content'),
             ['content_item' => $this->loadDocument($xml)],
             $context
         );
-        $listener->onCreatePage($event);
+        $listener->onCreatePagePart($event);
 
-        $this->assertSame($expectedTitle, $event->getTitle());
         $this->assertEquals([new View(null, $expectedContentHeader)], $event->getContent());
     }
 
@@ -115,13 +114,13 @@ XML
                 'lang' => 'en',
                 'dir' => 'ltr',
             ],
-            'Title',
             [
                 'node' => '/libero:item/libero:front',
                 'template' => '@LiberoPatterns/content-header.html.twig',
                 'context' => [
                     'lang' => 'en',
                     'dir' => 'ltr',
+                    'area' => null,
                 ],
             ],
         ];
@@ -141,13 +140,13 @@ XML
                 'lang' => 'en',
                 'dir' => 'ltr',
             ],
-            null,
             [
                 'node' => '/libero:item/libero:front',
                 'template' => '@LiberoPatterns/content-header.html.twig',
                 'context' => [
                     'lang' => 'en',
                     'dir' => 'ltr',
+                    'area' => null,
                 ],
             ],
         ];
@@ -169,13 +168,13 @@ XML
                 'lang' => 'fr',
                 'dir' => 'ltr',
             ],
-            'Title',
             [
                 'node' => '/libero:item/libero:front',
                 'template' => '@LiberoPatterns/content-header.html.twig',
                 'context' => [
                     'lang' => 'fr',
                     'dir' => 'ltr',
+                    'area' => null,
                 ],
             ],
         ];
@@ -197,43 +196,15 @@ XML
                 'lang' => 'ar-EG',
                 'dir' => 'rtl',
             ],
-            'Title',
             [
                 'node' => '/libero:item/libero:front',
                 'template' => '@LiberoPatterns/content-header.html.twig',
                 'context' => [
                     'lang' => 'ar-EG',
                     'dir' => 'rtl',
+                    'area' => null,
                 ],
             ],
         ];
-    }
-
-    /**
-     * @test
-     */
-    public function it_does_not_replace_an_existing_title() : void
-    {
-        $listener = new ContentHeaderListener($this->createDumpingConverter());
-
-        $document = $this->loadDocument(
-            <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<libero:item xmlns:libero="http://libero.pub">
-    <libero:meta>
-        <libero:id>id</libero:id>
-    </libero:meta>
-    <libero:front xml:lang="en">
-        <libero:title>New Title</libero:title>
-    </libero:front>
-</libero:item>
-XML
-        );
-
-        $event = new CreatePageEvent($this->createRequest('content'), ['content_item' => $document]);
-        $event->setTitle('Existing Title');
-        $listener->onCreatePage($event);
-
-        $this->assertSame('Existing Title', $event->getTitle());
     }
 }

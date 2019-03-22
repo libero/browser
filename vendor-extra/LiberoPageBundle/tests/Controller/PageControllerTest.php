@@ -8,6 +8,7 @@ use Libero\LiberoPageBundle\Controller\PageController;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\LoadPageEvent;
 use Libero\LiberoPageBundle\Exception\NoContentSet;
+use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,16 @@ final class PageControllerTest extends TestCase
             CreatePageEvent::NAME => function (CreatePageEvent $event) : void {
                 $event->setContext('context', $event->getContext());
                 $event->setTitle('title');
-                $event->addContent($event->getDocument('foo')->textContent);
+                $event->setContent(
+                    'area',
+                    new View(
+                        'template',
+                        [
+                        'content' => $event->getDocument('foo')
+                            ->textContent,
+                        ]
+                    )
+                );
             },
         ];
 
@@ -62,7 +72,14 @@ final class PageControllerTest extends TestCase
                     'dir' => 'ltr',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [
+                            'content' => 'content',
+                        ],
+                    ],
+                ],
             ],
         ];
 
@@ -79,7 +96,14 @@ final class PageControllerTest extends TestCase
                     'dir' => 'ltr',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [
+                            'content' => 'content',
+                        ],
+                    ],
+                ],
             ],
         ];
 
@@ -96,7 +120,14 @@ final class PageControllerTest extends TestCase
                     'dir' => 'rtl',
                 ],
                 'title' => 'title',
-                'content' => ['content'],
+                'content' => [
+                    'area' => [
+                        'template' => 'template',
+                        'arguments' => [
+                            'content' => 'content',
+                        ],
+                    ],
+                ],
             ],
         ];
     }
