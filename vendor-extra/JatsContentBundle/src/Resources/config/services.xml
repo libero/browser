@@ -89,7 +89,13 @@
                 <!-- Map of @article-type values to translation keys -->
                 <argument key="research-article">libero.jats.article_type.research_article</argument>
             </argument>
-            <tag name="libero.view_converter"/>
+            <tag name="libero.view_converter" priority="-100"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontDisplayChannelContentMetaVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontDisplayChannelContentMetaVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
             <tag name="libero.view_converter"/>
         </service>
 
