@@ -75,6 +75,24 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderMetaVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontContentHeaderMetaVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\ViewConverter\FrontArticleTypeContentMetaVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\FrontArticleTypeContentMetaVisitor">
+            <argument type="service" id="translator"/>
+            <argument type="collection">
+                <!-- Map of @article-type values to translation keys -->
+                <argument key="research-article">libero.jats.article_type.research_article</argument>
+            </argument>
+            <tag name="libero.view_converter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor"
             class="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>

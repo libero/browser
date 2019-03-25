@@ -12,6 +12,14 @@
                 <source>Categories that include this item</source>
             </trans-unit>
 
+            <trans-unit id="2" resname="libero.patterns.content_header.meta.label">
+                <source>Publication details</source>
+            </trans-unit>
+
+            <trans-unit id="3" resname="libero.patterns.content_header.meta.type.label">
+                <source>Type of article</source>
+            </trans-unit>
+
         </body>
 
     </file>

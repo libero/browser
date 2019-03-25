@@ -16,6 +16,10 @@
                 <source>Research organism</source>
             </trans-unit>
 
+            <trans-unit id="3" resname="libero.jats.article_type.research_article">
+                <source>Research article</source>
+            </trans-unit>
+
         </body>
 
     </file>
