@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
+use FluentDOM\DOM\Node;
 use LogicException;
 use function array_push;
 use function is_string;
+use function var_dump;
 
 final class ViewConverterRegistry implements ViewConverter
 {
@@ -19,7 +20,7 @@ final class ViewConverterRegistry implements ViewConverter
         array_push($this->visitors, ...$visitors);
     }
 
-    public function convert(NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View
+    public function convert(Node $node, ?string $template = null, array $context = []) : View
     {
         if (!$node instanceof Element) {
             if (is_string($template) && '@LiberoPatterns/text.html.twig' !== $template) {
@@ -35,6 +36,10 @@ final class ViewConverterRegistry implements ViewConverter
 
         foreach ($this->visitors as $visitor) {
             $view = $visitor->visit($node, $view);
+
+            if ($view->hasContext('lazy')) {
+                return $view;
+            }
         }
 
         if (!$view->getTemplate()) {

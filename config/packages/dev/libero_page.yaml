@@ -3,6 +3,7 @@ libero_page:
         homepage:
             type: homepage
             path: '/'
+            content_service: 'scholarly-articles'
         blog_article:
             type: content
             path: '/blog/{id}'

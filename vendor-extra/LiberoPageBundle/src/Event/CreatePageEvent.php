@@ -58,7 +58,8 @@ final class CreatePageEvent extends Event
     public function getDocument(string $key) : Document
     {
         if (!isset($this->documents[$key])) {
-            throw new InvalidArgumentException("Unknown document '{$key}'");
+            throw new InvalidArgumentException("Unknown document '{$key}'; known keys are: '".implode("', '",
+                    array_keys($this->documents))."'");
         }
 
         return $this->documents[$key];

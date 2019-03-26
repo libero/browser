@@ -3,6 +3,7 @@ libero_page:
         homepage:
             type: homepage
             path: '/'
+            content_service: 'blog-articles'
         blog_article:
             type: content
             path: '/blog/{id}'

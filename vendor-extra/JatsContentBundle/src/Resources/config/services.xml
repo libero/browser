@@ -100,6 +100,12 @@
             <tag name="libero.view_converter"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\ViewConverter\ItemParagraphVisitor"
+            class="Libero\JatsContentBundle\ViewConverter\ItemParagraphVisitor">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="libero.view_converter"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\ViewConverter\SectionVisitor"
             class="Libero\JatsContentBundle\ViewConverter\SectionVisitor">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>

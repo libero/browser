@@ -28,6 +28,11 @@ final class LoadPageEvent extends Event
         return $this->request;
     }
 
+    public function hasDocument(string $key) : bool
+    {
+        return isset($this->documents[$key]);
+    }
+
     public function addDocument(string $key, PromiseInterface $promise) : void
     {
         $this->documents[$key] = $promise;

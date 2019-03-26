@@ -53,9 +53,10 @@ final class LiberoPageConfiguration implements ConfigurationInterface
                         ->isRequired()
                     ->end()
                     ->scalarNode('content_service')
+                        ->isRequired()
                     ->end()
                 ->end()
-                ->validate()
+                /*->validate()
                     ->ifTrue(function (array $values) : bool {
                         return 'content' === $values['type'] && !isset($values['content_service']);
                     })
@@ -66,7 +67,7 @@ final class LiberoPageConfiguration implements ConfigurationInterface
                         return 'content' !== $values['type'] && isset($values['content_service']);
                     })
                     ->thenInvalid('Non-content pages cannot have a content_service')
-                ->end()
+                ->end()*/
             ->end()
         ;
         return $pagesNode;
