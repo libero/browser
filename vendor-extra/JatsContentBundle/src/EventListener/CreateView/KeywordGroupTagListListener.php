@@ -6,7 +6,6 @@ namespace Libero\JatsContentBundle\EventListener\CreateView;
 
 use DOMNodeList;
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Event\CreateViewEvent;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
@@ -31,11 +30,8 @@ final class KeywordGroupTagListListener
         $this->translationKeys = $translationKeys;
     }
 
-    protected function handle(CreateViewEvent $event) : View
+    protected function handle(Element $object, View $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
 
@@ -72,7 +68,7 @@ final class KeywordGroupTagListListener
             );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/tag-list.html.twig';
     }

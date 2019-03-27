@@ -6,7 +6,6 @@ namespace Libero\JatsContentBundle\EventListener\CreateView;
 
 use DOMNodeList;
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Event\CreateViewEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
@@ -26,11 +25,8 @@ final class FrontItemTagsListener
         $this->converter = $converter;
     }
 
-    protected function handle(CreateViewEvent $event) : View
+    protected function handle(Element $object, View $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
         /** @var DOMNodeList|Element[] $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()
             ->evaluate('jats:article-meta/jats:kwd-group', $object);
@@ -57,7 +53,7 @@ final class FrontItemTagsListener
         return $view->withArgument('groups', $groups);
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/item-tags.html.twig';
     }

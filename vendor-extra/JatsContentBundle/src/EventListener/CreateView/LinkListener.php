@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\EventListener\CreateView;
 
-use Libero\ViewsBundle\Event\CreateViewEvent;
+use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
@@ -22,15 +22,12 @@ final class LinkListener
         $this->converter = $converter;
     }
 
-    protected function handle(CreateViewEvent $event) : View
+    protected function handle(Element $object, View $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/link.html.twig';
     }

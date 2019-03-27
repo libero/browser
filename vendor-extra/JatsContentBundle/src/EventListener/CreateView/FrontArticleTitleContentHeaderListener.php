@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\CreateView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Event\CreateViewEvent;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -21,11 +20,8 @@ final class FrontArticleTitleContentHeaderListener
         $this->converter = $converter;
     }
 
-    protected function handle(CreateViewEvent $event) : View
+    protected function handle(Element $object, View $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
 
@@ -39,7 +35,7 @@ final class FrontArticleTitleContentHeaderListener
         );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/content-header.html.twig';
     }

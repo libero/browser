@@ -6,7 +6,6 @@ namespace Libero\JatsContentBundle\EventListener\CreateView;
 
 use DOMNodeList;
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Event\CreateViewEvent;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
@@ -28,12 +27,9 @@ final class FrontSubjectGroupContentHeaderListener
         $this->translator = $translator;
     }
 
-    protected function handle(CreateViewEvent $event) : View
+    protected function handle(Element $object, View $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
-        /** @var DOMNodeList|Element[] $subjects */
+/** @var DOMNodeList|Element[] $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(
             'jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type="heading"]/jats:subject',
             $object
@@ -62,7 +58,7 @@ final class FrontSubjectGroupContentHeaderListener
         );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/content-header.html.twig';
     }
