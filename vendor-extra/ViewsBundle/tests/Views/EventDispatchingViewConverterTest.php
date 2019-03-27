@@ -69,18 +69,20 @@ final class EventDispatchingViewConverterTest extends TestCase
 
         $node = new Element('element');
 
+        $expected = new View('changed', ['one' => 'two'], ['three' => 'four']);
+
         $dispatcher->addListener(
             CreateViewEvent::NAME,
-            function (CreateViewEvent $event) use ($node) : void {
+            function (CreateViewEvent $event) use ($expected, $node) : void {
                 $this->assertEquals($node, $event->getObject());
                 $this->assertEquals(new View('template', [], ['con' => 'text']), $event->getView());
 
-                $event->setView(new View('changed'));
+                $event->setView($expected);
             }
         );
 
         $view = $handler->convert($node, 'template', ['con' => 'text']);
 
-        $this->assertEquals('changed', $view->getTemplate());
+        $this->assertEquals($expected, $view);
     }
 }
