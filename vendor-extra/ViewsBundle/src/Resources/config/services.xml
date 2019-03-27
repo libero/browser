@@ -8,15 +8,17 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\ViewsBundle\Views\ViewConverterRegistry"
-            class="Libero\ViewsBundle\Views\ViewConverterRegistry"/>
+        <service id="Libero\ViewsBundle\Views\EventDispatchingViewConverter"
+            class="Libero\ViewsBundle\Views\EventDispatchingViewConverter">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
 
         <service id="Libero\ViewsBundle\Views\ViewConverter"
-            alias="Libero\ViewsBundle\Views\ViewConverterRegistry"/>
+            alias="Libero\ViewsBundle\Views\EventDispatchingViewConverter"/>
 
-        <service id="Libero\ViewsBundle\ViewConverter\LangVisitor"
-            class="Libero\ViewsBundle\ViewConverter\LangVisitor">
-            <tag name="libero.view_converter" priority="100"/>
+        <service id="Libero\ViewsBundle\EventListener\CreateView\LangListener"
+            class="Libero\ViewsBundle\EventListener\CreateView\LangListener">
+            <tag name="kernel.event_listener" event="libero.view.create" method="onCreateView" priority="100"/>
         </service>
 
     </services>
