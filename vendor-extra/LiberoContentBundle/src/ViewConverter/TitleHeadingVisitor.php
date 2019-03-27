@@ -26,7 +26,7 @@ final class TitleHeadingVisitor implements ViewConverterVisitor
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/heading.html.twig';
     }

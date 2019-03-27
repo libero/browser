@@ -5,14 +5,20 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
+use LogicException;
 use function in_array;
+use function is_string;
 use function sprintf;
 
 trait SimplifiedVisitor
 {
     final public function visit(Element $object, View $view) : View
     {
-        if ($this->expectedTemplate() !== $view->getTemplate()) {
+        if (is_string($this->expectedTemplate()) && $this->expectedTemplate() !== $view->getTemplate()) {
+            return $view;
+        }
+
+        if (is_string($view->getTemplate()) && $this->possibleTemplate() !== $view->getTemplate()) {
             return $view;
         }
 
@@ -26,12 +32,28 @@ trait SimplifiedVisitor
             }
         }
 
+        if (null === $view->getTemplate()) {
+            $view = $view->withTemplate($this->possibleTemplate());
+        }
+
         return $this->doVisit($object, $view);
     }
 
     abstract protected function doVisit(Element $object, View $view) : View;
 
-    abstract protected function expectedTemplate() : string;
+    protected function expectedTemplate() : ?string
+    {
+        return null;
+    }
+
+    protected function possibleTemplate() : string
+    {
+        if (!is_string($this->expectedTemplate())) {
+            throw new LogicException('Visitor must override possibleTemplate() if it does not expectedTemplate()');
+        }
+
+        return $this->expectedTemplate();
+    }
 
     /**
      * @return array<string>

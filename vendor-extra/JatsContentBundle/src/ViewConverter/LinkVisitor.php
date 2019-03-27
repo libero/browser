@@ -28,7 +28,7 @@ final class LinkVisitor implements ViewConverterVisitor
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/link.html.twig';
     }

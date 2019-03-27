@@ -8,7 +8,7 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
+use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
@@ -18,7 +18,7 @@ use function iterator_to_array;
 final class SectionVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedChildVisitor;
+    use SimplifiedVisitor;
 
     private $converter;
 
@@ -67,9 +67,9 @@ final class SectionVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/section.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://jats.nlm.nih.gov}sec';
+        return ['{http://jats.nlm.nih.gov}sec'];
     }
 
     protected function unexpectedArguments() : array

@@ -6,7 +6,7 @@ namespace Libero\LiberoContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
+use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
@@ -14,7 +14,7 @@ use Libero\ViewsBundle\Views\ViewConverterVisitor;
 final class ItalicVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedChildVisitor;
+    use SimplifiedVisitor;
 
     private $converter;
 
@@ -33,9 +33,9 @@ final class ItalicVisitor implements ViewConverterVisitor
         return '@LiberoPatterns/italic.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function expectedElement() : array
     {
-        return '{http://libero.pub}italic';
+        return ['{http://libero.pub}italic'];
     }
 
     protected function unexpectedArguments() : array

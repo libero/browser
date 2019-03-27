@@ -54,7 +54,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
         return $view->withArgument('groups', $groups);
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/item-tags.html.twig';
     }

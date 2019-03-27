@@ -38,7 +38,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/content-header.html.twig';
     }

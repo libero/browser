@@ -69,7 +69,7 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
             );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/tag-list.html.twig';
     }

@@ -62,7 +62,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         );
     }
 
-    protected function expectedTemplate() : string
+    protected function expectedTemplate() : ?string
     {
         return '@LiberoPatterns/content-header.html.twig';
     }
