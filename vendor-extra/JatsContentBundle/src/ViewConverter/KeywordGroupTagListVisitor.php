@@ -31,7 +31,7 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         $this->translationKeys = $translationKeys;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);

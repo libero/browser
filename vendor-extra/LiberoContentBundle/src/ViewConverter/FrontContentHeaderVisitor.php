@@ -21,7 +21,7 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('libero:title[1]', $object);

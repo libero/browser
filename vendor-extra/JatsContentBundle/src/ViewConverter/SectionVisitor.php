@@ -27,7 +27,7 @@ final class SectionVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         if (!$view->hasContext('level')) {
             $view = $view->withContext(['level' => 1]);

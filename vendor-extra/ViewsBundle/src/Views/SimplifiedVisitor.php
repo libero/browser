@@ -36,10 +36,10 @@ trait SimplifiedVisitor
             $view = $view->withTemplate($this->possibleTemplate());
         }
 
-        return $this->doVisit($object, $view);
+        return $this->handle($object, $view);
     }
 
-    abstract protected function doVisit(Element $object, View $view) : View;
+    abstract protected function handle(Element $object, View $view) : View;
 
     protected function expectedTemplate() : ?string
     {

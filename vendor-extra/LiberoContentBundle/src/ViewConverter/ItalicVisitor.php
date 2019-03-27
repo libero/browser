@@ -23,7 +23,7 @@ final class ItalicVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }

@@ -31,7 +31,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         $this->translator = $translator;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         /** @var DOMNodeList|Element[] $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(
