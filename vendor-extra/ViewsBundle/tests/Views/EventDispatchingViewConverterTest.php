@@ -67,47 +67,20 @@ final class EventDispatchingViewConverterTest extends TestCase
         $dispatcher = new EventDispatcher();
         $handler = new EventDispatchingViewConverter($dispatcher);
 
-        $dispatcher->addListener(
-            CreateViewEvent::NAME,
-            function (CreateViewEvent $event) : void {
-                $event->setView(
-                    $event->getView()
-                        ->withTemplate($event->getView()->getTemplate().'foo')
-                        ->withArgument('node', $event->getObject())
-                        ->withArgument('foo', 'foo')
-                        ->withContext(['one' => 'foo'])
-                );
-            }
-        );
+        $node = new Element('element');
 
         $dispatcher->addListener(
             CreateViewEvent::NAME,
-            function (CreateViewEvent $event) : void {
-                $event->setView(
-                    $event->getView()
-                        ->withTemplate($event->getView()->getTemplate().'bar')
-                        ->withArgument('bar', 'bar')
-                        ->withContext(['one' => 'bar'])
-                );
+            function (CreateViewEvent $event) use ($node) : void {
+                $this->assertEquals($node, $event->getObject());
+                $this->assertEquals(new View('template', [], ['con' => 'text']), $event->getView());
+
+                $event->setView(new View('changed'));
             }
         );
 
-        $dispatcher->addListener(
-            CreateViewEvent::NAME,
-            function (CreateViewEvent $event) : void {
-                $event->setView(
-                    $event->getView()
-                        ->withTemplate($event->getView()->getTemplate().'baz')
-                        ->withArgument('baz', 'baz')
-                        ->withContext(['one' => 'baz'])
-                );
-            }
-        );
+        $view = $handler->convert($node, 'template', ['con' => 'text']);
 
-        $view = $handler->convert($node = new Element('element'), 'template', ['con' => 'text', 'one' => 'two']);
-
-        $this->assertEquals('templatefoobarbaz', $view->getTemplate());
-        $this->assertEquals(['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz', 'node' => $node], $view->getArguments());
-        $this->assertEquals(['con' => 'text', 'one' => 'baz'], $view->getContext());
+        $this->assertEquals('changed', $view->getTemplate());
     }
 }
