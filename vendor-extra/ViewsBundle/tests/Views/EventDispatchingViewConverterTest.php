@@ -62,7 +62,7 @@ final class EventDispatchingViewConverterTest extends TestCase
     /**
      * @test
      */
-    public function it_delegates_to_visitors() : void
+    public function it_dispatches_an_event() : void
     {
         $dispatcher = new EventDispatcher();
         $handler = new EventDispatchingViewConverter($dispatcher);

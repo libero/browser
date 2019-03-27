@@ -7,9 +7,9 @@ namespace Libero\JatsContentBundle\EventListener\CreateView;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\CreateViewEvent;
+use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
-use Libero\ViewsBundle\Views\TranslatingVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -18,9 +18,9 @@ use function count;
 
 final class KeywordGroupTagListListener
 {
+    use ContextAwareTranslation;
     use ConvertsLists;
     use SimplifiedViewConverterListener;
-    use TranslatingVisitor;
 
     private $translationKeys;
 

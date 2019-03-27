@@ -6,7 +6,7 @@ namespace Libero\ViewsBundle\Views;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-trait TranslatingVisitor
+trait ContextAwareTranslation
 {
     /** @var TranslatorInterface */
     private $translator;
