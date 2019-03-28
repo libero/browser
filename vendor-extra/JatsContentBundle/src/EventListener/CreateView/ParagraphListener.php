@@ -6,14 +6,15 @@ namespace Libero\JatsContentBundle\EventListener\CreateView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\OptionalTemplateListener;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
+use function Libero\ViewsBundle\array_has_key;
 
 final class ParagraphListener
 {
     use ConvertsChildren;
-    use SimplifiedViewConverterListener;
+    use OptionalTemplateListener;
 
     private $converter;
 
@@ -27,18 +28,18 @@ final class ParagraphListener
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function possibleTemplate() : string
+    protected function template() : string
     {
         return '@LiberoPatterns/paragraph.html.twig';
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}p'];
+        return '{http://jats.nlm.nih.gov}p' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['text'];
+        return !array_has_key($arguments, 'text');
     }
 }

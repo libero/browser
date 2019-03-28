@@ -6,19 +6,45 @@ namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\CreateViewEvent;
+use function sprintf;
 
 trait SimplifiedViewConverterListener
 {
-    use OptionalViewConverterListener;
-
     final public function onCreateView(CreateViewEvent $event) : void
     {
-        if (!$this->check($event)) {
+        $object = $event->getObject();
+        $view = $event->getView();
+
+        if (!$this->canHandleTemplate($view->getTemplate())) {
             return;
         }
 
-        $event->setView($this->handle($event->getObject(), $event->getView()));
+        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
+            return;
+        }
+
+        if (!$this->canHandleArguments($view->getArguments())) {
+            return;
+        }
+
+        $view = $this->beforeHandle($view);
+
+        $event->setView($this->handle($object, $view));
     }
 
     abstract protected function handle(Element $object, View $view) : View;
+
+    abstract protected function canHandleTemplate(?string $template) : bool;
+
+    abstract protected function canHandleElement(string $element) : bool;
+
+    protected function canHandleArguments(array $arguments) : bool
+    {
+        return true;
+    }
+
+    protected function beforeHandle(View $view) : View
+    {
+        return $view;
+    }
 }

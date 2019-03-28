@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Libero\\ViewsBundle\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "require": {
         "php": "^7.2",

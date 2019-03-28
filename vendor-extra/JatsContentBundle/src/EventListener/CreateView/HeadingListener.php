@@ -9,6 +9,8 @@ use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
+use function Libero\ViewsBundle\array_has_key;
+use function Libero\ViewsBundle\string_is;
 
 final class HeadingListener
 {
@@ -29,21 +31,18 @@ final class HeadingListener
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function expectedTemplate() : ?string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/heading.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return [
-            '{http://jats.nlm.nih.gov}article-title',
-            '{http://jats.nlm.nih.gov}title',
-        ];
+        return string_is($element, '{http://jats.nlm.nih.gov}article-title', '{http://jats.nlm.nih.gov}title');
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['text'];
+        return !array_has_key($arguments, 'text');
     }
 }

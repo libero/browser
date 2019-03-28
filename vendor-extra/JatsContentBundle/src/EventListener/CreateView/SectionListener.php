@@ -8,16 +8,17 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\OptionalTemplateListener;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_map;
 use function iterator_to_array;
+use function Libero\ViewsBundle\array_has_key;
 
 final class SectionListener
 {
     use ConvertsChildren;
-    use SimplifiedViewConverterListener;
+    use OptionalTemplateListener;
 
     private $converter;
 
@@ -61,18 +62,18 @@ final class SectionListener
         );
     }
 
-    protected function possibleTemplate() : string
+    protected function template() : string
     {
         return '@LiberoPatterns/section.html.twig';
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}sec'];
+        return '{http://jats.nlm.nih.gov}sec' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['content'];
+        return !array_has_key($arguments, 'content');
     }
 }

@@ -14,6 +14,7 @@ use function array_filter;
 use function array_map;
 use function array_values;
 use function count;
+use function Libero\ViewsBundle\array_has_key;
 
 final class FrontItemTagsListener
 {
@@ -53,18 +54,18 @@ final class FrontItemTagsListener
         return $view->withArgument('groups', $groups);
     }
 
-    protected function expectedTemplate() : ?string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/item-tags.html.twig';
+        return '@LiberoPatterns/item-tags.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}front'];
+        return '{http://jats.nlm.nih.gov}front' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['groups'];
+        return !array_has_key($arguments, 'groups');
     }
 }
