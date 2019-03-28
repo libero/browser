@@ -20,7 +20,7 @@ final class HomepageContentHeaderListener
 
     public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
-        if ('homepage' !== $event->getRequest()->attributes->get('libero_page')['type']) {
+        if (!$event->isFor('homepage')) {
             return;
         }
 

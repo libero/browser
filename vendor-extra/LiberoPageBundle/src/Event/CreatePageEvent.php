@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class CreatePageEvent extends Event
 {
+    use PageEvent;
+
     public const NAME = 'libero.page.create';
 
     private $content = [];
-    private $context;
     private $documents;
-    private $request;
     private $title;
 
     /**
@@ -30,11 +30,6 @@ final class CreatePageEvent extends Event
         $this->context = $context;
     }
 
-    public function getRequest() : Request
-    {
-        return $this->request;
-    }
-
     public function getContent() : array
     {
         return $this->content;
@@ -43,16 +38,6 @@ final class CreatePageEvent extends Event
     public function setContent(string $area, View $view) : void
     {
         $this->content[$area] = $view;
-    }
-
-    public function getContext() : array
-    {
-        return $this->context;
-    }
-
-    public function setContext(string $key, $value) : void
-    {
-        $this->context[$key] = $value;
     }
 
     public function getDocument(string $key) : Document

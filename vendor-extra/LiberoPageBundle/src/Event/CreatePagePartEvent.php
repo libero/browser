@@ -16,10 +16,10 @@ use function key;
 
 final class CreatePagePartEvent extends Event
 {
+    use PageEvent;
+
     private $content = [];
-    private $context;
     private $documents;
-    private $request;
     private $template;
 
     public static function name(string $part) : string
@@ -66,16 +66,6 @@ final class CreatePagePartEvent extends Event
         }
     }
 
-    public function getContext() : array
-    {
-        return $this->context;
-    }
-
-    public function setContext(string $key, $value) : void
-    {
-        $this->context[$key] = $value;
-    }
-
     public function getDocument(string $key) : Document
     {
         if (!isset($this->documents[$key])) {
@@ -91,11 +81,6 @@ final class CreatePagePartEvent extends Event
     public function getDocuments() : array
     {
         return $this->documents;
-    }
-
-    public function getRequest() : Request
-    {
-        return $this->request;
     }
 
     public function getTemplate() : string

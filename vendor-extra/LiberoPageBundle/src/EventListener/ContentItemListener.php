@@ -21,12 +21,11 @@ final class ContentItemListener
 
     public function onLoadPage(LoadPageEvent $event) : void
     {
-        $request = $event->getRequest();
-        $page = $request->attributes->get('libero_page', ['type' => '']);
-
-        if ('content' !== $page['type']) {
+        if (!$event->isFor('content')) {
             return;
         }
+
+        $page = $event->getRequest()->attributes->get('libero_page');
 
         $event->addDocument(
             'content_item',

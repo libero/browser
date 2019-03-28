@@ -109,4 +109,15 @@ final class CreatePagePartEventTest extends TestCase
 
         $this->assertSame('template', $event->getTemplate());
     }
+
+    /**
+     * @test
+     */
+    public function it_is_for_a_page() : void
+    {
+        $event = new CreatePagePartEvent('template', $this->createRequest('page'));
+
+        $this->assertTrue($event->isFor('page'));
+        $this->assertFalse($event->isFor('other-page'));
+    }
 }
