@@ -20,40 +20,40 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\FrontContentHeaderVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\TitleHeadingVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\ItalicVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\ItalicVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\BoldVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\BoldVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\BoldListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\BoldListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\SubVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\SubVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SubListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\SubListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\ViewConverter\SupVisitor"
-            class="Libero\LiberoContentBundle\ViewConverter\SupVisitor">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SupListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\SupListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
     </services>

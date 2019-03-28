@@ -604,13 +604,14 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ViewsBundle",
-                "reference": "663111de6f8502faefdd760612ebfeba9b4a7b17"
+                "reference": "4bc2ea628893b34c5ae926178bf5bc91948c90c8"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.0",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",
+                "symfony/event-dispatcher": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "require-dev": {
