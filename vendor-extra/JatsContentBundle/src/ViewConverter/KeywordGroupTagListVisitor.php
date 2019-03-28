@@ -37,7 +37,7 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
 
-        /** @var DOMNodeList|Element[] $keywords */
+        /** @var DOMNodeList<Element> $keywords */
         $keywords = $object('jats:kwd');
 
         if (0 === count($keywords)) {

@@ -34,7 +34,7 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
 
     protected function handle(Element $object, View $view) : View
     {
-        /** @var DOMNodeList|Element[] $subjects */
+        /** @var DOMNodeList<Element> $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(
             'jats:article-meta/jats:article-categories/jats:subj-group[@subj-group-type="heading"]/jats:subject',
             $object

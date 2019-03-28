@@ -46,7 +46,7 @@ final class SectionVisitor implements ViewConverterVisitor
             );
         }
 
-        /** @var DOMNodeList|Element[] $children */
+        /** @var DOMNodeList<Element> $children */
         $children = $object('*[not(local-name()="title" and namespace-uri()="http://jats.nlm.nih.gov")]');
 
         $childContext = $view->getContext();

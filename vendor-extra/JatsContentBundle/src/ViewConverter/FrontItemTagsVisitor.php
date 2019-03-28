@@ -29,7 +29,7 @@ final class FrontItemTagsVisitor implements ViewConverterVisitor
 
     protected function handle(Element $object, View $view) : View
     {
-        /** @var DOMNodeList|Element[] $keywordGroups */
+        /** @var DOMNodeList<Element> $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()
             ->evaluate('jats:article-meta/jats:kwd-group', $object);
 
