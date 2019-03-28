@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use Libero\ViewsBundle\Views\TranslatingVisitor;
+use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\View;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class HomepageContentHeaderListener
 {
-    use TranslatingVisitor;
+    use ContextAwareTranslation;
 
     public function __construct(TranslatorInterface $translator)
     {

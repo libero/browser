@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
-use Libero\ViewsBundle\Views\TranslatingVisitor;
+use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function is_string;
 
 final class TitleListener
 {
-    use TranslatingVisitor;
+    use ContextAwareTranslation;
 
     public function __construct(TranslatorInterface $translator)
     {

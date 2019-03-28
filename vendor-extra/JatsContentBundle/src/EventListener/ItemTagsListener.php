@@ -22,7 +22,7 @@ final class ItemTagsListener
 
     public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
-        if ('content' !== $event->getRequest()->attributes->get('libero_page')['type']) {
+        if (!$event->isFor('content')) {
             return;
         }
 

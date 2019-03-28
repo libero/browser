@@ -14,7 +14,7 @@ final class TitleListener
 
     public function onCreatePage(CreatePageEvent $event) : void
     {
-        if ('content' !== $event->getRequest()->attributes->get('libero_page')['type']) {
+        if (!$event->isFor('content')) {
             return;
         }
 
