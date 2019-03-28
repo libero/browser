@@ -21,7 +21,6 @@ final class ItalicListener
         $this->converter = $converter;
     }
 
-
     protected function handle(Element $object, View $view) : View
     {
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
