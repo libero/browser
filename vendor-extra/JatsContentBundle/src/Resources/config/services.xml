@@ -39,26 +39,26 @@
             <tag name="kernel.event_listener" event="libero.page.content" method="onCreatePage" priority="1000"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\HeadingVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\HeadingVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\LinkVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\LinkVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\LinkListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\LinkListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter" priority="-10"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\FrontItemTagsVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontItemTagsListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontItemTagsListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\KeywordGroupTagListVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\KeywordGroupTagListListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\KeywordGroupTagListListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
             <argument type="collection">
@@ -66,56 +66,56 @@
                 <argument key="author-keywords">libero.jats.keyword_group.title.author_keywords</argument>
                 <argument key="research-organism">libero.jats.keyword_group.title.research_organism</argument>
             </argument>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\FrontArticleTitleContentHeaderVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontArticleTitleContentHeaderListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontArticleTitleContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\FrontSubjectGroupContentHeaderVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\ItalicVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\ItalicVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ItalicListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\ItalicListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\BoldVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\BoldVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\BoldListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\BoldListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\ParagraphVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\ParagraphVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\SectionVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\SectionVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\SectionListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\SectionListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\SubVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\SubVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\SubListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\SubListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\ViewConverter\SupVisitor"
-            class="Libero\JatsContentBundle\ViewConverter\SupVisitor">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\SupListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\SupListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <tag name="libero.view_converter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
     </services>
