@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Event\CreateViewEvent;
+use Libero\ViewsBundle\Event\BuildViewEvent;
 use function sprintf;
 
 trait SimplifiedViewConverterListener
 {
-    final public function onCreateView(CreateViewEvent $event) : void
+    final public function onBuildView(BuildViewEvent $event) : void
     {
         $object = $event->getObject();
         $view = $event->getView();

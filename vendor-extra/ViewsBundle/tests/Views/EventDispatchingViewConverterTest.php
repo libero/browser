@@ -6,7 +6,7 @@ namespace tests\Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Text;
-use Libero\ViewsBundle\Event\CreateViewEvent;
+use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\EventDispatchingViewConverter;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -72,8 +72,8 @@ final class EventDispatchingViewConverterTest extends TestCase
         $expected = new View('changed', ['one' => 'two'], ['three' => 'four']);
 
         $dispatcher->addListener(
-            CreateViewEvent::NAME,
-            function (CreateViewEvent $event) use ($expected, $node) : void {
+            BuildViewEvent::NAME,
+            function (BuildViewEvent $event) use ($expected, $node) : void {
                 $this->assertEquals($node, $event->getObject());
                 $this->assertEquals(new View('template', [], ['con' => 'text']), $event->getView());
 

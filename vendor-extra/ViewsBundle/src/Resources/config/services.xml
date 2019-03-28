@@ -16,9 +16,9 @@
         <service id="Libero\ViewsBundle\Views\ViewConverter"
             alias="Libero\ViewsBundle\Views\EventDispatchingViewConverter"/>
 
-        <service id="Libero\ViewsBundle\EventListener\CreateView\LangListener"
-            class="Libero\ViewsBundle\EventListener\CreateView\LangListener">
-            <tag name="kernel.event_listener" event="libero.view.create" method="onCreateView" priority="100"/>
+        <service id="Libero\ViewsBundle\EventListener\BuildView\LangListener"
+            class="Libero\ViewsBundle\EventListener\BuildView\LangListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="100"/>
         </service>
 
     </services>

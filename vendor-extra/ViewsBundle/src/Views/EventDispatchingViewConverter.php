@@ -6,7 +6,7 @@ namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
-use Libero\ViewsBundle\Event\CreateViewEvent;
+use Libero\ViewsBundle\Event\BuildViewEvent;
 use LogicException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function is_string;
@@ -32,7 +32,7 @@ final class EventDispatchingViewConverter implements ViewConverter
             return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
         }
 
-        $event = new CreateViewEvent($node, new View($template, [], $context));
+        $event = new BuildViewEvent($node, new View($template, [], $context));
 
         $this->dispatcher->dispatch($event::NAME, $event);
 
