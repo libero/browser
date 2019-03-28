@@ -5,44 +5,42 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
-use function in_array;
 use function sprintf;
 
 trait SimplifiedVisitor
 {
     final public function visit(Element $object, View $view) : View
     {
-        if ($this->expectedTemplate() !== $view->getTemplate()) {
+        if (!$this->canHandleTemplate($view->getTemplate())) {
             return $view;
         }
 
-        if (!in_array(sprintf('{%s}%s', $object->namespaceURI, $object->localName), $this->expectedElement())) {
+        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
             return $view;
         }
 
-        foreach ($this->unexpectedArguments() as $argument) {
-            if ($view->hasArgument($argument)) {
-                return $view;
-            }
+        if (!$this->canHandleArguments($view->getArguments())) {
+            return $view;
         }
 
-        return $this->doVisit($object, $view);
+        $view = $this->beforeHandle($view);
+
+        return $this->handle($object, $view);
     }
 
-    abstract protected function doVisit(Element $object, View $view) : View;
+    abstract protected function handle(Element $object, View $view) : View;
 
-    abstract protected function expectedTemplate() : string;
+    abstract protected function canHandleTemplate(?string $template) : bool;
 
-    /**
-     * @return array<string>
-     */
-    abstract protected function expectedElement() : array;
+    abstract protected function canHandleElement(string $element) : bool;
 
-    /**
-     * @return array<string>
-     */
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return [];
+        return true;
+    }
+
+    protected function beforeHandle(View $view) : View
+    {
+        return $view;
     }
 }

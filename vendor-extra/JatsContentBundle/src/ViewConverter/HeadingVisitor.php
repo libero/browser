@@ -10,6 +10,8 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function Libero\ViewsBundle\array_has_key;
+use function Libero\ViewsBundle\string_is;
 
 final class HeadingVisitor implements ViewConverterVisitor
 {
@@ -21,7 +23,7 @@ final class HeadingVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         if ($view->hasContext('level')) {
             $view = $view->withArgument('level', $view->getContext('level'));
@@ -30,21 +32,18 @@ final class HeadingVisitor implements ViewConverterVisitor
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function expectedTemplate() : string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/heading.html.twig';
+        return '@LiberoPatterns/heading.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return [
-            '{http://jats.nlm.nih.gov}article-title',
-            '{http://jats.nlm.nih.gov}title',
-        ];
+        return string_is($element, '{http://jats.nlm.nih.gov}article-title', '{http://jats.nlm.nih.gov}title');
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['text'];
+        return !array_has_key($arguments, 'text');
     }
 }
