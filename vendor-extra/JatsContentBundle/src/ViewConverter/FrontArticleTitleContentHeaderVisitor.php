@@ -9,6 +9,7 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function Libero\ViewsBundle\array_has_key;
 
 final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisitor
 {
@@ -21,7 +22,7 @@ final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisito
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);
@@ -36,18 +37,18 @@ final class FrontArticleTitleContentHeaderVisitor implements ViewConverterVisito
         );
     }
 
-    protected function expectedTemplate() : string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/content-header.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}front'];
+        return '{http://jats.nlm.nih.gov}front' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['contentTitle'];
+        return !array_has_key($arguments, 'contentTitle');
     }
 }

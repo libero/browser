@@ -6,15 +6,16 @@ namespace Libero\LiberoContentBundle\ViewConverter;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedChildVisitor;
+use Libero\ViewsBundle\Views\OptionalTemplateVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function Libero\ViewsBundle\array_has_key;
 
 final class SubVisitor implements ViewConverterVisitor
 {
     use ConvertsChildren;
-    use SimplifiedChildVisitor;
+    use OptionalTemplateVisitor;
 
     private $converter;
 
@@ -23,23 +24,23 @@ final class SubVisitor implements ViewConverterVisitor
         $this->converter = $converter;
     }
 
-    protected function doVisit(Element $object, View $view) : View
+    protected function handle(Element $object, View $view) : View
     {
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function possibleTemplate() : string
+    protected function template() : string
     {
         return '@LiberoPatterns/sub.html.twig';
     }
 
-    protected function expectedElement() : string
+    protected function canHandleElement(string $element) : bool
     {
-        return '{http://libero.pub}sub';
+        return '{http://libero.pub}sub' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['text'];
+        return !array_has_key($arguments, 'text');
     }
 }
