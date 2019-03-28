@@ -15,6 +15,7 @@ use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
 use function count;
+use function Libero\ViewsBundle\array_has_key;
 
 final class KeywordGroupTagListVisitor implements ViewConverterVisitor
 {
@@ -69,18 +70,18 @@ final class KeywordGroupTagListVisitor implements ViewConverterVisitor
             );
     }
 
-    protected function expectedTemplate() : ?string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/tag-list.html.twig';
+        return '@LiberoPatterns/tag-list.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}kwd-group'];
+        return '{http://jats.nlm.nih.gov}kwd-group' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['list'];
+        return !array_has_key($arguments, 'list');
     }
 }

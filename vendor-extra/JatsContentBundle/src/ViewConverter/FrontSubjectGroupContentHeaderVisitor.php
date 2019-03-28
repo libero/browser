@@ -15,6 +15,7 @@ use Libero\ViewsBundle\Views\ViewConverterVisitor;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
 use function count;
+use function Libero\ViewsBundle\array_has_key;
 
 final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisitor
 {
@@ -62,18 +63,18 @@ final class FrontSubjectGroupContentHeaderVisitor implements ViewConverterVisito
         );
     }
 
-    protected function expectedTemplate() : ?string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/content-header.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://jats.nlm.nih.gov}front'];
+        return '{http://jats.nlm.nih.gov}front' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['categories'];
+        return !array_has_key($arguments, 'categories');
     }
 }

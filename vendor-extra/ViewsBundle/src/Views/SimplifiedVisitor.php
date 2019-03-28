@@ -5,66 +5,42 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
-use LogicException;
-use function in_array;
-use function is_string;
 use function sprintf;
 
 trait SimplifiedVisitor
 {
     final public function visit(Element $object, View $view) : View
     {
-        if (is_string($this->expectedTemplate()) && $this->expectedTemplate() !== $view->getTemplate()) {
+        if (!$this->canHandleTemplate($view->getTemplate())) {
             return $view;
         }
 
-        if (is_string($view->getTemplate()) && $this->possibleTemplate() !== $view->getTemplate()) {
+        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
             return $view;
         }
 
-        if (!in_array(sprintf('{%s}%s', $object->namespaceURI, $object->localName), $this->expectedElement())) {
+        if (!$this->canHandleArguments($view->getArguments())) {
             return $view;
         }
 
-        foreach ($this->unexpectedArguments() as $argument) {
-            if ($view->hasArgument($argument)) {
-                return $view;
-            }
-        }
-
-        if (null === $view->getTemplate()) {
-            $view = $view->withTemplate($this->possibleTemplate());
-        }
+        $view = $this->beforeHandle($view);
 
         return $this->handle($object, $view);
     }
 
     abstract protected function handle(Element $object, View $view) : View;
 
-    protected function expectedTemplate() : ?string
+    abstract protected function canHandleTemplate(?string $template) : bool;
+
+    abstract protected function canHandleElement(string $element) : bool;
+
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return null;
+        return true;
     }
 
-    protected function possibleTemplate() : string
+    protected function beforeHandle(View $view) : View
     {
-        if (!is_string($this->expectedTemplate())) {
-            throw new LogicException('Visitor must override possibleTemplate() if it does not expectedTemplate()');
-        }
-
-        return $this->expectedTemplate();
-    }
-
-    /**
-     * @return array<string>
-     */
-    abstract protected function expectedElement() : array;
-
-    /**
-     * @return array<string>
-     */
-    protected function unexpectedArguments() : array
-    {
-        return [];
+        return $view;
     }
 }

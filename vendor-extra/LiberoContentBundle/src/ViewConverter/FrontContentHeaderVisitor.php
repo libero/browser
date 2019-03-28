@@ -9,6 +9,7 @@ use Libero\ViewsBundle\Views\SimplifiedVisitor;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Libero\ViewsBundle\Views\ViewConverterVisitor;
+use function Libero\ViewsBundle\array_has_key;
 
 final class FrontContentHeaderVisitor implements ViewConverterVisitor
 {
@@ -38,18 +39,18 @@ final class FrontContentHeaderVisitor implements ViewConverterVisitor
         );
     }
 
-    protected function expectedTemplate() : ?string
+    protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/content-header.html.twig' === $template;
     }
 
-    protected function expectedElement() : array
+    protected function canHandleElement(string $element) : bool
     {
-        return ['{http://libero.pub}front'];
+        return '{http://libero.pub}front' === $element;
     }
 
-    protected function unexpectedArguments() : array
+    protected function canHandleArguments(array $arguments) : bool
     {
-        return ['contentTitle'];
+        return !array_has_key($arguments, 'contentTitle');
     }
 }
