@@ -6,7 +6,7 @@ namespace tests\Libero\LiberoPageBundle\Controller;
 
 use Libero\LiberoPageBundle\Controller\PageController;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
-use Libero\LiberoPageBundle\Event\LoadPageEvent;
+use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Libero\LiberoPageBundle\Exception\NoContentSet;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ final class PageControllerTest extends TestCase
     public function it_returns_the_title(Request $request, array $twigContext) : void
     {
         $listeners = [
-            LoadPageEvent::NAME => function (LoadPageEvent $event) : void {
+            LoadPageDataEvent::NAME => function (LoadPageDataEvent $event) : void {
                 $document = $this->loadDocument('<foo><bar>content</bar></foo>');
                 $event->addDocument('foo', promise_for($document));
             },

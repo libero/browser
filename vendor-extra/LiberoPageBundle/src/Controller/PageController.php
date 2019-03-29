@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\Controller;
 
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
-use Libero\LiberoPageBundle\Event\LoadPageEvent;
+use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Libero\LiberoPageBundle\Exception\NoContentSet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ final class PageController
             'dir' => text_direction($request->getLocale()),
         ];
 
-        $loadEvent = new LoadPageEvent($request, $context);
+        $loadEvent = new LoadPageDataEvent($request, $context);
         $this->dispatcher->dispatch($loadEvent::NAME, $loadEvent);
 
         $createEvent = new CreatePageEvent($request, $loadEvent->getDocuments()->wait(), $loadEvent->getContext());

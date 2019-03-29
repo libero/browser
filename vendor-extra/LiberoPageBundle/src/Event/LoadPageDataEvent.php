@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use function GuzzleHttp\Promise\all;
 
-final class LoadPageEvent extends Event
+final class LoadPageDataEvent extends Event
 {
     use PageEvent;
 

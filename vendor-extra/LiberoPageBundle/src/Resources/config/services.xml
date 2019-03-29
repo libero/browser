@@ -31,7 +31,7 @@
         <service id="Libero\LiberoPageBundle\EventListener\ContentItemListener"
             class="Libero\LiberoPageBundle\EventListener\ContentItemListener">
             <argument type="service" id="libero.client"/>
-            <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPage"/>
+            <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
         </service>
 
         <service id="libero.page.create.namespace.libero"

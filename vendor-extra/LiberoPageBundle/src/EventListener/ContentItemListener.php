@@ -7,7 +7,7 @@ namespace Libero\LiberoPageBundle\EventListener;
 use FluentDOM;
 use FluentDOM\DOM\Document;
 use GuzzleHttp\ClientInterface;
-use Libero\LiberoPageBundle\Event\LoadPageEvent;
+use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Psr\Http\Message\ResponseInterface;
 
 final class ContentItemListener
@@ -19,7 +19,7 @@ final class ContentItemListener
         $this->client = $client;
     }
 
-    public function onLoadPage(LoadPageEvent $event) : void
+    public function onLoadPageData(LoadPageDataEvent $event) : void
     {
         if (!$event->isFor('content')) {
             return;
