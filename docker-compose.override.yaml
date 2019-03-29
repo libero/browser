@@ -8,3 +8,22 @@ services:
             - ./:/app
             - /app/var
             - /app/vendor
+    app-debug:
+        build:
+            context: .
+            target: debug
+        environment:
+            API_URI: http://web:8080
+            APP_SECRET:
+            DEFAULT_LOCALE: ${DEFAULT_LOCALE:-en}
+        volumes:
+            - ./:/app
+            - /app/var
+            - /app/vendor
+        depends_on:
+            - api
+    web:
+        depends_on:
+            - api
+            - app
+            - app-debug
