@@ -106,6 +106,18 @@ ENV APP_ENV=dev
 USER root
 ENV COMPOSER_ALLOW_SUPERUSER=true
 
+COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
+
+RUN bin/console assets:install && \
+    rm -rf var/*
+
+
+
+#
+# Stage: Debug environment
+#
+FROM dev AS debug
+
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
     pecl install \
         xdebug-2.7.0 \
@@ -116,7 +128,4 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/
 
-COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
-
-RUN bin/console assets:install && \
-    rm -rf var/*
+COPY .docker/php-debug.ini ${PHP_INI_DIR}/conf.d/02-app.ini
