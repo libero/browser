@@ -48,6 +48,29 @@ final class EventDispatchingViewConverterTest extends TestCase
 
     /**
      * @test
+     * @dataProvider nonElementProvider
+     */
+    public function it_handles_non_elements(string $node, $expected = '') : void
+    {
+        $handler = new EventDispatchingViewConverter(new EventDispatcher());
+
+        $node = $this->loadNode($node);
+
+        $expected = new View('@LiberoPatterns/text.html.twig', ['nodes' => $expected]);
+
+        $this->assertEquals($expected, $handler->convert($node));
+    }
+
+    public function nonElementProvider() : iterable
+    {
+        yield 'cdata' => ['<![CDATA[<cdata>]]>', '<cdata>'];
+        yield 'comment' => ['<!--comment-->'];
+        yield 'processing instruction' => ['<?processing instruction?>'];
+        yield 'text' => ['text', 'text'];
+    }
+
+    /**
+     * @test
      */
     public function it_fails_if_non_elements_try_to_use_a_pattern() : void
     {

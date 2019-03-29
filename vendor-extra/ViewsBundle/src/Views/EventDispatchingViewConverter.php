@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
+use FluentDOM\DOM\CdataSection;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
+use FluentDOM\DOM\Text;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use LogicException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,6 +29,10 @@ final class EventDispatchingViewConverter implements ViewConverter
                 throw new LogicException(
                     "Expected the template '@LiberoPatterns/text.html.twig' for a non-element node"
                 );
+            }
+
+            if (!$node instanceof Text && !$node instanceof CdataSection) {
+                return new View('@LiberoPatterns/text.html.twig', ['nodes' => ''], $context);
             }
 
             return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);

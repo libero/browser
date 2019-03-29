@@ -7,6 +7,7 @@ namespace tests\Libero\LiberoPageBundle;
 use FluentDOM;
 use FluentDOM\DOM\Document;
 use FluentDOM\DOM\Element;
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 
 trait XmlTestCase
 {
@@ -22,5 +23,10 @@ trait XmlTestCase
     final protected function loadElement(string $xml) : Element
     {
         return $this->loadDocument($xml)->documentElement;
+    }
+
+    final protected function loadNode(string $xml) : NonDocumentTypeChildNode
+    {
+        return $this->loadElement("<root>$xml</root>")[0];
     }
 }
