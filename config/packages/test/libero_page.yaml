@@ -1,13 +1,11 @@
 libero_page:
     pages:
         homepage:
-            type: homepage
             path: '/'
-        blog_article:
-            type: content
-            path: '/blog/{id}'
-            content_service: 'blog-articles'
-        scholarly_article:
-            type: content
-            path: '/articles/{id}'
-            content_service: 'scholarly-articles'
+        content:
+            blog_article:
+                path: '/blog/{id}'
+                content_service: 'blog-articles'
+            scholarly_article:
+                path: '/articles/{id}'
+                content_service: 'scholarly-articles'

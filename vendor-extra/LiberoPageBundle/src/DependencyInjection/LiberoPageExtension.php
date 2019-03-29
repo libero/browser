@@ -27,17 +27,29 @@ final class LiberoPageExtension extends Extension
         $container->setAlias('libero.client', $config['client']);
         $container->setParameter('libero.page_template', $config['page_template']);
 
-        foreach (array_keys($config['pages']) as $name) {
-            $config['pages'][$name]['name'] = $name;
-            $config['pages'][$name]['controller'] = PageController::class;
-            $config['pages'][$name]['route'] = "libero.page.{$config['pages'][$name]['type']}.{$name}";
+        $config['pages']['homepage'] = ['homepage' => $config['pages']['homepage']];
+
+        $pages = [];
+        foreach (array_keys($config['pages'] ?? []) as $type) {
+            foreach (array_keys($config['pages'][$type]) as $name) {
+                $page = $config['pages'][$type][$name];
+                $page['name'] = $name;
+                $page['type'] = $type;
+                $page['controller'] = PageController::class;
+                if ($name === $type) {
+                    $page['route'] = "libero.page.{$type}";
+                } else {
+                    $page['route'] = "libero.page.{$type}.{$name}";
+                }
+                $pages[] = $page;
+            }
         }
 
         $container->findDefinition(PageRouteLoader::class)
-            ->setArgument(0, $config['pages']);
+            ->setArgument(0, $pages);
 
         $container->findDefinition(LiberoPageListener::class)
-            ->setArgument(0, array_column($config['pages'], null, 'route'));
+            ->setArgument(0, array_column($pages, null, 'route'));
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container) : ConfigurationInterface

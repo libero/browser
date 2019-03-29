@@ -24,7 +24,7 @@ final class LiberoPageListener
         $route = $request->attributes->get('_route');
 
         if (!isset($this->routes[$route])) {
-            $request->attributes->set('libero_page', ['type' => '']);
+            $request->attributes->set('libero_page', ['name' => 'unknown', 'type' => 'unknown']);
 
             return;
         }

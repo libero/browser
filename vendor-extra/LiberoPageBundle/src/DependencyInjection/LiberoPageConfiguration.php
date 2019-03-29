@@ -43,29 +43,43 @@ final class LiberoPageConfiguration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $pagesNode */
         $pagesNode = $builder->root('pages');
         $pagesNode
+            ->children()
+                ->append($this->getHomepageDefinition())
+                ->append($this->getContentPagesDefinition())
+            ->end()
+        ;
+        return $pagesNode;
+    }
+
+    private function getHomepageDefinition() : ArrayNodeDefinition
+    {
+        $builder = new TreeBuilder();
+        /** @var ArrayNodeDefinition $pagesNode */
+        $pagesNode = $builder->root('homepage');
+        $pagesNode
+            ->children()
+                ->scalarNode('path')
+                    ->isRequired()
+                ->end()
+            ->end()
+        ;
+        return $pagesNode;
+    }
+
+    private function getContentPagesDefinition() : ArrayNodeDefinition
+    {
+        $builder = new TreeBuilder();
+        /** @var ArrayNodeDefinition $pagesNode */
+        $pagesNode = $builder->root('content');
+        $pagesNode
             ->arrayPrototype()
                 ->children()
-                    ->enumNode('type')
-                        ->values(['content', 'homepage'])
-                        ->isRequired()
-                    ->end()
                     ->scalarNode('path')
                         ->isRequired()
                     ->end()
                     ->scalarNode('content_service')
+                        ->isRequired()
                     ->end()
-                ->end()
-                ->validate()
-                    ->ifTrue(function (array $values) : bool {
-                        return 'content' === $values['type'] && !isset($values['content_service']);
-                    })
-                    ->thenInvalid('Content pages require a content_service')
-                ->end()
-                ->validate()
-                    ->ifTrue(function (array $values) : bool {
-                        return 'content' !== $values['type'] && isset($values['content_service']);
-                    })
-                    ->thenInvalid('Non-content pages cannot have a content_service')
                 ->end()
             ->end()
         ;

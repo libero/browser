@@ -1,4 +1,4 @@
-/config/packages/content_page.yaml
+/config/packages/libero_page.yaml
 
 ###> phpunit/phpunit ###
 /phpunit.xml
