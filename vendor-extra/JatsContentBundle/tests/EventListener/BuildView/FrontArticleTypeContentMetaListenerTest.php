@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class FrontArticleTypeContentMetaListenerTest extends TestCase
 {

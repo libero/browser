@@ -1,0 +1,3 @@
+libero_page:
+    client: 'csa_guzzle.client.libero_api'
+    page_template: 'page.html.twig'

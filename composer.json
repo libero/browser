@@ -11,9 +11,9 @@
     "autoload-dev": {
         "psr-4": {
             "tests\\Libero\\Browser\\": "tests/",
-            "tests\\Libero\\ContentPageBundle\\": "vendor-extra/ContentPageBundle/tests/",
             "tests\\Libero\\JatsContentBundle\\": "vendor-extra/JatsContentBundle/tests/",
             "tests\\Libero\\LiberoContentBundle\\": "vendor-extra/LiberoContentBundle/tests/",
+            "tests\\Libero\\LiberoPageBundle\\": "vendor-extra/LiberoPageBundle/tests/",
             "tests\\Libero\\ViewsBundle\\": "vendor-extra/ViewsBundle/tests/"
         }
     },
@@ -23,9 +23,9 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "csa/guzzle-bundle": "^3.1",
-        "libero/content-page-bundle": "^1.0@dev",
         "libero/jats-content-bundle": "^1.0@dev",
         "libero/libero-content-bundle": "^1.0@dev",
+        "libero/page-bundle": "^1.0@dev",
         "libero/patterns-bundle": "^1.0@dev",
         "libero/views-bundle": "^1.0@dev",
         "symfony/asset": "^4.1",

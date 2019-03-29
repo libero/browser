@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
 
 final class ContentHeaderListener
@@ -19,9 +19,13 @@ final class ContentHeaderListener
         $this->converter = $converter;
     }
 
-    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
+    public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
-        $front = $event->getItem()->xpath()->firstOf(self::FRONT_PATH);
+        if (!$event->isFor('content')) {
+            return;
+        }
+
+        $front = $event->getDocument('content_item')->xpath()->firstOf(self::FRONT_PATH);
 
         if (!$front instanceof Element) {
             return;
