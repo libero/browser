@@ -8,8 +8,8 @@ use Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class ParagraphListenerTest extends TestCase
 {

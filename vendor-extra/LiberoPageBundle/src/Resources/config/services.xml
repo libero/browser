@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://symfony.com/schema/dic/services"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <defaults public="false"/>
+
+        <service id="Libero\LiberoPageBundle\Controller\PageController"
+            class="Libero\LiberoPageBundle\Controller\PageController">
+            <argument type="service" id="twig"/>
+            <argument>%libero.page_template%</argument>
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener"
+            class="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener">
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\TitleListener"
+            class="Libero\LiberoPageBundle\EventListener\TitleListener">
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="-1000"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\ContentItemListener"
+            class="Libero\LiberoPageBundle\EventListener\ContentItemListener">
+            <argument type="service" id="libero.client"/>
+            <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
+        </service>
+
+        <service id="libero.page.create.namespace.libero"
+            class="Libero\LiberoPageBundle\EventListener\NamespaceListener">
+            <argument>libero</argument>
+            <argument>http://libero.pub</argument>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\MainListener"
+            class="Libero\LiberoPageBundle\EventListener\MainListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\Routing\PageRouteLoader"
+            class="Libero\LiberoPageBundle\Routing\PageRouteLoader">
+            <argument type="collection"/>
+            <tag name="routing.loader"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\LiberoPageListener"
+            class="Libero\LiberoPageBundle\EventListener\LiberoPageListener">
+            <argument type="collection"/>
+            <!-- Immediately after RouterListener -->
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="31"/>
+        </service>
+
+    </services>
+
+</container>

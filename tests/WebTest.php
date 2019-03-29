@@ -12,6 +12,21 @@ final class WebTest extends WebTestCase
 {
     /**
      * @test
+     */
+    public function it_has_a_homepage() : void
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/');
+        $response = $client->getResponse();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertSame('Site Name', trim($crawler->filter('.content-header__title')->text()));
+    }
+
+    /**
+     * @test
      * @dataProvider idProvider
      */
     public function it_shows_scholarly_articles(string $id) : void

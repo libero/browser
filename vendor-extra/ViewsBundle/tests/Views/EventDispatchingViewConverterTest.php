@@ -13,7 +13,7 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class EventDispatchingViewConverterTest extends TestCase
 {

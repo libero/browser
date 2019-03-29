@@ -1,0 +1,33 @@
+{
+    "name": "libero/page-bundle",
+    "description": "Libero page",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Libero\\LiberoPageBundle\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "require": {
+        "php": "^7.2",
+        "fluentdom/fluentdom": "^7.0",
+        "guzzlehttp/promises": "^1.0",
+        "punic/punic": "^3.3",
+        "symfony/contracts": "^1.0",
+        "symfony/event-dispatcher": "^4.1",
+        "symfony/http-foundation": "^4.1",
+        "symfony/http-kernel": "^4.1",
+        "twig/twig": "^2.5"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
