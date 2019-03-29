@@ -9,7 +9,6 @@ use InvalidArgumentException;
 use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
-use function array_merge;
 use function end;
 use function is_array;
 use function is_string;
@@ -41,34 +40,30 @@ final class CreatePagePartEvent extends Event
 
     public function getContent() : array
     {
-        $content = [];
-
-        foreach ($this->content as $view) {
-            $area = $view->getContext('area');
-
-            if (!is_string($area)) {
-                $content[] = $view;
-
-                continue;
-            }
-
-            $last = end($content);
-            if (is_array($last) && $area === $last['area']) {
-                $key = key($content);
-                $content[$key]['content'][] = $view;
-
-                continue;
-            }
-
-            $content[] = ['area' => $area, 'content' => [$view]];
-        }
-
-        return $content;
+        return $this->content;
     }
 
     public function addContent(View ...$views) : void
     {
-        $this->content = array_merge($this->content, $views);
+        foreach ($views as $view) {
+            $area = $view->getContext('area');
+
+            if (!is_string($area)) {
+                $this->content[] = $view;
+
+                continue;
+            }
+
+            $last = end($this->content);
+            if (is_array($last) && $area === $last['area']) {
+                $key = key($this->content);
+                $this->content[$key]['content'][] = $view;
+
+                continue;
+            }
+
+            $this->content[] = ['area' => $area, 'content' => [$view]];
+        }
     }
 
     public function getDocument(string $key) : Document

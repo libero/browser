@@ -9,8 +9,6 @@ use InvalidArgumentException;
 use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
-use function array_keys;
-use function implode;
 
 final class CreatePageEvent extends Event
 {
@@ -45,10 +43,7 @@ final class CreatePageEvent extends Event
     public function getDocument(string $key) : Document
     {
         if (!isset($this->documents[$key])) {
-            throw new InvalidArgumentException("Unknown document '{$key}'; known keys are: '".implode(
-                "', '",
-                array_keys($this->documents)
-            )."'");
+            throw new InvalidArgumentException("Unknown document '{$key}'");
         }
 
         return $this->documents[$key];
