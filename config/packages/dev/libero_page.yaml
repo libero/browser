@@ -2,6 +2,7 @@ libero_page:
     pages:
         homepage:
             path: '/'
+            search_service: 'scholarly-articles'
         content:
             blog_article:
                 path: '/blog/{id}'

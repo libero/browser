@@ -38,6 +38,10 @@ final class EventDispatchingViewConverter implements ViewConverter
 
         $view = $event->getView();
 
+        if ($event->isPropagationStopped()) {
+            return $view;
+        }
+
         if (!$view->getTemplate()) {
             return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
         }
