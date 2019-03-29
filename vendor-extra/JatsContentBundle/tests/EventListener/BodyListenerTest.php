@@ -4,18 +4,55 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener;
 
-use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
 use Libero\JatsContentBundle\EventListener\BodyListener;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\ViewConvertingTestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\PageTestCase;
+use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 use function array_map;
 
 final class BodyListenerTest extends TestCase
 {
+    use PageTestCase;
     use ViewConvertingTestCase;
     use XmlTestCase;
+
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_it_is_not_a_content_page() : void
+    {
+        $listener = new BodyListener($this->createFailingConverter());
+
+        $document = $this->loadDocument(
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+    <libero:meta>
+        <libero:id>id</libero:id>
+    </libero:meta>
+    <jats:article>
+        <jats:body>
+            <jats:p>Paragraph 1</jats:p>
+            <jats:sec>
+                <jats:title>Section 1</jats:title>
+            </jats:sec>
+            <jats:p>Paragraph 2</jats:p>
+        </jats:body>
+    </jats:article>
+</libero:item>
+XML
+        );
+
+        $event = new CreatePagePartEvent('template', $this->createRequest('foo'), ['content_item' => $document]);
+        $originalEvent = clone $event;
+
+        $listener->onCreatePagePart($event);
+
+        $this->assertEquals($originalEvent, $event);
+    }
 
     /**
      * @test
@@ -36,10 +73,10 @@ final class BodyListenerTest extends TestCase
 XML
         );
 
-        $event = new CreateContentPagePartEvent('template', $document);
+        $event = new CreatePagePartEvent('template', $this->createRequest('content'), ['content_item' => $document]);
         $originalEvent = clone $event;
 
-        $listener->onCreatePageMain($event);
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals($originalEvent, $event);
     }
@@ -54,8 +91,13 @@ XML
 
         $document = $this->loadDocument($xml);
 
-        $event = new CreateContentPagePartEvent('template', $document, $context);
-        $listener->onCreatePageMain($event);
+        $event = new CreatePagePartEvent(
+            'template',
+            $this->createRequest('content'),
+            ['content_item' => $document],
+            $context
+        );
+        $listener->onCreatePagePart($event);
 
         $this->assertEquals(
             array_map(

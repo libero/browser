@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\ViewConverter;
 use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
@@ -23,9 +23,13 @@ final class BodyListener
         $this->converter = $converter;
     }
 
-    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
+    public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
-        $body = $event->getItem()->xpath()->firstOf(self::BODY_PATH);
+        if (!$event->isFor('content')) {
+            return;
+        }
+
+        $body = $event->getDocument('content_item')->xpath()->firstOf(self::BODY_PATH);
 
         if (!$body instanceof Element) {
             return;

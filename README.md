@@ -8,9 +8,13 @@ Serve content read from a Libero API to the public.
 Getting started
 ---------------
 
+To run Browser in the `dev` environment:
+
 1. Run `docker-compose down --volumes --remove-orphans && docker-compose up --build`.
 
-2. Open http://localhost:8080/articles/article1 to see the scholarly article `article1` in the `dev` environment.
+2. Open http://localhost:8080/ to see the homepage.
+
+3. Open http://localhost:8080/articles/article1 to see the scholarly article `article1`.
 
 ### Configuration
 
@@ -25,17 +29,20 @@ To run an image reading from two content services (`blog-articles` and `scholarl
 
 - Set the `API_URI` environment variable to be the root of the Libero API.
 
-- Create `config/packages/content_page.yaml` (either by extending the image or mounting a file):
+- Create `config/packages/libero_page.yaml` (either by extending the image or mounting a file):
 
     ```yaml
-    content_page:
+    libero_page:
         pages:
-            blog_article:
-                path: '/blog/{id}'
-                service: 'blog-articles'
-            scholarly_article:
-                path: '/articles/{id}'
-                service: 'scholarly-articles'
+            homepage:
+                path: '/'
+            content:
+                blog_article:
+                    path: '/blog/{id}'
+                    content_service: 'blog-articles'
+                scholarly_article:
+                    path: '/articles/{id}'
+                    content_service: 'scholarly-articles'
     ```
 
 Getting help

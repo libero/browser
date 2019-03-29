@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener;
 
 use FluentDOM\DOM\Element;
-use Libero\ContentPageBundle\Event\CreateContentPagePartEvent;
+use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function count;
@@ -20,9 +20,13 @@ final class ItemTagsListener
         $this->converter = $converter;
     }
 
-    public function onCreatePageMain(CreateContentPagePartEvent $event) : void
+    public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
-        $front = $event->getItem()->xpath()->firstOf('/libero:item/jats:article/jats:front');
+        if (!$event->isFor('content')) {
+            return;
+        }
+
+        $front = $event->getDocument('content_item')->xpath()->firstOf('/libero:item/jats:article/jats:front');
 
         if (!$front instanceof Element) {
             return;

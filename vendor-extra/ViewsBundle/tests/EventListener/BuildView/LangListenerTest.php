@@ -9,7 +9,7 @@ use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\EventListener\BuildView\LangListener;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\ContentPageBundle\XmlTestCase;
+use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class LangListenerTest extends TestCase
 {
