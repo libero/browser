@@ -15,3 +15,8 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> symfony/translation ###
+/translations/
+!/translations/.gitkeep
+###< symfony/translation ###
