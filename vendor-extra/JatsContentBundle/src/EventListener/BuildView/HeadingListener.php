@@ -8,6 +8,7 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 use function Libero\ViewsBundle\string_is;
@@ -22,7 +23,7 @@ final class HeadingListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, TemplateView $view) : TemplateView
+    protected function handle(Element $object, TemplateView $view) : View
     {
         if ($view->hasContext('level')) {
             $view = $view->withArgument('level', $view->getContext('level'));

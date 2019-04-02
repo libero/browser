@@ -8,6 +8,7 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\View;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function sprintf;
 
@@ -24,7 +25,7 @@ final class FrontArticleTypeContentMetaListener
         $this->translationKeys = $translationKeys;
     }
 
-    protected function handle(Element $object, TemplateView $view) : TemplateView
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $items = $view->getArgument('items') ?? [];
 

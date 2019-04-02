@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
@@ -21,7 +22,7 @@ final class FrontArticleTitleContentHeaderListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, TemplateView $view) : TemplateView
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:article-meta/jats:title-group/jats:article-title', $object);

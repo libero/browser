@@ -27,7 +27,7 @@ final class FrontItemTagsListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, TemplateView $view) : TemplateView
+    protected function handle(Element $object, TemplateView $view) : View
     {
         /** @var DOMNodeList<Element> $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()

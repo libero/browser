@@ -10,6 +10,7 @@ use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
@@ -28,7 +29,7 @@ final class FrontSubjectGroupContentHeaderListener
         $this->translator = $translator;
     }
 
-    protected function handle(Element $object, TemplateView $view) : TemplateView
+    protected function handle(Element $object, TemplateView $view) : View
     {
         /** @var DOMNodeList<Element> $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(

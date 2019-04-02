@@ -32,7 +32,7 @@ trait SimplifiedViewConverterListener
         $event->setView($this->handle($object, $view));
     }
 
-    abstract protected function handle(Element $object, TemplateView $view) : TemplateView;
+    abstract protected function handle(Element $object, TemplateView $view) : View;
 
     abstract protected function canHandleTemplate(?string $template) : bool;
 
