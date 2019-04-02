@@ -32,7 +32,7 @@ final class ItemListListener
                 function (NonDocumentTypeChildNode $child) use ($view) : View {
                     return $this->converter->convert(
                         $child,
-                        '@LiberoPatterns/paragraph.html.twig',
+                        '@LiberoPatterns/teaser.html.twig',
                         $view->getContext()
                     );
                 },
@@ -53,6 +53,6 @@ final class ItemListListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'nodes');
+        return !array_has_key($arguments, 'list');
     }
 }

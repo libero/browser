@@ -12,7 +12,7 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
 use function sprintf;
 
-final class ItemRefParagraphListener
+final class ItemRefTeaserListener
 {
     private $client;
     private $converter;
@@ -58,7 +58,7 @@ final class ItemRefParagraphListener
 
     protected function canHandleTemplate(string $template) : bool
     {
-        return '@LiberoPatterns/paragraph.html.twig' === $template;
+        return '@LiberoPatterns/teaser.html.twig' === $template;
     }
 
     protected function canHandleElement(string $element) : bool

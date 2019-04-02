@@ -10,7 +10,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
-final class ItemParagraphListener
+final class ItemTeaserListener
 {
     use SimplifiedViewConverterListener;
 
@@ -23,28 +23,29 @@ final class ItemParagraphListener
 
     protected function handle(Element $object, View $view) : View
     {
-        $title = $object->ownerDocument->xpath()
+        $heading = $object->ownerDocument->xpath()
             ->firstOf(
                 '/libero:item/jats:article/jats:front/jats:article-meta/jats:title-group/jats:article-title',
                 $object
             );
 
-        if (!$title instanceof Element) {
+        if (!$heading instanceof Element) {
             return $view;
         }
 
-        return $view->withArguments(
-            $this->converter->convert(
-                $title,
-                '@LiberoPatterns/heading.html.twig',
-                $view->getContext()
-            )->getArguments()
-        );
+        return $view
+            ->withArgument('href', '#')
+            ->withArgument(
+                'heading',
+                $this->converter
+                    ->convert($heading, '@LiberoPatterns/heading.html.twig', $view->getContext())
+                    ->getArguments()
+            );
     }
 
     protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/paragraph.html.twig' === $template;
+        return '@LiberoPatterns/teaser.html.twig' === $template;
     }
 
     protected function canHandleElement(string $element) : bool
@@ -54,6 +55,6 @@ final class ItemParagraphListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'text');
+        return !array_has_key($arguments, 'heading');
     }
 }
