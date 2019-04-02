@@ -6,6 +6,7 @@ namespace Libero\ViewsBundle\Event;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\View;
 use Symfony\Component\EventDispatcher\Event;
 
 final class BuildViewEvent extends Event
@@ -26,12 +27,12 @@ final class BuildViewEvent extends Event
         return $this->object;
     }
 
-    public function getView() : TemplateView
+    public function getView() : View
     {
         return $this->view;
     }
 
-    public function setView(TemplateView $view) : void
+    public function setView(View $view) : void
     {
         $this->view = $view;
     }

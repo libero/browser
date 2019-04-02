@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\StringView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -44,6 +45,19 @@ final class StringViewTest extends TestCase
         $this->assertSame('bar', $view->getContext('foo'));
         $this->assertNull($view->getContext('bar'));
         $this->assertEquals(['foo' => 'bar'], $view->getContext());
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_array_accessible() : void
+    {
+        $view = new EmptyView();
+
+        $this->assertFalse(isset($view['foo']));
+        $this->assertNull($view['foo']);
+        $this->assertFalse(isset($view['bar']));
+        $this->assertNull($view['bar']);
     }
 
     /**

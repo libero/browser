@@ -49,6 +49,19 @@ final class EmptyViewTest extends TestCase
     /**
      * @test
      */
+    public function it_is_array_accessible() : void
+    {
+        $view = new EmptyView();
+
+        $this->assertFalse(isset($view['foo']));
+        $this->assertNull($view['foo']);
+        $this->assertFalse(isset($view['bar']));
+        $this->assertNull($view['bar']);
+    }
+
+    /**
+     * @test
+     */
     public function it_is_json_serializable() : void
     {
         $view = new EmptyView();

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
-use ArrayIterator;
 use IteratorAggregate;
-use Traversable;
 use function array_replace_recursive;
-use function is_string;
 
 final class TemplateView implements IteratorAggregate, View
 {
+    use ArrayAccessFromJsonSerialize;
+    use HasContext;
+    use IteratorFromJsonSerialize;
+
     private $arguments;
-    private $context;
     private $template;
 
     public function __construct(?string $template, array $arguments = [], array $context = [])
@@ -41,20 +41,6 @@ final class TemplateView implements IteratorAggregate, View
     public function getTemplate() : ?string
     {
         return $this->template;
-    }
-
-    public function hasContext(string $key) : bool
-    {
-        return isset($this->context[$key]);
-    }
-
-    public function getContext(?string $key = null)
-    {
-        if (is_string($key)) {
-            return $this->context[$key] ?? null;
-        }
-
-        return $this->context;
     }
 
     public function withArgument(string $key, $value) : TemplateView
@@ -103,10 +89,5 @@ final class TemplateView implements IteratorAggregate, View
             'template' => $this->template,
             'arguments' => $this->arguments,
         ];
-    }
-
-    public function getIterator() : Traversable
-    {
-        return new ArrayIterator($this->jsonSerialize());
     }
 }

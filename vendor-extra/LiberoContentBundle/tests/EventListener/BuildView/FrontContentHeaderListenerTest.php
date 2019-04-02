@@ -30,6 +30,7 @@ final class FrontContentHeaderListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -54,6 +55,7 @@ final class FrontContentHeaderListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -72,6 +74,7 @@ final class FrontContentHeaderListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -93,6 +96,7 @@ final class FrontContentHeaderListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertSame(['contentTitle' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -122,6 +126,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [

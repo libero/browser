@@ -6,6 +6,7 @@ namespace tests\Libero\ViewsBundle\Event;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\Event;
@@ -46,6 +47,12 @@ final class BuildViewEventTest extends TestCase
         $this->assertEquals($view, $event->getView());
 
         $view = new TemplateView('foo', ['bar' => 'baz'], ['qux' => 'quux']);
+
+        $event->setView($view);
+
+        $this->assertEquals($view, $event->getView());
+
+        $view = new EmptyView();
 
         $event->setView($view);
 

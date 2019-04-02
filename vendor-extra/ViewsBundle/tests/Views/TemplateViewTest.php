@@ -87,6 +87,21 @@ final class TemplateViewTest extends TestCase
     /**
      * @test
      */
+    public function it_is_array_accessible() : void
+    {
+        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
+
+        $this->assertTrue(isset($view['template']));
+        $this->assertSame('template', $view['template']);
+        $this->assertTrue(isset($view['arguments']));
+        $this->assertSame(['foo' => 'bar', 'baz' => ['qux']], $view['arguments']);
+        $this->assertFalse(isset($view['quux']));
+        $this->assertNull($view['quux']);
+    }
+
+    /**
+     * @test
+     */
     public function it_is_json_serializable() : void
     {
         $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);

@@ -33,6 +33,7 @@ final class KeywordGroupTagListListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -66,6 +67,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -84,6 +86,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -114,6 +117,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertSame(['list' => 'qux'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -148,6 +152,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/tag-list.html.twig', $view->getTemplate());
         $this->assertEquals($expectedArguments, $view->getArguments());
         $this->assertSame(['lang' => 'es'], $view->getContext());

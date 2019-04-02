@@ -15,7 +15,7 @@ trait SimplifiedViewConverterListener
         $object = $event->getObject();
         $view = $event->getView();
 
-        if (!$this->canHandleTemplate($view->getTemplate())) {
+        if (!$view instanceof TemplateView || !$this->canHandleTemplate($view->getTemplate())) {
             return;
         }
 

@@ -3,6 +3,7 @@ parameters:
         - '~^Call to an undefined method FluentDOM\\DOM\\Node\\.+?::getNodePath\(\)\.$~'
         - '~^Cannot call method (end|([a-z]+)Node)\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
         - '~^Service "csa_guzzle\.mock\.storage" is not registered in the container\.$~'
+        - '~^Call to method PHPUnit\\Framework\\Assert::assert(True|False)\(\) with (true|false) will always evaluate to (true|false)\.$~'
     level: max
     paths:
         - bin/console

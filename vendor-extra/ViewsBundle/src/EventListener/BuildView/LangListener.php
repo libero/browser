@@ -6,6 +6,7 @@ namespace Libero\ViewsBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Attribute;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Views\TemplateView;
 use Punic\Misc;
 
 final class LangListener
@@ -13,6 +14,10 @@ final class LangListener
     public function onBuildView(BuildViewEvent $event) : void
     {
         $view = $event->getView();
+
+        if (!$view instanceof TemplateView) {
+            return;
+        }
 
         if ($view->hasArgument('attributes') && !empty($view->getArgument('attributes')['lang'])) {
             return;

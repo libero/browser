@@ -30,6 +30,7 @@ final class SectionListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertNull($view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -54,6 +55,7 @@ final class SectionListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -72,6 +74,7 @@ final class SectionListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertNull($view->getTemplate());
         $this->assertSame(['content' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -91,6 +94,7 @@ final class SectionListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertEquals($expectedArguments, $view->getArguments());
         $this->assertSame(['level' => 1], $view->getContext());
@@ -187,6 +191,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertEquals(
             [

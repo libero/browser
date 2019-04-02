@@ -32,6 +32,7 @@ final class FrontItemTagsListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -67,6 +68,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -85,6 +87,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -117,6 +120,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertSame(['groups' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -160,6 +164,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
@@ -219,6 +224,7 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertSame(['qux' => 'quux'], $view->getContext());

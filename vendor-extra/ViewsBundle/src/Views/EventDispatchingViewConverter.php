@@ -42,6 +42,10 @@ final class EventDispatchingViewConverter implements ViewConverter
 
         $view = $event->getView();
 
+        if (!$view instanceof TemplateView) {
+            return $view;
+        }
+
         if (!$view->getTemplate()) {
             return new StringView((string) $node, $context);
         }

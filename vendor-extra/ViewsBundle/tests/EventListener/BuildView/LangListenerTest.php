@@ -28,6 +28,7 @@ final class LangListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertFalse($view->hasArgument('attributes'));
         $this->assertEmpty($view->getContext());
     }
@@ -45,6 +46,7 @@ final class LangListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame(['lang' => 'en'], $view->getArgument('attributes'));
         $this->assertEmpty($view->getContext());
     }
@@ -70,6 +72,7 @@ final class LangListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame($expectedAttributes, $view->getArgument('attributes'), 'Attributes do not match');
         $this->assertSame($expectedContext, $view->getContext(), 'Context does not match');
     }
@@ -263,6 +266,7 @@ final class LangListenerTest extends TestCase
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame(
             ['attributes' => ['foo' => 'bar', 'lang' => 'en', 'dir' => 'ltr'], 'baz' => 'qux'],
             $view->getArguments()
