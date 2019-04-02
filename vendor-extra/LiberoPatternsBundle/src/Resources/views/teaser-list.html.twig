@@ -1,0 +1,54 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list']) }) -%}
+
+<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+  {%- with title|default({}) only -%}
+    {%- block title -%}
+
+      {% if text is defined %}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__title']) }) -%}
+        {%- include '@LiberoPatterns/heading.html.twig' with {level: level|default(4)} -%}
+
+      {% endif %}
+
+    {%- endblock title -%}
+  {%- endwith -%}
+
+  {%- with list only -%}
+    {%- block list -%}
+
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__list']) }) -%}
+
+      <ol {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+        {%- for item in items -%}
+
+          {%- with item only -%}
+            {%- block item -%}
+
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__item']) }) -%}
+
+              <li {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+                {%- with content only -%}
+                  {%- block content -%}
+
+                    {%- include('@LiberoPatterns/teaser.html.twig') -%}
+
+                  {%- endblock content -%}
+                {%- endwith -%}
+
+              </li>
+
+            {%- endblock item -%}
+          {%- endwith -%}
+
+        {%- endfor -%}
+
+      </ol>
+
+    {%- endblock list -%}
+  {%- endwith -%}
+
+</div>
