@@ -75,6 +75,30 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontArticleTypeContentMetaListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontArticleTypeContentMetaListener">
+            <argument type="service" id="translator"/>
+            <argument type="collection">
+                <!-- Map of @article-type values to translation keys -->
+                <argument key="research-article">libero.jats.article_type.research_article</argument>
+            </argument>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-100"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener"
             class="Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>

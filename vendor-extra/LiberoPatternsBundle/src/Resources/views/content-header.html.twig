@@ -45,6 +45,16 @@
 
     {%- endwith -%}
 
+    {%- with meta|default({}) only -%}
+      {%- block meta -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/content-meta.html.twig' -%}
+        {%- endif -%}
+
+      {%- endblock meta -%}
+    {%- endwith -%}
+
   {%- endblock -%}
 
 </header>

@@ -1,0 +1,33 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
+
+<ul {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+  {%- for item in items -%}
+
+    {%- with item only -%}
+      {%- block item -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
+
+        <li {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+          {%- with content only -%}
+            {%- block content -%}
+
+              {%- if attributes.href is defined -%}
+                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__link']) }) -%}
+              {%- endif -%}
+
+              {%- include '@LiberoPatterns/link.html.twig' -%}
+
+            {%- endblock content -%}
+          {%- endwith -%}
+
+        </li>
+
+      {%- endblock item -%}
+    {%- endwith -%}
+
+  {%- endfor -%}
+
+</ul>
