@@ -34,6 +34,7 @@ final class ItemTeaserListener
         }
 
         return $view
+            // @todo - set route to content.
             ->withArgument('href', '#')
             ->withArgument(
                 'heading',
