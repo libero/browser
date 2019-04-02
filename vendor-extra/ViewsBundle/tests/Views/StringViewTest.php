@@ -8,7 +8,6 @@ use Libero\ViewsBundle\Views\StringView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use function GuzzleHttp\json_encode;
-use function iterator_to_array;
 
 final class StringViewTest extends TestCase
 {
@@ -55,15 +54,5 @@ final class StringViewTest extends TestCase
         $view = new StringView('text');
 
         $this->assertSame('"text"', json_encode($view));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_traversable() : void
-    {
-        $view = new StringView('text');
-
-        $this->assertSame(['text'], iterator_to_array($view));
     }
 }

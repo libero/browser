@@ -8,7 +8,6 @@ use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use function GuzzleHttp\json_encode;
-use function iterator_to_array;
 
 final class EmptyViewTest extends TestCase
 {
@@ -20,6 +19,16 @@ final class EmptyViewTest extends TestCase
         $view = new EmptyView();
 
         $this->assertInstanceOf(View::class, $view);
+    }
+
+    /**
+     * @test
+     */
+    public function it_casts_to_a_string() : void
+    {
+        $view = new EmptyView();
+
+        $this->assertSame('', (string) $view);
     }
 
     /**
@@ -45,15 +54,5 @@ final class EmptyViewTest extends TestCase
         $view = new EmptyView();
 
         $this->assertSame('null', json_encode($view));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_traversable() : void
-    {
-        $view = new EmptyView();
-
-        $this->assertSame([], iterator_to_array($view));
     }
 }

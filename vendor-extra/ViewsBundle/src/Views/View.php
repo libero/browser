@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use JsonSerializable;
-use Traversable;
 
-interface View extends JsonSerializable, Traversable
+interface View extends JsonSerializable
 {
     public function hasContext(string $key) : bool;
 

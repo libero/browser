@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
-use ArrayIterator;
-use IteratorAggregate;
-use Traversable;
 use function is_string;
 
-final class StringView implements IteratorAggregate, View
+final class StringView implements View
 {
     private $context;
     private $string;
@@ -42,10 +39,5 @@ final class StringView implements IteratorAggregate, View
     public function jsonSerialize()
     {
         return $this->string;
-    }
-
-    public function getIterator() : Traversable
-    {
-        return new ArrayIterator([$this->string]);
     }
 }
