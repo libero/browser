@@ -6,6 +6,7 @@ namespace tests\Libero\LiberoPageBundle\Event;
 
 use InvalidArgumentException;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
+use Libero\ViewsBundle\Views\StringView;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\Event;
@@ -59,7 +60,7 @@ final class CreatePagePartEventTest extends TestCase
         $view2 = new TemplateView('template', [], ['area' => 'one']);
         $view3 = new TemplateView('template', [], ['area' => 'one']);
         $view4 = new TemplateView('template', [], ['area' => 'two']);
-        $view5 = new TemplateView('template', ['bar']);
+        $view5 = new StringView('bar');
         $view6 = new TemplateView('template', [], ['area' => 'one']);
         $view7 = new TemplateView('template', [], ['area' => 'one']);
         $event->addContent($view1, $view2);
