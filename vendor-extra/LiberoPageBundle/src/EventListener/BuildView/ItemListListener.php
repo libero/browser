@@ -53,6 +53,6 @@ final class ItemListListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'list');
+        return !array_has_key($arguments, 'nodes');
     }
 }
