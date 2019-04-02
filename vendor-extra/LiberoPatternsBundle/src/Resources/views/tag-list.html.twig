@@ -1,8 +1,6 @@
-{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list']) }) -%}
 
-<div {{- attributes(attributes|default({})) }}>
+<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
 
   {%- with title|default({}) only -%}
     {%- block title -%}
@@ -20,26 +18,22 @@
   {%- with list only -%}
     {%- block list -%}
 
-      {%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
       {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__list']) }) -%}
 
       {%- if singleLine|default(false) -%}
         {%- set attributes = attributes|merge({class: attributes.class|merge(['tag-list__list--single-line']) }) -%}
       {%- endif -%}
 
-      <ul {{- attributes(attributes|default({})) }}>
+      <ul {%- include('@LiberoPatterns/attributes.html.twig') -%}>
 
         {%- for item in items -%}
 
           {%- with item only -%}
             {%- block item -%}
 
-              {%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
               {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__item']) }) -%}
 
-              <li {{- attributes(attributes|default({})) }}>
+              <li {%- include('@LiberoPatterns/attributes.html.twig') -%}>
 
                 {%- with content only -%}
                   {%- block content -%}

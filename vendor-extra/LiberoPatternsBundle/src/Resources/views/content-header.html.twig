@@ -1,8 +1,6 @@
-{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
 
-<header {{- attributes(attributes|default({})) }}>
+<header {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
   {%- block body -%}
 

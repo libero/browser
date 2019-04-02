@@ -1,11 +1,8 @@
-{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-{%- from '@LiberoPatterns/includes.html.twig' import include -%}
-
 {% spaceless %}
 
-  <sup {{- attributes(attributes|default({})) }}>
+  <sup {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
-    {{- include(text) -}}
+    {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
 
   </sup>
 

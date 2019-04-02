@@ -1,15 +1,11 @@
-{% macro attributes(attributes) %}
+{%- for name, value in attributes|default({}) if value is not same as(false) -%}
 
-  {%- for name, value in attributes|default({}) if value is not same as(false) -%}
+  {{- ' ' ~ name -}}
 
-    {{- ' ' ~ name -}}
+  {%- if value is iterable -%}
+    ="{{ value|join(' ') }}"
+  {%- elseif value is not same as(true) -%}
+    ="{{ value }}"
+  {%- endif -%}
 
-    {%- if value is iterable -%}
-      ="{{ value|join(' ') }}"
-    {%- elseif value is not same as(true) -%}
-      ="{{ value }}"
-    {%- endif -%}
-
-  {%- endfor -%}
-
-{% endmacro attributes %}
+{%- endfor -%}

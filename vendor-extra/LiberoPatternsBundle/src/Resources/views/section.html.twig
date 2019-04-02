@@ -1,8 +1,6 @@
-{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section']) }) -%}
 
-<section {{- attributes(attributes|default({})) }}>
+<section {%- include '@LiberoPatterns/attributes.html.twig' -%}>
 
   {%- with heading|default({}) only -%}
 
@@ -25,13 +23,10 @@
 
     {%- block content -%}
 
-      {%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-      {%- from '@LiberoPatterns/includes.html.twig' import include -%}
-
       {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
 
-      <div {{- attributes(attributes|default({})) }}>
-        {{- include(content) -}}
+      <div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+        {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
       </div>
 
     {%- endblock -%}

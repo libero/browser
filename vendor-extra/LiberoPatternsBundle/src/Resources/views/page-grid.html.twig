@@ -1,8 +1,6 @@
-{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
-
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
 
-<div {{- attributes(attributes|default({})) }}>
+<div {%- include '@LiberoPatterns/attributes.html.twig' %}>
 
   {%- with start|default({}) only -%}
     {%- block start -%}
