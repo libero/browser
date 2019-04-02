@@ -6,7 +6,7 @@ namespace tests\Libero\LiberoPageBundle\Event;
 
 use InvalidArgumentException;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\Event;
 use tests\Libero\LiberoPageBundle\PageTestCase;
@@ -67,13 +67,13 @@ final class CreatePageEventTest extends TestCase
 
         $this->assertEmpty($event->getContent());
 
-        $view1 = new View('template', ['foo']);
+        $view1 = new TemplateView('template', ['foo']);
         $event->setContent('foo', $view1);
 
-        $view2 = new View('template', ['bar']);
+        $view2 = new TemplateView('template', ['bar']);
         $event->setContent('bar', $view2);
 
-        $view3 = new View('template', ['baz']);
+        $view3 = new TemplateView('template', ['baz']);
         $event->setContent('foo', $view3);
 
         $this->assertEquals(

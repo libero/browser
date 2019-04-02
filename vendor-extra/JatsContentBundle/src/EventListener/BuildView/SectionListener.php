@@ -9,7 +9,7 @@ use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\OptionalTemplateListener;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_map;
 use function iterator_to_array;
@@ -27,7 +27,7 @@ final class SectionListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : TemplateView
     {
         if (!$view->hasContext('level')) {
             $view = $view->withContext(['level' => 1]);
@@ -54,7 +54,7 @@ final class SectionListener
         return $view->withArgument(
             'content',
             array_map(
-                function (NonDocumentTypeChildNode $child) use ($childContext) : View {
+                function (NonDocumentTypeChildNode $child) use ($childContext) : TemplateView {
                     return $this->converter->convert($child, null, $childContext);
                 },
                 iterator_to_array($children)

@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\HeadingListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -25,7 +25,7 @@ final class HeadingListenerTest extends TestCase
 
         $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -43,7 +43,7 @@ final class HeadingListenerTest extends TestCase
 
         $element = $this->loadElement('<article-title xmlns="http://jats.nlm.nih.gov">foo</article-title>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig', ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -63,7 +63,7 @@ final class HeadingListenerTest extends TestCase
         $element = $this->loadElement($xml);
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -82,7 +82,7 @@ final class HeadingListenerTest extends TestCase
 XML
             ,
             [
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:article-title/text()[1]',
@@ -90,7 +90,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:article-title/jats:italic',
@@ -98,7 +98,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:article-title/text()[2]',
@@ -117,7 +117,7 @@ XML
 XML
             ,
             [
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:title/text()[1]',
@@ -125,7 +125,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:title/jats:italic',
@@ -133,7 +133,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:title/text()[2]',
@@ -154,7 +154,7 @@ XML
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 

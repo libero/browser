@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
@@ -32,7 +32,7 @@ final class FrontDisplayChannelContentMetaListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-meta.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-meta.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -72,7 +72,7 @@ final class FrontDisplayChannelContentMetaListenerTest extends TestCase
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -104,7 +104,7 @@ XML
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-meta.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-meta.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -140,7 +140,7 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/content-meta.html.twig', ['items' => ['type' => 'foo']])
+            new TemplateView('@LiberoPatterns/content-meta.html.twig', ['items' => ['type' => 'foo']])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -189,7 +189,7 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/content-meta.html.twig', ['items' => ['foo' => 'bar']], $context)
+            new TemplateView('@LiberoPatterns/content-meta.html.twig', ['items' => ['foo' => 'bar']], $context)
         );
         $listener->onBuildView($event);
         $view = $event->getView();

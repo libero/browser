@@ -7,7 +7,7 @@ namespace tests\Libero\ViewsBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\EventListener\BuildView\LangListener;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
@@ -24,7 +24,7 @@ final class LangListenerTest extends TestCase
 
         $element = $this->loadElement('<foo><bar>baz</bar></foo>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -41,7 +41,7 @@ final class LangListenerTest extends TestCase
 
         $element = $this->loadElement('<foo xml:lang="fr">bar</foo>');
 
-        $event = new BuildViewEvent($element, new View('template', ['attributes' => ['lang' => 'en']]));
+        $event = new BuildViewEvent($element, new TemplateView('template', ['attributes' => ['lang' => 'en']]));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -66,7 +66,7 @@ final class LangListenerTest extends TestCase
         /** @var Element $element */
         $element = $document->xpath()->firstOf($selector);
 
-        $event = new BuildViewEvent($element, new View('template', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('template', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -258,7 +258,7 @@ final class LangListenerTest extends TestCase
 
         $event = new BuildViewEvent(
             $element,
-            new View('template', ['attributes' => ['foo' => 'bar'], 'baz' => 'qux'], $context)
+            new TemplateView('template', ['attributes' => ['foo' => 'bar'], 'baz' => 'qux'], $context)
         );
         $listener->onBuildView($event);
         $view = $event->getView();

@@ -4,21 +4,31 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use Traversable;
 use function GuzzleHttp\json_encode;
 use function iterator_to_array;
 
-final class ViewTest extends TestCase
+final class TemplateViewTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function it_is_a_view() : void
+    {
+        $view = new TemplateView(null);
+
+        $this->assertInstanceOf(View::class, $view);
+    }
+
     /**
      * @test
      */
     public function it_may_have_a_template() : void
     {
-        $with = new View('foo');
-        $withOut = new View(null);
+        $with = new TemplateView('foo');
+        $withOut = new TemplateView(null);
 
         $this->assertSame('foo', $with->getTemplate());
         $this->assertNull($withOut->getTemplate());
@@ -33,7 +43,7 @@ final class ViewTest extends TestCase
      */
     public function it_has_arguments() : void
     {
-        $view = new View(null, ['foo' => 'bar']);
+        $view = new TemplateView(null, ['foo' => 'bar']);
 
         $this->assertTrue($view->hasArgument('foo'));
         $this->assertFalse($view->hasArgument('bar'));
@@ -56,7 +66,7 @@ final class ViewTest extends TestCase
      */
     public function it_has_context() : void
     {
-        $view = new View(null, [], ['foo' => 'bar']);
+        $view = new TemplateView(null, [], ['foo' => 'bar']);
 
         $this->assertTrue($view->hasContext('foo'));
         $this->assertFalse($view->hasContext('bar'));
@@ -79,7 +89,7 @@ final class ViewTest extends TestCase
      */
     public function it_is_json_serializable() : void
     {
-        $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);
+        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
         $expected = json_encode(
             [
@@ -99,9 +109,7 @@ final class ViewTest extends TestCase
      */
     public function it_is_traversable() : void
     {
-        $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);
-
-        $this->assertInstanceOf(Traversable::class, $view);
+        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
         $expected = [
             'template' => 'template',

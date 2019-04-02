@@ -7,7 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function Libero\ViewsBundle\array_has_key;
@@ -25,7 +25,7 @@ final class FrontContentHeaderMetaListener
         $this->translator = $translator;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : TemplateView
     {
         $meta = $this->converter
             ->convert($object, '@LiberoPatterns/content-meta.html.twig', $view->getContext())

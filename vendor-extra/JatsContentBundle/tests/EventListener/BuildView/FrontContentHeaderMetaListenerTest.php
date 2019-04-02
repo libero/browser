@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
@@ -29,7 +29,7 @@ final class FrontContentHeaderMetaListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -58,7 +58,7 @@ final class FrontContentHeaderMetaListenerTest extends TestCase
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -83,7 +83,7 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['meta' => ['foo']])
+            new TemplateView('@LiberoPatterns/content-header.html.twig', ['meta' => ['foo']])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -118,7 +118,10 @@ XML
 
         $context = ['lang' => 'es'];
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/content-header.html.twig', [], $context)
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 

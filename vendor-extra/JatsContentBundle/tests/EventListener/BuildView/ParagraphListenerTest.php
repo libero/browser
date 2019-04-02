@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -26,7 +26,7 @@ final class ParagraphListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View(null));
+        $event = new BuildViewEvent($element, new TemplateView(null));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -50,7 +50,7 @@ final class ParagraphListenerTest extends TestCase
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -68,7 +68,7 @@ final class ParagraphListenerTest extends TestCase
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $event = new BuildViewEvent($element, new View(null, ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView(null, ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -94,7 +94,7 @@ XML
 
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new View(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -102,15 +102,15 @@ XML
         $this->assertEquals(
             [
                 'text' => [
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/jats:p/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/jats:p/jats:bold', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/jats:p/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),

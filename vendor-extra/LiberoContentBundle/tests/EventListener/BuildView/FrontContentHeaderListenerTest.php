@@ -6,7 +6,7 @@ namespace tests\Libero\LiberoContentBundle\EventListener\BuildView;
 
 use Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -26,7 +26,7 @@ final class FrontContentHeaderListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -50,7 +50,7 @@ final class FrontContentHeaderListenerTest extends TestCase
 
         $element = $this->loadElement('<front xmlns="http://libero.pub"><title>foo</title></front>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -68,7 +68,7 @@ final class FrontContentHeaderListenerTest extends TestCase
 
         $element = $this->loadElement('<front xmlns="http://libero.pub">foo</front>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -88,7 +88,7 @@ final class FrontContentHeaderListenerTest extends TestCase
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar'])
+            new TemplateView('@LiberoPatterns/content-header.html.twig', ['contentTitle' => 'bar'])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -115,7 +115,10 @@ XML
 
         $context = ['bar' => 'baz'];
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/content-header.html.twig', [], $context)
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 

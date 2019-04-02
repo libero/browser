@@ -1,16 +1,18 @@
+{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
-<ul {%- include('@LiberoPatterns/attributes.html.twig') -%}>
-
+<ul {{- attributes(attributes|default({})) }}>
   {%- for item in items -%}
 
     {%- with item only -%}
       {%- block item -%}
 
+        {%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
+
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
-        <li {%- include('@LiberoPatterns/attributes.html.twig') -%}>
-
+        <li {{- attributes(attributes|default({})) }}>
           {%- with content only -%}
             {%- block content -%}
 

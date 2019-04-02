@@ -25,27 +25,25 @@ final class EventDispatchingViewConverter implements ViewConverter
     public function convert(NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View
     {
         if (!$node instanceof Element) {
-            if (is_string($template) && '@LiberoPatterns/text.html.twig' !== $template) {
-                throw new LogicException(
-                    "Expected the template '@LiberoPatterns/text.html.twig' for a non-element node"
-                );
+            if (is_string($template)) {
+                throw new LogicException('Expected no template for a non-element node');
             }
 
             if (!$node instanceof Text && !$node instanceof CdataSection) {
-                return new View('@LiberoPatterns/text.html.twig', ['nodes' => ''], $context);
+                return new EmptyView($context);
             }
 
-            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
+            return new StringView((string) $node, $context);
         }
 
-        $event = new BuildViewEvent($node, new View($template, [], $context));
+        $event = new BuildViewEvent($node, new TemplateView($template, [], $context));
 
         $this->dispatcher->dispatch($event::NAME, $event);
 
         $view = $event->getView();
 
         if (!$view->getTemplate()) {
-            return new View('@LiberoPatterns/text.html.twig', ['nodes' => (string) $node], $context);
+            return new StringView((string) $node, $context);
         }
 
         return $view;

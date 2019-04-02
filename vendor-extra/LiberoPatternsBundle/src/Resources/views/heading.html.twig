@@ -1,5 +1,8 @@
-<h{{ level|default(1) }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
+{%- from '@LiberoPatterns/includes.html.twig' import include -%}
 
-  {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+<h{{ level|default(1) }} {{- attributes(attributes|default({})) }}>
+
+  {{- include(text) -}}
 
 </h{{ level|default(1) }}>

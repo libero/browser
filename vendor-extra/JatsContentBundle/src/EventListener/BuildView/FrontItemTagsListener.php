@@ -8,6 +8,7 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_filter;
@@ -26,7 +27,7 @@ final class FrontItemTagsListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : TemplateView
     {
         /** @var DOMNodeList<Element> $keywordGroups */
         $keywordGroups = $object->ownerDocument->xpath()
@@ -40,7 +41,7 @@ final class FrontItemTagsListener
             array_filter(
                 array_map(
                     function (View $tagList) : array {
-                        return $tagList->getArguments();
+                        return $tagList instanceof TemplateView ? $tagList->getArguments() : [];
                     },
                     $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
                 )

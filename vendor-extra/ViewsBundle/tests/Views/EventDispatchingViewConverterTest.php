@@ -7,7 +7,10 @@ namespace tests\Libero\ViewsBundle\Views;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Text;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\EventDispatchingViewConverter;
+use Libero\ViewsBundle\Views\StringView;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use LogicException;
@@ -38,35 +41,30 @@ final class EventDispatchingViewConverterTest extends TestCase
 
         $node = $this->loadElement('<foo>bar <baz>qux</baz> quux</foo>');
 
-        $expected = new View(
-            '@LiberoPatterns/text.html.twig',
-            ['nodes' => 'bar qux quux']
-        );
+        $expected = new StringView('bar qux quux', ['con' => 'text']);
 
-        $this->assertEquals($expected, $handler->convert($node));
+        $this->assertEquals($expected, $handler->convert($node, null, ['con' => 'text']));
     }
 
     /**
      * @test
      * @dataProvider nonElementProvider
      */
-    public function it_handles_non_elements(string $node, $expected = '') : void
+    public function it_handles_non_elements(string $node, View $expected) : void
     {
         $handler = new EventDispatchingViewConverter(new EventDispatcher());
 
         $node = $this->loadNode($node);
 
-        $expected = new View('@LiberoPatterns/text.html.twig', ['nodes' => $expected]);
-
-        $this->assertEquals($expected, $handler->convert($node));
+        $this->assertEquals($expected, $handler->convert($node, null, ['con' => 'text']));
     }
 
     public function nonElementProvider() : iterable
     {
-        yield 'cdata' => ['<![CDATA[<cdata>]]>', '<cdata>'];
-        yield 'comment' => ['<!--comment-->'];
-        yield 'processing instruction' => ['<?processing instruction?>'];
-        yield 'text' => ['text', 'text'];
+        yield 'cdata' => ['<![CDATA[<cdata>]]>', new StringView('<cdata>', ['con' => 'text'])];
+        yield 'comment' => ['<!--comment-->', new EmptyView(['con' => 'text'])];
+        yield 'processing instruction' => ['<?processing instruction?>', new EmptyView(['con' => 'text'])];
+        yield 'text' => ['text', new StringView('text', ['con' => 'text'])];
     }
 
     /**
@@ -77,9 +75,9 @@ final class EventDispatchingViewConverterTest extends TestCase
         $handler = new EventDispatchingViewConverter(new EventDispatcher());
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage("Expected the template '@LiberoPatterns/text.html.twig' for a non-element node");
+        $this->expectExceptionMessage('Expected no template for a non-element node');
 
-        $handler->convert(new Text('foo'), '@LiberoPatterns/not-text.html.twig');
+        $handler->convert(new Text('foo'), '@LiberoPatterns/template.html.twig');
     }
 
     /**
@@ -92,13 +90,13 @@ final class EventDispatchingViewConverterTest extends TestCase
 
         $node = new Element('element');
 
-        $expected = new View('changed', ['one' => 'two'], ['three' => 'four']);
+        $expected = new TemplateView('changed', ['one' => 'two'], ['three' => 'four']);
 
         $dispatcher->addListener(
             BuildViewEvent::NAME,
             function (BuildViewEvent $event) use ($expected, $node) : void {
                 $this->assertEquals($node, $event->getObject());
-                $this->assertEquals(new View('template', [], ['con' => 'text']), $event->getView());
+                $this->assertEquals(new TemplateView('template', [], ['con' => 'text']), $event->getView());
 
                 $event->setView($expected);
             }

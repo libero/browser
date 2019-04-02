@@ -6,7 +6,7 @@ namespace tests\Libero\LiberoContentBundle\EventListener;
 
 use Libero\LiberoContentBundle\EventListener\ContentHeaderListener;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\PageTestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -89,7 +89,7 @@ XML
         );
         $listener->onCreatePagePart($event);
 
-        $this->assertEquals([new View(null, $expectedContentHeader)], $event->getContent());
+        $this->assertEquals([new TemplateView(null, $expectedContentHeader)], $event->getContent());
     }
 
     public function pageProvider() : iterable

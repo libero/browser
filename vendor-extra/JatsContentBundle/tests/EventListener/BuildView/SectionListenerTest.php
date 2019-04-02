@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\SectionListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -26,7 +26,7 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View(null));
+        $event = new BuildViewEvent($element, new TemplateView(null));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -50,7 +50,7 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement('<sec xmlns="http://jats.nlm.nih.gov">foo</sec>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -68,7 +68,7 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement('<sec xmlns="http://jats.nlm.nih.gov">foo</sec>');
 
-        $event = new BuildViewEvent($element, new View(null, ['content' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView(null, ['content' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -87,7 +87,7 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View(null));
+        $event = new BuildViewEvent($element, new TemplateView(null));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -108,7 +108,7 @@ XML
             ,
             [
                 'content' => [
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[1]',
@@ -116,7 +116,7 @@ XML
                             'context' => ['level' => 2],
                         ]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[2]',
@@ -144,7 +144,7 @@ XML
                     'context' => ['level' => 1],
                 ],
                 'content' => [
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[1]',
@@ -152,7 +152,7 @@ XML
                             'context' => ['level' => 2],
                         ]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[2]',
@@ -183,7 +183,7 @@ XML
 
         $context = ['level' => 3];
 
-        $event = new BuildViewEvent($element, new View(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -191,7 +191,7 @@ XML
         $this->assertEquals(
             [
                 'content' => [
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[1]',
@@ -199,7 +199,7 @@ XML
                             'context' => ['level' => 4],
                         ]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         [
                             'node' => '/jats:sec/jats:p[2]',

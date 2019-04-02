@@ -1,6 +1,8 @@
+{%- from '@LiberoPatterns/attributes.html.twig' import attributes -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags']) }) -%}
 
-<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+<div {{- attributes(attributes|default({})) }}>
 
   {%- block body -%}
 

@@ -6,7 +6,7 @@ namespace Libero\LiberoPageBundle\Event;
 
 use FluentDOM\DOM\Document;
 use InvalidArgumentException;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use function end;
@@ -43,7 +43,7 @@ final class CreatePagePartEvent extends Event
         return $this->content;
     }
 
-    public function addContent(View ...$views) : void
+    public function addContent(TemplateView ...$views) : void
     {
         foreach ($views as $view) {
             $area = $view->getContext('area');
