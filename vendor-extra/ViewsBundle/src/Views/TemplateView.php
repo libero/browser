@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use ArrayAccess;
-use ArrayIterator;
 use IteratorAggregate;
 use function array_replace_recursive;
 
 final class TemplateView implements ArrayAccess, IteratorAggregate, View
 {
     use HasContext;
-    use SimplifiedArrayAccess;
+    use IteratorArrayAccess;
 
     private $arguments;
     private $template;
@@ -86,14 +85,7 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
 
     public function getIterator()
     {
-        return new ArrayIterator($this->asArray());
-    }
-
-    protected function asArray() : array
-    {
-        return [
-            'template' => $this->template,
-            'arguments' => $this->arguments,
-        ];
+        yield 'template' => $this->template;
+        yield 'arguments' => $this->arguments;
     }
 }
