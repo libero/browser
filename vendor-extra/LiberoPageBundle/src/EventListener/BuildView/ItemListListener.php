@@ -27,23 +27,27 @@ final class ItemListListener
     protected function handle(Element $object, View $view) : View
     {
         return $view->withArgument(
-            'nodes',
-            array_map(
-                function (NonDocumentTypeChildNode $child) use ($view) : View {
-                    return $this->converter->convert(
-                        $child,
-                        '@LiberoPatterns/teaser.html.twig',
-                        $view->getContext()
-                    );
-                },
-                iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
-            )
+            'list',
+            [
+                'items' => array_map(
+                    function (NonDocumentTypeChildNode $child) use ($view) : array {
+                        return [
+                            'content' => $this->converter->convert(
+                                $child,
+                                '@LiberoPatterns/teaser.html.twig',
+                                $view->getContext()
+                            )
+                        ];
+                    },
+                    iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
+                )
+            ]
         );
     }
 
     protected function canHandleTemplate(string $template) : bool
     {
-        return '@LiberoPatterns/text.html.twig' === $template;
+        return '@LiberoPatterns/teaser-list.html.twig' === $template;
     }
 
     protected function canHandleElement(string $element) : bool
@@ -53,6 +57,6 @@ final class ItemListListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'nodes');
+        return !array_has_key($arguments, 'list');
     }
 }

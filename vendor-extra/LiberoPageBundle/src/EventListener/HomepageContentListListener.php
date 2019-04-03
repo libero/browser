@@ -57,7 +57,7 @@ final class HomepageContentListListener
 
         $list = $event->getDocument('content_list');
         $event->addContent(
-            $this->converter->convert($list->documentElement, '@LiberoPatterns/text.html.twig', $event->getContext())
+            $this->converter->convert($list->documentElement, '@LiberoPatterns/teaser-list.html.twig', $event->getContext())
         );
     }
 
