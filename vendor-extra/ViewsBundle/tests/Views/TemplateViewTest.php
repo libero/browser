@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use BadMethodCallException;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
@@ -96,6 +97,33 @@ final class TemplateViewTest extends TestCase
         $this->assertSame(['foo' => 'bar', 'baz' => ['qux']], $view['arguments']);
         $this->assertArrayNotHasKey('quux', $view);
         $this->assertNull($view['quux']);
+    }
+
+    /**
+     * @test
+     * @dataProvider immutableProvider
+     */
+    public function it_is_immutable(callable $action) : void
+    {
+        $view = new TemplateView(null);
+
+        $this->expectException(BadMethodCallException::class);
+
+        $action($view);
+    }
+
+    public function immutableProvider() : iterable
+    {
+        yield 'set' => [
+            function (TemplateView $view) : void {
+                $view['foo'] = 'bar';
+            },
+        ];
+        yield 'unset' => [
+            function (TemplateView $view) : void {
+                unset($view['foo']);
+            },
+        ];
     }
 
     /**
