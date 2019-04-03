@@ -90,11 +90,11 @@ final class TemplateViewTest extends TestCase
     {
         $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
-        $this->assertTrue(isset($view['template']));
+        $this->assertArrayHasKey('template', $view);
         $this->assertSame('template', $view['template']);
-        $this->assertTrue(isset($view['arguments']));
+        $this->assertArrayHasKey('arguments', $view);
         $this->assertSame(['foo' => 'bar', 'baz' => ['qux']], $view['arguments']);
-        $this->assertFalse(isset($view['quux']));
+        $this->assertArrayNotHasKey('quux', $view);
         $this->assertNull($view['quux']);
     }
 
