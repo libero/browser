@@ -36,7 +36,7 @@ final class ItemListListener
                                 $child,
                                 '@LiberoPatterns/teaser.html.twig',
                                 $view->getContext()
-                            )
+                            )->getArguments()
                         ];
                     },
                     iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
