@@ -4,9 +4,7 @@ libero_page:
             path: '/'
             search_service: 'scholarly-articles'
         content:
-            blog_article:
+            blog-articles:
                 path: '/blog/{id}'
-                content_service: 'blog-articles'
-            scholarly_article:
+            scholarly-articles:
                 path: '/articles/{id}'
-                content_service: 'scholarly-articles'

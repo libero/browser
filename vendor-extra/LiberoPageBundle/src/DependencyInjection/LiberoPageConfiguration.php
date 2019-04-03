@@ -75,12 +75,10 @@ final class LiberoPageConfiguration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $pagesNode */
         $pagesNode = $builder->root('content');
         $pagesNode
+            ->normalizeKeys(false)
             ->arrayPrototype()
                 ->children()
                     ->scalarNode('path')
-                        ->isRequired()
-                    ->end()
-                    ->scalarNode('content_service')
                         ->isRequired()
                     ->end()
                 ->end()

@@ -124,8 +124,8 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\EventListener\BuildView\ItemTeaserListener"
-            class="Libero\JatsContentBundle\EventListener\BuildView\ItemTeaserListener">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ItemArticleTitleTeaserListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\ItemArticleTitleTeaserListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>

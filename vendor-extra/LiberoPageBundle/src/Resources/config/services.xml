@@ -48,6 +48,12 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="\Libero\LiberoPageBundle\EventListener\BuildView\ItemTeaserHrefListener"
+            class="\Libero\LiberoPageBundle\EventListener\BuildView\ItemTeaserHrefListener">
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserListener"
             class="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserListener">
             <argument type="service" id="libero.client"/>

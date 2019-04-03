@@ -10,7 +10,7 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
-final class ItemTeaserListener
+final class ItemArticleTitleTeaserListener
 {
     use SimplifiedViewConverterListener;
 
@@ -34,8 +34,6 @@ final class ItemTeaserListener
         }
 
         return $view
-            // @todo - set route to content.
-            ->withArgument('href', '#')
             ->withArgument(
                 'heading',
                 $this->converter
