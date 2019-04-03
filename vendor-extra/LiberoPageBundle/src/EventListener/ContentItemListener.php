@@ -31,7 +31,7 @@ final class ContentItemListener
             'content_item',
             $this->client->requestAsync(
                 'GET',
-                "{$page['content_service']}/items/{$page['content_id']}/versions/latest",
+                "{$page['name']}/items/{$page['content_id']}/versions/latest",
                 [
                     'headers' => ['Accept' => 'application/xml'],
                     'http_errors' => true,
