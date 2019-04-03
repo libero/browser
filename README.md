@@ -37,12 +37,10 @@ To run an image reading from two content services (`blog-articles` and `scholarl
             homepage:
                 path: '/'
             content:
-                blog_article:
+                blog-articles:
                     path: '/blog/{id}'
-                    content_service: 'blog-articles'
-                scholarly_article:
+                scholarly-articles:
                     path: '/articles/{id}'
-                    content_service: 'scholarly-articles'
     ```
 
 Getting help
