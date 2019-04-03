@@ -7,7 +7,6 @@ namespace tests\Libero\ViewsBundle\Views;
 use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use function GuzzleHttp\json_encode;
 
 final class EmptyViewTest extends TestCase
 {
@@ -44,28 +43,5 @@ final class EmptyViewTest extends TestCase
         $this->assertSame('bar', $view->getContext('foo'));
         $this->assertNull($view->getContext('bar'));
         $this->assertEquals(['foo' => 'bar'], $view->getContext());
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_array_accessible() : void
-    {
-        $view = new EmptyView();
-
-        $this->assertFalse(isset($view['foo']));
-        $this->assertNull($view['foo']);
-        $this->assertFalse(isset($view['bar']));
-        $this->assertNull($view['bar']);
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_json_serializable() : void
-    {
-        $view = new EmptyView();
-
-        $this->assertSame('null', json_encode($view));
     }
 }

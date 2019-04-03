@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
+use ArrayAccess;
+use ArrayIterator;
 use IteratorAggregate;
 use function array_replace_recursive;
 
-final class TemplateView implements IteratorAggregate, View
+final class TemplateView implements ArrayAccess, IteratorAggregate, View
 {
-    use ArrayAccessFromJsonSerialize;
     use HasContext;
-    use IteratorFromJsonSerialize;
+    use SimplifiedArrayAccess;
 
     private $arguments;
     private $template;
@@ -83,7 +84,12 @@ final class TemplateView implements IteratorAggregate, View
         return $view;
     }
 
-    public function jsonSerialize()
+    public function getIterator()
+    {
+        return new ArrayIterator($this->asArray());
+    }
+
+    protected function asArray() : array
     {
         return [
             'template' => $this->template,

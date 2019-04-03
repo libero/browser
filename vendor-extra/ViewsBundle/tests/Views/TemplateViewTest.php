@@ -7,7 +7,6 @@ namespace tests\Libero\ViewsBundle\Views;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
-use function GuzzleHttp\json_encode;
 use function iterator_to_array;
 
 final class TemplateViewTest extends TestCase
@@ -97,26 +96,6 @@ final class TemplateViewTest extends TestCase
         $this->assertSame(['foo' => 'bar', 'baz' => ['qux']], $view['arguments']);
         $this->assertFalse(isset($view['quux']));
         $this->assertNull($view['quux']);
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_json_serializable() : void
-    {
-        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
-
-        $expected = json_encode(
-            [
-                'template' => 'template',
-                'arguments' => [
-                    'foo' => 'bar',
-                    'baz' => ['qux'],
-                ],
-            ]
-        );
-
-        $this->assertJsonStringEqualsJsonString($expected, json_encode($view));
     }
 
     /**

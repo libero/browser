@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\ViewsBundle\Views;
 
-use ArrayAccess;
-use JsonSerializable;
-
-interface View extends ArrayAccess, JsonSerializable
+interface View
 {
     public function hasContext(string $key) : bool;
 

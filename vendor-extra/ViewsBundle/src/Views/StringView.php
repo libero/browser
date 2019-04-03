@@ -6,9 +6,7 @@ namespace Libero\ViewsBundle\Views;
 
 final class StringView implements View
 {
-    use ArrayAccessFromJsonSerialize;
     use HasContext;
-    use IteratorFromJsonSerialize;
 
     private $string;
 
@@ -19,11 +17,6 @@ final class StringView implements View
     }
 
     public function __toString() : string
-    {
-        return $this->string;
-    }
-
-    public function jsonSerialize()
     {
         return $this->string;
     }

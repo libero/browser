@@ -6,9 +6,7 @@ namespace Libero\ViewsBundle\Views;
 
 final class EmptyView implements View
 {
-    use ArrayAccessFromJsonSerialize;
     use HasContext;
-    use IteratorFromJsonSerialize;
 
     public function __construct(array $context = [])
     {
@@ -18,10 +16,5 @@ final class EmptyView implements View
     public function __toString() : string
     {
         return '';
-    }
-
-    public function jsonSerialize()
-    {
-        return null;
     }
 }
