@@ -6,6 +6,7 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use function Libero\ViewsBundle\array_has_key;
@@ -21,7 +22,7 @@ final class ItemTeaserHrefListener
         $this->urlGenerator = $urlGenerator;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $xpath = $object->ownerDocument->xpath();
 

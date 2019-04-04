@@ -6,7 +6,7 @@ namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class HomepageContentHeaderListener
@@ -27,7 +27,7 @@ final class HomepageContentHeaderListener
         $context = ['area' => null] + $event->getContext();
 
         $event->addContent(
-            new View(
+            new TemplateView(
                 '@LiberoPatterns/content-header.html.twig',
                 ['contentTitle' => ['text' => $this->translate('libero.page.site_name', $context)]],
                 $context

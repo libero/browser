@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
 use FluentDOM;
+use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
-use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
-use function sprintf;
 
 final class ItemRefTeaserListener
 {
+    use SimplifiedViewConverterListener;
+
     private $client;
     private $converter;
 
@@ -23,20 +26,9 @@ final class ItemRefTeaserListener
         $this->converter = $converter;
     }
 
-    public function onBuildView(BuildViewEvent $event) : void
+    protected function handle(Element $object, TemplateView $view) : View
     {
-        $object = $event->getObject();
-        $view = $event->getView();
-
-        if (!$this->canHandleTemplate($view->getTemplate())) {
-            return;
-        }
-
-        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
-            return;
-        }
-
-        $new = $this->client
+        return $this->client
             ->requestAsync(
                 'GET',
                 "{$object->getAttribute('service')}/items/{$object->getAttribute('id')}/versions/latest"
@@ -48,12 +40,7 @@ final class ItemRefTeaserListener
 
                     return $this->converter->convert($item->documentElement, $view->getTemplate(), $view->getContext());
                 }
-            );
-
-        $view = View::lazy([$new, 'wait']);
-
-        $event->setView($view);
-        $event->stopPropagation();
+            )->wait();
     }
 
     protected function canHandleTemplate(?string $template) : bool

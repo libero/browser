@@ -6,7 +6,7 @@ namespace Libero\LiberoPageBundle\Event;
 
 use FluentDOM\DOM\Document;
 use InvalidArgumentException;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,7 +35,7 @@ final class CreatePageEvent extends Event
         return $this->content;
     }
 
-    public function setContent(string $area, View $view) : void
+    public function setContent(string $area, TemplateView $view) : void
     {
         $this->content[$area] = $view;
     }

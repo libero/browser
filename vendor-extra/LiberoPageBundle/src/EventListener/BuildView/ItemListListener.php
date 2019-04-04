@@ -7,6 +7,7 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_map;
@@ -24,7 +25,7 @@ final class ItemListListener
         $this->converter = $converter;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         return $view->withArgument(
             'list',

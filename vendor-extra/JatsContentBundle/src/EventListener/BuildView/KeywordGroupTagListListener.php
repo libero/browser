@@ -9,6 +9,7 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,7 +32,7 @@ final class KeywordGroupTagListListener
         $this->translationKeys = $translationKeys;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
@@ -46,8 +47,13 @@ final class KeywordGroupTagListListener
         $type = $object->getAttribute('kwd-group-type');
 
         if ($title instanceof Element) {
-            $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext())
-                ->getArguments();
+            $title = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext());
+
+            if (!$title instanceof TemplateView) {
+                return $view;
+            }
+
+            $title = $title->getArguments();
         } elseif (!isset($this->translationKeys[$type])) {
             return $view;
         } else {
@@ -60,7 +66,7 @@ final class KeywordGroupTagListListener
                 'list',
                 [
                     'items' => array_map(
-                        function (View $link) : array {
+                        function (TemplateView $link) : array {
                             return ['content' => $link->getArguments()];
                         },
                         $this->convertList($keywords, '@LiberoPatterns/link.html.twig', $view->getContext())

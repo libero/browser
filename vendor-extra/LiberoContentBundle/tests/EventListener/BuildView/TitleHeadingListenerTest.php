@@ -6,7 +6,7 @@ namespace tests\Libero\LiberoContentBundle\EventListener\BuildView;
 
 use Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -26,10 +26,11 @@ final class TitleHeadingListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -50,10 +51,11 @@ final class TitleHeadingListenerTest extends TestCase
 
         $element = $this->loadElement('<title xmlns="http://libero.pub">foo</title>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -68,10 +70,11 @@ final class TitleHeadingListenerTest extends TestCase
 
         $element = $this->loadElement('<title xmlns="http://libero.pub">foo</title>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig', ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig', ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -94,23 +97,24 @@ XML
 
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/heading.html.twig', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/heading.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/heading.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'text' => [
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/libero:title/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/libero:title/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
-                    new View(
+                    new TemplateView(
                         null,
                         ['node' => '/libero:title/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
