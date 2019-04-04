@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
+use function is_string;
 use function Libero\LiberoPageBundle\is_valid_date;
 use function Libero\ViewsBundle\array_has_key;
 use function preg_match;
@@ -19,11 +20,13 @@ final class IsoDateListener
 
     protected function handle(Element $object, View $view) : View
     {
-        if (!$object->hasAttribute('iso-8601-date')) {
+        $date = $object->getAttribute('iso-8601-date');
+
+        if (!is_string($date)) {
             return $view;
         }
 
-        preg_match(self::DATE_PATTERN, $object->getAttribute('iso-8601-date'), $matches);
+        preg_match(self::DATE_PATTERN, $date, $matches);
 
         if (!isset($matches[1]) || !is_valid_date($matches[1])) {
             return $view;

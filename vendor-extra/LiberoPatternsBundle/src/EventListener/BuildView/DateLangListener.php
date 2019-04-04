@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Libero\LiberoPatternsBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;

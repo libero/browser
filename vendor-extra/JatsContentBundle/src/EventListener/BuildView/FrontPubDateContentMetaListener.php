@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use IntlDateFormatter;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
