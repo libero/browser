@@ -4,12 +4,12 @@
 
     <meta>
 
-        <id>article1</id>
-        <service>blog-articles</service>
+        <id>article2</id>
+        <service>scholarly-articles</service>
 
     </meta>
 
-    <jats:article article-type="research-article">
+    <jats:article>
 
         <jats:front>
 
@@ -18,22 +18,15 @@
                 <jats:title-group>
 
                     <jats:article-title>
-                        <jats:italic>Homo naledi</jats:italic>, a new species of the genus
-                        <jats:italic>Homo</jats:italic> from the Dinaledi Chamber, South Africa
+                        Article 2 y'all
                     </jats:article-title>
 
                 </jats:title-group>
 
                 <jats:article-categories>
-
                     <jats:subj-group subj-group-type="heading">
                         <jats:subject>Evolutionary Biology</jats:subject>
                     </jats:subj-group>
-
-                    <jats:subj-group subj-group-type="display-channel">
-                        <jats:subject>Research Article</jats:subject>
-                    </jats:subj-group>
-
                 </jats:article-categories>
 
                 <jats:kwd-group kwd-group-type="author-keywords">
@@ -66,7 +59,7 @@
                     articulation, as well as smaller fragments many of which could be refit into more complete
                     elements. The collection is a morphologically homogeneous sample that can be attributed to no
                     previously-known hominin species. Here we describe this new species, <jats:italic>Homo
-                    naledi</jats:italic>. We have not defined <jats:italic>H. naledi</jats:italic> narrowly based on a
+                        naledi</jats:italic>. We have not defined <jats:italic>H. naledi</jats:italic> narrowly based on a
                     single jaw or skull because the entire body of material has informed our understanding of its
                     biology.
                 </jats:p>

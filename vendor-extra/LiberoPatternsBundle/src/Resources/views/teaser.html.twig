@@ -1,0 +1,27 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
+
+<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+  {%- with {attributes: {class: []}} -%}
+    {%- block header -%}
+
+      {%- set attributes = attributes|merge({class: attributes.class|merge(['teaser__header']) }) -%}
+      <header {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+
+        {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
+          {%- block heading -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__heading']) }) -%}
+            {%- set level = level|default(4) -%}
+
+            {%- include '@LiberoPatterns/heading.html.twig' -%}
+
+          {%- endblock heading -%}
+        {%- endwith -%}
+
+      </header>
+
+    {%- endblock header -%}
+  {%- endwith -%}
+
+</div>
