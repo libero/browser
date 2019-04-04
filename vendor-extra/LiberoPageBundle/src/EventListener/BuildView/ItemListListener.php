@@ -45,7 +45,7 @@ final class ItemListListener
         );
     }
 
-    protected function canHandleTemplate(string $template) : bool
+    protected function canHandleTemplate(?string $template) : bool
     {
         return '@LiberoPatterns/teaser-list.html.twig' === $template;
     }

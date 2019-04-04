@@ -56,7 +56,7 @@ final class ItemRefTeaserListener
         $event->stopPropagation();
     }
 
-    protected function canHandleTemplate(string $template) : bool
+    protected function canHandleTemplate(?string $template) : bool
     {
         return '@LiberoPatterns/teaser.html.twig' === $template;
     }
