@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use ArrayAccess;
 use BadMethodCallException;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
+use Traversable;
 use function iterator_to_array;
 
 final class TemplateViewTest extends TestCase
@@ -91,6 +93,8 @@ final class TemplateViewTest extends TestCase
     {
         $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
+        $this->assertInstanceOf(ArrayAccess::class, $view);
+
         $this->assertArrayHasKey('template', $view);
         $this->assertSame('template', $view['template']);
         $this->assertArrayHasKey('arguments', $view);
@@ -132,6 +136,8 @@ final class TemplateViewTest extends TestCase
     public function it_is_traversable() : void
     {
         $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
+
+        $this->assertInstanceOf(Traversable::class, $view);
 
         $expected = [
             'template' => 'template',
