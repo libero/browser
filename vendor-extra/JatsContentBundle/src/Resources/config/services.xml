@@ -39,6 +39,16 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\DatePartsListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\DatePartsListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\IsoDateListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\IsoDateListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener"
             class="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
@@ -94,6 +104,13 @@
 
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener"
             class="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontPubDateContentMetaListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontPubDateContentMetaListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>

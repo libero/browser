@@ -1,0 +1,11 @@
+{%- set attributes = attributes|default({})|merge({datetime: date|date("Y-m-d")}) -%}
+
+{% spaceless %}
+
+  <time {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+    <bdo>{{ date|localizeddate(format|default('long'), 'none', attributes.lang|default(lang ?? null)) }}</bdo>
+
+  </time>
+
+{% endspaceless %}

@@ -13,7 +13,11 @@
     },
     "require": {
         "php": "^7.2",
-        "symfony/http-kernel": "^4.1"
+        "symfony/config": "^4.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/http-kernel": "^4.1",
+        "twig/extensions": "^1.5",
+        "twig/twig": "^2.7"
     },
     "config": {
         "sort-packages": true
