@@ -8,7 +8,7 @@ use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\JatsContentBundle\EventListener\BuildView\FrontItemTagsListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -28,10 +28,11 @@ final class FrontItemTagsListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/item-tags.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/item-tags.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -63,10 +64,11 @@ final class FrontItemTagsListenerTest extends TestCase
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -81,10 +83,11 @@ XML
 
         $element = $this->loadElement('<front xmlns="http://jats.nlm.nih.gov"><article-meta/></front>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/item-tags.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/item-tags.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -110,10 +113,14 @@ XML
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/item-tags.html.twig', ['groups' => 'bar']));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/item-tags.html.twig', ['groups' => 'bar'])
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertSame(['groups' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -153,10 +160,11 @@ XML
         );
 
         $context = ['qux' => 'quux'];
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/item-tags.html.twig', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/item-tags.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
@@ -212,10 +220,11 @@ XML
         );
 
         $context = ['qux' => 'quux'];
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/item-tags.html.twig', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/item-tags.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/item-tags.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertSame(['qux' => 'quux'], $view->getContext());

@@ -15,7 +15,7 @@ trait SimplifiedViewConverterListener
         $object = $event->getObject();
         $view = $event->getView();
 
-        if (!$this->canHandleTemplate($view->getTemplate())) {
+        if (!$view instanceof TemplateView || !$this->canHandleTemplate($view->getTemplate())) {
             return;
         }
 
@@ -32,7 +32,7 @@ trait SimplifiedViewConverterListener
         $event->setView($this->handle($object, $view));
     }
 
-    abstract protected function handle(Element $object, View $view) : View;
+    abstract protected function handle(Element $object, TemplateView $view) : View;
 
     abstract protected function canHandleTemplate(?string $template) : bool;
 
@@ -43,7 +43,7 @@ trait SimplifiedViewConverterListener
         return true;
     }
 
-    protected function beforeHandle(View $view) : View
+    protected function beforeHandle(TemplateView $view) : TemplateView
     {
         return $view;
     }

@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener;
 
 use Libero\JatsContentBundle\EventListener\ItemTagsListener;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\PageTestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -107,7 +107,7 @@ XML
         );
         $listener->onCreatePagePart($event);
 
-        $this->assertEquals([new View(null, $expectedItemTags)], $event->getContent());
+        $this->assertEquals([new TemplateView(null, $expectedItemTags)], $event->getContent());
     }
 
     public function pageProvider() : iterable

@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,7 +29,7 @@ final class FrontDisplayChannelContentMetaListener
         $this->translator = $translator;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $items = $view->getArgument('items') ?? [];
 

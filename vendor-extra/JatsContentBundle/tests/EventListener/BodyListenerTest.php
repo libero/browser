@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener;
 
 use Libero\JatsContentBundle\EventListener\BodyListener;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\PageTestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -101,8 +101,8 @@ XML
 
         $this->assertEquals(
             array_map(
-                function (array $block) : View {
-                    return new View(null, $block);
+                function (array $block) : TemplateView {
+                    return new TemplateView(null, $block);
                 },
                 $expectedBody
             ),

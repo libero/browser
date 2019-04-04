@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\LinkListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
@@ -25,10 +25,11 @@ final class LinkListenerTest extends TestCase
 
         $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -43,10 +44,11 @@ final class LinkListenerTest extends TestCase
 
         $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
-        $event = new BuildViewEvent($element, new View(null, ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView(null, ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertNull($view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -63,10 +65,11 @@ final class LinkListenerTest extends TestCase
         $element = $this->loadElement($xml);
 
         $context = ['qux' => 'quux'];
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/link.html.twig', [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/link.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
         $this->assertEquals(['text' => $expectedText], $view->getArguments());
         $this->assertSame(['qux' => 'quux'], $view->getContext());
@@ -82,7 +85,7 @@ final class LinkListenerTest extends TestCase
 XML
             ,
             [
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:kwd/text()[1]',
@@ -90,7 +93,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:kwd/jats:italic',
@@ -98,7 +101,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:kwd/text()[2]',
@@ -117,7 +120,7 @@ XML
 XML
             ,
             [
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:subject/text()[1]',
@@ -125,7 +128,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:subject/jats:italic',
@@ -133,7 +136,7 @@ XML
                         'context' => ['qux' => 'quux'],
                     ]
                 ),
-                new View(
+                new TemplateView(
                     null,
                     [
                         'node' => '/jats:subject/text()[2]',
@@ -154,10 +157,11 @@ XML
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/link.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/link.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());

@@ -6,6 +6,8 @@ namespace tests\Libero\LiberoPageBundle;
 
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\CallbackViewConverter;
+use Libero\ViewsBundle\Views\EmptyView;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use LogicException;
@@ -16,7 +18,7 @@ trait ViewConvertingTestCase
     {
         return new CallbackViewConverter(
             function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
-                return new View(
+                return new TemplateView(
                     null,
                     ['node' => $node->getNodePath(), 'template' => $template, 'context' => $context]
                 );
@@ -45,7 +47,7 @@ trait ViewConvertingTestCase
                 $filter
             ) : View {
                 if (false === $filter($node, $template, $context)) {
-                    return new View(null);
+                    return new EmptyView($context);
                 }
 
                 return $converter->convert($node, $template, $context);

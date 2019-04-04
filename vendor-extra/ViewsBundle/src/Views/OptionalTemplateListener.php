@@ -17,7 +17,7 @@ trait OptionalTemplateListener
         return !is_string($template) || $this->template() === $template;
     }
 
-    final protected function beforeHandle(View $view) : View
+    final protected function beforeHandle(TemplateView $view) : TemplateView
     {
         return $view->withTemplate($this->template());
     }

@@ -6,7 +6,7 @@ namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function array_merge;
 use function count;
@@ -39,7 +39,7 @@ final class MainListener
 
         $event->setContent(
             PAGE_GRID_MAIN,
-            new View($part->getTemplate(), ['content' => $part->getContent()], $part->getContext())
+            new TemplateView($part->getTemplate(), ['content' => $part->getContent()], $part->getContext())
         );
     }
 }

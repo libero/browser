@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener;
 use FluentDOM\DOM\Element;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ConvertsLists;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function count;
 use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
@@ -36,7 +37,7 @@ final class ItemTagsListener
 
         $itemTags = $this->converter->convert($front, '@LiberoPatterns/item-tags.html.twig', $context);
 
-        if (0 === count($itemTags->getArguments())) {
+        if (!$itemTags instanceof TemplateView || 0 === count($itemTags->getArguments())) {
             return;
         }
 
