@@ -8,7 +8,6 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
 use function is_string;
-use function Libero\LiberoPageBundle\is_valid_date;
 use function Libero\ViewsBundle\array_has_key;
 use function preg_match;
 
@@ -28,7 +27,7 @@ final class IsoDateListener
 
         preg_match(self::DATE_PATTERN, $date, $matches);
 
-        if (!isset($matches[1]) || !is_valid_date($matches[1])) {
+        if (!isset($matches[1])) {
             return $view;
         }
 
