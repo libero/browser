@@ -30,7 +30,7 @@ final class FrontPubDateContentMetaListener
     {
         $items = $view->getArgument('items') ?? [];
 
-        if (isset($items['data'])) {
+        if (isset($items['date'])) {
             return $view;
         }
 
@@ -42,11 +42,11 @@ final class FrontPubDateContentMetaListener
 
         $date = $this->converter->convert($pubDate, '@LiberoPatterns/date.html.twig', $view->getContext());
 
-        if (!$date->hasArgument('date')) {
+        if (empty($date->getArguments())) {
             return $view;
         }
 
-        $items['data'] = [
+        $items['date'] = [
             'attributes' => [
                 'aria-label' => $this->translate('libero.patterns.content_header.meta.date.label', $view->getContext()),
             ],

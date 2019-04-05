@@ -9,21 +9,24 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
 use function count;
-use function implode;
 use function iterator_to_array;
 use function Libero\ViewsBundle\array_has_key;
+use function sprintf;
 use function usort;
 
 final class DatePartsListener
 {
-    private const DATE_PATTERN = '~^[0-9]{4}-[0-9]{2}-[0-9]{2}$~';
+    private const YEAR_PATH = 'jats:year[number(.)=.][1]';
+    private const MONTH_PATH = 'jats:month[number(.)=.][1]';
+    private const DAY_PATH = 'jats:day[number(.)=.][1]';
+    private const PARTS_PATH = self::YEAR_PATH.'|'.self::MONTH_PATH.'|'.self::DAY_PATH;
 
     use SimplifiedViewConverterListener;
 
     protected function handle(Element $object, View $view) : View
     {
         /** @var DOMNodeList<Element> $parts */
-        $parts = $object('jats:year[number(.)=.][1]|jats:month[number(.)=.][1]|jats:day[number(.)=.][1]');
+        $parts = $object(self::PARTS_PATH);
 
         if (3 !== count($parts)) {
             return $view;
@@ -50,7 +53,7 @@ final class DatePartsListener
             }
         );
 
-        return $view->withArgument('date', implode('-', $parts));
+        return $view->withArgument('date', sprintf("%'.04s-%'.02s-%'.02s", ...$parts));
     }
 
     protected function canHandleTemplate(?string $template) : bool
