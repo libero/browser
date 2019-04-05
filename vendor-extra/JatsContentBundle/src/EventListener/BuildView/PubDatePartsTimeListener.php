@@ -10,11 +10,10 @@ use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
 use function count;
 use function iterator_to_array;
-use function Libero\ViewsBundle\array_has_key;
 use function sprintf;
 use function usort;
 
-final class DatePartsListener
+final class PubDatePartsTimeListener
 {
     private const YEAR_PATH = 'jats:year[number(.)=.][1]';
     private const MONTH_PATH = 'jats:month[number(.)=.][1]';
@@ -25,6 +24,12 @@ final class DatePartsListener
 
     protected function handle(Element $object, View $view) : View
     {
+        $attributes = $view->getArgument('attributes') ?? [];
+
+        if (isset($attributes['datetime'])) {
+            return $view;
+        }
+
         /** @var DOMNodeList<Element> $parts */
         $parts = $object(self::PARTS_PATH);
 
@@ -53,21 +58,18 @@ final class DatePartsListener
             }
         );
 
-        return $view->withArgument('date', sprintf("%'.04s-%'.02s-%'.02s", ...$parts));
+        $attributes['datetime'] = sprintf("%'.04s-%'.02s-%'.02s", ...$parts);
+
+        return $view->withArgument('attributes', $attributes);
     }
 
     protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/date.html.twig' === $template;
+        return '@LiberoPatterns/time.html.twig' === $template;
     }
 
     protected function canHandleElement(string $element) : bool
     {
         return '{http://jats.nlm.nih.gov}pub-date' === $element;
-    }
-
-    protected function canHandleArguments(array $arguments) : bool
-    {
-        return !array_has_key($arguments, 'date');
     }
 }

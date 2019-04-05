@@ -40,7 +40,7 @@ final class FrontPubDateContentMetaListener
             return $view;
         }
 
-        $date = $this->converter->convert($pubDate, '@LiberoPatterns/date.html.twig', $view->getContext());
+        $date = $this->converter->convert($pubDate, '@LiberoPatterns/time.html.twig', $view->getContext());
 
         if (empty($date->getArguments())) {
             return $view;

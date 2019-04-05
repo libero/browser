@@ -192,7 +192,7 @@ XML
                                     null,
                                     [
                                         'node' => '/jats:front/jats:article-meta/jats:pub-date[2]',
-                                        'template' => '@LiberoPatterns/date.html.twig',
+                                        'template' => '@LiberoPatterns/time.html.twig',
                                         'context' => ['lang' => 'es'],
                                         'format' => 'medium',
                                     ]

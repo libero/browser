@@ -39,14 +39,19 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\EventListener\BuildView\DatePartsListener"
-            class="Libero\JatsContentBundle\EventListener\BuildView\DatePartsListener">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDateIsoDateTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDateIsoDateTimeListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDatePartsTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDatePartsTimeListener">
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\EventListener\BuildView\IsoDateListener"
-            class="Libero\JatsContentBundle\EventListener\BuildView\IsoDateListener">
-            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDateTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDateTimeListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-100"/>
         </service>
 
         <service id="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener"

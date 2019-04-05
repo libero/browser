@@ -5,38 +5,40 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
+use IntlDateFormatter;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\View;
-use function is_string;
 use function Libero\ViewsBundle\array_has_key;
-use function preg_match;
+use function strtotime;
 
-final class IsoDateListener
+final class PubDateTimeListener
 {
-    private const DATE_PATTERN = '~^([0-9]{4}-[0-9]{2}-[0-9]{2})(?:$|T)~';
-
     use SimplifiedViewConverterListener;
 
     protected function handle(Element $object, View $view) : View
     {
-        $date = $object->getAttribute('iso-8601-date');
-
-        if (!is_string($date)) {
+        if (!isset($view->getArgument('attributes')['datetime']) || !$view->hasContext('lang')) {
             return $view;
         }
 
-        preg_match(self::DATE_PATTERN, $date, $matches);
+        $formatter = IntlDateFormatter::create(
+            $view->getContext('lang'),
+            IntlDateFormatter::MEDIUM,
+            IntlDateFormatter::NONE
+        );
 
-        if (!isset($matches[1])) {
+        $text = $formatter->format(strtotime($view->getArgument('attributes')['datetime']));
+
+        if (!$text) {
             return $view;
         }
 
-        return $view->withArgument('date', $matches[1]);
+        return $view->withArgument('text', $text);
     }
 
     protected function canHandleTemplate(?string $template) : bool
     {
-        return '@LiberoPatterns/date.html.twig' === $template;
+        return '@LiberoPatterns/time.html.twig' === $template;
     }
 
     protected function canHandleElement(string $element) : bool
@@ -46,6 +48,6 @@ final class IsoDateListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'date');
+        return !array_has_key($arguments, 'text');
     }
 }
