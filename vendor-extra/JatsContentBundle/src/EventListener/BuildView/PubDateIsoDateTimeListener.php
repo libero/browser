@@ -6,6 +6,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use function is_string;
 use function preg_match;
@@ -16,7 +17,7 @@ final class PubDateIsoDateTimeListener
 
     use SimplifiedViewConverterListener;
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $attributes = $view->getArgument('attributes') ?? [];
 

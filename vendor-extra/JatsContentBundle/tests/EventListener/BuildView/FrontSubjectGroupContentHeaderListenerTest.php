@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
@@ -32,10 +32,11 @@ final class FrontSubjectGroupContentHeaderListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -72,10 +73,11 @@ final class FrontSubjectGroupContentHeaderListenerTest extends TestCase
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -106,10 +108,11 @@ XML
 XML
         );
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -142,11 +145,12 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/content-header.html.twig', ['categories' => 'bar'])
+            new TemplateView('@LiberoPatterns/content-header.html.twig', ['categories' => 'bar'])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertSame(['categories' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -188,10 +192,14 @@ XML
         );
 
         $context = ['lang' => 'es'];
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/content-header.html.twig', [], $context));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/content-header.html.twig', [], $context)
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
             [

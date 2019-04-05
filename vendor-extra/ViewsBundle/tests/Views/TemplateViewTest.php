@@ -4,21 +4,33 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use ArrayAccess;
+use BadMethodCallException;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use Traversable;
-use function GuzzleHttp\json_encode;
 use function iterator_to_array;
 
-final class ViewTest extends TestCase
+final class TemplateViewTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function it_is_a_view() : void
+    {
+        $view = new TemplateView(null);
+
+        $this->assertInstanceOf(View::class, $view);
+    }
+
     /**
      * @test
      */
     public function it_may_have_a_template() : void
     {
-        $with = new View('foo');
-        $withOut = new View(null);
+        $with = new TemplateView('foo');
+        $withOut = new TemplateView(null);
 
         $this->assertSame('foo', $with->getTemplate());
         $this->assertNull($withOut->getTemplate());
@@ -33,7 +45,7 @@ final class ViewTest extends TestCase
      */
     public function it_has_arguments() : void
     {
-        $view = new View(null, ['foo' => 'bar']);
+        $view = new TemplateView(null, ['foo' => 'bar']);
 
         $this->assertTrue($view->hasArgument('foo'));
         $this->assertFalse($view->hasArgument('bar'));
@@ -56,7 +68,7 @@ final class ViewTest extends TestCase
      */
     public function it_has_context() : void
     {
-        $view = new View(null, [], ['foo' => 'bar']);
+        $view = new TemplateView(null, [], ['foo' => 'bar']);
 
         $this->assertTrue($view->hasContext('foo'));
         $this->assertFalse($view->hasContext('bar'));
@@ -77,21 +89,45 @@ final class ViewTest extends TestCase
     /**
      * @test
      */
-    public function it_is_json_serializable() : void
+    public function it_is_array_accessible() : void
     {
-        $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);
+        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
-        $expected = json_encode(
-            [
-                'template' => 'template',
-                'arguments' => [
-                    'foo' => 'bar',
-                    'baz' => ['qux'],
-                ],
-            ]
-        );
+        $this->assertInstanceOf(ArrayAccess::class, $view);
 
-        $this->assertJsonStringEqualsJsonString($expected, json_encode($view));
+        $this->assertArrayHasKey('template', $view);
+        $this->assertSame('template', $view['template']);
+        $this->assertArrayHasKey('arguments', $view);
+        $this->assertSame(['foo' => 'bar', 'baz' => ['qux']], $view['arguments']);
+        $this->assertArrayNotHasKey('quux', $view);
+        $this->assertNull($view['quux']);
+    }
+
+    /**
+     * @test
+     * @dataProvider immutableProvider
+     */
+    public function it_is_immutable(callable $action) : void
+    {
+        $view = new TemplateView(null);
+
+        $this->expectException(BadMethodCallException::class);
+
+        $action($view);
+    }
+
+    public function immutableProvider() : iterable
+    {
+        yield 'set' => [
+            function (TemplateView $view) : void {
+                $view['foo'] = 'bar';
+            },
+        ];
+        yield 'unset' => [
+            function (TemplateView $view) : void {
+                unset($view['foo']);
+            },
+        ];
     }
 
     /**
@@ -99,7 +135,7 @@ final class ViewTest extends TestCase
      */
     public function it_is_traversable() : void
     {
-        $view = new View('template', ['foo' => 'bar', 'baz' => ['qux']]);
+        $view = new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
 
         $this->assertInstanceOf(Traversable::class, $view);
 

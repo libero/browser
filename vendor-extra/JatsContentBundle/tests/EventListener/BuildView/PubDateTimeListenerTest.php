@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\PubDateTimeListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Locale;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -27,10 +27,11 @@ final class PubDateTimeListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/time.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/time.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -51,10 +52,11 @@ final class PubDateTimeListenerTest extends TestCase
 
         $element = $this->loadElement('<pub-date xmlns="http://jats.nlm.nih.gov"/>');
 
-        $event = new BuildViewEvent($element, new View('template'));
+        $event = new BuildViewEvent($element, new TemplateView('template'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('template', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -71,11 +73,15 @@ final class PubDateTimeListenerTest extends TestCase
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/time.html.twig', ['attributes' => ['datetime' => '1999-12-31'], 'text' => 'foo'])
+            new TemplateView(
+                '@LiberoPatterns/time.html.twig',
+                ['attributes' => ['datetime' => '1999-12-31'], 'text' => 'foo']
+            )
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertSame(['attributes' => ['datetime' => '1999-12-31'], 'text' => 'foo'], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -90,10 +96,11 @@ final class PubDateTimeListenerTest extends TestCase
 
         $element = $this->loadElement('<pub-date xmlns="http://jats.nlm.nih.gov"/>');
 
-        $event = new BuildViewEvent($element, new View('@LiberoPatterns/time.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/time.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -110,11 +117,12 @@ final class PubDateTimeListenerTest extends TestCase
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/time.html.twig', ['attributes' => ['datetime' => '2000-01-02']])
+            new TemplateView('@LiberoPatterns/time.html.twig', ['attributes' => ['datetime' => '2000-01-02']])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertEquals(['attributes' => ['datetime' => '2000-01-02']], $view->getArguments());
         $this->assertEmpty($view->getContext());
@@ -136,11 +144,12 @@ final class PubDateTimeListenerTest extends TestCase
 
         $event = new BuildViewEvent(
             $element,
-            new View('@LiberoPatterns/time.html.twig', ['attributes' => ['datetime' => $datetime]], $context)
+            new TemplateView('@LiberoPatterns/time.html.twig', ['attributes' => ['datetime' => $datetime]], $context)
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertEquals(['attributes' => ['datetime' => $datetime], 'text' => $expected], $view->getArguments());
         $this->assertSame($context, $view->getContext());

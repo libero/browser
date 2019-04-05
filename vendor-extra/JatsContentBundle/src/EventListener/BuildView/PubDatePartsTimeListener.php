@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use function count;
 use function iterator_to_array;
@@ -22,7 +23,7 @@ final class PubDatePartsTimeListener
 
     use SimplifiedViewConverterListener;
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         $attributes = $view->getArgument('attributes') ?? [];
 

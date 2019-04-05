@@ -7,6 +7,7 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use FluentDOM\DOM\Element;
 use IntlDateFormatter;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use function Libero\ViewsBundle\array_has_key;
 use function strtotime;
@@ -15,7 +16,7 @@ final class PubDateTimeListener
 {
     use SimplifiedViewConverterListener;
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         if (!isset($view->getArgument('attributes')['datetime']) || !$view->hasContext('lang')) {
             return $view;

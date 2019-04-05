@@ -6,7 +6,7 @@ namespace tests\Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\CallbackViewConverter;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewConverter;
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +18,8 @@ final class CallbackViewConverterTest extends TestCase
     public function it_is_a_view_converter() : void
     {
         $handler = new CallbackViewConverter(
-            function () : View {
-                return new View(null);
+            function () : TemplateView {
+                return new TemplateView(null);
             }
         );
 
@@ -32,13 +32,13 @@ final class CallbackViewConverterTest extends TestCase
     public function it_returns_the_results_of_a_callback() : void
     {
         $handler = new CallbackViewConverter(
-            function (Element $object, ?string $template, array $context = []) : View {
-                return new View($template, $context + ['element' => $object]);
+            function (Element $object, ?string $template, array $context = []) : TemplateView {
+                return new TemplateView($template, $context + ['element' => $object]);
             }
         );
 
         $element = new Element('foo');
-        $expected = new View('template', ['bar' => 'baz', 'element' => $element]);
+        $expected = new TemplateView('template', ['bar' => 'baz', 'element' => $element]);
 
         $this->assertEquals($expected, $handler->convert($element, 'template', ['bar' => 'baz']));
     }

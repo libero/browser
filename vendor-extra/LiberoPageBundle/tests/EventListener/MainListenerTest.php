@@ -7,7 +7,7 @@ namespace tests\Libero\LiberoPageBundle\EventListener;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\LiberoPageBundle\EventListener\MainListener;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use tests\Libero\LiberoPageBundle\PageTestCase;
@@ -27,7 +27,7 @@ final class MainListenerTest extends TestCase
         $dispatcher->addListener(
             CreatePagePartEvent::name('not-main'),
             function (CreatePagePartEvent $event) : void {
-                $event->addContent(new View('template'));
+                $event->addContent(new TemplateView('template'));
             }
         );
 
@@ -52,7 +52,7 @@ final class MainListenerTest extends TestCase
             function (CreatePagePartEvent $event) : void {
                 $this->assertSame(['con' => 'text', 'area' => 'main'], $event->getContext());
 
-                $event->addContent(new View('template'));
+                $event->addContent(new TemplateView('template'));
                 $event->setContext('foo', 'bar');
             }
         );
@@ -65,11 +65,11 @@ final class MainListenerTest extends TestCase
 
         $this->assertEquals(
             [
-                'main' => new View(
+                'main' => new TemplateView(
                     '@LiberoPatterns/content-grid.html.twig',
                     [
                         'content' => [
-                            new View('template'),
+                            new TemplateView('template'),
                         ],
                     ],
                     [

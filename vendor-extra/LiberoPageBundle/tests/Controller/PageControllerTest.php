@@ -8,7 +8,7 @@ use Libero\LiberoPageBundle\Controller\PageController;
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Libero\LiberoPageBundle\Exception\NoContentSet;
-use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +39,7 @@ final class PageControllerTest extends TestCase
                 $event->setTitle('title');
                 $event->setContent(
                     'area',
-                    new View(
+                    new TemplateView(
                         'template',
                         [
                         'content' => $event->getDocument('foo')

@@ -9,6 +9,7 @@ use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,7 +29,7 @@ final class FrontSubjectGroupContentHeaderListener
         $this->translator = $translator;
     }
 
-    protected function handle(Element $object, View $view) : View
+    protected function handle(Element $object, TemplateView $view) : View
     {
         /** @var DOMNodeList<Element> $subjects */
         $subjects = $object->ownerDocument->xpath()->evaluate(
@@ -50,7 +51,7 @@ final class FrontSubjectGroupContentHeaderListener
                     ),
                 ],
                 'items' => array_map(
-                    function (View $link) : array {
+                    function (TemplateView $link) : array {
                         return ['content' => $link->getArguments()];
                     },
                     $this->convertList($subjects, '@LiberoPatterns/link.html.twig', $view->getContext())
