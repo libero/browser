@@ -6,6 +6,7 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
+use Libero\ViewsBundle\Views\LazyView;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
@@ -27,23 +28,30 @@ final class ItemListListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        return $view->withArgument(
-            'list',
-            [
-                'items' => array_map(
-                    function (NonDocumentTypeChildNode $child) use ($view) : array {
-                        return [
-                            'content' => $this->converter->convert(
-                                $child,
-                                '@LiberoPatterns/teaser.html.twig',
-                                $view->getContext()
-                            )->getArguments()
-                        ];
-                    },
-                    iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
-                )
-            ]
+        $items = array_map(
+            function (NonDocumentTypeChildNode $child) use ($view) : View {
+                return $this->converter->convert(
+                        $child,
+                        '@LiberoPatterns/teaser.html.twig',
+                        $view->getContext()
+                    );
+            },
+            iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
         );
+
+        return new LazyView(function () use ($view, $items) {
+            return $view->withArgument(
+                'list',
+                [
+                    'items' => array_map(
+                        function (View $view) {
+                            return ['content' => $view['arguments']];
+                        },
+                        $items
+                    ),
+                ]
+            );
+        }, $view->getContext());
     }
 
     protected function canHandleTemplate(?string $template) : bool

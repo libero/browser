@@ -7,6 +7,7 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
+use Libero\ViewsBundle\Views\LazyView;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
@@ -28,7 +29,7 @@ final class ItemRefTeaserListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        return $this->client
+        $new = $this->client
             ->requestAsync(
                 'GET',
                 "{$object->getAttribute('service')}/items/{$object->getAttribute('id')}/versions/latest"
@@ -40,7 +41,9 @@ final class ItemRefTeaserListener
 
                     return $this->converter->convert($item->documentElement, $view->getTemplate(), $view->getContext());
                 }
-            )->wait();
+            );
+
+        return new LazyView([$new, 'wait'], $view->getContext());
     }
 
     protected function canHandleTemplate(?string $template) : bool
