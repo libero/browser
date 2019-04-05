@@ -48,7 +48,7 @@ final class ItemTeaserHrefListener
 
     protected function canHandleElement(string $element) : bool
     {
-        return '{http://libero.pub}item' === $element;
+        return true;
     }
 
     protected function canHandleArguments(array $arguments) : bool

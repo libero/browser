@@ -5,16 +5,13 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
+use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
-use function Libero\ViewsBundle\array_has_key;
 
-final class ItemArticleTitleTeaserListener
+final class ItemTeaserListener
 {
-    use SimplifiedViewConverterListener;
-
     private $converter;
 
     public function __construct(ViewConverter $converter)
@@ -22,25 +19,37 @@ final class ItemArticleTitleTeaserListener
         $this->converter = $converter;
     }
 
+    public function onBuildView(BuildViewEvent $event) : void
+    {
+        $object = $event->getObject();
+        $view = $event->getView();
+
+        if (!$view instanceof TemplateView || !$this->canHandleTemplate($view->getTemplate())) {
+            return;
+        }
+
+        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
+            return;
+        }
+
+        $event->setView($this->handle($object, $view));
+
+        $event->stopPropagation();
+    }
+
     protected function handle(Element $object, TemplateView $view) : View
     {
-        $heading = $object->ownerDocument->xpath()
+        $front = $object->ownerDocument->xpath()
             ->firstOf(
-                '/libero:item/jats:article/jats:front/jats:article-meta/jats:title-group/jats:article-title',
+                '/libero:item/jats:article/jats:front',
                 $object
             );
 
-        if (!$heading instanceof Element) {
+        if (!$front instanceof Element) {
             return $view;
         }
 
-        return $view
-            ->withArgument(
-                'heading',
-                $this->converter
-                    ->convert($heading, '@LiberoPatterns/heading.html.twig', $view->getContext())
-                    ->getArguments()
-            );
+        return $this->converter->convert($front, $view->getTemplate(), $view->getContext());
     }
 
     protected function canHandleTemplate(?string $template) : bool
@@ -51,10 +60,5 @@ final class ItemArticleTitleTeaserListener
     protected function canHandleElement(string $element) : bool
     {
         return '{http://libero.pub}item' === $element;
-    }
-
-    protected function canHandleArguments(array $arguments) : bool
-    {
-        return !array_has_key($arguments, 'heading');
     }
 }
