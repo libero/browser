@@ -31,10 +31,10 @@ final class ItemListListener
         $items = array_map(
             function (NonDocumentTypeChildNode $child) use ($view) : View {
                 return $this->converter->convert(
-                        $child,
-                        '@LiberoPatterns/teaser.html.twig',
-                        $view->getContext()
-                    );
+                    $child,
+                    '@LiberoPatterns/teaser.html.twig',
+                    $view->getContext()
+                );
             },
             iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
         );
