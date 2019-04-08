@@ -39,6 +39,21 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDateIsoDateTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDateIsoDateTimeListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDatePartsTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDatePartsTimeListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\PubDateTimeListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\PubDateTimeListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-100"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener"
             class="Libero\JatsContentBundle\EventListener\BuildView\HeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
@@ -94,6 +109,13 @@
 
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener"
             class="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontPubDateContentMetaListener"
+            class="Libero\JatsContentBundle\EventListener\BuildView\FrontPubDateContentMetaListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
