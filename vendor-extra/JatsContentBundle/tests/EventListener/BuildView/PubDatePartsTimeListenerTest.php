@@ -119,19 +119,13 @@ XML
 
     /**
      * @test
+     * @dataProvider missingProvider
      */
-    public function it_does_nothing_if_a_part_is_missing() : void
+    public function it_does_nothing_if_a_part_is_missing(string $xml) : void
     {
         $listener = new PubDatePartsTimeListener();
 
-        $element = $this->loadElement(
-            <<<XML
-<pub-date xmlns="http://jats.nlm.nih.gov">
-    <month>1</month>
-    <day>2</day>
-</pub-date>
-XML
-        );
+        $element = $this->loadElement($xml);
 
         $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/time.html.twig'));
         $listener->onBuildView($event);
@@ -141,6 +135,72 @@ XML
         $this->assertSame('@LiberoPatterns/time.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
+    }
+
+    public function missingProvider() : iterable
+    {
+        yield 'no year' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <month>1</month>
+    <day>2</day>
+</pub-date>
+XML
+            ,
+        ];
+
+        yield 'no number year' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <year>Two Thousand</year>
+    <month>1</month>
+    <day>2</day>
+</pub-date>
+XML
+            ,
+        ];
+
+        yield 'no month' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <year>2000</year>
+    <day>2</day>
+</pub-date>
+XML
+            ,
+        ];
+
+        yield 'no number month' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <year>2000</year>
+    <month>January</month>
+    <day>2</day>
+</pub-date>
+XML
+            ,
+        ];
+
+        yield 'no day' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <year>2000</year>
+    <month>1</month>
+</pub-date>
+XML
+            ,
+        ];
+
+        yield 'no number day' => [
+            <<<XML
+<pub-date xmlns="http://jats.nlm.nih.gov">
+    <year>2000</year>
+    <month>1</month>
+    <day>Second</day>
+</pub-date>
+XML
+            ,
+        ];
     }
 
     /**

@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
-use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
-use function count;
-use function iterator_to_array;
 use function sprintf;
-use function usort;
 
 final class PubDatePartsTimeListener
 {
@@ -31,35 +27,24 @@ final class PubDatePartsTimeListener
             return $view;
         }
 
-        /** @var DOMNodeList<Element> $parts */
-        $parts = $object(self::PARTS_PATH);
+        $xpath = $object->ownerDocument->xpath();
 
-        if (3 !== count($parts)) {
+        $day = $xpath->firstOf(self::DAY_PATH);
+        if (!$day instanceof Element) {
             return $view;
         }
 
-        $parts = iterator_to_array($parts);
-        usort(
-            $parts,
-            function (Element $a, Element $b) : int {
-                if ('year' === $a->localName) {
-                    return -1;
-                }
-                if ('year' === $b->localName) {
-                    return 1;
-                }
-                if ('month' === $a->localName) {
-                    return -1;
-                }
-                if ('month' === $b->localName) {
-                    return 1;
-                }
+        $month = $xpath->firstOf(self::MONTH_PATH);
+        if (!$month instanceof Element) {
+            return $view;
+        }
 
-                return 0;
-            }
-        );
+        $year = $xpath->firstOf(self::YEAR_PATH);
+        if (!$year instanceof Element) {
+            return $view;
+        }
 
-        $attributes['datetime'] = sprintf("%'.04s-%'.02s-%'.02s", ...$parts);
+        $attributes['datetime'] = sprintf("%'.04s-%'.02s-%'.02s", $year, $month, $day);
 
         return $view->withArgument('attributes', $attributes);
     }
