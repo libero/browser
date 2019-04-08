@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
+use ArrayAccess;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\LazyView;
@@ -48,11 +49,11 @@ final class ItemListListener
                         'items' => array_filter(
                             array_map(
                                 function (View $view) {
-                                    if (!$view instanceof TemplateView) {
+                                    if (!$view instanceof ArrayAccess) {
                                         return [];
                                     }
 
-                                    return ['content' => $view->getArguments()];
+                                    return ['content' => $view['arguments']];
                                 },
                                 $items
                             )

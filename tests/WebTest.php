@@ -66,6 +66,7 @@ XML
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
         $this->assertSame('Site Name', trim($crawler->filter('.content-header__title')->text()));
+        $this->assertSame('Scholarly article 1', trim($crawler->filter('.teaser__heading')->text()));
     }
 
     /**
