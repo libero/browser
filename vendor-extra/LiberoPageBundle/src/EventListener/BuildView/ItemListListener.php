@@ -11,6 +11,7 @@ use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
+use function array_filter;
 use function array_map;
 use function iterator_to_array;
 use function Libero\ViewsBundle\array_has_key;
@@ -39,19 +40,28 @@ final class ItemListListener
             iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
         );
 
-        return new LazyView(function () use ($view, $items) {
-            return $view->withArgument(
-                'list',
-                [
-                    'items' => array_map(
-                        function (View $view) {
-                            return ['content' => $view['arguments']];
-                        },
-                        $items
-                    ),
-                ]
-            );
-        }, $view->getContext());
+        return new LazyView(
+            function () use ($view, $items) {
+                return $view->withArgument(
+                    'list',
+                    [
+                        'items' => array_filter(
+                            array_map(
+                                function (View $view) {
+                                    if (!$view instanceof TemplateView) {
+                                        return [];
+                                    }
+
+                                    return ['content' => $view->getArguments()];
+                                },
+                                $items
+                            )
+                        ),
+                    ]
+                );
+            },
+            $view->getContext()
+        );
     }
 
     protected function canHandleTemplate(?string $template) : bool

@@ -17,6 +17,49 @@ final class WebTest extends WebTestCase
     {
         $client = static::createClient();
 
+        self::mockApiResponse(
+            new Request(
+                'GET',
+                'http://localhost/search/items',
+                ['Accept' => 'application/xml']
+            ),
+            new Response(
+                200,
+                [],
+                <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<item-list xmlns="http://libero.pub">
+    <item-ref id="article1" service="scholarly-articles"/>
+</item-list>
+XML
+            )
+        );
+
+        self::mockApiResponse(
+            new Request(
+                'GET',
+                'http://localhost/scholarly-articles/items/article1/versions/latest',
+                ['Accept' => 'application/xml']
+            ),
+            new Response(
+                200,
+                [],
+                <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<item xmlns="http://libero.pub">
+    <meta>
+        <id>article1</id>
+        <service>scholarly-articles</service>
+    </meta>
+    <front xml:lang="en">
+        <id>article1</id>
+        <title>Scholarly article 1</title>
+    </front>
+</item>
+XML
+            )
+        );
+
         $crawler = $client->request('GET', '/');
         $response = $client->getResponse();
 
@@ -45,8 +88,11 @@ final class WebTest extends WebTestCase
                 <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
-    <front xml:lang="en">
+    <meta>
         <id>{$id}</id>
+        <service>scholarly-articles</service>
+    </meta>
+    <front xml:lang="en">
         <title>Scholarly article {$id}</title>
     </front>
 </item>
@@ -82,8 +128,11 @@ XML
                 <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <item xmlns="http://libero.pub">
+    <meta>
+        <id>{$id}</id>
+        <service>scholarly-articles</service>
+    </meta>
     <front xml:lang="en">
-        <id>${id}</id>
         <title>Blog article ${id}</title>
     </front>
 </item>

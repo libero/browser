@@ -29,11 +29,14 @@ final class ItemRefTeaserListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        $new = $this->client
-            ->requestAsync(
-                'GET',
-                "{$object->getAttribute('service')}/items/{$object->getAttribute('id')}/versions/latest"
-            )
+        $itemTeaser = $this->client->requestAsync(
+            'GET',
+            "{$object->getAttribute('service')}/items/{$object->getAttribute('id')}/versions/latest",
+            [
+                'headers' => ['Accept' => 'application/xml'],
+                'http_errors' => true,
+            ]
+        )
             ->then(
                 function (ResponseInterface $response) use ($object, $view) : View {
                     $item = FluentDOM::load((string) $response->getBody());
@@ -43,7 +46,12 @@ final class ItemRefTeaserListener
                 }
             );
 
-        return new LazyView([$new, 'wait'], $view->getContext());
+        return new LazyView(
+            function () use ($itemTeaser) : TemplateView {
+                return $itemTeaser->wait();
+            },
+            $view->getContext()
+        );
     }
 
     protected function canHandleTemplate(?string $template) : bool

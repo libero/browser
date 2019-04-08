@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Libero\JatsContentBundle\EventListener\BuildView;
+namespace Libero\LiberoContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\BuildViewEvent;
@@ -48,7 +48,7 @@ final class ItemTeaserListener
     {
         $front = $object->ownerDocument->xpath()
             ->firstOf(
-                '/libero:item/jats:article/jats:front',
+                '/libero:item/libero:front',
                 $object
             );
 

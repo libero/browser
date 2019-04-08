@@ -26,10 +26,22 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontTitleTeaserListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\FrontTitleTeaserListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener"
             class="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener"
+            class="Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="50"/>
         </service>
 
         <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener"
