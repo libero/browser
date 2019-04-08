@@ -20,6 +20,10 @@
                 <source>Type of article</source>
             </trans-unit>
 
+            <trans-unit id="4" resname="libero.patterns.content_header.meta.date.label">
+                <source>Publication date</source>
+            </trans-unit>
+
         </body>
 
     </file>
