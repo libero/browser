@@ -1,3 +1,9 @@
+FROM php:7.2.11-fpm-alpine AS php
+
+ENV PHP_EXTENSION_DIR=/usr/local/lib/php/extensions/no-debug-non-zts-20170718
+
+
+
 #
 # Stage: Composer install for production
 #
@@ -20,7 +26,7 @@ RUN composer --no-interaction dump-autoload --classmap-authoritative
 #
 # Stage: Production environment
 #
-FROM php:7.2.11-fpm-alpine AS prod
+FROM php AS prod
 
 WORKDIR /app
 
@@ -114,9 +120,9 @@ RUN bin/console assets:install && \
 
 
 #
-# Stage: Debug environment
+# Stage: Install Xdebug
 #
-FROM dev AS debug
+FROM php AS xdebug
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
     pecl install \
@@ -127,5 +133,15 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
     && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/
+
+
+
+#
+# Stage: Debug environment
+#
+FROM dev AS debug
+
+COPY --from=xdebug ${PHP_EXTENSION_DIR}/*.so ${PHP_EXTENSION_DIR}/
+COPY --from=xdebug ${PHP_INI_DIR}/conf.d/*.ini ${PHP_INI_DIR}/conf.d/
 
 COPY .docker/php-debug.ini ${PHP_INI_DIR}/conf.d/02-app.ini
