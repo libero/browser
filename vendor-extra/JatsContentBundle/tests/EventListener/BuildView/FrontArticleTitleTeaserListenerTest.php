@@ -94,7 +94,7 @@ XML
     /**
      * @test
      */
-    public function it_does_nothing_if_there_is_already_a_teaser_title_set() : void
+    public function it_does_nothing_if_there_is_already_a_teaser_heading_set() : void
     {
         $listener = new FrontArticleTitleTeaserListener($this->createFailingConverter());
 
@@ -127,7 +127,7 @@ XML
     /**
      * @test
      */
-    public function it_sets_the_text_argument() : void
+    public function it_sets_the_heading_argument() : void
     {
         $listener = new FrontArticleTitleTeaserListener($this->createDumpingConverter());
 
