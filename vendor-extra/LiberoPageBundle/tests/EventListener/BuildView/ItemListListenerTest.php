@@ -84,7 +84,7 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['level' => 2, 'con' => 'text'])
+            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['con' => 'text'])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -99,7 +99,7 @@ XML
                                 'node' => '/libero:item-list/libero:item-ref[1]',
                                 'template' => '@LiberoPatterns/teaser.html.twig',
                                 'context' => [
-                                    'level' => 4,
+                                    'level' => 1,
                                     'con' => 'text',
                                 ],
                             ],
@@ -109,7 +109,7 @@ XML
                                 'node' => '/libero:item-list/libero:item-ref[2]',
                                 'template' => '@LiberoPatterns/teaser.html.twig',
                                 'context' => [
-                                    'level' => 4,
+                                    'level' => 1,
                                     'con' => 'text',
                                 ],
                             ],
@@ -141,11 +141,7 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView(
-                '@LiberoPatterns/teaser-list.html.twig',
-                [],
-                ['lang' => 'es', 'level' => 5, 'list_title' => 'title_key']
-            )
+            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['lang' => 'es', 'list_title' => 'title_key'])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -154,7 +150,7 @@ XML
         $this->assertSame(
             [
                 'title' => [
-                    'level' => 6,
+                    'level' => 1,
                     'text' => 'title_key in es',
                 ],
                 'list' => [

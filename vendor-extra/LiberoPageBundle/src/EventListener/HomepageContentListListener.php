@@ -11,6 +11,7 @@ use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
+use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
 
 final class HomepageContentListListener
 {
@@ -55,13 +56,15 @@ final class HomepageContentListListener
             return;
         }
 
+        $context = [
+                'area' => CONTENT_GRID_PRIMARY,
+                'level' => ($event->getContext()['level'] ?? 1) + 1,
+                'list_title' => 'libero.page.homepage.primary_listing.title',
+            ] + $event->getContext();
+
         $list = $event->getDocument('content_list');
         $event->addContent(
-            $this->converter->convert(
-                $list->documentElement,
-                '@LiberoPatterns/teaser-list.html.twig',
-                $event->getContext() + ['list_title' => 'libero.page.homepage.primary_listing.title']
-            )
+            $this->converter->convert($list->documentElement, '@LiberoPatterns/teaser-list.html.twig', $context)
         );
     }
 }
