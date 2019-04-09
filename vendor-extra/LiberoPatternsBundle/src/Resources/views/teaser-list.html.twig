@@ -1,5 +1,11 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list']) }) -%}
 
+{%- if title.text is defined -%}
+  {%- set title_id = title.attributes.id|default('heading' ~ random()) -%}
+  {%- set attributes = attributes|merge({'aria-labelledby': title_id}) -%}
+  {%- set title = title|merge({_id: title_id}) -%}
+{%- endif -%}
+
 <div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
 
   {%- with title|default({}) only -%}
@@ -7,7 +13,7 @@
 
       {% if text is defined %}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__title']) }) -%}
+        {%- set attributes = attributes|default({})|merge({id: _id, class: attributes.class|default([])|merge(['teaser-list__title']) }) -%}
         {%- include '@LiberoPatterns/heading.html.twig' with {level: level|default(2)} -%}
 
       {% endif %}
