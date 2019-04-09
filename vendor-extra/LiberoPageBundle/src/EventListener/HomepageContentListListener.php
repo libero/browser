@@ -34,7 +34,7 @@ final class HomepageContentListListener
         $list = $this->client
             ->requestAsync(
                 'GET',
-                "{$page['search_service']}/items",
+                $page['primary_listing'],
                 [
                     'headers' => ['Accept' => 'application/xml'],
                     'http_errors' => true,

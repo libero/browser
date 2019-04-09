@@ -61,7 +61,7 @@ final class LiberoPageConfiguration implements ConfigurationInterface
                 ->scalarNode('path')
                     ->isRequired()
                 ->end()
-                ->scalarNode('search_service')
+                ->scalarNode('primary_listing')
                     ->isRequired()
                 ->end()
             ->end()

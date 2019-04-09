@@ -2,7 +2,7 @@ libero_page:
     pages:
         homepage:
             path: '/'
-            search_service: 'search'
+            primary_listing: 'search'
         content:
             blog-articles:
                 path: '/blog/{id}'

@@ -36,6 +36,7 @@ To run an image reading from two content services (`blog-articles` and `scholarl
         pages:
             homepage:
                 path: '/'
+                primary_listing: 'scholarly-articles/items'
             content:
                 blog-articles:
                     path: '/blog/{id}'

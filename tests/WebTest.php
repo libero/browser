@@ -20,7 +20,7 @@ final class WebTest extends WebTestCase
         self::mockApiResponse(
             new Request(
                 'GET',
-                'http://localhost/search/items',
+                'http://localhost/search',
                 ['Accept' => 'application/xml']
             ),
             new Response(
