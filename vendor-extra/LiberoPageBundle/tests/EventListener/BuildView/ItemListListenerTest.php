@@ -9,9 +9,6 @@ use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\LazyView;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Translation\IdentityTranslator;
-use Symfony\Component\Translation\Loader\ArrayLoader;
-use Symfony\Component\Translation\Translator;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
@@ -26,7 +23,7 @@ final class ItemListListenerTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_libero_item_list_element(string $xml) : void
     {
-        $listener = new ItemListListener($this->createFailingConverter(), new IdentityTranslator());
+        $listener = new ItemListListener($this->createFailingConverter());
 
         $element = $this->loadElement($xml);
 
@@ -51,7 +48,7 @@ final class ItemListListenerTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_teaser_list_template() : void
     {
-        $listener = new ItemListListener($this->createFailingConverter(), new IdentityTranslator());
+        $listener = new ItemListListener($this->createFailingConverter());
 
         $element = $this->loadElement('<item-list xmlns="http://libero.pub"/>');
 
@@ -68,9 +65,9 @@ final class ItemListListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_sets_the_list_items_argument() : void
+    public function it_does_nothing_if_there_is_already_a_list_items_argument() : void
     {
-        $listener = new ItemListListener($this->createDumpingConverter(), new IdentityTranslator());
+        $listener = new ItemListListener($this->createDumpingConverter());
 
         $element = $this->loadElement(
             <<<XML
@@ -84,7 +81,63 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['con' => 'text'])
+            new TemplateView('@LiberoPatterns/teaser-list.html.twig', ['list' => ['items' => 'foo']])
+        );
+        $listener->onBuildView($event);
+        $view = $event->getView();
+
+        $this->assertInstanceOf(TemplateView::class, $view);
+        $this->assertSame('@LiberoPatterns/teaser-list.html.twig', $view->getTemplate());
+        $this->assertSame(['list' => ['items' => 'foo']], $view->getArguments());
+        $this->assertEmpty($view->getContext());
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_nothing_if_there_are_no_item_refs() : void
+    {
+        $listener = new ItemListListener($this->createDumpingConverter());
+
+        $element = $this->loadElement('<item-list xmlns="http://libero.pub"/>');
+
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['list_empty' => 'foo'])
+        );
+        $listener->onBuildView($event);
+        $view = $event->getView();
+
+        $this->assertInstanceOf(TemplateView::class, $view);
+        $this->assertSame('@LiberoPatterns/teaser-list.html.twig', $view->getTemplate());
+        $this->assertEmpty($view->getArguments());
+        $this->assertSame(['list_empty' => 'foo'], $view->getContext());
+    }
+
+    /**
+     * @test
+     */
+    public function it_sets_the_list_items_argument() : void
+    {
+        $listener = new ItemListListener($this->createDumpingConverter());
+
+        $element = $this->loadElement(
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<libero:item-list xmlns:libero="http://libero.pub">
+    <libero:item-ref id="id1" service="service1"/>
+    <libero:item-ref id="id2" service="service2"/>
+</libero:item-list>
+XML
+        );
+
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView(
+                '@LiberoPatterns/teaser-list.html.twig',
+                ['list' => []],
+                ['con' => 'text', 'list_empty' => 'foo']
+            )
         );
         $listener->onBuildView($event);
         $view = $event->getView();
@@ -99,7 +152,6 @@ XML
                                 'node' => '/libero:item-list/libero:item-ref[1]',
                                 'template' => '@LiberoPatterns/teaser.html.twig',
                                 'context' => [
-                                    'level' => 1,
                                     'con' => 'text',
                                 ],
                             ],
@@ -109,7 +161,6 @@ XML
                                 'node' => '/libero:item-list/libero:item-ref[2]',
                                 'template' => '@LiberoPatterns/teaser.html.twig',
                                 'context' => [
-                                    'level' => 1,
                                     'con' => 'text',
                                 ],
                             ],
@@ -119,69 +170,6 @@ XML
             ],
             $view['arguments']
         );
-    }
-
-    /**
-     * @test
-     */
-    public function it_sets_the_title_argument() : void
-    {
-        $translator = new Translator('es');
-        $translator->addLoader('array', new ArrayLoader());
-        $translator->addResource(
-            'array',
-            ['title_key' => 'title_key in es'],
-            'es',
-            'messages'
-        );
-
-        $listener = new ItemListListener($this->createDumpingConverter(), $translator);
-
-        $element = $this->loadElement('<item-list xmlns="http://libero.pub"/>');
-
-        $event = new BuildViewEvent(
-            $element,
-            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['lang' => 'es', 'list_title' => 'title_key'])
-        );
-        $listener->onBuildView($event);
-        $view = $event->getView();
-
-        $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame(
-            [
-                'title' => ['level' => 1, 'text' => 'title_key in es'],
-                'list' => [],
-            ],
-            $view->getArguments()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_handles_empty_lists() : void
-    {
-        $translator = new Translator('es');
-        $translator->addLoader('array', new ArrayLoader());
-        $translator->addResource(
-            'array',
-            ['empty_key' => 'empty_key in es'],
-            'es',
-            'messages'
-        );
-
-        $listener = new ItemListListener($this->createDumpingConverter(), $translator);
-
-        $element = $this->loadElement('<item-list xmlns="http://libero.pub"/>');
-
-        $event = new BuildViewEvent(
-            $element,
-            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['lang' => 'es', 'list_empty' => 'empty_key'])
-        );
-        $listener->onBuildView($event);
-        $view = $event->getView();
-
-        $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame(['list' => ['empty' => 'empty_key in es']], $view->getArguments());
+        $this->assertSame(['con' => 'text'], $view->getContext());
     }
 }

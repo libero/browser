@@ -13,10 +13,8 @@ use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
 use function count;
-use function Libero\ViewsBundle\array_has_key;
 
 final class ItemListListener
 {
@@ -25,10 +23,9 @@ final class ItemListListener
 
     private $converter;
 
-    public function __construct(ViewConverter $converter, TranslatorInterface $translator)
+    public function __construct(ViewConverter $converter)
     {
         $this->converter = $converter;
-        $this->translator = $translator;
     }
 
     protected function handle(Element $object, TemplateView $view) : View
@@ -36,53 +33,31 @@ final class ItemListListener
         /** @var DOMNodeList<Element> $itemRefs */
         $itemRefs = $object('libero:item-ref');
 
-        $level = $view->getContext()['level'] ?? 1;
-        if ($view->hasContext('list_title')) {
-            $level++;
-            $view = $view->withArgument(
-                'title',
-                [
-                    'level' => $view->getContext()['level'] ?? 1,
-                    'text' => $this->translate($view->getContext('list_title'), $view->getContext()),
-                ]
-            );
-        }
-
         if (0 === count($itemRefs)) {
-            if (!$view->hasContext('list_empty')) {
-                return $view->withArgument('list', []);
-            }
-
-            return $view->withArgument(
-                'list',
-                ['empty' => $this->translate($view->getContext('list_empty'), $view->getContext())]
-            );
+            return $view;
         }
+
+        $context = $view->getContext();
+        unset($context['list_empty']);
 
         $items = [];
         foreach ($itemRefs as $itemRef) {
-            $items[] = $this->converter->convert(
-                $itemRef,
-                '@LiberoPatterns/teaser.html.twig',
-                ['level' => $level] + $view->getContext()
-            );
+            $items[] = $this->converter->convert($itemRef, '@LiberoPatterns/teaser.html.twig', $context);
         }
 
         return new LazyView(
             function () use ($view, $items) {
-                return $view->withArgument(
-                    'list',
-                    [
-                        'items' => array_map(
-                            function (ArrayAccess $view) {
-                                return ['content' => $view['arguments']];
-                            },
-                            $items
-                        ),
-                    ]
+                $list = $view->getArgument('list') ?? [];
+                $list['items'] = array_map(
+                    function (ArrayAccess $view) {
+                        return ['content' => $view['arguments']];
+                    },
+                    $items
                 );
+
+                return $view->withArgument('list', $list);
             },
-            $view->getContext()
+            $context
         );
     }
 
@@ -98,6 +73,6 @@ final class ItemListListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'list');
+        return !isset($arguments['list']['items']);
     }
 }

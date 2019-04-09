@@ -43,11 +43,24 @@
             <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
         </service>
 
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener"
+            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener">
+            <argument type="service" id="translator"/>
+            <!-- After ItemListListener -->
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener"
             class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
-            <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListTitleListener"
+            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListTitleListener">
+            <argument type="service" id="translator"/>
+            <!-- Before ItemListListener -->
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="10"/>
         </service>
 
         <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserHrefListener"
