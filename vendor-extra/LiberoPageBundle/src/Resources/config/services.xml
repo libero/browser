@@ -26,6 +26,7 @@
             class="Libero\LiberoPageBundle\EventListener\HomepageContentListListener">
             <argument type="service" id="libero.client"/>
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart"/>
         </service>
@@ -45,6 +46,7 @@
         <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener"
             class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 

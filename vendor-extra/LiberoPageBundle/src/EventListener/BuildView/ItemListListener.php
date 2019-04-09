@@ -7,24 +7,28 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 use ArrayAccess;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\LazyView;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_filter;
 use function array_map;
 use function Libero\ViewsBundle\array_has_key;
 
 final class ItemListListener
 {
+    use ContextAwareTranslation;
     use SimplifiedViewConverterListener;
 
     private $converter;
 
-    public function __construct(ViewConverter $converter)
+    public function __construct(ViewConverter $converter, TranslatorInterface $translator)
     {
         $this->converter = $converter;
+        $this->translator = $translator;
     }
 
     protected function handle(Element $object, TemplateView $view) : View
@@ -39,6 +43,13 @@ final class ItemListListener
 
         return new LazyView(
             function () use ($view, $items) {
+                if ($view->hasContext('list_title')) {
+                    $view = $view->withArgument(
+                        'title',
+                        ['text' => $this->translate($view->getContext('list_title'), $view->getContext())]
+                    );
+                }
+
                 return $view->withArgument(
                     'list',
                     [

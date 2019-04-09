@@ -60,7 +60,7 @@ final class HomepageContentListListener
             $this->converter->convert(
                 $list->documentElement,
                 '@LiberoPatterns/teaser-list.html.twig',
-                $event->getContext()
+                $event->getContext() + ['list_title' => 'libero.page.homepage.primary_listing.title']
             )
         );
     }
