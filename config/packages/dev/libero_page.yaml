@@ -2,6 +2,7 @@ libero_page:
     pages:
         homepage:
             path: '/'
+            primary_listing: 'scholarly-articles/items'
         content:
             blog-articles:
                 path: '/blog/{id}'
