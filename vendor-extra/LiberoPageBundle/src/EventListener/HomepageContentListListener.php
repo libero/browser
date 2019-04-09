@@ -42,7 +42,7 @@ final class HomepageContentListListener
             )
             ->then(
                 function (ResponseInterface $response) : Document {
-                    return $this->responseToDocument($response);
+                    return FluentDOM::load((string) $response->getBody());
                 }
             );
 
@@ -63,10 +63,5 @@ final class HomepageContentListListener
                 $event->getContext()
             )
         );
-    }
-
-    public function responseToDocument(ResponseInterface $response) : Document
-    {
-        return FluentDOM::load((string) $response->getBody());
     }
 }
