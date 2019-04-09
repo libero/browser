@@ -36,17 +36,26 @@ final class ItemListListener
         /** @var DOMNodeList<Element> $itemRefs */
         $itemRefs = $object('libero:item-ref');
 
+        $level = ($view->getContext()['level'] ?? 1) + 1;
+
         $items = [];
         foreach ($itemRefs as $itemRef) {
-            $items[] = $this->converter->convert($itemRef, '@LiberoPatterns/teaser.html.twig', $view->getContext());
+            $items[] = $this->converter->convert(
+                $itemRef,
+                '@LiberoPatterns/teaser.html.twig',
+                ['level' => $level + 1] + $view->getContext()
+            );
         }
 
         return new LazyView(
-            function () use ($view, $items) {
+            function () use ($level, $view, $items) {
                 if ($view->hasContext('list_title')) {
                     $view = $view->withArgument(
                         'title',
-                        ['text' => $this->translate($view->getContext('list_title'), $view->getContext())]
+                        [
+                            'level' => $level,
+                            'text' => $this->translate($view->getContext('list_title'), $view->getContext()),
+                        ]
                     );
                 }
 

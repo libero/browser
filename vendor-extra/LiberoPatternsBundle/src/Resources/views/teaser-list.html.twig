@@ -1,6 +1,6 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list']) }) -%}
 
-<div {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+<div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
 
   {%- with title|default({}) only -%}
     {%- block title -%}
@@ -8,7 +8,7 @@
       {% if text is defined %}
 
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__title']) }) -%}
-        {%- include '@LiberoPatterns/heading.html.twig' with {level: level|default(4)} -%}
+        {%- include '@LiberoPatterns/heading.html.twig' with {level: level|default(2)} -%}
 
       {% endif %}
 
@@ -18,35 +18,49 @@
   {%- with list only -%}
     {%- block list -%}
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__list']) }) -%}
+      {%- if items|default([])|length -%}
 
-      <ol {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__list']) }) -%}
 
-        {%- for item in items -%}
+        <ol {%- include '@LiberoPatterns/attributes.html.twig' -%}>
 
-          {%- with item only -%}
-            {%- block item -%}
+          {%- for item in items -%}
 
-              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__item']) }) -%}
+            {%- with item only -%}
+              {%- block item -%}
 
-              <li {%- include('@LiberoPatterns/attributes.html.twig') -%}>
+                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__item']) }) -%}
 
-                {%- with content only -%}
-                  {%- block content -%}
+                <li {%- include '@LiberoPatterns/attributes.html.twig' -%}>
 
-                    {%- include('@LiberoPatterns/teaser.html.twig') -%}
+                  {%- with content only -%}
+                    {%- block content -%}
 
-                  {%- endblock content -%}
-                {%- endwith -%}
+                      {%- include '@LiberoPatterns/teaser.html.twig' -%}
 
-              </li>
+                    {%- endblock content -%}
+                  {%- endwith -%}
 
-            {%- endblock item -%}
-          {%- endwith -%}
+                </li>
 
-        {%- endfor -%}
+              {%- endblock item -%}
+            {%- endwith -%}
 
-      </ol>
+          {%- endfor -%}
+
+        </ol>
+
+      {%- else -%}
+
+        {%- with {empty: empty} only -%}
+          {%- block empty -%}
+
+            {%- include '@LiberoPatterns/text.html.twig' with {nodes: empty} only -%}
+
+          {%- endblock empty -%}
+        {%- endwith -%}
+
+      {%- endif -%}
 
     {%- endblock list -%}
   {%- endwith -%}
