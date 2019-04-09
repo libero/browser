@@ -59,6 +59,7 @@ final class HomepageContentListListener
         $context = [
                 'area' => CONTENT_GRID_PRIMARY,
                 'level' => ($event->getContext()['level'] ?? 1) + 1,
+                'list_empty' => 'libero.page.homepage.primary_listing.empty',
                 'list_title' => 'libero.page.homepage.primary_listing.title',
             ] + $event->getContext();
 

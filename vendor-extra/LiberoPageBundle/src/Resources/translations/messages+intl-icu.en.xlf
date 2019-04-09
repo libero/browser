@@ -20,6 +20,10 @@
                 <source>Content</source>
             </trans-unit>
 
+            <trans-unit id="4" resname="libero.page.homepage.primary_listing.empty">
+                <source>No items available.</source>
+            </trans-unit>
+
         </body>
 
     </file>

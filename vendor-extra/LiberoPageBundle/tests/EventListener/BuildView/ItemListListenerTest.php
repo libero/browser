@@ -146,19 +146,42 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
-        $this->assertInstanceOf(LazyView::class, $view);
+        $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame(
             [
-                'title' => [
-                    'level' => 1,
-                    'text' => 'title_key in es',
-                ],
-                'list' => [
-                    'items' => [
-                    ],
-                ],
+                'title' => ['level' => 1, 'text' => 'title_key in es'],
+                'list' => [],
             ],
-            $view['arguments']
+            $view->getArguments()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function it_handles_empty_lists() : void
+    {
+        $translator = new Translator('es');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource(
+            'array',
+            ['empty_key' => 'empty_key in es'],
+            'es',
+            'messages'
+        );
+
+        $listener = new ItemListListener($this->createDumpingConverter(), $translator);
+
+        $element = $this->loadElement('<item-list xmlns="http://libero.pub"/>');
+
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/teaser-list.html.twig', [], ['lang' => 'es', 'list_empty' => 'empty_key'])
+        );
+        $listener->onBuildView($event);
+        $view = $event->getView();
+
+        $this->assertInstanceOf(TemplateView::class, $view);
+        $this->assertSame(['list' => ['empty' => 'empty_key in es']], $view->getArguments());
     }
 }

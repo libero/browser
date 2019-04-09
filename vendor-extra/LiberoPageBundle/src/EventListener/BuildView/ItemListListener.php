@@ -16,6 +16,7 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_filter;
 use function array_map;
+use function count;
 use function Libero\ViewsBundle\array_has_key;
 
 final class ItemListListener
@@ -39,6 +40,24 @@ final class ItemListListener
         $level = $view->getContext()['level'] ?? 1;
         if ($view->hasContext('list_title')) {
             $level++;
+            $view = $view->withArgument(
+                'title',
+                [
+                    'level' => $view->getContext()['level'] ?? 1,
+                    'text' => $this->translate($view->getContext('list_title'), $view->getContext()),
+                ]
+            );
+        }
+
+        if (0 === count($itemRefs)) {
+            if (!$view->hasContext('list_empty')) {
+                return $view->withArgument('list', []);
+            }
+
+            return $view->withArgument(
+                'list',
+                ['empty' => $this->translate($view->getContext('list_empty'), $view->getContext())]
+            );
         }
 
         $items = [];
@@ -52,16 +71,6 @@ final class ItemListListener
 
         return new LazyView(
             function () use ($view, $items) {
-                if ($view->hasContext('list_title')) {
-                    $view = $view->withArgument(
-                        'title',
-                        [
-                            'level' => $view->getContext()['level'] ?? 1,
-                            'text' => $this->translate($view->getContext('list_title'), $view->getContext()),
-                        ]
-                    );
-                }
-
                 return $view->withArgument(
                     'list',
                     [
