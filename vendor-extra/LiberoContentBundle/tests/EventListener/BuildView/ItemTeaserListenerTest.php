@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
+namespace tests\Libero\LiberoContentBundle\EventListener\BuildView;
 
-use Libero\JatsContentBundle\EventListener\BuildView\ItemTeaserListener;
+use Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
@@ -57,15 +57,9 @@ final class ItemTeaserListenerTest extends TestCase
         <id>article1</id>
         <service>scholarly-articles</service>
     </meta>
-    <article xmlns="http://jats.nlm.nih.gov">
-        <front>
-            <article-meta>
-                <title-group>
-                    <article-title>foo</article-title>
-                </title-group>
-            </article-meta>
-        </front>
-    </article>
+    <front>
+        <title>foo</title>
+    </front>
 </item>
 XML
         );
@@ -83,7 +77,7 @@ XML
     /**
      * @test
      */
-    public function it_does_nothing_if_there_is_no_jats_front() : void
+    public function it_does_nothing_if_there_is_no_libero_front() : void
     {
         $listener = new ItemTeaserListener($this->createFailingConverter());
 
@@ -112,27 +106,21 @@ XML
     /**
      * @test
      */
-    public function it_converts_a_jats_front_into_a_teaser() : void
+    public function it_converts_a_libero_front_into_a_teaser() : void
     {
         $listener = new ItemTeaserListener($this->createDumpingConverter());
 
         $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<libero:item xmlns:libero="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+<libero:item xmlns:libero="http://libero.pub">
     <libero:meta>
         <libero:id>article1</libero:id>
         <libero:service>scholarly-articles</libero:service>
     </libero:meta>
-    <jats:article>
-        <jats:front>
-            <jats:article-meta>
-                <jats:title-group>
-                    <jats:article-title>foo</jats:article-title>
-                </jats:title-group>
-            </jats:article-meta>
-        </jats:front>
-    </jats:article>
+    <libero:front>
+        <libero:title>foo</libero:title>
+    </libero:front>
 </libero:item>
 XML
         );
@@ -147,7 +135,7 @@ XML
         $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame(
             [
-                'node' => '/libero:item/jats:article/jats:front',
+                'node' => '/libero:item/libero:front',
                 'template' => '@LiberoPatterns/teaser.html.twig',
                 'context' => ['con' => 'text'],
             ],

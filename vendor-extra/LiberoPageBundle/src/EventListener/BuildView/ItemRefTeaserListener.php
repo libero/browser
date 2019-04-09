@@ -29,9 +29,16 @@ final class ItemRefTeaserListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
+        $service = $object->getAttribute('service');
+        $id = $object->getAttribute('id');
+
+        if (!$service || !$id) {
+            return $view;
+        }
+
         $itemTeaser = $this->client->requestAsync(
             'GET',
-            "{$object->getAttribute('service')}/items/{$object->getAttribute('id')}/versions/latest",
+            "{$service}/items/{$id}/versions/latest",
             [
                 'headers' => ['Accept' => 'application/xml'],
                 'http_errors' => true,
@@ -42,7 +49,17 @@ final class ItemRefTeaserListener
                     $item = FluentDOM::load((string) $response->getBody());
                     $item->namespaces($object->ownerDocument->namespaces());
 
-                    return $this->converter->convert($item->documentElement, $view->getTemplate(), $view->getContext());
+                    $itemTeaser = $this->converter->convert(
+                        $item->documentElement,
+                        $view->getTemplate(),
+                        $view->getContext()
+                    );
+
+                    if (!$itemTeaser instanceof TemplateView) {
+                        return $itemTeaser;
+                    }
+
+                    return $view->withArguments($itemTeaser['arguments'])->withContext($itemTeaser->getContext());
                 }
             );
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
 use ArrayAccess;
+use DOMNodeList;
 use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\LazyView;
 use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
@@ -14,7 +14,6 @@ use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_filter;
 use function array_map;
-use function iterator_to_array;
 use function Libero\ViewsBundle\array_has_key;
 
 final class ItemListListener
@@ -30,16 +29,13 @@ final class ItemListListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        $items = array_map(
-            function (NonDocumentTypeChildNode $child) use ($view) : View {
-                return $this->converter->convert(
-                    $child,
-                    '@LiberoPatterns/teaser.html.twig',
-                    $view->getContext()
-                );
-            },
-            iterator_to_array($object->getElementsByTagNameNS('http://libero.pub', 'item-ref'))
-        );
+        /** @var DOMNodeList<Element> $itemRefs */
+        $itemRefs = $object('libero:item-ref');
+
+        $items = [];
+        foreach ($itemRefs as $itemRef) {
+            $items[] = $this->converter->convert($itemRef, '@LiberoPatterns/teaser.html.twig', $view->getContext());
+        }
 
         return new LazyView(
             function () use ($view, $items) {

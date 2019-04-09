@@ -11,7 +11,7 @@ use Libero\ViewsBundle\Views\View;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use function Libero\ViewsBundle\array_has_key;
 
-final class ItemTeaserHrefListener
+final class ItemRefTeaserHrefListener
 {
     use SimplifiedViewConverterListener;
 
@@ -24,12 +24,10 @@ final class ItemTeaserHrefListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        $xpath = $object->ownerDocument->xpath();
-
         /** @var string $id */
-        $id = $xpath->evaluate('string(/libero:item/libero:meta/libero:id)');
+        $id = $object->getAttribute('id');
         /** @var string $service */
-        $service = $xpath->evaluate('string(/libero:item/libero:meta/libero:service)');
+        $service = $object->getAttribute('service');
 
         if ('' === $id || '' === $service) {
             return $view;
@@ -48,7 +46,7 @@ final class ItemTeaserHrefListener
 
     protected function canHandleElement(string $element) : bool
     {
-        return true;
+        return '{http://libero.pub}item-ref' === $element;
     }
 
     protected function canHandleArguments(array $arguments) : bool
