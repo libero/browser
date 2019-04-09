@@ -138,5 +138,6 @@ final class ItemListTitleListenerTest extends TestCase
 
         $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame(['title' => ['level' => 1, 'text' => 'title_key in es']], $view->getArguments());
+        $this->assertSame(['lang' => 'es', 'list_title' => 'title_key', 'level' => 2], $view->getContext());
     }
 }
