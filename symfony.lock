@@ -26,6 +26,9 @@
     "doctrine/instantiator": {
         "version": "1.1.0"
     },
+    "dusank/knapsack": {
+        "version": "10.0.0"
+    },
     "fluentdom/fluentdom": {
         "version": "7.1.0"
     },
