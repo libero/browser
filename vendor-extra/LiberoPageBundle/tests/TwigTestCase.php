@@ -7,6 +7,7 @@ namespace tests\Libero\LiberoPageBundle;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\DomCrawler\Crawler;
 use Twig\Environment;
+use function DusanKasan\Knapsack\dump;
 use function GuzzleHttp\json_encode;
 
 trait TwigTestCase
@@ -21,7 +22,7 @@ trait TwigTestCase
         $twig->method('render')
             ->willReturnCallback(
                 function (...$arguments) : string {
-                    return '<html><body>'.json_encode($arguments).'</body></html>';
+                    return '<html><body>'.json_encode(dump($arguments)).'</body></html>';
                 }
             );
 
