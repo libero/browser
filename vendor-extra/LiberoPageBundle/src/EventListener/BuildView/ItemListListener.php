@@ -14,7 +14,6 @@ use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use function array_filter;
 use function array_map;
 use function count;
 use function Libero\ViewsBundle\array_has_key;
@@ -74,17 +73,11 @@ final class ItemListListener
                 return $view->withArgument(
                     'list',
                     [
-                        'items' => array_filter(
-                            array_map(
-                                function (View $view) {
-                                    if (!$view instanceof ArrayAccess) {
-                                        return [];
-                                    }
-
-                                    return ['content' => $view['arguments']];
-                                },
-                                $items
-                            )
+                        'items' => array_map(
+                            function (ArrayAccess $view) {
+                                return ['content' => $view['arguments']];
+                            },
+                            $items
                         ),
                     ]
                 );
