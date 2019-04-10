@@ -1,3 +1,5 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list']) }) -%}
 
 {%- if title.text is defined -%}
@@ -6,7 +8,7 @@
   {%- set title = title|merge({_id: title_id}) -%}
 {%- endif -%}
 
-<div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+<div {{- html.attributes(attributes) }}>
 
   {%- with title|default({}) only -%}
     {%- block title -%}
@@ -21,23 +23,23 @@
     {%- endblock title -%}
   {%- endwith -%}
 
-  {%- with list only -%}
+  {%- with list|merge({html: html}) only -%}
     {%- block list -%}
 
       {%- if items|default([])|length -%}
 
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__list']) }) -%}
 
-        <ol {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+        <ol {{- html.attributes(attributes) }}>
 
           {%- for item in items -%}
 
-            {%- with item only -%}
+            {%- with item|merge({html: html}) only -%}
               {%- block item -%}
 
                 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__item']) }) -%}
 
-                <li {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+                <li {{- html.attributes(attributes) }}>
 
                   {%- with content only -%}
                     {%- block content -%}
@@ -62,10 +64,10 @@
           {%- set empty = [{template: '@LiberoPatterns/paragraph.html.twig', arguments: {text: empty}}] -%}
         {%- endif -%}
 
-        {%- with {empty: empty} only -%}
+        {%- with {empty: empty, html: html} only -%}
           {%- block empty -%}
 
-            {%- include '@LiberoPatterns/text.html.twig' with {nodes: empty} only -%}
+            {{- html.content(empty) -}}
 
           {%- endblock empty -%}
         {%- endwith -%}

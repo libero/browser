@@ -11,7 +11,7 @@ use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\LiberoPageBundle\Event\LoadPageDataEvent;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
-use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
+use const Libero\LiberoPatternsBundle\LISTING_GRID_PRIMARY;
 
 final class HomepageContentListListener
 {
@@ -57,7 +57,7 @@ final class HomepageContentListListener
         }
 
         $context = [
-                'area' => CONTENT_GRID_PRIMARY,
+                'area' => LISTING_GRID_PRIMARY,
                 'level' => ($event->getContext()['level'] ?? 1) + 1,
                 'list_empty' => 'libero.page.homepage.primary_listing.empty',
                 'list_title' => 'libero.page.homepage.primary_listing.title',

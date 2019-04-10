@@ -1,6 +1,6 @@
 {%- import '@LiberoPatterns/html.html.twig' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid']) }) -%}
 
 {%- set hasSecondary = false -%}
 {%- for area in content if area.area|default('full') == 'secondary' and area.content|default([])|length -%}
@@ -8,7 +8,7 @@
 {%- endfor -%}
 
 {%- if hasSecondary -%}
-  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['listing-grid--has-secondary']) }) -%}
 {%- endif -%}
 
 <{{ element|default('div') }} {{- html.attributes(attributes) }}>
@@ -18,13 +18,13 @@
 
       {%- block item -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid__item']) }) -%}
 
         {%- if area is defined -%}
 
           {%- if content|default([])|length -%}
 
-            {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
+            {%- set attributes = attributes|merge({class: attributes.class|merge(['listing-grid__item--' ~ area]) }) -%}
 
             <div {{- html.attributes(attributes) }}>
               {{- html.content(content) -}}
@@ -36,7 +36,7 @@
 
           {%- with arguments|merge({_template: template}) only -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item'])}) -%}
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid__item'])}) -%}
 
             {%- include _template -%}
 
