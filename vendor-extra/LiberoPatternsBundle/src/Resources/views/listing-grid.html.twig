@@ -1,0 +1,50 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid']) }) -%}
+
+{%- set hasSecondary = false -%}
+{%- for area in content if area.area|default('full') == 'secondary' and area.content|default([])|length -%}
+  {%- set hasSecondary = true -%}
+{%- endfor -%}
+
+{%- if hasSecondary -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['listing-grid--has-secondary']) }) -%}
+{%- endif -%}
+
+<{{ element|default('div') }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+
+  {%- for area in content -%}
+    {%- with area only -%}
+
+      {%- block item -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid__item']) }) -%}
+
+        {%- if area is defined -%}
+
+          {%- if content|default([])|length -%}
+
+            {%- set attributes = attributes|merge({class: attributes.class|merge(['listing-grid__item--' ~ area]) }) -%}
+
+            <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
+              {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+            </div>
+
+          {%- endif -%}
+
+        {%- else -%}
+
+          {%- with arguments|merge({_template: template}) only -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['listing-grid__item'])}) -%}
+
+            {%- include _template -%}
+
+          {%- endwith -%}
+
+        {%- endif -%}
+
+      {%- endblock item -%}
+
+    {%- endwith -%}
+  {%- endfor -%}
+
+</{{ element|default('div') }}>

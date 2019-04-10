@@ -10,7 +10,7 @@ use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function array_merge;
 use function count;
-use const Libero\LiberoPatternsBundle\CONTENT_GRID_MAIN;
+use const Libero\LiberoPatternsBundle\MAIN_GRID_MAIN;
 use const Libero\LiberoPatternsBundle\PAGE_GRID_MAIN;
 
 final class MainListener
@@ -24,11 +24,20 @@ final class MainListener
 
     public function onCreatePage(CreatePageEvent $event) : void
     {
+        switch ($event->getRequest()->attributes->get('libero_page')['type'] ?? null) {
+            case 'homepage':
+                $grid = '@LiberoPatterns/listing-grid.html.twig';
+                break;
+            default:
+                $grid = '@LiberoPatterns/content-grid.html.twig';
+                break;
+        }
+
         $part = new CreatePagePartEvent(
-            $grid = '@LiberoPatterns/content-grid.html.twig',
+            $grid,
             $event->getRequest(),
             $event->getDocuments(),
-            array_merge($event->getContext(), ['area' => CONTENT_GRID_MAIN])
+            array_merge($event->getContext(), ['area' => MAIN_GRID_MAIN])
         );
 
         $this->dispatcher->dispatch($part::name('main'), $part);
