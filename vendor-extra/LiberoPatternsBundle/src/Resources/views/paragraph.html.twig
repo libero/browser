@@ -1,7 +1,9 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
 
-<p {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+<p {{- html.attributes(attributes) }}>
 
-  {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} -%}
+  {{- html.content(text) -}}
 
 </p>

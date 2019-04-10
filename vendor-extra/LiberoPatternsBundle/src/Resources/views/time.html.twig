@@ -1,8 +1,10 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {% spaceless %}
 
-  <time {%- include '@LiberoPatterns/attributes.html.twig' %}>
+  <time {{- html.attributes(attributes|default({})) }}>
 
-    {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+    {{- html.content(text) -}}
 
   </time>
 

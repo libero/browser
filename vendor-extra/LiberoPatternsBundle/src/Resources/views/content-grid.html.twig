@@ -1,3 +1,5 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
 {%- set hasSecondary = false -%}
@@ -9,10 +11,10 @@
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
 {%- endif -%}
 
-<{{ element|default('div') }} {%- include '@LiberoPatterns/attributes.html.twig' %}>
+<{{ element|default('div') }} {{- html.attributes(attributes) }}>
 
   {%- for area in content -%}
-    {%- with area only -%}
+    {%- with area|merge({html: html}) only -%}
 
       {%- block item -%}
 
@@ -24,8 +26,8 @@
 
             {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-            <div {%- include '@LiberoPatterns/attributes.html.twig' %}>
-              {%- include '@LiberoPatterns/text.html.twig' with {nodes: content} -%}
+            <div {{- html.attributes(attributes) }}>
+              {{- html.content(content) -}}
             </div>
 
           {%- endif -%}

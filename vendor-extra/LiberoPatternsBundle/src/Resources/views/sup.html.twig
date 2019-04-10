@@ -1,8 +1,10 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {% spaceless %}
 
-  <sup {%- include '@LiberoPatterns/attributes.html.twig' %}>
+  <sup {{- html.attributes(attributes|default({})) }}>
 
-    {%- include '@LiberoPatterns/text.html.twig' with {nodes: text} only -%}
+    {{- html.content(text) -}}
 
   </sup>
 

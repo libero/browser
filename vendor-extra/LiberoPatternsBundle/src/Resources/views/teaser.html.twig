@@ -1,12 +1,14 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
 
-<div {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+<div {{- html.attributes(attributes) }}>
 
   {%- with {attributes: {class: []}} -%}
     {%- block header -%}
 
       {%- set attributes = attributes|merge({class: attributes.class|merge(['teaser__header']) }) -%}
-      <header {%- include '@LiberoPatterns/attributes.html.twig' -%}>
+      <header {{- html.attributes(attributes) }}>
 
         {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
           {%- block heading -%}

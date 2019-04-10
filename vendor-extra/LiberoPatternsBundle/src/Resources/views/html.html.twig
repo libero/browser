@@ -1,0 +1,37 @@
+{%- macro content(content) -%}
+
+  {%- import _self as html -%}
+
+  {%- if content.template is defined -%}
+
+    {%- include content.template with content.arguments|default({}) only -%}
+
+  {%- elseif content is iterable -%}
+
+    {%- for node in content -%}
+      {{- html.content(node) -}}
+    {%- endfor -%}
+
+  {%- else -%}
+
+    {{- content -}}
+
+  {%- endif -%}
+
+{%- endmacro content -%}
+
+{%- macro attributes(attributes) -%}
+
+  {%- for name, value in attributes|default({}) if value is not same as(false) -%}
+
+    {{- ' ' ~ name -}}
+
+    {%- if value is iterable -%}
+      ="{{ value|join(' ') }}"
+    {%- elseif value is not same as(true) -%}
+      ="{{ value }}"
+    {%- endif -%}
+
+  {%- endfor -%}
+
+{%- endmacro attributes -%}
