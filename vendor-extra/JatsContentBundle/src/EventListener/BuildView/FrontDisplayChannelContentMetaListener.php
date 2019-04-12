@@ -6,16 +6,16 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class FrontDisplayChannelContentMetaListener
 {
     use ContextAwareTranslation;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private const CATEGORIES_PATH = 'jats:article-meta/jats:article-categories';
     private const GROUP_PATH = self::CATEGORIES_PATH.'/jats:subj-group[@subj-group-type="display-channel"]';
@@ -57,9 +57,9 @@ final class FrontDisplayChannelContentMetaListener
         return $view->withArgument('items', $items);
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-meta.html.twig' === $template;
+        return '@LiberoPatterns/content-meta.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

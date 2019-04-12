@@ -6,15 +6,15 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use IntlDateFormatter;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use function Libero\ViewsBundle\array_has_key;
 use function strtotime;
 
 final class PubDateTimeListener
 {
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     protected function handle(Element $object, TemplateView $view) : View
     {
@@ -37,9 +37,9 @@ final class PubDateTimeListener
         return $view->withArgument('text', $text);
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/time.html.twig' === $template;
+        return '@LiberoPatterns/time.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

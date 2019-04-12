@@ -17,13 +17,13 @@ final class CallbackViewConverterTest extends TestCase
      */
     public function it_is_a_view_converter() : void
     {
-        $handler = new CallbackViewConverter(
+        $converter = new CallbackViewConverter(
             function () : TemplateView {
-                return new TemplateView(null);
+                return new TemplateView('template');
             }
         );
 
-        $this->assertInstanceOf(ViewConverter::class, $handler);
+        $this->assertInstanceOf(ViewConverter::class, $converter);
     }
 
     /**
@@ -31,15 +31,15 @@ final class CallbackViewConverterTest extends TestCase
      */
     public function it_returns_the_results_of_a_callback() : void
     {
-        $handler = new CallbackViewConverter(
+        $converter = new CallbackViewConverter(
             function (Element $object, ?string $template, array $context = []) : TemplateView {
-                return new TemplateView($template, $context + ['element' => $object]);
+                return new TemplateView($template ?? '', $context + ['element' => $object]);
             }
         );
 
         $element = new Element('foo');
         $expected = new TemplateView('template', ['bar' => 'baz', 'element' => $element]);
 
-        $this->assertEquals($expected, $handler->convert($element, 'template', ['bar' => 'baz']));
+        $this->assertEquals($expected, $converter->convert($element, 'template', ['bar' => 'baz']));
     }
 }

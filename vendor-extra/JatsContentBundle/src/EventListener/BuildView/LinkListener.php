@@ -6,9 +6,9 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 use function Libero\ViewsBundle\string_is;
@@ -16,9 +16,7 @@ use function Libero\ViewsBundle\string_is;
 final class LinkListener
 {
     use ConvertsChildren;
-    use SimplifiedViewConverterListener;
-
-    private $converter;
+    use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)
     {
@@ -30,9 +28,9 @@ final class LinkListener
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/link.html.twig' === $template;
+        return '@LiberoPatterns/link.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

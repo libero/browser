@@ -6,16 +6,16 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function sprintf;
 
 final class FrontArticleTypeContentMetaListener
 {
     use ContextAwareTranslation;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $translationKeys;
 
@@ -60,9 +60,9 @@ final class FrontArticleTypeContentMetaListener
         return $view->withArgument('items', $items);
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-meta.html.twig' === $template;
+        return '@LiberoPatterns/content-meta.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

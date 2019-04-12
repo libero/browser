@@ -44,12 +44,12 @@ final class LinkListenerTest extends TestCase
 
         $element = $this->loadElement('<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>');
 
-        $event = new BuildViewEvent($element, new TemplateView(null, ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/link.html.twig', ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -58,7 +58,7 @@ final class LinkListenerTest extends TestCase
      * @test
      * @dataProvider textProvider
      */
-    public function it_sets_the_template_and_text_argument(string $xml, array $expectedText) : void
+    public function it_sets_the_text_argument(string $xml, array $expectedText) : void
     {
         $listener = new LinkListener($this->createDumpingConverter());
 
@@ -86,7 +86,7 @@ XML
             ,
             [
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:kwd/text()[1]',
                         'template' => null,
@@ -94,7 +94,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:kwd/jats:italic',
                         'template' => null,
@@ -102,7 +102,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:kwd/text()[2]',
                         'template' => null,
@@ -121,7 +121,7 @@ XML
             ,
             [
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:subject/text()[1]',
                         'template' => null,
@@ -129,7 +129,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:subject/jats:italic',
                         'template' => null,
@@ -137,7 +137,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:subject/text()[2]',
                         'template' => null,

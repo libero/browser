@@ -19,7 +19,7 @@ final class TemplateViewTest extends TestCase
      */
     public function it_is_a_view() : void
     {
-        $view = new TemplateView(null);
+        $view = new TemplateView('template');
 
         $this->assertInstanceOf(View::class, $view);
     }
@@ -27,17 +27,11 @@ final class TemplateViewTest extends TestCase
     /**
      * @test
      */
-    public function it_may_have_a_template() : void
+    public function it_has_a_template() : void
     {
-        $with = new TemplateView('foo');
-        $withOut = new TemplateView(null);
+        $view = new TemplateView('template');
 
-        $this->assertSame('foo', $with->getTemplate());
-        $this->assertNull($withOut->getTemplate());
-
-        $with = $with->withTemplate('bar');
-
-        $this->assertSame('bar', $with->getTemplate());
+        $this->assertSame('template', $view->getTemplate());
     }
 
     /**
@@ -45,7 +39,7 @@ final class TemplateViewTest extends TestCase
      */
     public function it_has_arguments() : void
     {
-        $view = new TemplateView(null, ['foo' => 'bar']);
+        $view = new TemplateView('template', ['foo' => 'bar']);
 
         $this->assertTrue($view->hasArgument('foo'));
         $this->assertFalse($view->hasArgument('bar'));
@@ -68,7 +62,7 @@ final class TemplateViewTest extends TestCase
      */
     public function it_has_context() : void
     {
-        $view = new TemplateView(null, [], ['foo' => 'bar']);
+        $view = new TemplateView('template', [], ['foo' => 'bar']);
 
         $this->assertTrue($view->hasContext('foo'));
         $this->assertFalse($view->hasContext('bar'));
@@ -109,7 +103,7 @@ final class TemplateViewTest extends TestCase
      */
     public function it_is_immutable(callable $action) : void
     {
-        $view = new TemplateView(null);
+        $view = new TemplateView('template');
 
         $this->expectException(BadMethodCallException::class);
 

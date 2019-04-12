@@ -107,15 +107,15 @@ XML
             [
                 'text' => [
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/libero:title/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/libero:title/libero:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/libero:title/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],
