@@ -8,22 +8,19 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\LiberoPageBundle\Controller\PageController"
-            class="Libero\LiberoPageBundle\Controller\PageController">
+        <service id="Libero\LiberoPageBundle\Controller\PageController">
             <argument type="service" id="twig"/>
             <argument>%libero.page_template%</argument>
             <argument type="service" id="event_dispatcher"/>
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener"
-            class="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener">
+        <service id="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener">
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\HomepageContentListListener"
-            class="Libero\LiberoPageBundle\EventListener\HomepageContentListListener">
+        <service id="Libero\LiberoPageBundle\EventListener\HomepageContentListListener">
             <argument type="service" id="libero.client"/>
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
@@ -31,47 +28,40 @@
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\TitleListener"
-            class="Libero\LiberoPageBundle\EventListener\TitleListener">
+        <service id="Libero\LiberoPageBundle\EventListener\TitleListener">
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="-1000"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\ContentItemListener"
-            class="Libero\LiberoPageBundle\EventListener\ContentItemListener">
+        <service id="Libero\LiberoPageBundle\EventListener\ContentItemListener">
             <argument type="service" id="libero.client"/>
             <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener"
-            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener">
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener">
             <argument type="service" id="translator"/>
             <!-- After ItemListListener -->
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener"
-            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener">
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListTitleListener"
-            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemListTitleListener">
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListTitleListener">
             <argument type="service" id="translator"/>
             <!-- Before ItemListListener -->
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="10"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserHrefListener"
-            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserHrefListener">
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserHrefListener">
             <argument type="service" id="router"/>
             <!-- Before ItemRefTeaserListener -->
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="1"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserListener"
-            class="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserListener">
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemRefTeaserListener">
             <argument type="service" id="libero.client"/>
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
@@ -84,20 +74,17 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage" priority="1000"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\MainListener"
-            class="Libero\LiberoPageBundle\EventListener\MainListener">
+        <service id="Libero\LiberoPageBundle\EventListener\MainListener">
             <argument type="service" id="event_dispatcher"/>
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\Routing\PageRouteLoader"
-            class="Libero\LiberoPageBundle\Routing\PageRouteLoader">
+        <service id="Libero\LiberoPageBundle\Routing\PageRouteLoader">
             <argument type="collection"/>
             <tag name="routing.loader"/>
         </service>
 
-        <service id="Libero\LiberoPageBundle\EventListener\LiberoPageListener"
-            class="Libero\LiberoPageBundle\EventListener\LiberoPageListener">
+        <service id="Libero\LiberoPageBundle\EventListener\LiberoPageListener">
             <argument type="collection"/>
             <!-- Immediately after RouterListener -->
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="31"/>
