@@ -8,16 +8,14 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\ViewsBundle\Views\EventDispatchingViewConverter"
-            class="Libero\ViewsBundle\Views\EventDispatchingViewConverter">
+        <service id="Libero\ViewsBundle\Views\EventDispatchingViewConverter">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="Libero\ViewsBundle\Views\ViewConverter"
             alias="Libero\ViewsBundle\Views\EventDispatchingViewConverter"/>
 
-        <service id="Libero\ViewsBundle\EventListener\BuildView\LangListener"
-            class="Libero\ViewsBundle\EventListener\BuildView\LangListener">
+        <service id="Libero\ViewsBundle\EventListener\BuildView\LangListener">
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="100"/>
         </service>
 
