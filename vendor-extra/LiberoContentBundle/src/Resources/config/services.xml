@@ -8,62 +8,52 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\LiberoContentBundle\EventListener\ContentHeaderListener"
-            class="Libero\LiberoContentBundle\EventListener\ContentHeaderListener">
+        <service id="Libero\LiberoContentBundle\EventListener\ContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\TitleListener"
-            class="Libero\LiberoContentBundle\EventListener\TitleListener">
+        <service id="Libero\LiberoContentBundle\EventListener\TitleListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontContentHeaderListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontTitleTeaserListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\FrontTitleTeaserListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\FrontTitleTeaserListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\TitleHeadingListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItemTeaserListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="50"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\ItalicListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\BoldListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\BoldListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\BoldListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SubListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\SubListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SubListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SupListener"
-            class="Libero\LiberoContentBundle\EventListener\BuildView\SupListener">
+        <service id="Libero\LiberoContentBundle\EventListener\BuildView\SupListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
