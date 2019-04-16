@@ -1,0 +1,11 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+<picture {{- html.attributes(attributes|default({})) }}>
+
+  {%- for source in sources|default([]) -%}
+    <source {{- html.attributes(source) }}>
+  {%- endfor -%}
+
+  <img {{- html.attributes(image) }}>
+
+</picture>
