@@ -29,9 +29,11 @@ final class GraphicImageListener
             return $view;
         }
 
+        $uri = (string) $uri;
+
         if ('image/jpeg' !== sprintf('%s/%s', $object->getAttribute('mimetype'), $object->getAttribute('mime-subtype'))
             &&
-            'image/jpeg' !== mimetype_from_filename((string) $uri)
+            'image/jpeg' !== mimetype_from_filename($uri)
         ) {
             return $view;
         }

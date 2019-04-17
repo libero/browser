@@ -30,7 +30,7 @@ final class FigGraphicFigureListener
         foreach ($graphics as $graphic) {
             $converted = $this->converter->convert($graphic, '@LiberoPatterns/image.html.twig', $view->getContext());
 
-            if (!$converted instanceof TemplateView || !$converted->hasArgument('image')) {
+            if (!$converted instanceof TemplateView || empty($converted->getArguments())) {
                 continue;
             }
 
