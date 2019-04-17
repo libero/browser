@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
+use GuzzleHttp\Psr7\UriResolver;
 use Libero\ViewsBundle\Views\OptionalTemplateListener;
 use Libero\ViewsBundle\Views\TemplateView;
-use UnexpectedValueException;
 use function GuzzleHttp\Psr7\mimetype_from_filename;
+use function GuzzleHttp\Psr7\uri_for;
 use function in_array;
-use function Libero\LiberoPageBundle\absolute_xlink_href;
 use function Libero\ViewsBundle\array_has_key;
 use function sprintf;
 
@@ -20,11 +20,10 @@ final class GraphicImageListener
 
     protected function handle(Element $object, TemplateView $view) : TemplateView
     {
-        try {
-            $uri = absolute_xlink_href($object);
-        } catch (UnexpectedValueException $e) {
-            return $view;
-        }
+        $uri = UriResolver::resolve(
+            uri_for($object->baseURI),
+            uri_for($object->getAttributeNS('http://www.w3.org/1999/xlink', 'href'))
+        );
 
         if (!in_array($uri->getScheme(), ['http', 'https'], true)) {
             return $view;

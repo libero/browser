@@ -12,6 +12,7 @@
         "php": "^7.2",
         "ext-dom": "*",
         "fluentdom/fluentdom": "^7.0",
+        "guzzlehttp/psr7": "^1.4",
         "libero/page-bundle": "^1.0@dev",
         "libero/views-bundle": "^1.0@dev",
         "symfony/config": "^4.1",
