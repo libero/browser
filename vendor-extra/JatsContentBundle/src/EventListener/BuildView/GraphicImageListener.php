@@ -12,6 +12,7 @@ use function GuzzleHttp\Psr7\mimetype_from_filename;
 use function in_array;
 use function Libero\LiberoPageBundle\absolute_xlink_href;
 use function Libero\ViewsBundle\array_has_key;
+use function sprintf;
 
 final class GraphicImageListener
 {
@@ -29,8 +30,7 @@ final class GraphicImageListener
             return $view;
         }
 
-        if (
-            'image/jpeg' !== sprintf('%s/%s', $object->getAttribute('mimetype'), $object->getAttribute('mime-subtype'))
+        if ('image/jpeg' !== sprintf('%s/%s', $object->getAttribute('mimetype'), $object->getAttribute('mime-subtype'))
             &&
             'image/jpeg' !== mimetype_from_filename((string) $uri)
         ) {
