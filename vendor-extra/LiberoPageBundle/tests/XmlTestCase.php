@@ -11,11 +11,13 @@ use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 
 trait XmlTestCase
 {
-    final protected function loadDocument(string $xml) : Document
+    final protected function loadDocument(string $xml, ?string $documentUri = null) : Document
     {
         $xml = FluentDOM::load($xml);
+        $xml->documentURI = $documentUri;
         $xml->xpath()->registerNamespace('libero', 'http://libero.pub');
         $xml->xpath()->registerNamespace('jats', 'http://jats.nlm.nih.gov');
+        $xml->xpath()->registerNamespace('xlink', 'http://www.w3.org/1999/xlink');
 
         return $xml;
     }
