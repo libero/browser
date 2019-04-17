@@ -2,7 +2,6 @@ parameters:
     ignoreErrors:
         - '~^Call to an undefined method FluentDOM\\DOM\\Node\\.+?::getNodePath\(\)\.$~'
         - '~^Cannot call method (end|([a-z]+)Node)\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
-        - '~^Property DOMDocument::\$documentURI \(string\) does not accept string\|null.$~'
         - '~^Service "csa_guzzle\.mock\.storage" is not registered in the container\.$~'
     level: max
     paths:
