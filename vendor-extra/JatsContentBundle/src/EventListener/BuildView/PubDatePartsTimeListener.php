@@ -15,7 +15,6 @@ final class PubDatePartsTimeListener
     private const YEAR_PATH = 'jats:year[number(.)=.][1]';
     private const MONTH_PATH = 'jats:month[number(.)=.][1]';
     private const DAY_PATH = 'jats:day[number(.)=.][1]';
-    private const PARTS_PATH = self::YEAR_PATH.'|'.self::MONTH_PATH.'|'.self::DAY_PATH;
 
     use SimplifiedViewConverterListener;
 
@@ -29,17 +28,20 @@ final class PubDatePartsTimeListener
 
         $xpath = $object->ownerDocument->xpath();
 
-        $day = $xpath->firstOf(self::DAY_PATH);
+        $day = $xpath->firstOf(self::DAY_PATH, $object);
+
         if (!$day instanceof Element) {
             return $view;
         }
 
-        $month = $xpath->firstOf(self::MONTH_PATH);
+        $month = $xpath->firstOf(self::MONTH_PATH, $object);
+
         if (!$month instanceof Element) {
             return $view;
         }
 
-        $year = $xpath->firstOf(self::YEAR_PATH);
+        $year = $xpath->firstOf(self::YEAR_PATH, $object);
+
         if (!$year instanceof Element) {
             return $view;
         }
