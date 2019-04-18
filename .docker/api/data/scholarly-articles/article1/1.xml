@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov">
+<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <meta>
 
@@ -75,6 +75,10 @@
                     single jaw or skull because the entire body of material has informed our understanding of its
                     biology.
                 </jats:p>
+
+                <jats:fig>
+                    <jats:graphic xlink:href="https://iiif.elifesciences.org/lax:09560%2Felife-09560-fig1-v1.tif/full/1234,/0/default.jpg"/>
+                </jats:fig>
 
                 <jats:p>Order Primates LINNAEUS 1758</jats:p>
 
