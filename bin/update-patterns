@@ -53,4 +53,5 @@ cd ../..
 
 rsync --archive --delete var/pattern-library/export/css/ vendor-extra/LiberoPatternsBundle/src/Resources/public/css --exclude sass
 rsync --archive --delete var/pattern-library/export/fonts/ vendor-extra/LiberoPatternsBundle/src/Resources/public/fonts
+rsync --archive --delete var/pattern-library/export/js/ vendor-extra/LiberoPatternsBundle/src/Resources/public/js --exclude src
 rsync --archive --delete var/pattern-library/export/templates/ vendor-extra/LiberoPatternsBundle/src/Resources/views
