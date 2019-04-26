@@ -7,7 +7,47 @@
 
       {{- html.content(content) -}}
 
-    {%- endblock -%}
+    {%- endblock content -%}
   {%- endwith -%}
+
+  {%- if caption is defined -%}
+
+    {%- with caption|merge({html: html}) only -%}
+      {%- block caption -%}
+
+        <figcaption {{- html.attributes(attributes|default({})) }}>
+
+          {%- with heading|default({}) only -%}
+            {%- block captionHeading -%}
+
+              {%- if text is defined -%}
+
+                {%- set level = level|default(2) -%}
+
+                {%- include '@LiberoPatterns/heading.html.twig' -%}
+
+              {%- endif -%}
+
+            {%- endblock captionHeading -%}
+          {%- endwith -%}
+
+          {%- with {content: content|default([]), html: html} only -%}
+            {%- block captionContent -%}
+
+              {%- if content|length -%}
+
+                {{- html.content(content) -}}
+
+              {%- endif -%}
+
+            {%- endblock captionContent -%}
+          {%- endwith -%}
+
+        </figcaption>
+
+      {%- endblock caption -%}
+    {%- endwith -%}
+
+  {%- endif -%}
 
 </figure>
