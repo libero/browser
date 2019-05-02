@@ -459,11 +459,12 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "72cb43052a8e012ca574e9d9b3e03059ca56e7f5"
+                "reference": "6780a301af19065e6830d8b246b83a72550f2ea8"
             },
             "require": {
                 "ext-dom": "*",
                 "fluentdom/fluentdom": "^7.0",
+                "guzzlehttp/psr7": "^1.4",
                 "libero/page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
