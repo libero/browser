@@ -6,7 +6,6 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\FigCaptionContentFigureListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -16,29 +15,6 @@ final class FigCaptionContentFigureListenerTest extends TestCase
 {
     use ViewConvertingTestCase;
     use XmlTestCase;
-
-    /**
-     * @test
-     * @dataProvider templateChoiceProvider
-     */
-    public function it_can_choose_a_template(string $xml, ?string $expected) : void
-    {
-        $listener = new FigCaptionContentFigureListener($this->createFailingConverter());
-
-        $element = $this->loadElement($xml);
-
-        $event = new ChooseTemplateEvent($element);
-        $listener->onChooseTemplate($event);
-
-        $this->assertSame($expected, $event->getTemplate());
-    }
-
-    public function templateChoiceProvider() : iterable
-    {
-        yield 'figure element' => ['<fig xmlns="http://jats.nlm.nih.gov"/>', '@LiberoPatterns/figure.html.twig'];
-        yield 'different namespace' => ['<fig xmlns="http://example.com"/>', null];
-        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov"/>', null];
-    }
 
     /**
      * @test

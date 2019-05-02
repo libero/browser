@@ -7,7 +7,6 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
@@ -19,7 +18,6 @@ use function iterator_to_array;
 final class FigCaptionContentFigureListener
 {
     use ConvertsChildren;
-    use TemplateChoosingListener;
     use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)

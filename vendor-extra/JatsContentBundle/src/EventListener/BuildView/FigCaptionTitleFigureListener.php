@@ -6,7 +6,6 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
@@ -14,7 +13,6 @@ use Libero\ViewsBundle\Views\ViewConverter;
 final class FigCaptionTitleFigureListener
 {
     use ConvertsChildren;
-    use TemplateChoosingListener;
     use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)
