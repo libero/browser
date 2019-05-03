@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace tests\Libero\ViewsBundle\Views;
 
+use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\CallbackViewConverter;
 use Libero\ViewsBundle\Views\StringView;
 use Libero\ViewsBundle\Views\StringViewConverter;
-use Libero\ViewsBundle\Views\TemplateViewBuildingViewConverter;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
@@ -52,23 +51,39 @@ final class StringViewConverterTest extends TestCase
     }
 
     /**
-     * @test0
+     * @test
      * @dataProvider hiddenNodeProvider
      */
     public function it_falls_back_on_hidden_nodes(string $node) : void
     {
         $fallback = new StringView('fallback');
 
-        $converter = new TemplateViewBuildingViewConverter(
-            $this->createMock(EventDispatcherInterface::class),
+        $node = $this->loadNode($node);
+        $template = 'template';
+        $context = ['con' => 'text'];
+
+        $converter = new StringViewConverter(
             new CallbackViewConverter(
-                function () use ($fallback) : View {
+                function (
+                    NonDocumentTypeChildNode $fallbackNode,
+                    ?string $fallbackTemplate,
+                    array $fallbackContext
+                ) use (
+                    $context,
+                    $fallback,
+                    $node,
+                    $template
+                ) : View {
+                    $this->assertEquals($fallbackNode, $node);
+                    $this->assertSame($fallbackTemplate, $template);
+                    $this->assertSame($fallbackContext, $context);
+
                     return $fallback;
                 }
             )
         );
 
-        $this->assertSame($fallback, $converter->convert($this->loadNode($node)));
+        $this->assertSame($fallback, $converter->convert($node, $template, $context));
     }
 
     public function hiddenNodeProvider() : iterable
