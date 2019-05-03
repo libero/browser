@@ -6,7 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use DOMElement;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
-use Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureListener;
+use Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureImageListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
@@ -25,7 +25,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_can_choose_a_template(string $xml, ?string $expected) : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement($xml);
 
@@ -48,7 +48,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_fig_element(string $xml) : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement($xml);
 
@@ -73,7 +73,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_figure_template() : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement('<fig xmlns="http://jats.nlm.nih.gov"><graphic/></fig>');
 
@@ -92,7 +92,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_a_content_argument_set() : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement('<fig xmlns="http://jats.nlm.nih.gov"><graphic/></fig>');
 
@@ -115,7 +115,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_no_graphics_convert() : void
     {
-        $listener = new FigGraphicFigureListener(
+        $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createFailingConverter(),
                 function () : bool {
@@ -148,7 +148,7 @@ XML
      */
     public function it_sets_the_content_argument() : void
     {
-        $listener = new FigGraphicFigureListener(
+        $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createDumpingConverter(),
                 function (NonDocumentTypeChildNode $node, ?string $template, array $context) : bool {

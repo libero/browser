@@ -131,7 +131,7 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="50"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureListener">
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureImageListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.template" method="onChooseTemplate"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>

@@ -13,7 +13,7 @@ use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
-final class FigGraphicFigureListener
+final class FigGraphicFigureImageListener
 {
     use ConvertsChildren;
     use TemplateChoosingListener;
