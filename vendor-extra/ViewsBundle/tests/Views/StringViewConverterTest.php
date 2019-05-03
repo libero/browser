@@ -46,7 +46,7 @@ final class StringViewConverterTest extends TestCase
 
     public function visibleNodeProvider() : iterable
     {
-        yield 'cdata' => ['<![CDATA[<cdata>]]>', '<cdata>'];
+        yield 'cdata' => ['<![CDATA[c < data]]>', 'c < data'];
         yield 'element' => ['<foo>element</foo>', 'element'];
         yield 'text' => ['text', 'text'];
     }

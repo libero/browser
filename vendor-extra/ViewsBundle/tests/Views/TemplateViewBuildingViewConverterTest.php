@@ -73,7 +73,7 @@ final class TemplateViewBuildingViewConverterTest extends TestCase
 
     public function nonElementProvider() : iterable
     {
-        yield 'cdata' => ['<![CDATA[<cdata>]]>'];
+        yield 'cdata' => ['<![CDATA[c < data>]]>'];
         yield 'comment' => ['<!--comment-->'];
         yield 'processing instruction' => ['<?processing instruction?>'];
         yield 'text' => ['text'];
