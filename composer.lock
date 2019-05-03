@@ -574,10 +574,13 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPatternsBundle",
-                "reference": "5c6c13a71f9a63442979196ce160949c430ddd13"
+                "reference": "30243fc2db4c26a19f833ca3017c162492eba510"
             },
             "require": {
                 "php": "^7.2",
+                "symfony/asset": "^4.1",
+                "symfony/config": "^4.1",
+                "symfony/dependency-injection": "^4.1",
                 "symfony/http-kernel": "^4.1"
             },
             "type": "symfony-bundle",
