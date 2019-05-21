@@ -1,0 +1,23 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['site-header']) }) -%}
+
+<header {{- html.attributes(attributes) }}>
+
+    {%- set logo = logo|default({}) -%}
+    {%- with logo -%}
+
+        {%- set href = logo.href|default('') -%}
+        {%- set image = logo.image|default({})|merge({src: asset(logo.image.src|default('images/libero-logo.svg')), alt: logo.image.alt|default('Site logo')}) -%}
+
+      {%- block logo -%}
+
+        <a href="{{ href }}">
+          <img {{- html.attributes(image) }} class="site-header__image"/>
+        </a>
+
+      {%- endblock -%}
+
+    {%- endwith -%}
+
+</header>
