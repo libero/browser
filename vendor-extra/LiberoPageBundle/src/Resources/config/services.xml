@@ -79,6 +79,11 @@
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
 
+        <service id="Libero\LiberoPageBundle\EventListener\StartListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\Routing\PageRouteLoader">
             <argument type="collection"/>
             <tag name="routing.loader"/>
