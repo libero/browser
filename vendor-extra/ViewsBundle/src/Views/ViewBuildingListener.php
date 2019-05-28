@@ -6,7 +6,6 @@ namespace Libero\ViewsBundle\Views;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use function sprintf;
 
 trait ViewBuildingListener
 {
@@ -21,7 +20,7 @@ trait ViewBuildingListener
             return;
         }
 
-        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
+        if (!$this->canHandleElement($object)) {
             return;
         }
 

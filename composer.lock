@@ -219,21 +219,27 @@
         },
         {
             "name": "fluentdom/fluentdom",
-            "version": "7.1.0",
+            "version": "7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThomasWeinert/FluentDOM.git",
-                "reference": "91038715a02e50255a289c0532acd6adbfc30bde"
+                "reference": "1620d3834bae86673f1a2cc06dca1c24604e3011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThomasWeinert/FluentDOM/zipball/91038715a02e50255a289c0532acd6adbfc30bde",
-                "reference": "91038715a02e50255a289c0532acd6adbfc30bde",
+                "url": "https://api.github.com/repos/ThomasWeinert/FluentDOM/zipball/1620d3834bae86673f1a2cc06dca1c24604e3011",
+                "reference": "1620d3834bae86673f1a2cc06dca1c24604e3011",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-libxml": "*",
                 "php": ">=7.0"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "ext-xmlreader": "*",
+                "ext-xmlwriter": "*"
             },
             "suggest": {
                 "ext-json": "JSON support, needed for several loaders/serializers",
@@ -270,7 +276,7 @@
                 "jquery",
                 "xml"
             ],
-            "time": "2018-11-11T13:47:41+00:00"
+            "time": "2019-05-25T15:40:08+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -463,7 +469,7 @@
             },
             "require": {
                 "ext-dom": "*",
-                "fluentdom/fluentdom": "^7.0",
+                "fluentdom/fluentdom": "^7.2",
                 "guzzlehttp/psr7": "^1.4",
                 "libero/page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
@@ -502,7 +508,7 @@
                 "reference": "9f13b48431cc730a3516ddcb7123890c5f2f4c95"
             },
             "require": {
-                "fluentdom/fluentdom": "^7.0",
+                "fluentdom/fluentdom": "^7.2",
                 "libero/page-bundle": "^1.0@dev",
                 "libero/views-bundle": "^1.0@dev",
                 "php": "^7.2",
@@ -539,7 +545,7 @@
                 "reference": "2cfff9d16f9065f381db01dcf08b76c56f9f2d33"
             },
             "require": {
-                "fluentdom/fluentdom": "^7.0",
+                "fluentdom/fluentdom": "^7.2",
                 "guzzlehttp/promises": "^1.0",
                 "php": "^7.2",
                 "punic/punic": "^3.3",
@@ -611,7 +617,7 @@
                 "reference": "4bc2ea628893b34c5ae926178bf5bc91948c90c8"
             },
             "require": {
-                "fluentdom/fluentdom": "^7.0",
+                "fluentdom/fluentdom": "^7.2",
                 "php": "^7.2",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1",

@@ -33,9 +33,9 @@ final class SupListener
         return '@LiberoPatterns/sup.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}sup' === $element;
+        return '{http://jats.nlm.nih.gov}sup' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

@@ -10,7 +10,6 @@ use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use function sprintf;
 
 final class FrontArticleTypeContentMetaListener
 {
@@ -35,10 +34,7 @@ final class FrontArticleTypeContentMetaListener
 
         $article = $object->parentNode;
 
-        if (!$article instanceof Element
-            ||
-            '{http://jats.nlm.nih.gov}article' !== sprintf('{%s}%s', $article->namespaceURI, $article->localName)
-        ) {
+        if (!$article instanceof Element || '{http://jats.nlm.nih.gov}article' !== $article->clarkNotation()) {
             return $view;
         }
 
@@ -65,8 +61,8 @@ final class FrontArticleTypeContentMetaListener
         return '@LiberoPatterns/content-meta.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}front' === $element;
+        return '{http://jats.nlm.nih.gov}front' === $element->clarkNotation();
     }
 }
