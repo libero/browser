@@ -6,9 +6,9 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function Libero\ViewsBundle\array_has_key;
@@ -16,7 +16,7 @@ use function Libero\ViewsBundle\array_has_key;
 final class FrontContentHeaderMetaListener
 {
     use ContextAwareTranslation;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $converter;
 
@@ -28,9 +28,13 @@ final class FrontContentHeaderMetaListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        $meta = $this->converter
-            ->convert($object, '@LiberoPatterns/content-meta.html.twig', $view->getContext())
-            ->getArguments();
+        $meta = $this->converter->convert($object, '@LiberoPatterns/content-meta.html.twig', $view->getContext());
+
+        if (!$meta instanceof TemplateView) {
+            return $view->withArgument('meta', $meta);
+        }
+
+        $meta = $meta->getArguments();
 
         if (empty($meta)) {
             return $view;
@@ -46,9 +50,9 @@ final class FrontContentHeaderMetaListener
         return $view->withArgument('meta', $meta);
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig' === $template;
+        return '@LiberoPatterns/content-header.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

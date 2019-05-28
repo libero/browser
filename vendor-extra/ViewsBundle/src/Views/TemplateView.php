@@ -16,7 +16,7 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
     private $arguments;
     private $template;
 
-    public function __construct(?string $template, array $arguments = [], array $context = [])
+    public function __construct(string $template, array $arguments = [], array $context = [])
     {
         $this->template = $template;
         $this->arguments = $arguments;
@@ -38,7 +38,7 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
         return $this->arguments;
     }
 
-    public function getTemplate() : ?string
+    public function getTemplate() : string
     {
         return $this->template;
     }
@@ -57,19 +57,6 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
         $view = clone $this;
 
         $view->arguments = array_replace_recursive($view->arguments, $arguments);
-
-        return $view;
-    }
-
-    public function withTemplate(string $template) : TemplateView
-    {
-        if ($template === $this->template) {
-            return $this;
-        }
-
-        $view = clone $this;
-
-        $view->template = $template;
 
         return $view;
     }

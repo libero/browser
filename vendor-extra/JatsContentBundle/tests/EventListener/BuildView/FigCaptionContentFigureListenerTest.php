@@ -26,12 +26,12 @@ final class FigCaptionContentFigureListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/figure.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/figure.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -156,7 +156,7 @@ XML
                 'caption' => [
                     'content' => [
                         new TemplateView(
-                            null,
+                            '',
                             [
                                 'node' => '/jats:fig/jats:caption/jats:p[1]',
                                 'template' => null,
@@ -164,7 +164,7 @@ XML
                             ]
                         ),
                         new TemplateView(
-                            null,
+                            '',
                             [
                                 'node' => '/jats:fig/jats:caption/jats:p[2]',
                                 'template' => null,

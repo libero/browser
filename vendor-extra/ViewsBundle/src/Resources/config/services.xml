@@ -8,12 +8,27 @@
 
         <defaults public="false"/>
 
-        <service id="Libero\ViewsBundle\Views\EventDispatchingViewConverter">
-            <argument type="service" id="event_dispatcher"/>
+        <service id="Libero\ViewsBundle\Views\StringViewConverter"
+            decorates="Libero\ViewsBundle\Views\ViewConverter" decoration-priority="10">
+            <argument type="service" id="Libero\ViewsBundle\Views\StringViewConverter.inner"/>
         </service>
 
+        <service id="Libero\ViewsBundle\Views\TemplateChoosingViewConverter"
+            decorates="Libero\ViewsBundle\Views\ViewConverter" decoration-priority="-10">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Libero\ViewsBundle\Views\TemplateChoosingViewConverter.inner"/>
+        </service>
+
+        <service id="Libero\ViewsBundle\Views\TemplateViewBuildingViewConverter"
+            decorates="Libero\ViewsBundle\Views\ViewConverter">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Libero\ViewsBundle\Views\TemplateViewBuildingViewConverter.inner"/>
+        </service>
+
+        <service id="Libero\ViewsBundle\Views\EmptyViewConverter"/>
+
         <service id="Libero\ViewsBundle\Views\ViewConverter"
-            alias="Libero\ViewsBundle\Views\EventDispatchingViewConverter"/>
+            alias="Libero\ViewsBundle\Views\EmptyViewConverter"/>
 
         <service id="Libero\ViewsBundle\EventListener\BuildView\LangListener">
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="100"/>

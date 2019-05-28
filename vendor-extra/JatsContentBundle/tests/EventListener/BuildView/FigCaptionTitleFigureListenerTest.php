@@ -26,12 +26,12 @@ final class FigCaptionTitleFigureListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/figure.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/figure.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }

@@ -6,15 +6,15 @@ namespace Libero\LiberoPageBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ItemListEmptyListener
 {
     use ContextAwareTranslation;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     public function __construct(TranslatorInterface $translator)
     {
@@ -33,9 +33,9 @@ final class ItemListEmptyListener
         );
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/teaser-list.html.twig' === $template;
+        return '@LiberoPatterns/teaser-list.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

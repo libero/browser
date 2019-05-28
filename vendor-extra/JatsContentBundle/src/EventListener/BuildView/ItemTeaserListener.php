@@ -25,7 +25,7 @@ final class ItemTeaserListener
         $object = $event->getObject();
         $view = $event->getView();
 
-        if (!$view instanceof TemplateView || !$this->canHandleTemplate($view->getTemplate())) {
+        if (!$view instanceof TemplateView || $view->getTemplate() !== $this->template()) {
             return;
         }
 
@@ -59,9 +59,9 @@ final class ItemTeaserListener
         return $this->converter->convert($front, $view->getTemplate(), $view->getContext());
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/teaser.html.twig' === $template;
+        return '@LiberoPatterns/teaser.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

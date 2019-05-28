@@ -6,8 +6,9 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use DOMElement;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
-use Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureListener;
+use Libero\JatsContentBundle\EventListener\BuildView\FigGraphicFigureImageListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -20,20 +21,43 @@ final class FigGraphicFigureImageListenerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider templateChoiceProvider
+     */
+    public function it_can_choose_a_template(string $xml, ?string $expected) : void
+    {
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
+
+        $element = $this->loadElement($xml);
+
+        $event = new ChooseTemplateEvent($element);
+        $listener->onChooseTemplate($event);
+
+        $this->assertSame($expected, $event->getTemplate());
+    }
+
+    public function templateChoiceProvider() : iterable
+    {
+        yield 'figure element' => ['<fig xmlns="http://jats.nlm.nih.gov"/>', '@LiberoPatterns/figure.html.twig'];
+        yield 'different namespace' => ['<fig xmlns="http://example.com"/>', null];
+        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov"/>', null];
+    }
+
+    /**
+     * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_fig_element(string $xml) : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/figure.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/figure.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -49,7 +73,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_is_not_the_figure_template() : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement('<fig xmlns="http://jats.nlm.nih.gov"><graphic/></fig>');
 
@@ -68,16 +92,20 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_there_is_already_a_content_argument_set() : void
     {
-        $listener = new FigGraphicFigureListener($this->createFailingConverter());
+        $listener = new FigGraphicFigureImageListener($this->createFailingConverter());
 
         $element = $this->loadElement('<fig xmlns="http://jats.nlm.nih.gov"><graphic/></fig>');
 
-        $event = new BuildViewEvent($element, new TemplateView(null, ['content' => 'foo']));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/figure.html.twig', ['content' => 'foo'])
+        );
+
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/figure.html.twig', $view->getTemplate());
         $this->assertSame(['content' => 'foo'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -87,7 +115,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
      */
     public function it_does_nothing_if_no_graphics_convert() : void
     {
-        $listener = new FigGraphicFigureListener(
+        $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createFailingConverter(),
                 function () : bool {
@@ -105,7 +133,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
 </jats:fig>
 XML
         );
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/figure.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -118,9 +146,9 @@ XML
     /**
      * @test
      */
-    public function it_sets_the_template_and_content_argument() : void
+    public function it_sets_the_content_argument() : void
     {
-        $listener = new FigGraphicFigureListener(
+        $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createDumpingConverter(),
                 function (NonDocumentTypeChildNode $node, ?string $template, array $context) : bool {
@@ -140,7 +168,7 @@ XML
         );
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/figure.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -149,7 +177,7 @@ XML
         $this->assertEquals(
             [
                 'content' => new TemplateView(
-                    null,
+                    '',
                     [
                             'node' => '/jats:fig/jats:graphic[2]',
                             'template' => '@LiberoPatterns/image.html.twig',
