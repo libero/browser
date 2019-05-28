@@ -30,7 +30,7 @@ final class StartListener
             array_merge($event->getContext(), ['area' => PAGE_GRID_START])
         );
 
-        $this->dispatcher->dispatch($part::name('full'), $part);
+        $this->dispatcher->dispatch($part::name('start'), $part);
 
         if (0 === count($part->getContent())) {
             return;
