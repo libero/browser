@@ -18,7 +18,7 @@ final class BuildViewEventTest extends TestCase
      */
     public function it_is_an_event() : void
     {
-        $event = new BuildViewEvent(new Element('name'), new TemplateView(null));
+        $event = new BuildViewEvent(new Element('name'), new TemplateView('template'));
 
         $this->assertInstanceOf(Event::class, $event);
     }
@@ -30,7 +30,7 @@ final class BuildViewEventTest extends TestCase
     {
         $object = new Element('name');
 
-        $event = new BuildViewEvent($object, new TemplateView(null));
+        $event = new BuildViewEvent($object, new TemplateView('template'));
 
         $this->assertEquals($object, $event->getObject());
     }

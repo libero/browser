@@ -6,6 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -18,6 +19,29 @@ final class ParagraphListenerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider templateChoiceProvider
+     */
+    public function it_can_choose_a_template(string $xml, ?string $expected) : void
+    {
+        $listener = new ParagraphListener($this->createFailingConverter());
+
+        $element = $this->loadElement($xml);
+
+        $event = new ChooseTemplateEvent($element);
+        $listener->onChooseTemplate($event);
+
+        $this->assertSame($expected, $event->getTemplate());
+    }
+
+    public function templateChoiceProvider() : iterable
+    {
+        yield 'p element' => ['<p xmlns="http://jats.nlm.nih.gov">foo</p>', '@LiberoPatterns/paragraph.html.twig'];
+        yield 'different namespace' => ['<p xmlns="http://example.com">foo</p>', null];
+        yield 'different element' => ['<sec xmlns="http://jats.nlm.nih.gov">foo</sec>', null];
+    }
+
+    /**
+     * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_p_element(string $xml) : void
@@ -26,12 +50,12 @@ final class ParagraphListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/paragraph.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/paragraph.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -70,12 +94,15 @@ final class ParagraphListenerTest extends TestCase
 
         $element = $this->loadElement('<p xmlns="http://jats.nlm.nih.gov">foo</p>');
 
-        $event = new BuildViewEvent($element, new TemplateView(null, ['text' => 'bar']));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/paragraph.html.twig', ['text' => 'bar'])
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/paragraph.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -83,7 +110,7 @@ final class ParagraphListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_sets_the_template_and_text_argument() : void
+    public function it_sets_the_text_argument() : void
     {
         $listener = new ParagraphListener($this->createDumpingConverter());
 
@@ -97,7 +124,7 @@ XML
 
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/paragraph.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -107,15 +134,15 @@ XML
             [
                 'text' => [
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:p/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:p/jats:bold', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:p/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],

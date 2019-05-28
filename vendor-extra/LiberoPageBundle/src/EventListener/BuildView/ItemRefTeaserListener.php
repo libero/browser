@@ -8,15 +8,15 @@ use FluentDOM;
 use FluentDOM\DOM\Element;
 use GuzzleHttp\ClientInterface;
 use Libero\ViewsBundle\Views\LazyView;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Psr\Http\Message\ResponseInterface;
 
 final class ItemRefTeaserListener
 {
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $client;
     private $converter;
@@ -71,9 +71,9 @@ final class ItemRefTeaserListener
         );
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/teaser.html.twig' === $template;
+        return '@LiberoPatterns/teaser.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

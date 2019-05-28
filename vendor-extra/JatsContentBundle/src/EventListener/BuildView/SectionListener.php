@@ -8,9 +8,10 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\OptionalTemplateListener;
+use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_map;
 use function iterator_to_array;
@@ -19,9 +20,8 @@ use function Libero\ViewsBundle\array_has_key;
 final class SectionListener
 {
     use ConvertsChildren;
-    use OptionalTemplateListener;
-
-    private $converter;
+    use TemplateChoosingListener;
+    use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)
     {
@@ -34,16 +34,17 @@ final class SectionListener
             $view = $view->withContext(['level' => 1]);
         }
 
-        $heading = $object->ownerDocument->xpath()
+        $title = $object->ownerDocument->xpath()
             ->firstOf('jats:title', $object);
 
-        if ($heading instanceof Element) {
-            $view = $view->withArgument(
-                'heading',
-                $this->converter
-                    ->convert($heading, '@LiberoPatterns/heading.html.twig', $view->getContext())
-                    ->getArguments()
-            );
+        if ($title instanceof Element) {
+            $heading = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext());
+
+            if ($heading instanceof TemplateView) {
+                $view = $view->withArgument('heading', $heading->getArguments());
+            } else {
+                $view = $view->withArgument('heading', $heading);
+            }
         }
 
         /** @var DOMNodeList<Element> $children */

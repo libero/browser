@@ -6,8 +6,9 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use GuzzleHttp\Psr7\UriResolver;
-use Libero\ViewsBundle\Views\OptionalTemplateListener;
+use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use function GuzzleHttp\Psr7\mimetype_from_filename;
 use function GuzzleHttp\Psr7\uri_for;
 use function in_array;
@@ -16,7 +17,8 @@ use function sprintf;
 
 final class GraphicImageListener
 {
-    use OptionalTemplateListener;
+    use TemplateChoosingListener;
+    use ViewBuildingListener;
 
     protected function handle(Element $object, TemplateView $view) : TemplateView
     {

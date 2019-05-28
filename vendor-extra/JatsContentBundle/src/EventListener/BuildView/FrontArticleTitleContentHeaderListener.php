@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
 final class FrontArticleTitleContentHeaderListener
 {
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $converter;
 
@@ -31,15 +31,18 @@ final class FrontArticleTitleContentHeaderListener
             return $view;
         }
 
-        return $view->withArgument(
-            'contentTitle',
-            $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext())->getArguments()
-        );
+        $contentTitle = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext());
+
+        if (!$contentTitle instanceof TemplateView) {
+            return $view->withArgument('contentTitle', $contentTitle);
+        }
+
+        return $view->withArgument('contentTitle', $contentTitle->getArguments());
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig' === $template;
+        return '@LiberoPatterns/content-header.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

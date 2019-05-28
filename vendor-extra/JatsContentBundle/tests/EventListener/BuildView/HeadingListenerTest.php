@@ -86,7 +86,7 @@ XML
             ,
             [
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:article-title/text()[1]',
                         'template' => null,
@@ -94,7 +94,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:article-title/jats:italic',
                         'template' => null,
@@ -102,7 +102,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:article-title/text()[2]',
                         'template' => null,
@@ -121,7 +121,7 @@ XML
             ,
             [
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:title/text()[1]',
                         'template' => null,
@@ -129,7 +129,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:title/jats:italic',
                         'template' => null,
@@ -137,7 +137,7 @@ XML
                     ]
                 ),
                 new TemplateView(
-                    null,
+                    '',
                     [
                         'node' => '/jats:title/text()[2]',
                         'template' => null,

@@ -9,9 +9,9 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\LazyView;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_map;
 use function count;
@@ -19,7 +19,7 @@ use function count;
 final class ItemListListener
 {
     use ContextAwareTranslation;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $converter;
 
@@ -61,9 +61,9 @@ final class ItemListListener
         );
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/teaser-list.html.twig' === $template;
+        return '@LiberoPatterns/teaser-list.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool
