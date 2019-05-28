@@ -6,16 +6,16 @@ namespace Libero\LiberoContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
 final class TitleHeadingListener
 {
     use ConvertsChildren;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)
     {
@@ -27,9 +27,9 @@ final class TitleHeadingListener
         return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/heading.html.twig' === $template;
+        return '@LiberoPatterns/heading.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Libero\LiberoContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
 final class FrontContentHeaderListener
 {
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     private $converter;
 
@@ -39,9 +39,9 @@ final class FrontContentHeaderListener
         );
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig' === $template;
+        return '@LiberoPatterns/content-header.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

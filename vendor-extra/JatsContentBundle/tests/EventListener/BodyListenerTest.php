@@ -102,7 +102,7 @@ XML
         $this->assertEquals(
             array_map(
                 function (array $block) : TemplateView {
-                    return new TemplateView(null, $block);
+                    return new TemplateView('', $block);
                 },
                 $expectedBody
             ),

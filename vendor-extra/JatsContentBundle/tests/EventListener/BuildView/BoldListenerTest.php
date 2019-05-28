@@ -6,6 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\BoldListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -18,6 +19,29 @@ final class BoldListenerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider templateChoiceProvider
+     */
+    public function it_can_choose_a_template(string $xml, ?string $expected) : void
+    {
+        $listener = new BoldListener($this->createFailingConverter());
+
+        $element = $this->loadElement($xml);
+
+        $event = new ChooseTemplateEvent($element);
+        $listener->onChooseTemplate($event);
+
+        $this->assertSame($expected, $event->getTemplate());
+    }
+
+    public function templateChoiceProvider() : iterable
+    {
+        yield 'bold element' => ['<bold xmlns="http://jats.nlm.nih.gov">foo</bold>', '@LiberoPatterns/bold.html.twig'];
+        yield 'different namespace' => ['<bold xmlns="http://example.com">foo</bold>', null];
+        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov">foo</italic>', null];
+    }
+
+    /**
+     * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_bold_element(string $xml) : void
@@ -26,12 +50,12 @@ final class BoldListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/bold.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/bold.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -70,12 +94,12 @@ final class BoldListenerTest extends TestCase
 
         $element = $this->loadElement('<bold xmlns="http://jats.nlm.nih.gov">foo</bold>');
 
-        $event = new BuildViewEvent($element, new TemplateView(null, ['text' => 'bar']));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/bold.html.twig', ['text' => 'bar']));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/bold.html.twig', $view->getTemplate());
         $this->assertSame(['text' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -83,7 +107,7 @@ final class BoldListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_sets_the_template_and_text_argument() : void
+    public function it_sets_the_text_argument() : void
     {
         $listener = new BoldListener($this->createDumpingConverter());
 
@@ -97,7 +121,7 @@ XML
 
         $context = ['qux' => 'quux'];
 
-        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/bold.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -107,15 +131,15 @@ XML
             [
                 'text' => [
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:bold/text()[1]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:bold/jats:italic', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         ['node' => '/jats:bold/text()[2]', 'template' => null, 'context' => ['qux' => 'quux']]
                     ),
                 ],

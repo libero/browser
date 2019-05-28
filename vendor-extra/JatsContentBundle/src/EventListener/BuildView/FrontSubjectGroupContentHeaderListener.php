@@ -8,9 +8,9 @@ use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\ConvertsLists;
-use Libero\ViewsBundle\Views\SimplifiedViewConverterListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function array_map;
@@ -21,7 +21,7 @@ final class FrontSubjectGroupContentHeaderListener
 {
     use ContextAwareTranslation;
     use ConvertsLists;
-    use SimplifiedViewConverterListener;
+    use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter, TranslatorInterface $translator)
     {
@@ -60,9 +60,9 @@ final class FrontSubjectGroupContentHeaderListener
         );
     }
 
-    protected function canHandleTemplate(?string $template) : bool
+    protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig' === $template;
+        return '@LiberoPatterns/content-header.html.twig';
     }
 
     protected function canHandleElement(string $element) : bool

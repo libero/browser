@@ -19,7 +19,7 @@ trait ViewConvertingTestCase
         return new CallbackViewConverter(
             function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
                 return new TemplateView(
-                    null,
+                    '',
                     ['node' => $node->getNodePath(), 'template' => $template, 'context' => $context]
                 );
             }

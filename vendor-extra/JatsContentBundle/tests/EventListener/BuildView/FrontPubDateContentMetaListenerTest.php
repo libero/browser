@@ -194,7 +194,7 @@ XML
                         'content' => [
                             'text' => [
                                 new TemplateView(
-                                    null,
+                                    '',
                                     [
                                         'node' => '/jats:front/jats:article-meta/jats:pub-date[2]',
                                         'template' => '@LiberoPatterns/time.html.twig',

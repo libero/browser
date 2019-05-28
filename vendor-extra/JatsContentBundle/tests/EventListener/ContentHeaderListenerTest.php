@@ -96,7 +96,7 @@ XML
         );
         $listener->onCreatePagePart($event);
 
-        $this->assertEquals([new TemplateView(null, $expectedContentHeader)], $event->getContent());
+        $this->assertEquals([new TemplateView('', $expectedContentHeader)], $event->getContent());
     }
 
     public function pageProvider() : iterable

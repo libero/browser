@@ -7,15 +7,17 @@ namespace Libero\JatsContentBundle\EventListener\BuildView;
 use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\ViewsBundle\Views\ConvertsChildren;
-use Libero\ViewsBundle\Views\OptionalTemplateListener;
+use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
+use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
 
-final class FigGraphicFigureListener
+final class FigGraphicFigureImageListener
 {
     use ConvertsChildren;
-    use OptionalTemplateListener;
+    use TemplateChoosingListener;
+    use ViewBuildingListener;
 
     public function __construct(ViewConverter $converter)
     {

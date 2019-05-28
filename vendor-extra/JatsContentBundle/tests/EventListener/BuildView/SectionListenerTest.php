@@ -6,6 +6,7 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\SectionListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
+use Libero\ViewsBundle\Event\ChooseTemplateEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -18,6 +19,29 @@ final class SectionListenerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider templateChoiceProvider
+     */
+    public function it_can_choose_a_template(string $xml, ?string $expected) : void
+    {
+        $listener = new SectionListener($this->createFailingConverter());
+
+        $element = $this->loadElement($xml);
+
+        $event = new ChooseTemplateEvent($element);
+        $listener->onChooseTemplate($event);
+
+        $this->assertSame($expected, $event->getTemplate());
+    }
+
+    public function templateChoiceProvider() : iterable
+    {
+        yield 'sec element' => ['<sec xmlns="http://jats.nlm.nih.gov">foo</sec>', '@LiberoPatterns/section.html.twig'];
+        yield 'different namespace' => ['<sec xmlns="http://example.com">foo</sec>', null];
+        yield 'different element' => ['<p xmlns="http://jats.nlm.nih.gov">foo</p>', null];
+    }
+
+    /**
+     * @test
      * @dataProvider nodeProvider
      */
     public function it_does_nothing_if_it_is_not_a_jats_sec_element(string $xml) : void
@@ -26,12 +50,12 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/section.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -70,12 +94,15 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement('<sec xmlns="http://jats.nlm.nih.gov">foo</sec>');
 
-        $event = new BuildViewEvent($element, new TemplateView(null, ['content' => 'bar']));
+        $event = new BuildViewEvent(
+            $element,
+            new TemplateView('@LiberoPatterns/section.html.twig', ['content' => 'bar'])
+        );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertNull($view->getTemplate());
+        $this->assertSame('@LiberoPatterns/section.html.twig', $view->getTemplate());
         $this->assertSame(['content' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -90,7 +117,7 @@ final class SectionListenerTest extends TestCase
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView(null));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/section.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -113,7 +140,7 @@ XML
             [
                 'content' => [
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[1]',
                             'template' => null,
@@ -121,7 +148,7 @@ XML
                         ]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[2]',
                             'template' => null,
@@ -149,7 +176,7 @@ XML
                 ],
                 'content' => [
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[1]',
                             'template' => null,
@@ -157,7 +184,7 @@ XML
                         ]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[2]',
                             'template' => null,
@@ -187,7 +214,7 @@ XML
 
         $context = ['level' => 3];
 
-        $event = new BuildViewEvent($element, new TemplateView(null, [], $context));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/section.html.twig', [], $context));
         $listener->onBuildView($event);
         $view = $event->getView();
 
@@ -197,7 +224,7 @@ XML
             [
                 'content' => [
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[1]',
                             'template' => null,
@@ -205,7 +232,7 @@ XML
                         ]
                     ),
                     new TemplateView(
-                        null,
+                        '',
                         [
                             'node' => '/jats:sec/jats:p[2]',
                             'template' => null,
