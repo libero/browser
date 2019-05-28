@@ -465,7 +465,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/JatsContentBundle",
-                "reference": "6780a301af19065e6830d8b246b83a72550f2ea8"
+                "reference": "e78821a2498684bfd68cb47cbee096432f42f0fb"
             },
             "require": {
                 "ext-dom": "*",
@@ -505,7 +505,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoContentBundle",
-                "reference": "9f13b48431cc730a3516ddcb7123890c5f2f4c95"
+                "reference": "121b66408a866fa1c461eead3cb3b3a0171bd5bb"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.2",
@@ -542,7 +542,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/LiberoPageBundle",
-                "reference": "2cfff9d16f9065f381db01dcf08b76c56f9f2d33"
+                "reference": "180e65f43c793d6e1669f33d37db6a70b9a5a5d5"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.2",
@@ -614,7 +614,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor-extra/ViewsBundle",
-                "reference": "4bc2ea628893b34c5ae926178bf5bc91948c90c8"
+                "reference": "e3fe93590bf225277aead32f5efdde4069e80db4"
             },
             "require": {
                 "fluentdom/fluentdom": "^7.2",
