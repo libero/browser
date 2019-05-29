@@ -33,9 +33,9 @@ final class ItalicListener
         return '@LiberoPatterns/italic.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}italic' === $element;
+        return '{http://jats.nlm.nih.gov}italic' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

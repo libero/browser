@@ -69,9 +69,9 @@ final class SectionListener
         return '@LiberoPatterns/section.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}sec' === $element;
+        return '{http://jats.nlm.nih.gov}sec' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

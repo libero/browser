@@ -80,9 +80,9 @@ final class KeywordGroupTagListListener
         return '@LiberoPatterns/tag-list.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}kwd-group' === $element;
+        return '{http://jats.nlm.nih.gov}kwd-group' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

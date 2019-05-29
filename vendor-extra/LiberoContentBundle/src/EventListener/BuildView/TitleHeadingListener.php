@@ -32,9 +32,9 @@ final class TitleHeadingListener
         return '@LiberoPatterns/heading.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://libero.pub}title' === $element;
+        return '{http://libero.pub}title' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool
