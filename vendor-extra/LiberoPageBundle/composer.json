@@ -13,7 +13,7 @@
     },
     "require": {
         "php": "^7.2",
-        "fluentdom/fluentdom": "^7.0",
+        "fluentdom/fluentdom": "^7.2",
         "guzzlehttp/promises": "^1.0",
         "punic/punic": "^3.3",
         "symfony/contracts": "^1.0",

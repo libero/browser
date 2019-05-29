@@ -44,9 +44,9 @@ final class FrontTitleTeaserListener
         return '@LiberoPatterns/teaser.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://libero.pub}front' === $element;
+        return '{http://libero.pub}front' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

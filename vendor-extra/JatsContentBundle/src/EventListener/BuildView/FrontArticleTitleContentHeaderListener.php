@@ -45,9 +45,9 @@ final class FrontArticleTitleContentHeaderListener
         return '@LiberoPatterns/content-header.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}front' === $element;
+        return '{http://jats.nlm.nih.gov}front' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

@@ -56,8 +56,8 @@ final class PubDatePartsTimeListener
         return '@LiberoPatterns/time.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}pub-date' === $element;
+        return '{http://jats.nlm.nih.gov}pub-date' === $element->clarkNotation();
     }
 }

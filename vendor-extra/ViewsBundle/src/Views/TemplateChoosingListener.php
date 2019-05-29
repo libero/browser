@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Libero\ViewsBundle\Views;
 
 use Libero\ViewsBundle\Event\ChooseTemplateEvent;
-use function sprintf;
 
 trait TemplateChoosingListener
 {
@@ -15,7 +14,7 @@ trait TemplateChoosingListener
     {
         $object = $event->getObject();
 
-        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
+        if (!$this->canHandleElement($object)) {
             return;
         }
 
