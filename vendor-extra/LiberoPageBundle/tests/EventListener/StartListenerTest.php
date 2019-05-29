@@ -49,9 +49,9 @@ final class StartListenerTest extends TestCase
     {
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(
-            CreatePagePartEvent::name('full'),
+            CreatePagePartEvent::name('start'),
             function (CreatePagePartEvent $event) : void {
-                $this->assertSame(['con' => 'text', 'area' => 'start'], $event->getContext());
+                $this->assertSame(['con' => 'text', 'area' => 'main'], $event->getContext());
 
                 $event->addContent(new TemplateView('template'));
                 $event->setContext('foo', 'bar');
@@ -75,7 +75,7 @@ final class StartListenerTest extends TestCase
                     ],
                     [
                         'con' => 'text',
-                        'area' => 'start',
+                        'area' => 'main',
                         'foo' => 'bar',
                     ]
                 ),

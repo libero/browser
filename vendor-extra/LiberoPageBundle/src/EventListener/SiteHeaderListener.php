@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
+use const Libero\LiberoPatternsBundle\MAIN_GRID_FULL;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -24,7 +25,7 @@ final class SiteHeaderListener
   public function onCreatePagePart(CreatePagePartEvent $event) : void
   {
 
-    $context = ['area' => null] + $event->getContext();
+    $context = ['area' => MAIN_GRID_FULL] + $event->getContext();
 
     $event->addContent(
       new TemplateView(

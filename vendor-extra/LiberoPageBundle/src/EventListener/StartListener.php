@@ -6,6 +6,7 @@ namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
+use const Libero\LiberoPatternsBundle\MAIN_GRID_MAIN;
 use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function array_merge;
@@ -27,7 +28,7 @@ final class StartListener
           '@LiberoPatterns/content-grid.html.twig',
             $event->getRequest(),
             $event->getDocuments(),
-            array_merge($event->getContext(), ['area' => PAGE_GRID_START])
+            array_merge($event->getContext(), ['area' => MAIN_GRID_MAIN])
         );
 
         $this->dispatcher->dispatch($part::name('start'), $part);
