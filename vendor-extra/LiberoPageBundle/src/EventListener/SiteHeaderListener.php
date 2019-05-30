@@ -33,6 +33,9 @@ final class SiteHeaderListener
                 [
                     'logo' => [
                         'href' => $this->urlGenerator->generate('libero.page.homepage'),
+                        'image' => [
+                            'alt' => $this->translate('libero.page.site_name', $context),
+                        ],
                     ],
                 ],
                 $context
