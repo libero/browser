@@ -36,11 +36,7 @@ final class LiberoPageExtension extends Extension
                 $page['name'] = $name;
                 $page['type'] = $type;
                 $page['controller'] = PageController::class;
-                if ($name === $type) {
-                    $page['route'] = "libero.page.{$type}";
-                } else {
-                    $page['route'] = "libero.page.{$type}.{$name}";
-                }
+                $page['route'] = $name === $type ? "libero.page.{$type}" : "libero.page.{$type}.{$name}";
                 $pages[] = $page;
             }
         }

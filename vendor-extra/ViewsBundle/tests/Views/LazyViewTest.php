@@ -22,7 +22,7 @@ final class LazyViewTest extends TestCase
     public function it_is_a_view() : void
     {
         $view = new LazyView(
-            function () : TemplateView {
+            static function () : TemplateView {
                 throw new LogicException();
             }
         );
@@ -36,7 +36,7 @@ final class LazyViewTest extends TestCase
     public function it_has_context() : void
     {
         $view = new LazyView(
-            function () : TemplateView {
+            static function () : TemplateView {
                 throw new LogicException();
             },
             ['foo' => 'bar']
@@ -56,7 +56,7 @@ final class LazyViewTest extends TestCase
     public function it_is_array_accessible() : void
     {
         $view = new LazyView(
-            function () : TemplateView {
+            static function () : TemplateView {
                 return new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
             }
         );
@@ -78,7 +78,7 @@ final class LazyViewTest extends TestCase
     public function it_is_immutable(callable $action) : void
     {
         $view = new LazyView(
-            function () : TemplateView {
+            static function () : TemplateView {
                 throw new LogicException();
             }
         );
@@ -91,12 +91,12 @@ final class LazyViewTest extends TestCase
     public function immutableProvider() : iterable
     {
         yield 'set' => [
-            function (LazyView $view) : void {
+            static function (LazyView $view) : void {
                 $view['foo'] = 'bar';
             },
         ];
         yield 'unset' => [
-            function (LazyView $view) : void {
+            static function (LazyView $view) : void {
                 unset($view['foo']);
             },
         ];
@@ -108,7 +108,7 @@ final class LazyViewTest extends TestCase
     public function it_is_traversable() : void
     {
         $view = new LazyView(
-            function () : TemplateView {
+            static function () : TemplateView {
                 return new TemplateView('template', ['foo' => 'bar', 'baz' => ['qux']]);
             }
         );

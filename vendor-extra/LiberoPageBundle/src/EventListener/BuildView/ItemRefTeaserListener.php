@@ -64,7 +64,7 @@ final class ItemRefTeaserListener
             );
 
         return new LazyView(
-            function () use ($itemTeaser) : TemplateView {
+            static function () use ($itemTeaser) : TemplateView {
                 return $itemTeaser->wait();
             },
             $view->getContext()

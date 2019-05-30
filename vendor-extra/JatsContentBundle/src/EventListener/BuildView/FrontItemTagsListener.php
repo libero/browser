@@ -40,7 +40,7 @@ final class FrontItemTagsListener
         $groups = array_values(
             array_filter(
                 array_map(
-                    function (View $tagList) : array {
+                    static function (View $tagList) : array {
                         return $tagList instanceof TemplateView ? $tagList->getArguments() : [];
                     },
                     $this->convertList($keywordGroups, '@LiberoPatterns/tag-list.html.twig', $view->getContext())
