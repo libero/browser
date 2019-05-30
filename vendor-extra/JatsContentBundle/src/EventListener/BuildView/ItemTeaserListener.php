@@ -9,7 +9,6 @@ use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewConverter;
-use function sprintf;
 
 final class ItemTeaserListener
 {
@@ -29,7 +28,7 @@ final class ItemTeaserListener
             return;
         }
 
-        if (!$this->canHandleElement(sprintf('{%s}%s', $object->namespaceURI, $object->localName))) {
+        if (!$this->canHandleElement($object)) {
             return;
         }
 
@@ -64,8 +63,8 @@ final class ItemTeaserListener
         return '@LiberoPatterns/teaser.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://libero.pub}item' === $element;
+        return '{http://libero.pub}item' === $element->clarkNotation();
     }
 }

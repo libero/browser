@@ -10,7 +10,7 @@
     },
     "require": {
         "php": "^7.2",
-        "fluentdom/fluentdom": "^7.0",
+        "fluentdom/fluentdom": "^7.2",
         "libero/page-bundle": "^1.0@dev",
         "libero/views-bundle": "^1.0@dev",
         "symfony/config": "^4.1",

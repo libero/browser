@@ -37,9 +37,13 @@ final class HeadingListener
         return '@LiberoPatterns/heading.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return string_is($element, '{http://jats.nlm.nih.gov}article-title', '{http://jats.nlm.nih.gov}title');
+        return string_is(
+            $element->clarkNotation(),
+            '{http://jats.nlm.nih.gov}article-title',
+            '{http://jats.nlm.nih.gov}title'
+        );
     }
 
     protected function canHandleArguments(array $arguments) : bool

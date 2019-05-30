@@ -56,9 +56,9 @@ final class GraphicImageListener
         return '@LiberoPatterns/image.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}graphic' === $element;
+        return '{http://jats.nlm.nih.gov}graphic' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

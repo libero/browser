@@ -33,9 +33,9 @@ final class BoldListener
         return '@LiberoPatterns/bold.html.twig';
     }
 
-    protected function canHandleElement(string $element) : bool
+    protected function canHandleElement(Element $element) : bool
     {
-        return '{http://libero.pub}bold' === $element;
+        return '{http://libero.pub}bold' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool
