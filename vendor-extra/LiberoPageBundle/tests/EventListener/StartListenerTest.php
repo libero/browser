@@ -41,9 +41,8 @@ final class StartListenerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider gridProvider
      */
-    public function it_adds_content_to_the_start_area(?string $type, string $grid) : void
+    public function it_adds_content_to_the_start_area() : void
     {
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(
@@ -58,14 +57,14 @@ final class StartListenerTest extends TestCase
 
         $startListener = new StartListener($dispatcher);
 
-        $event = new CreatePageEvent($this->createRequest($type), [], ['con' => 'text']);
+        $event = new CreatePageEvent($this->createRequest(null), [], ['con' => 'text']);
 
         $startListener->onCreatePage($event);
 
         $this->assertEquals(
             [
                 'start' => new TemplateView(
-                    $grid,
+                    '@LiberoPatterns/content-grid.html.twig',
                     [
                         'content' => [
                             new TemplateView('template'),
@@ -82,13 +81,5 @@ final class StartListenerTest extends TestCase
         );
         $this->assertSame(['con' => 'text'], $event->getContext());
         $this->assertNull($event->getTitle());
-    }
-
-    public function gridProvider() : iterable
-    {
-        yield 'content page' => ['content', '@LiberoPatterns/content-grid.html.twig'];
-        yield 'homepage' => ['homepage', '@LiberoPatterns/content-grid.html.twig'];
-        yield 'other page' => ['something-else', '@LiberoPatterns/content-grid.html.twig'];
-        yield 'unknown page' => [null, '@LiberoPatterns/content-grid.html.twig'];
     }
 }
