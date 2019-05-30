@@ -15,6 +15,8 @@ use const Libero\LiberoPatternsBundle\PAGE_GRID_MAIN;
 
 final class MainListener
 {
+    private const PAGE_GRID_PART = PAGE_GRID_MAIN;
+
     private $dispatcher;
 
     public function __construct(EventDispatcherInterface $dispatcher)
@@ -40,14 +42,14 @@ final class MainListener
             array_merge($event->getContext(), ['area' => MAIN_GRID_MAIN])
         );
 
-        $this->dispatcher->dispatch($part::name('main'), $part);
+        $this->dispatcher->dispatch($part::name(self::PAGE_GRID_PART), $part);
 
         if (0 === count($part->getContent())) {
             return;
         }
 
         $event->setContent(
-            PAGE_GRID_MAIN,
+            self::PAGE_GRID_PART,
             new TemplateView($part->getTemplate(), ['content' => $part->getContent()], $part->getContext())
         );
     }
