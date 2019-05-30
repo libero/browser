@@ -11,12 +11,10 @@ use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use tests\Libero\LiberoPageBundle\PageTestCase;
-use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class StartListenerTest extends TestCase
 {
     use PageTestCase;
-    use XmlTestCase;
 
     /**
      * @test
