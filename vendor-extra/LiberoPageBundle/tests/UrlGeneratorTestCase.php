@@ -14,7 +14,7 @@ trait UrlGeneratorTestCase
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
 
         $urlGenerator->method('generate')->willReturnCallback(
-            function (string $name, array $parameters) : string {
+            static function (string $name, array $parameters) : string {
                 return "{$name}/".json_encode($parameters);
             }
         );

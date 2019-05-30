@@ -113,12 +113,12 @@ final class TemplateViewTest extends TestCase
     public function immutableProvider() : iterable
     {
         yield 'set' => [
-            function (TemplateView $view) : void {
+            static function (TemplateView $view) : void {
                 $view['foo'] = 'bar';
             },
         ];
         yield 'unset' => [
-            function (TemplateView $view) : void {
+            static function (TemplateView $view) : void {
                 unset($view['foo']);
             },
         ];

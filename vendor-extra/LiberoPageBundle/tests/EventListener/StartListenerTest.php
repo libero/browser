@@ -24,7 +24,7 @@ final class StartListenerTest extends TestCase
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(
             CreatePagePartEvent::name('not-start'),
-            function (CreatePagePartEvent $event) : void {
+            static function (CreatePagePartEvent $event) : void {
                 $event->addContent(new TemplateView('template'));
             }
         );

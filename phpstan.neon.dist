@@ -2,7 +2,8 @@ parameters:
     ignoreErrors:
         - '~^Call to an undefined method FluentDOM\\DOM\\Node\\.+?::getNodePath\(\)\.$~'
         - '~^Cannot call method (end|([a-z]+)Node)\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$~'
-        - '~^Service "csa_guzzle\.mock\.storage" is not registered in the container\.$~'
+        - message: '~^Service ".+?" is (not registered in the container|private)\.$~'
+          path: %currentWorkingDirectory%/tests/
     level: max
     paths:
         - bin/console
@@ -12,7 +13,7 @@ parameters:
         - tests
         - vendor-extra
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/dev/srcDevDebugProjectContainer.xml
+        container_xml_path: %currentWorkingDirectory%/var/cache/dev/srcDevDebugProjectContainer.xml
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

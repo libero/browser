@@ -34,7 +34,7 @@ final class PageControllerTest extends TestCase
                 $document = $this->loadDocument('<foo><bar>content</bar></foo>');
                 $event->addDocument('foo', promise_for($document));
             },
-            CreatePageEvent::NAME => function (CreatePageEvent $event) : void {
+            CreatePageEvent::NAME => static function (CreatePageEvent $event) : void {
                 $event->setContext('context', $event->getContext());
                 $event->setTitle('title');
                 $event->setContent(

@@ -66,7 +66,7 @@ final class KeywordGroupTagListListener
                 'list',
                 [
                     'items' => array_map(
-                        function (TemplateView $link) : array {
+                        static function (TemplateView $link) : array {
                             return ['content' => $link->getArguments()];
                         },
                         $this->convertList($keywords, '@LiberoPatterns/link.html.twig', $view->getContext())

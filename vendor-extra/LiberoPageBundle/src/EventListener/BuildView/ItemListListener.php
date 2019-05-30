@@ -46,10 +46,10 @@ final class ItemListListener
         }
 
         return new LazyView(
-            function () use ($view, $items) {
+            static function () use ($view, $items) {
                 $list = $view->getArgument('list') ?? [];
                 $list['items'] = array_map(
-                    function (ArrayAccess $view) {
+                    static function (ArrayAccess $view) {
                         return ['content' => $view['arguments']];
                     },
                     $items

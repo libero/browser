@@ -134,7 +134,7 @@ XML
         $listener = new FrontItemTagsListener(
             $this->createFilteringConverter(
                 $this->createDumpingConverter(),
-                function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
+                static function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
                     return $node instanceof Element && $node->hasAttribute('kwd-group-type');
                 }
             )
@@ -194,7 +194,7 @@ XML
         $listener = new FrontItemTagsListener(
             $this->createFilteringConverter(
                 $this->createDumpingConverter(),
-                function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
+                static function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : bool {
                     return false;
                 }
             )

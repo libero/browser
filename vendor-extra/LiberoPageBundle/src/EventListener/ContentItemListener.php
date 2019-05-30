@@ -38,7 +38,7 @@ final class ContentItemListener
                 ]
             )
                 ->then(
-                    function (ResponseInterface $response) : Document {
+                    static function (ResponseInterface $response) : Document {
                         return FluentDOM::load((string) $response->getBody());
                     }
                 )

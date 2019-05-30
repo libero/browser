@@ -26,7 +26,7 @@ final class MainListenerTest extends TestCase
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(
             CreatePagePartEvent::name('not-main'),
-            function (CreatePagePartEvent $event) : void {
+            static function (CreatePagePartEvent $event) : void {
                 $event->addContent(new TemplateView('template'));
             }
         );
