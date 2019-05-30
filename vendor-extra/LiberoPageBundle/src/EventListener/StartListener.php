@@ -6,11 +6,11 @@ namespace Libero\LiberoPageBundle\EventListener;
 
 use Libero\LiberoPageBundle\Event\CreatePageEvent;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
-use const Libero\LiberoPatternsBundle\MAIN_GRID_MAIN;
 use Libero\ViewsBundle\Views\TemplateView;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function array_merge;
 use function count;
+use const Libero\LiberoPatternsBundle\MAIN_GRID_MAIN;
 use const Libero\LiberoPatternsBundle\PAGE_GRID_START;
 
 final class StartListener
@@ -25,7 +25,7 @@ final class StartListener
     public function onCreatePage(CreatePageEvent $event) : void
     {
         $part = new CreatePagePartEvent(
-          '@LiberoPatterns/content-grid.html.twig',
+            '@LiberoPatterns/content-grid.html.twig',
             $event->getRequest(),
             $event->getDocuments(),
             array_merge($event->getContext(), ['area' => MAIN_GRID_MAIN])
@@ -38,7 +38,7 @@ final class StartListener
         }
 
         $event->setContent(
-          PAGE_GRID_START,
+            PAGE_GRID_START,
             new TemplateView($part->getTemplate(), ['content' => $part->getContent()], $part->getContext())
         );
     }
