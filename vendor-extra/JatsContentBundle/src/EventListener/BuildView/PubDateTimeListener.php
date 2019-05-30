@@ -22,7 +22,7 @@ final class PubDateTimeListener
             return $view;
         }
 
-        $formatter = IntlDateFormatter::create(
+        $formatter = new IntlDateFormatter(
             $view->getContext('lang'),
             IntlDateFormatter::MEDIUM,
             IntlDateFormatter::NONE

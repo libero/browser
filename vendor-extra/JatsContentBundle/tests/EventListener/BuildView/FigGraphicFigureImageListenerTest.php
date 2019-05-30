@@ -118,7 +118,7 @@ final class FigGraphicFigureImageListenerTest extends TestCase
         $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createFailingConverter(),
-                function () : bool {
+                static function () : bool {
                     return false;
                 }
             )
@@ -151,7 +151,7 @@ XML
         $listener = new FigGraphicFigureImageListener(
             $this->createFilteringConverter(
                 $this->createDumpingConverter(),
-                function (NonDocumentTypeChildNode $node, ?string $template, array $context) : bool {
+                static function (NonDocumentTypeChildNode $node, ?string $template, array $context) : bool {
                     return $node->previousElementSibling instanceof DOMElement;
                 }
             )

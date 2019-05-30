@@ -17,7 +17,7 @@ trait ViewConvertingTestCase
     final protected function createDumpingConverter() : ViewConverter
     {
         return new CallbackViewConverter(
-            function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
+            static function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
                 return new TemplateView(
                     '',
                     ['node' => $node->getNodePath(), 'template' => $template, 'context' => $context]
@@ -29,7 +29,7 @@ trait ViewConvertingTestCase
     final protected function createFailingConverter() : ViewConverter
     {
         return new CallbackViewConverter(
-            function () : View {
+            static function () : View {
                 throw new LogicException('Not expected to be used');
             }
         );
@@ -38,7 +38,7 @@ trait ViewConvertingTestCase
     final protected function createFilteringConverter(ViewConverter $converter, callable $filter) : ViewConverter
     {
         return new CallbackViewConverter(
-            function (
+            static function (
                 NonDocumentTypeChildNode $node,
                 ?string $template = null,
                 array $context = []

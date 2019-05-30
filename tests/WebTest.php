@@ -15,7 +15,7 @@ final class WebTest extends WebTestCase
      */
     public function it_has_a_homepage() : void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         self::mockApiResponse(
             new Request(
@@ -75,7 +75,7 @@ XML
      */
     public function it_shows_scholarly_articles(string $id) : void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         self::mockApiResponse(
             new Request(
@@ -115,7 +115,7 @@ XML
      */
     public function it_shows_blog_articles(string $id) : void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         self::mockApiResponse(
             new Request(

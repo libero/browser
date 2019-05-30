@@ -21,7 +21,7 @@ trait TwigTestCase
 
         $twig->method('render')
             ->willReturnCallback(
-                function (...$arguments) : string {
+                static function (...$arguments) : string {
                     return '<html><body>'.json_encode(dump($arguments)).'</body></html>';
                 }
             );

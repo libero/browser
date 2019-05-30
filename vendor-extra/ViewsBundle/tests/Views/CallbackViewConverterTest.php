@@ -18,7 +18,7 @@ final class CallbackViewConverterTest extends TestCase
     public function it_is_a_view_converter() : void
     {
         $converter = new CallbackViewConverter(
-            function () : TemplateView {
+            static function () : TemplateView {
                 return new TemplateView('template');
             }
         );
@@ -32,7 +32,7 @@ final class CallbackViewConverterTest extends TestCase
     public function it_returns_the_results_of_a_callback() : void
     {
         $converter = new CallbackViewConverter(
-            function (Element $object, ?string $template, array $context = []) : TemplateView {
+            static function (Element $object, ?string $template, array $context = []) : TemplateView {
                 return new TemplateView($template ?? '', $context + ['element' => $object]);
             }
         );

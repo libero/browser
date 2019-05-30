@@ -40,11 +40,10 @@ final class SectionListener
         if ($title instanceof Element) {
             $heading = $this->converter->convert($title, '@LiberoPatterns/heading.html.twig', $view->getContext());
 
-            if ($heading instanceof TemplateView) {
-                $view = $view->withArgument('heading', $heading->getArguments());
-            } else {
-                $view = $view->withArgument('heading', $heading);
-            }
+            $view = $view->withArgument(
+                'heading',
+                $heading instanceof TemplateView ? $heading->getArguments() : $heading
+            );
         }
 
         /** @var DOMNodeList<Element> $children */
