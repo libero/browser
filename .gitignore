@@ -20,6 +20,3 @@
 /translations/
 !/translations/.gitkeep
 ###< symfony/translation ###
-
-# Example asset used only directly in the pattern library
-/vendor-extra/LiberoPatternsBundle/src/Resources/public/images/custom-logo.svg
