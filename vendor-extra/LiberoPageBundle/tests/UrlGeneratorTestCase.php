@@ -6,6 +6,7 @@ namespace tests\Libero\LiberoPageBundle;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use function json_encode;
+use const JSON_FORCE_OBJECT;
 
 trait UrlGeneratorTestCase
 {
@@ -15,7 +16,7 @@ trait UrlGeneratorTestCase
 
         $urlGenerator->method('generate')->willReturnCallback(
             static function (string $name, array $parameters) : string {
-                return "{$name}/".json_encode($parameters);
+                return "{$name}/".json_encode($parameters, JSON_FORCE_OBJECT);
             }
         );
 
