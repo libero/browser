@@ -11,11 +11,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use function array_merge;
 use function count;
 use const Libero\LiberoPatternsBundle\MAIN_GRID_MAIN;
-use const Libero\LiberoPatternsBundle\PAGE_GRID_MAIN;
+use const Libero\LiberoPatternsBundle\PAGE_GRID_START;
 
-final class MainListener
+final class StartListener
 {
-    private const PAGE_GRID_PART = PAGE_GRID_MAIN;
+    private const PAGE_GRID_PART = PAGE_GRID_START;
 
     private $dispatcher;
 
@@ -26,17 +26,8 @@ final class MainListener
 
     public function onCreatePage(CreatePageEvent $event) : void
     {
-        switch ($event->getRequest()->attributes->get('libero_page')['type'] ?? null) {
-            case 'homepage':
-                $grid = '@LiberoPatterns/listing-grid.html.twig';
-                break;
-            default:
-                $grid = '@LiberoPatterns/content-grid.html.twig';
-                break;
-        }
-
         $part = new CreatePagePartEvent(
-            $grid,
+            '@LiberoPatterns/content-grid.html.twig',
             $event->getRequest(),
             $event->getDocuments(),
             array_merge($event->getContext(), ['area' => MAIN_GRID_MAIN])

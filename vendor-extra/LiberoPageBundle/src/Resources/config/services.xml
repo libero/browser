@@ -15,6 +15,12 @@
             <tag name="controller.service_arguments"/>
         </service>
 
+        <service id="Libero\LiberoPageBundle\EventListener\SiteHeaderListener">
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_listener" event="libero.page.create.start" method="onCreatePagePart" priority="60"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener">
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
@@ -75,6 +81,11 @@
         </service>
 
         <service id="Libero\LiberoPageBundle\EventListener\MainListener">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\StartListener">
             <argument type="service" id="event_dispatcher"/>
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
         </service>
