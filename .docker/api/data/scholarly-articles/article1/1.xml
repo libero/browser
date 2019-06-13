@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<item xmlns="http://libero.pub" xmlns:jats="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
+<item xmlns:jats="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://libero.pub">
 
     <meta>
 
@@ -53,6 +53,433 @@
                     <jats:month>09</jats:month>
                     <jats:day>30</jats:day>
                 </jats:pub-date>
+
+                <jats:contrib-group>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Berger</jats:surname>
+                            <jats:given-names>Lee R</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Hawks</jats:surname>
+                            <jats:given-names>John</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Wisconsin-Madison, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>de Ruiter</jats:surname>
+                            <jats:given-names>Darryl J</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Texas A&amp;M University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Churchill</jats:surname>
+                            <jats:given-names>Steven E</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Duke University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Schmid</jats:surname>
+                            <jats:given-names>Peter</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Zurich, Switzerland</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Delezene</jats:surname>
+                            <jats:given-names>Lucas K</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Arkansas, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Kivell</jats:surname>
+                            <jats:given-names>Tracy L</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Kent, United Kingdom</jats:aff>
+                        <jats:aff>Max Planck Institute for Evolutionary Anthropology, Germany</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Garvin</jats:surname>
+                            <jats:given-names>Heather M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Mercyhurst University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Williams</jats:surname>
+                            <jats:given-names>Scott A</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>New York University, United States</jats:aff>
+                        <jats:aff>New York Consortium in Evolutionary Primatology, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>DeSilva</jats:surname>
+                            <jats:given-names>Jeremy M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Dartmouth College, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Skinner</jats:surname>
+                            <jats:given-names>Matthew M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Kent, United Kingdom</jats:aff>
+                        <jats:aff>Max Planck Institute for Evolutionary Anthropology, Germany</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Musiba</jats:surname>
+                            <jats:given-names>Charles M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Colorado Denver, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Cameron</jats:surname>
+                            <jats:given-names>Noel</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Loughborough University, United Kingdom</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Holliday</jats:surname>
+                            <jats:given-names>Trenton W</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Tulane University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Harcourt-Smith</jats:surname>
+                            <jats:given-names>William</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Lehman College, United States</jats:aff>
+                        <jats:aff>American Museum of Natural History, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Ackermann</jats:surname>
+                            <jats:given-names>Rebecca R</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of Cape Town, South Africa</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Bastir</jats:surname>
+                            <jats:given-names>Markus</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Museo Nacional de Ciencias Naturales, Spain</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Bogin</jats:surname>
+                            <jats:given-names>Barry</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Loughborough University, United Kingdom</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Bolter</jats:surname>
+                            <jats:given-names>Debra</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Modesto Junior College, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Brophy</jats:surname>
+                            <jats:given-names>Juliet</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Louisiana State University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Cofran</jats:surname>
+                            <jats:given-names>Zachary D</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Nazarbayev University, Kazakhstan</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Congdon</jats:surname>
+                            <jats:given-names>Kimberly A</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Missouri, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Deane</jats:surname>
+                            <jats:given-names>Andrew S</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Kentucky College of Medicine, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Dembo</jats:surname>
+                            <jats:given-names>Mana</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Simon Fraser University, Canada</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Drapeau</jats:surname>
+                            <jats:given-names>Michelle</jats:given-names>
+                        </jats:name>
+                        <jats:aff>Université de Montréal, Canada</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Elliott</jats:surname>
+                            <jats:given-names>Marina C</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Simon Fraser University, Canada</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Feuerriegel</jats:surname>
+                            <jats:given-names>Elen M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Australian National University, Australia</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Garcia-Martinez</jats:surname>
+                            <jats:given-names>Daniel</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Museo Nacional de Ciencias Naturales, Spain</jats:aff>
+                        <jats:aff>Universidad Autònoma de Madrid, Spain</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Green</jats:surname>
+                            <jats:given-names>David J</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Midwestern University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Gurtov</jats:surname>
+                            <jats:given-names>Alia</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Wisconsin-Madison, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Irish</jats:surname>
+                            <jats:given-names>Joel D</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Liverpool John Moores University, United Kingdom</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Kruger</jats:surname>
+                            <jats:given-names>Ashley</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Laird</jats:surname>
+                            <jats:given-names>Myra F</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>New York University, United States</jats:aff>
+                        <jats:aff>New York Consortium in Evolutionary Primatology, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Marchi</jats:surname>
+                            <jats:given-names>Damiano</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Pisa, Italy</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Meyer</jats:surname>
+                            <jats:given-names>Marc R</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Chaffey College, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Nalla</jats:surname>
+                            <jats:given-names>Shahed</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Johannesburg, South Africa</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Negash</jats:surname>
+                            <jats:given-names>Enquye W</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>George Washington University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Orr</jats:surname>
+                            <jats:given-names>Caley M</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Colorado School of Medicine, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Radovcic</jats:surname>
+                            <jats:given-names>Davorka</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Croatian Natural History Museum, Croatia</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Schroeder</jats:surname>
+                            <jats:given-names>Lauren</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Cape Town, South Africa</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Scott</jats:surname>
+                            <jats:given-names>Jill E</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Iowa, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Throckmorton</jats:surname>
+                            <jats:given-names>Zachary</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Lincoln Memorial University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Tocheri</jats:surname>
+                            <jats:given-names>Matthew W</jats:given-names>
+                        </jats:name>
+                        <jats:aff>Smithsonian Institution, United States</jats:aff>
+                        <jats:aff>Lakehead University, Canada</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>VanSickle</jats:surname>
+                            <jats:given-names>Caroline</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>University of Wisconsin-Madison, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Walker</jats:surname>
+                            <jats:given-names>Christopher S</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Duke University, United States</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Wei</jats:surname>
+                            <jats:given-names>Pianpian</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                        <jats:aff>Institute of Vertebrate Paleontology and Paleoanthropology, China</jats:aff>
+                    </jats:contrib>
+
+                    <jats:contrib contrib-type="author">
+                        <jats:name>
+                            <jats:surname>Zipfel</jats:surname>
+                            <jats:given-names>Bernhard</jats:given-names>
+                        </jats:name>
+                        <jats:aff>University of the Witwatersrand, South Africa</jats:aff>
+                    </jats:contrib>
+                </jats:contrib-group>
 
             </jats:article-meta>
 

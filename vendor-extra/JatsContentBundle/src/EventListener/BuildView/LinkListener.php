@@ -35,7 +35,12 @@ final class LinkListener
 
     protected function canHandleElement(Element $element) : bool
     {
-        return string_is($element->clarkNotation(), '{http://jats.nlm.nih.gov}kwd', '{http://jats.nlm.nih.gov}subject');
+        return string_is(
+            $element->clarkNotation(),
+            '{http://jats.nlm.nih.gov}aff',
+            '{http://jats.nlm.nih.gov}kwd',
+            '{http://jats.nlm.nih.gov}subject'
+        );
     }
 
     protected function canHandleArguments(array $arguments) : bool

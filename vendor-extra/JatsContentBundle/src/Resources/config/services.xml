@@ -52,6 +52,10 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ContribLinkListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\LinkListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
@@ -81,6 +85,16 @@
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContribAuthorContentHeaderListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContribAuthorAffContentHeaderListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
