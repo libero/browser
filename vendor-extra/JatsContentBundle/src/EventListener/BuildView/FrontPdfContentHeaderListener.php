@@ -10,6 +10,7 @@ use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use function GuzzleHttp\Psr7\uri_for;
+use function in_array;
 use function Libero\ViewsBundle\array_has_key;
 
 final class FrontPdfContentHeaderListener
@@ -29,6 +30,10 @@ final class FrontPdfContentHeaderListener
             uri_for($pdf->baseURI),
             uri_for($pdf->getAttributeNS('http://www.w3.org/1999/xlink', 'href'))
         );
+
+        if (!in_array($uri->getScheme(), ['http', 'https'], true)) {
+            return $view;
+        }
 
         return $view->withArgument('downloadIconLink', ['attributes' => ['href' => (string) $uri]]);
     }
