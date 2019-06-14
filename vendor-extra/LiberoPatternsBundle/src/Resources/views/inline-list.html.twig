@@ -6,6 +6,10 @@
   {%- set attributes = attributes|merge({class: attributes.class|merge(['inline-list--small']) }) -%}
 {%- endif -%}
 
+{%- if alternativeSeparators|default(false) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['inline-list--alternative-separators']) }) -%}
+{%- endif -%}
+
 <ol {{- html.attributes(attributes) }}>
 
   {%- for item in items -%}

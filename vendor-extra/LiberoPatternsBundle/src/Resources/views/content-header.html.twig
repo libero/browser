@@ -51,7 +51,7 @@
       {%- block authors -%}
 
         {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false} -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false, alternativeSeparators: false} -%}
         {%- endif -%}
 
       {%- endblock authors -%}
@@ -61,7 +61,7 @@
       {%- block affiliations -%}
 
         {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true} -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true, alternativeSeparators: true} -%}
         {%- endif -%}
 
       {%- endblock affiliations -%}
