@@ -47,6 +47,19 @@
 
     {%- endwith -%}
 
+    {%- if downloadIconLink is defined -%}
+      {%- with downloadIconLink|merge({html: html}) only -%}
+        {%- set attributes = attributes|default({})|merge({href: attributes.href, class: attributes.class|default([])|merge(['content-header__download_link']) }) -%}
+        <a {{ html.attributes(attributes) }}>
+          <picture>
+            <source srcset="{{asset('images/download-full.svg', 'libero_patterns')}}" type="image/svg+xml" media="(min-width: 45.625em)">
+            <img src="{{asset('images/download.svg', 'libero_patterns')}}" class="content-header__download_icon" alt="">
+          </picture>
+        </a>
+        {%- endwith -%}
+    {%- endif -%}
+
+
     {%- with meta|default({}) only -%}
       {%- block meta -%}
 
