@@ -16,6 +16,10 @@ trait ConvertsChildren
 
     final protected function convertChildren(Element $object, array $context = []) : array
     {
+        if ($context['strip_inline'] ?? false) {
+            return [new StringView((string) $object, $context)];
+        }
+
         return array_map(
             function (NonDocumentTypeChildNode $child) use ($context) : View {
                 return $this->converter->convert($child, null, $context);

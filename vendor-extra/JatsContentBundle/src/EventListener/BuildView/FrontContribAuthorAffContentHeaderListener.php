@@ -36,16 +36,18 @@ final class FrontContribAuthorAffContentHeaderListener
             return $view;
         }
 
+        $context = ['strip_inline' => true] + $view->getContext();
+
         $affiliations = [
             'items' => array_unique(
                 array_reduce(
-                    $this->convertList($affs, '@LiberoPatterns/link.html.twig', $view->getContext()),
+                    $this->convertList($affs, '@LiberoPatterns/link.html.twig', $context),
                     static function (array $list, View $view) : array {
-                        if (!$view instanceof TemplateView || !$view->hasArgument('text')) {
-                            return $list;
+                        if ($view instanceof TemplateView && $view->hasArgument('text')) {
+                            $list[] = ['content' => $view->getArguments()];
+                        } elseif (!$view instanceof TemplateView) {
+                            $list[] = ['content' => ['text' => $view]];
                         }
-
-                        $list[] = ['content' => $view->getArguments()];
 
                         return $list;
                     },

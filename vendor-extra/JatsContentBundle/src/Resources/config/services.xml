@@ -52,11 +52,8 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
-        <service id="Libero\JatsContentBundle\EventListener\BuildView\AffLinkListener">
-            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
-        </service>
-
         <service id="Libero\JatsContentBundle\EventListener\BuildView\ContribLinkListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 

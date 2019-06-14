@@ -5,15 +5,25 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
+use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
+use Libero\ViewsBundle\Views\ViewConverter;
+use function array_merge;
 use function array_reduce;
+use function count;
 use function Libero\ViewsBundle\array_has_key;
 
 final class ContribLinkListener
 {
+    use ConvertsChildren;
     use ViewBuildingListener;
+
+    public function __construct(ViewConverter $converter)
+    {
+        $this->converter = $converter;
+    }
 
     protected function handle(Element $object, TemplateView $view) : View
     {
@@ -54,23 +64,23 @@ final class ContribLinkListener
 
         $text = array_reduce(
             $order,
-            static function (string $text, string $component) use ($name, $xpath) : string {
+            function (array $parts, string $component) use ($name, $view, $xpath) : array {
                 $element = $xpath->firstOf($component, $name);
 
                 if (!$element instanceof Element) {
-                    return $text;
+                    return $parts;
                 }
 
-                if ('' === $text) {
-                    return $element->textContent;
+                if (0 !== count($parts)) {
+                    $parts[] = ' ';
                 }
 
-                return "{$text} {$element->textContent}";
+                return array_merge($parts, $this->convertChildren($element, $view->getContext()));
             },
-            ''
+            []
         );
 
-        if ('' === $text) {
+        if (0 === count($text)) {
             return $view;
         }
 

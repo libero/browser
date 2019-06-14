@@ -77,6 +77,41 @@ final class LinkListenerTest extends TestCase
 
     public function textProvider() : iterable
     {
+        yield 'aff' => [
+            <<<XML
+<jats:aff xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:aff>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:aff/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:aff/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:aff/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
+
         yield 'kwd' => [
             <<<XML
 <jats:kwd xmlns:jats="http://jats.nlm.nih.gov">
@@ -146,6 +181,32 @@ XML
                 ),
             ],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_strip_inline_elements() : void
+    {
+        $listener = new LinkListener($this->createDumpingConverter());
+
+        $element = $this->loadElement(
+            <<<XML
+<jats:aff xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:aff>
+XML
+        );
+
+        $context = ['strip_elements' => true];
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/link.html.twig', [], $context));
+        $listener->onBuildView($event);
+        $view = $event->getView();
+
+        $this->assertInstanceOf(TemplateView::class, $view);
+        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
+        $this->assertEquals(['text' => 'foo bar baz'], $view->getArguments());
+        $this->assertSame(['qux' => 'quux'], $view->getContext());
     }
 
     /**

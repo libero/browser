@@ -34,15 +34,17 @@ final class FrontContribAuthorContentHeaderListener
             return $view;
         }
 
+        $context = ['strip_inline' => true] + $view->getContext();
+
         $authors = [
             'items' => array_reduce(
-                $this->convertList($contribs, '@LiberoPatterns/link.html.twig', $view->getContext()),
+                $this->convertList($contribs, '@LiberoPatterns/link.html.twig', $context),
                 static function (array $list, View $view) : array {
-                    if (!$view instanceof TemplateView || !$view->hasArgument('text')) {
-                        return $list;
+                    if ($view instanceof TemplateView && $view->hasArgument('text')) {
+                        $list[] = ['content' => $view->getArguments()];
+                    } elseif (!$view instanceof TemplateView) {
+                        $list[] = ['content' => ['text' => $view]];
                     }
-
-                    $list[] = ['content' => $view->getArguments()];
 
                     return $list;
                 },
