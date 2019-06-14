@@ -40,11 +40,7 @@ final class FrontContribAuthorContentHeaderListener
             'items' => array_reduce(
                 $this->convertList($contribs, '@LiberoPatterns/link.html.twig', $context),
                 static function (array $list, View $view) : array {
-                    if ($view instanceof TemplateView && $view->hasArgument('text')) {
-                        $list[] = ['content' => $view->getArguments()];
-                    } elseif (!$view instanceof TemplateView) {
-                        $list[] = ['content' => ['text' => $view]];
-                    }
+                    $list[] = ['content' => $view instanceof TemplateView ? $view->getArguments() : $view];
 
                     return $list;
                 },

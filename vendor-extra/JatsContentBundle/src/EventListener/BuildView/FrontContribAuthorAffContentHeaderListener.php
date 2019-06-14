@@ -13,6 +13,7 @@ use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function array_reduce;
 use function array_unique;
+use function array_values;
 use function count;
 use function Libero\ViewsBundle\array_has_key;
 use const SORT_REGULAR;
@@ -39,21 +40,23 @@ final class FrontContribAuthorAffContentHeaderListener
         $context = ['strip_inline' => true] + $view->getContext();
 
         $affiliations = [
-            'items' => array_unique(
-                array_reduce(
-                    $this->convertList($affs, '@LiberoPatterns/link.html.twig', $context),
-                    static function (array $list, View $view) : array {
-                        if ($view instanceof TemplateView && $view->hasArgument('text')) {
-                            $list[] = ['content' => $view->getArguments()];
-                        } elseif (!$view instanceof TemplateView) {
-                            $list[] = ['content' => ['text' => $view]];
-                        }
+            'items' => array_values(
+                array_unique(
+                    array_reduce(
+                        $this->convertList($affs, '@LiberoPatterns/link.html.twig', $context),
+                        static function (array $list, View $view) : array {
+                            if ($view instanceof TemplateView && $view->hasArgument('text')) {
+                                $list[] = ['content' => $view->getArguments()];
+                            } elseif (!$view instanceof TemplateView) {
+                                $list[] = ['content' => ['text' => $view]];
+                            }
 
-                        return $list;
-                    },
-                    []
-                ),
-                SORT_REGULAR
+                            return $list;
+                        },
+                        []
+                    ),
+                    SORT_REGULAR
+                )
             ),
         ];
 

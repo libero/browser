@@ -8,6 +8,7 @@ use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use function array_map;
 use function iterator_to_array;
+use function trim;
 
 trait ConvertsChildren
 {
@@ -17,7 +18,7 @@ trait ConvertsChildren
     final protected function convertChildren(Element $object, array $context = []) : array
     {
         if ($context['strip_inline'] ?? false) {
-            return [new StringView((string) $object, $context)];
+            return [new StringView(trim((string) $object), $context)];
         }
 
         return array_map(
