@@ -47,45 +47,21 @@
 
     {%- endwith -%}
 
-    {%- with authors|default({})|merge({html: html}) only -%}
+    {%- with authors|default({}) only -%}
       {%- block authors -%}
 
         {%- if items|default([])|length -%}
-
-          <ol {{- html.attributes(attributes|default({})) -}}>
-            {%- for author in items -%}
-              <li>
-                {%- with author only -%}
-                  {%- block author -%}
-                    {%- include '@LiberoPatterns/link.html.twig' -%}
-                  {%- endblock author -%}
-                {%- endwith -%}
-              </li>
-            {%- endfor -%}
-          </ol>
-
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false} -%}
         {%- endif -%}
 
       {%- endblock authors -%}
     {%- endwith -%}
 
-    {%- with affiliations|default({})|merge({html: html}) only -%}
+    {%- with affiliations|default({}) only -%}
       {%- block affiliations -%}
 
         {%- if items|default([])|length -%}
-
-          <ol {{- html.attributes(attributes|default({})) -}}>
-            {%- for affiliation in items -%}
-              <li>
-                {%- with affiliation only -%}
-                  {%- block affiliation -%}
-                    {%- include '@LiberoPatterns/link.html.twig' -%}
-                  {%- endblock affiliation -%}
-                {%- endwith -%}
-              </li>
-            {%- endfor -%}
-          </ol>
-
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true} -%}
         {%- endif -%}
 
       {%- endblock affiliations -%}

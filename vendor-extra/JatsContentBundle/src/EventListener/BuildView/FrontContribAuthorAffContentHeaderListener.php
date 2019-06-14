@@ -45,7 +45,7 @@ final class FrontContribAuthorAffContentHeaderListener
                             return $list;
                         }
 
-                        $list[] = $view->getArguments();
+                        $list[] = ['content' => $view->getArguments()];
 
                         return $list;
                     },

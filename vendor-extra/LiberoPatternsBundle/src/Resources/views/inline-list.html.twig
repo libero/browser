@@ -1,0 +1,39 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list']) }) -%}
+
+{%- if small|default(false) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['inline-list--small']) }) -%}
+{%- endif -%}
+
+<ol {{- html.attributes(attributes) }}>
+
+  {%- for item in items -%}
+
+    {%- with item|merge({html: html}) only -%}
+      {%- block item -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list__item']) }) -%}
+
+        <li {{- html.attributes(attributes) }}>
+
+          {%- with content only -%}
+            {%- block content -%}
+
+              {%- if attributes.href is defined -%}
+                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list__link']) }) -%}
+              {%- endif -%}
+
+              {%- include '@LiberoPatterns/link.html.twig' -%}
+
+            {%- endblock content -%}
+          {%- endwith -%}
+
+        </li>
+
+      {%- endblock item -%}
+    {%- endwith -%}
+
+  {%- endfor -%}
+
+</ol>
