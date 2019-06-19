@@ -181,7 +181,6 @@ XML
                                 'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[1]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
-                                    'strip_inline' => true,
                                     'bar' => 'baz',
                                 ],
                             ],
@@ -191,7 +190,6 @@ XML
                                 'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[2]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
-                                    'strip_inline' => true,
                                     'bar' => 'baz',
                                 ],
                             ],
@@ -201,7 +199,6 @@ XML
                                 'node' => '/jats:front/jats:article-meta/jats:contrib-group[2]/jats:contrib[2]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
-                                    'strip_inline' => true,
                                     'bar' => 'baz',
                                 ],
                             ],

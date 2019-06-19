@@ -6,7 +6,6 @@ namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
 use Libero\JatsContentBundle\EventListener\BuildView\LinkListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\StringView;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
@@ -182,35 +181,6 @@ XML
                 ),
             ],
         ];
-    }
-
-    /**
-     * @test
-     */
-    public function it_can_strip_inline_elements() : void
-    {
-        $listener = new LinkListener($this->createDumpingConverter());
-
-        $element = $this->loadElement(
-            <<<XML
-<jats:aff xmlns:jats="http://jats.nlm.nih.gov">
-    foo <jats:italic>bar</jats:italic> baz
-</jats:aff>
-XML
-        );
-
-        $context = ['strip_inline' => true];
-        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/link.html.twig', [], $context));
-        $listener->onBuildView($event);
-        $view = $event->getView();
-
-        $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
-        $this->assertEquals(
-            ['text' => [new StringView('foo bar baz', ['strip_inline' => true])]],
-            $view->getArguments()
-        );
-        $this->assertSame(['strip_inline' => true], $view->getContext());
     }
 
     /**
