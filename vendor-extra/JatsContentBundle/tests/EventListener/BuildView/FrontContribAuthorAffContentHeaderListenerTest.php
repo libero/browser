@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
-use FluentDOM\DOM\Element;
-use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\JatsContentBundle\EventListener\BuildView\FrontContribAuthorAffContentHeaderListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
-use Libero\ViewsBundle\Views\CallbackViewConverter;
-use Libero\ViewsBundle\Views\EmptyView;
 use Libero\ViewsBundle\Views\TemplateView;
-use Libero\ViewsBundle\Views\View;
 use PHPUnit\Framework\TestCase;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
-use function is_string;
 
 final class FrontContribAuthorAffContentHeaderListenerTest extends TestCase
 {
@@ -150,19 +144,7 @@ XML
      */
     public function it_sets_the_affiliations_argument() : void
     {
-        $listener = new FrontContribAuthorAffContentHeaderListener(
-            new CallbackViewConverter(
-                static function (NonDocumentTypeChildNode $node, ?string $template = null, array $context = []) : View {
-                    if (!$node instanceof Element
-                        || !is_string($template)
-                        || '{http://jats.nlm.nih.gov}aff' !== $node->clarkNotation()) {
-                        return new EmptyView();
-                    }
-
-                    return new TemplateView($template, ['text' => (string) $node], $context);
-                }
-            )
-        );
+        $listener = new FrontContribAuthorAffContentHeaderListener($this->createDumpingConverter());
 
         $element = $this->loadElement(
             <<<XML
@@ -201,6 +183,8 @@ XML
         $listener->onBuildView($event);
         $view = $event->getView();
 
+        $basePath = '/jats:front/jats:article-meta';
+
         $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
         $this->assertEquals(
@@ -209,17 +193,47 @@ XML
                     'items' => [
                         [
                             'content' => [
-                                'text' => 'Affiliation 1',
+                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[1]/jats:aff",
+                                'template' => '@LiberoPatterns/link.html.twig',
+                                'context' => [
+                                    'bar' => 'baz',
+                                ],
                             ],
                         ],
                         [
                             'content' => [
-                                'text' => 'Affiliation 2',
+                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[2]/jats:aff[1]",
+                                'template' => '@LiberoPatterns/link.html.twig',
+                                'context' => [
+                                    'bar' => 'baz',
+                                ],
                             ],
                         ],
                         [
                             'content' => [
-                                'text' => 'Affiliation 3',
+                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[2]/jats:aff[2]",
+                                'template' => '@LiberoPatterns/link.html.twig',
+                                'context' => [
+                                    'bar' => 'baz',
+                                ],
+                            ],
+                        ],
+                        [
+                            'content' => [
+                                'node' => "{$basePath}/jats:contrib-group[2]/jats:contrib/jats:aff[1]",
+                                'template' => '@LiberoPatterns/link.html.twig',
+                                'context' => [
+                                    'bar' => 'baz',
+                                ],
+                            ],
+                        ],
+                        [
+                            'content' => [
+                                'node' => "{$basePath}/jats:contrib-group[2]/jats:contrib/jats:aff[2]",
+                                'template' => '@LiberoPatterns/link.html.twig',
+                                'context' => [
+                                    'bar' => 'baz',
+                                ],
                             ],
                         ],
                     ],
