@@ -126,13 +126,18 @@ XML
 
     /**
      * @test
-     * @dataProvider textProvider
      */
-    public function it_sets_the_text_argument(string $xml, array $expectedText) : void
+    public function it_sets_the_text_argument() : void
     {
         $listener = new ContribLinkListener($this->createDumpingConverter());
 
-        $element = $this->loadElement($xml);
+        $element = $this->loadElement(
+            <<<XML
+<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
+    <jats:name/>
+</jats:contrib>
+XML
+        );
 
         $context = ['qux' => 'quux'];
 
@@ -142,277 +147,19 @@ XML
 
         $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/link.html.twig', $view->getTemplate());
-        $this->assertEquals(['text' => $expectedText], $view->getArguments());
+        $this->assertEquals(
+            [
+                'text' => new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:contrib/jats:name',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+            $view->getArguments()
+        );
         $this->assertSame(['qux' => 'quux'], $view->getContext());
-    }
-
-    public function textProvider() : iterable
-    {
-        yield 'default' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name>
-        <jats:surname>surname</jats:surname>
-        <jats:given-names>given names</jats:given-names>
-        <jats:prefix>prefix</jats:prefix>
-        <jats:suffix>suffix</jats:suffix>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:prefix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:surname/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:suffix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
-        yield 'minimum' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name>
-        <jats:given-names>given names</jats:given-names>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
-        yield 'eastern' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name name-style="eastern">
-        <jats:surname>surname</jats:surname>
-        <jats:given-names>given names</jats:given-names>
-        <jats:prefix>prefix</jats:prefix>
-        <jats:suffix>suffix</jats:suffix>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:prefix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:surname/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:suffix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
-        yield 'given-only' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name name-style="given-only">
-        <jats:surname>surname</jats:surname>
-        <jats:given-names>given names</jats:given-names>
-        <jats:prefix>prefix</jats:prefix>
-        <jats:suffix>suffix</jats:suffix>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:prefix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:suffix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
-        yield 'islensk' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name name-style="islensk">
-        <jats:surname>surname</jats:surname>
-        <jats:given-names>given names</jats:given-names>
-        <jats:prefix>prefix</jats:prefix>
-        <jats:suffix>suffix</jats:suffix>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:prefix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:surname/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:suffix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
-
-        yield 'western' => [
-            <<<XML
-<jats:contrib xmlns:jats="http://jats.nlm.nih.gov">
-    <jats:name name-style="western">
-        <jats:surname>surname</jats:surname>
-        <jats:given-names>given names</jats:given-names>
-        <jats:prefix>prefix</jats:prefix>
-        <jats:suffix>suffix</jats:suffix>
-    </jats:name>
-</jats:contrib>
-XML
-            ,
-            [
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:prefix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:given-names/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:surname/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-                ' ',
-                new TemplateView(
-                    '',
-                    [
-                        'node' => '/jats:contrib/jats:name/jats:suffix/text()',
-                        'template' => null,
-                        'context' => ['qux' => 'quux'],
-                    ]
-                ),
-            ],
-        ];
     }
 }

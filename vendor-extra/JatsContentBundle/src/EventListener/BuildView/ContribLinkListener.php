@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
-use function array_merge;
-use function array_reduce;
-use function count;
 use function Libero\ViewsBundle\array_has_key;
 
 final class ContribLinkListener
 {
-    use ConvertsChildren;
     use ViewBuildingListener;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -35,54 +32,7 @@ final class ContribLinkListener
             return $view;
         }
 
-        switch ($name->getAttribute('name-style')) {
-            case 'eastern':
-                $order = [
-                    'jats:prefix',
-                    'jats:surname',
-                    'jats:given-names',
-                    'jats:suffix',
-                ];
-                break;
-            case 'given-only':
-                $order = [
-                    'jats:prefix',
-                    'jats:given-names',
-                    'jats:suffix',
-                ];
-                break;
-            case 'islensk':
-            case 'western':
-            default:
-                $order = [
-                    'jats:prefix',
-                    'jats:given-names',
-                    'jats:surname',
-                    'jats:suffix',
-                ];
-        }
-
-        $text = array_reduce(
-            $order,
-            function (array $parts, string $component) use ($name, $view, $xpath) : array {
-                $element = $xpath->firstOf($component, $name);
-
-                if (!$element instanceof Element) {
-                    return $parts;
-                }
-
-                if (0 !== count($parts)) {
-                    $parts[] = ' ';
-                }
-
-                return array_merge($parts, $this->convertChildren($element, $view->getContext()));
-            },
-            []
-        );
-
-        if (0 === count($text)) {
-            return $view;
-        }
+        $text = $this->converter->convert($name, $view->getTemplate(), $view->getContext());
 
         return $view->withArgument('text', $text);
     }

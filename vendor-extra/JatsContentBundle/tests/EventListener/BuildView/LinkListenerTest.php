@@ -112,6 +112,41 @@ XML
             ],
         ];
 
+        yield 'surname' => [
+            <<<XML
+<jats:surname xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:surname>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
+
         yield 'kwd' => [
             <<<XML
 <jats:kwd xmlns:jats="http://jats.nlm.nih.gov">
@@ -147,6 +182,41 @@ XML
             ],
         ];
 
+        yield 'given-names' => [
+            <<<XML
+<jats:given-names xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:given-names>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:given-names/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:given-names/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:given-names/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
+
         yield 'subject' => [
             <<<XML
 <jats:subject xmlns:jats="http://jats.nlm.nih.gov">
@@ -175,6 +245,76 @@ XML
                     '',
                     [
                         'node' => '/jats:subject/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
+
+        yield 'suffix' => [
+            <<<XML
+<jats:suffix xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:suffix>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:suffix/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:suffix/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:suffix/text()[2]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+            ],
+        ];
+
+        yield 'surname' => [
+            <<<XML
+<jats:surname xmlns:jats="http://jats.nlm.nih.gov">
+    foo <jats:italic>bar</jats:italic> baz
+</jats:surname>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/text()[1]',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/jats:italic',
+                        'template' => null,
+                        'context' => ['qux' => 'quux'],
+                    ]
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:surname/text()[2]',
                         'template' => null,
                         'context' => ['qux' => 'quux'],
                     ]

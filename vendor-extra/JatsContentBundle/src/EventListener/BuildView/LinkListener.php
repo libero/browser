@@ -38,8 +38,12 @@ final class LinkListener
         return string_is(
             $element->clarkNotation(),
             '{http://jats.nlm.nih.gov}aff',
+            '{http://jats.nlm.nih.gov}given-names',
             '{http://jats.nlm.nih.gov}kwd',
-            '{http://jats.nlm.nih.gov}subject'
+            '{http://jats.nlm.nih.gov}prefix',
+            '{http://jats.nlm.nih.gov}subject',
+            '{http://jats.nlm.nih.gov}suffix',
+            '{http://jats.nlm.nih.gov}surname'
         );
     }
 

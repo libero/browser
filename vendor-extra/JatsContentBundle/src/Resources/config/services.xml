@@ -157,6 +157,21 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\NameEasternListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\NameGivenOnlyListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-10"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\NameWesternListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="10"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\ParagraphListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.template" method="onChooseTemplate" priority="10"/>
