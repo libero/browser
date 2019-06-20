@@ -28,7 +28,9 @@ final class FrontContribAuthorAffContentHeaderListener
     protected function handle(Element $object, TemplateView $view) : View
     {
         /** @var DOMNodeList<Element> $affs */
-        $affs = $object('jats:article-meta/jats:contrib-group/jats:contrib[@contrib-type="author"]/jats:aff');
+        $affs = $object(
+            'jats:article-meta/jats:contrib-group/jats:contrib[@contrib-type="author"][jats:name]/jats:aff'
+        );
 
         if (0 === count($affs)) {
             return $view;

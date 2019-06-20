@@ -148,13 +148,14 @@ XML
 <jats:front xmlns:jats="http://jats.nlm.nih.gov">
     <jats:article-meta>
         <jats:contrib-group>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
             <jats:contrib contrib-type="author"/>
-            <jats:contrib contrib-type="author"/>
-            <jats:contrib contrib-type="not-author"/>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
+            <jats:contrib contrib-type="not-author"><jats:name/></jats:contrib>
         </jats:contrib-group>
         <jats:contrib-group>
             <jats:contrib/>
-            <jats:contrib contrib-type="author"/>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
         </jats:contrib-group>
     </jats:article-meta>
 </jats:front>
@@ -187,7 +188,7 @@ XML
                         ],
                         [
                             'content' => [
-                                'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[2]',
+                                'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[3]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
                                     'bar' => 'baz',

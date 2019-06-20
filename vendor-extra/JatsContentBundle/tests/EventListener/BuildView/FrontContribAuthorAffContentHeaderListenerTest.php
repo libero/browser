@@ -153,18 +153,25 @@ XML
     <jats:article-meta>
         <jats:contrib-group>
             <jats:contrib contrib-type="author">
+                <jats:name/>
                 <jats:aff>Affiliation 1</jats:aff>
             </jats:contrib>
             <jats:contrib contrib-type="author">
+                <jats:aff>Affiliation 0</jats:aff>
+            </jats:contrib>
+            <jats:contrib contrib-type="author">
+                <jats:name/>
                 <jats:aff>Affiliation 2</jats:aff>
                 <jats:aff>Affiliation 1</jats:aff>
             </jats:contrib>
             <jats:contrib contrib-type="not-author">
+                <jats:name/>
                 <jats:aff>Affiliation 1</jats:aff>
             </jats:contrib>
         </jats:contrib-group>
         <jats:contrib-group>
             <jats:contrib contrib-type="author">
+                <jats:name/>
                 <jats:aff>Affiliation 1</jats:aff>
                 <jats:aff>Affiliation 3</jats:aff>
             </jats:contrib>
@@ -202,7 +209,7 @@ XML
                         ],
                         [
                             'content' => [
-                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[2]/jats:aff[1]",
+                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[3]/jats:aff[1]",
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
                                     'bar' => 'baz',
@@ -211,7 +218,7 @@ XML
                         ],
                         [
                             'content' => [
-                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[2]/jats:aff[2]",
+                                'node' => "{$basePath}/jats:contrib-group[1]/jats:contrib[3]/jats:aff[2]",
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => [
                                     'bar' => 'baz',

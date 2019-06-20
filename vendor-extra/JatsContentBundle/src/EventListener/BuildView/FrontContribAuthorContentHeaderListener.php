@@ -28,7 +28,7 @@ final class FrontContribAuthorContentHeaderListener
     protected function handle(Element $object, TemplateView $view) : View
     {
         /** @var DOMNodeList<Element> $contribs */
-        $contribs = $object('jats:article-meta/jats:contrib-group/jats:contrib[@contrib-type="author"]');
+        $contribs = $object('jats:article-meta/jats:contrib-group/jats:contrib[@contrib-type="author"][jats:name]');
 
         if (0 === count($contribs)) {
             return $view;
