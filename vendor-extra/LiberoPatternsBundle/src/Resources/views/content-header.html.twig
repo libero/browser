@@ -6,11 +6,17 @@
 
   {%- block body -%}
 
-    {%- with categories|default({}) only -%}
+    {%- with {categories: categories|default({}), html: html} only -%}
       {%- block categories -%}
 
-        {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/tag-list.html.twig' with {list: _context|merge({singleLine: true})} only -%}
+        {%- if categories.items|default([])|length -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
+
+          <div {{ html.attributes(attributes) }}>
+            {%- include '@LiberoPatterns/tag-list.html.twig' with {list: categories|merge({singleLine: true})} only -%}
+          </div>
+
         {%- endif -%}
 
       {%- endblock categories -%}
@@ -47,18 +53,46 @@
 
     {%- endwith -%}
 
-    {%- if downloadIconLink is defined -%}
-      {%- with downloadIconLink|merge({html: html}) only -%}
-        {%- set attributes = attributes|default({})|merge({href: attributes.href, class: attributes.class|default([])|merge(['content-header__download_link']) }) -%}
-        <a {{ html.attributes(attributes) }}>
-          <picture>
-            <source srcset="{{asset('images/download-full.svg', 'libero_patterns')}}" type="image/svg+xml" media="(min-width: 45.625em)">
-            <img src="{{asset('images/download.svg', 'libero_patterns')}}" class="content-header__download_icon" alt="">
-          </picture>
-        </a>
-        {%- endwith -%}
-    {%- endif -%}
+    {%- with {download: download|default({}), html: html} only -%}
+      {%- block download -%}
 
+        {%- if download.href is defined -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
+
+          <div {{ html.attributes(attributes) }}>
+            <a {{ html.attributes(download) }}>
+              <picture>
+                <source srcset="{{ asset('images/download-full.svg', 'libero_patterns') }}" type="image/svg+xml" media="(min-width: 45.625em)">
+                <img src="{{ asset('images/download.svg', 'libero_patterns') }}" class="content-header__download_icon" alt="">
+              </picture>
+            </a>
+          </div>
+
+        {%- endif -%}
+
+      {%- endblock download -%}
+    {%- endwith -%}
+
+    {%- with authors|default({}) only -%}
+      {%- block authors -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false, alternativeSeparators: false} -%}
+        {%- endif -%}
+
+      {%- endblock authors -%}
+    {%- endwith -%}
+
+    {%- with affiliations|default({}) only -%}
+      {%- block affiliations -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true, alternativeSeparators: true} -%}
+        {%- endif -%}
+
+      {%- endblock affiliations -%}
+    {%- endwith -%}
 
     {%- with meta|default({}) only -%}
       {%- block meta -%}
@@ -70,6 +104,5 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
-  {%- endblock -%}
-
+  {%- endblock body -%}
 </header>

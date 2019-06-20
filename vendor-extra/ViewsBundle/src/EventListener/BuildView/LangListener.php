@@ -8,6 +8,7 @@ use FluentDOM\DOM\Attribute;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use Punic\Misc;
+use function array_merge;
 
 final class LangListener
 {
@@ -33,7 +34,7 @@ final class LangListener
         }
 
         $context = ['lang' => $lang->nodeValue];
-        $attributes = ['lang' => $context['lang']];
+        $attributes = array_merge($view->getArgument('attributes') ?? [], ['lang' => $context['lang']]);
         $dir = 'right-to-left' === Misc::getCharacterOrder($context['lang']) ? 'rtl' : 'ltr';
         if ($view->getContext('dir') !== $dir) {
             $context['dir'] = $dir;

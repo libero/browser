@@ -35,7 +35,7 @@ final class FrontPdfContentHeaderListener
             return $view;
         }
 
-        return $view->withArgument('downloadIconLink', ['attributes' => ['href' => (string) $uri]]);
+        return $view->withArgument('download', ['href' => (string) $uri]);
     }
 
     protected function template() : string
@@ -50,6 +50,6 @@ final class FrontPdfContentHeaderListener
 
     protected function canHandleArguments(array $arguments) : bool
     {
-        return !array_has_key($arguments, 'downloadIconLink');
+        return !array_has_key($arguments, 'download');
     }
 }

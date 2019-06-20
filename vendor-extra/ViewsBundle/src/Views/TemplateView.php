@@ -6,7 +6,7 @@ namespace Libero\ViewsBundle\Views;
 
 use ArrayAccess;
 use IteratorAggregate;
-use function array_replace_recursive;
+use function array_replace;
 
 final class TemplateView implements ArrayAccess, IteratorAggregate, View
 {
@@ -56,7 +56,7 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
 
         $view = clone $this;
 
-        $view->arguments = array_replace_recursive($view->arguments, $arguments);
+        $view->arguments = array_replace($view->arguments, $arguments);
 
         return $view;
     }
@@ -65,7 +65,7 @@ final class TemplateView implements ArrayAccess, IteratorAggregate, View
     {
         $view = clone $this;
 
-        $view->context = array_replace_recursive($view->context, $context);
+        $view->context = array_replace($view->context, $context);
 
         return $view;
     }
