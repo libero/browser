@@ -9,8 +9,10 @@ use Libero\ViewsBundle\Views\TemplateChoosingListener;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
+use Libero\ViewsBundle\Views\ViewConverter;
+use function array_pop;
 use function array_reduce;
-use function count;
+use function end;
 use function in_array;
 use function Libero\ViewsBundle\array_has_key;
 
@@ -19,6 +21,7 @@ trait NameListener
     use TemplateChoosingListener;
     use ViewBuildingListener;
 
+    /** @var ViewConverter */
     private $converter;
 
     final protected function handle(Element $object, TemplateView $view) : View
@@ -34,16 +37,26 @@ trait NameListener
                     return $text;
                 }
 
-                if (0 !== count($text)) {
+                $part = $this->converter->convert($element, $view->getTemplate(), $view->getContext());
+
+                $spaces = $this->addSpaces($part->getContext('lang') ?? 'und');
+
+                if ($spaces && ' ' !== (end($text) ?: ' ')) {
                     $text[] = ' ';
                 }
-
-                $text[] = $this->converter->convert($element, $view->getTemplate(), $view->getContext());
+                $text[] = $part;
+                if ($spaces) {
+                    $text[] = ' ';
+                }
 
                 return $text;
             },
             []
         );
+
+        if (' ' === end($text)) {
+            array_pop($text);
+        }
 
         return $view->withArgument('text', $text);
     }
@@ -76,4 +89,9 @@ trait NameListener
      * @return array<null|string>
      */
     abstract protected function nameStyles() : array;
+
+    protected function addSpaces(string $lang) : bool
+    {
+        return true;
+    }
 }

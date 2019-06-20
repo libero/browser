@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace tests\Libero\LiberoPageBundle;
 
+use FluentDOM\DOM\Attribute;
+use FluentDOM\DOM\Element;
 use FluentDOM\DOM\Node\NonDocumentTypeChildNode;
 use Libero\ViewsBundle\Views\CallbackViewConverter;
 use Libero\ViewsBundle\Views\EmptyView;
@@ -51,6 +53,34 @@ trait ViewConvertingTestCase
                 }
 
                 return $converter->convert($node, $template, $context);
+            }
+        );
+    }
+
+    final protected function createLanguageAddingConverter(ViewConverter $converter) : ViewConverter
+    {
+        return new CallbackViewConverter(
+            static function (
+                NonDocumentTypeChildNode $node,
+                ?string $template = null,
+                array $context = []
+            ) use (
+                $converter
+            ) : View {
+                $view = $converter->convert($node, $template, $context);
+
+                if (!$view instanceof TemplateView || !$node instanceof Element) {
+                    return $view;
+                }
+
+                $lang = $node->ownerDocument->xpath()
+                    ->firstOf('ancestor-or-self::*[@xml:lang][1]/@xml:lang', $node);
+
+                if (!$lang instanceof Attribute) {
+                    return $view;
+                }
+
+                return $view->withContext(['lang' => $lang->nodeValue]);
             }
         );
     }

@@ -122,7 +122,7 @@ final class NameEasternListenerTest extends TestCase
      */
     public function it_sets_the_text_argument(string $xml, array $expectedText) : void
     {
-        $listener = new NameEasternListener($this->createDumpingConverter());
+        $listener = new NameEasternListener($this->createLanguageAddingConverter($this->createDumpingConverter()));
 
         $element = $this->loadElement($xml);
 
@@ -204,6 +204,258 @@ XML
                         'template' => '@LiberoPatterns/link.html.twig',
                         'context' => ['qux' => 'quux'],
                     ]
+                ),
+            ],
+        ];
+
+        yield 'Japanese' => [
+            <<<XML
+<jats:name xmlns:jats="http://jats.nlm.nih.gov" name-style="eastern" xml:lang="ja">
+        <jats:surname>surname</jats:surname>
+        <jats:given-names>given names</jats:given-names>
+        <jats:prefix>prefix</jats:prefix>
+        <jats:suffix>suffix</jats:suffix>
+</jats:name>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:prefix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:surname',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:given-names',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:suffix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+            ],
+        ];
+
+        yield 'Chinese (Simplified)' => [
+            <<<XML
+<jats:name xmlns:jats="http://jats.nlm.nih.gov" name-style="eastern" xml:lang="zh-CN">
+        <jats:surname>surname</jats:surname>
+        <jats:given-names>given names</jats:given-names>
+        <jats:prefix>prefix</jats:prefix>
+        <jats:suffix>suffix</jats:suffix>
+</jats:name>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:prefix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-CN']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:surname',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-CN']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:given-names',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-CN']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:suffix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-CN']
+                ),
+            ],
+        ];
+
+        yield 'Chinese (Traditional)' => [
+            <<<XML
+<jats:name xmlns:jats="http://jats.nlm.nih.gov" name-style="eastern" xml:lang="zh-TW">
+        <jats:surname>surname</jats:surname>
+        <jats:given-names>given names</jats:given-names>
+        <jats:prefix>prefix</jats:prefix>
+        <jats:suffix>suffix</jats:suffix>
+</jats:name>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:prefix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-TW']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:surname',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-TW']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:given-names',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-TW']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:suffix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'zh-TW']
+                ),
+            ],
+        ];
+
+        yield 'Korean' => [
+            <<<XML
+<jats:name xmlns:jats="http://jats.nlm.nih.gov" name-style="eastern" xml:lang="ko">
+        <jats:surname>surname</jats:surname>
+        <jats:given-names>given names</jats:given-names>
+        <jats:prefix>prefix</jats:prefix>
+        <jats:suffix>suffix</jats:suffix>
+</jats:name>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:prefix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ko']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:surname',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ko']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:given-names',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ko']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:suffix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ko']
+                ),
+            ],
+        ];
+
+        yield 'mixed languages' => [
+            <<<XML
+<jats:name xmlns:jats="http://jats.nlm.nih.gov" name-style="eastern" xml:lang="ja">
+        <jats:surname>surname</jats:surname>
+        <jats:given-names>given names</jats:given-names>
+        <jats:prefix xml:lang="en">prefix</jats:prefix>
+        <jats:suffix xml:lang="fr">suffix</jats:suffix>
+</jats:name>
+XML
+            ,
+            [
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:prefix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'en']
+                ),
+                ' ',
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:surname',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:given-names',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'ja']
+                ),
+                ' ',
+                new TemplateView(
+                    '',
+                    [
+                        'node' => '/jats:name/jats:suffix',
+                        'template' => '@LiberoPatterns/link.html.twig',
+                        'context' => ['qux' => 'quux'],
+                    ],
+                    ['lang' => 'fr']
                 ),
             ],
         ];
