@@ -53,8 +53,8 @@ final class TemplateViewTest extends TestCase
         $this->assertEquals(['foo' => ['baz' => 'qux']], $view->getArguments());
 
         $view = $view->withArguments(['foo' => ['quux' => 'quuz']]);
-        $this->assertSame(['baz' => 'qux', 'quux' => 'quuz'], $view->getArgument('foo'));
-        $this->assertEquals(['foo' => ['baz' => 'qux', 'quux' => 'quuz']], $view->getArguments());
+        $this->assertSame(['quux' => 'quuz'], $view->getArgument('foo'));
+        $this->assertEquals(['foo' => ['quux' => 'quuz']], $view->getArguments());
     }
 
     /**
@@ -76,8 +76,8 @@ final class TemplateViewTest extends TestCase
         $this->assertEquals(['foo' => ['baz' => 'qux']], $view->getContext());
 
         $view = $view->withContext(['foo' => ['quux' => 'quuz']]);
-        $this->assertSame(['baz' => 'qux', 'quux' => 'quuz'], $view->getContext('foo'));
-        $this->assertEquals(['foo' => ['baz' => 'qux', 'quux' => 'quuz']], $view->getContext());
+        $this->assertSame(['quux' => 'quuz'], $view->getContext('foo'));
+        $this->assertEquals(['foo' => ['quux' => 'quuz']], $view->getContext());
     }
 
     /**

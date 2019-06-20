@@ -44,6 +44,10 @@
             <tag name="kernel.event_listener" event="libero.page.load" method="onLoadPageData"/>
         </service>
 
+        <service id="Libero\LiberoPageBundle\EventListener\BuildView\ContentHeaderAffiliationDuplicateListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="-50"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\EventListener\BuildView\ItemListEmptyListener">
             <argument type="service" id="translator"/>
             <!-- After ItemListListener -->

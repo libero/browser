@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Libero\JatsContentBundle\EventListener\BuildView;
 
 use FluentDOM\DOM\Element;
-use Libero\ViewsBundle\Views\ConvertsChildren;
 use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\View;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
-use function Libero\ViewsBundle\string_is;
 
-final class LinkListener
+final class ContribLinkListener
 {
-    use ConvertsChildren;
     use ViewBuildingListener;
+
+    private $converter;
 
     public function __construct(ViewConverter $converter)
     {
@@ -25,7 +24,17 @@ final class LinkListener
 
     protected function handle(Element $object, TemplateView $view) : View
     {
-        return $view->withArgument('text', $this->convertChildren($object, $view->getContext()));
+        $xpath = $object->ownerDocument->xpath();
+
+        $name = $xpath->firstOf('jats:name', $object);
+
+        if (!$name instanceof Element) {
+            return $view;
+        }
+
+        $text = $this->converter->convert($name, $view->getTemplate(), $view->getContext());
+
+        return $view->withArgument('text', $text);
     }
 
     protected function template() : string
@@ -35,16 +44,7 @@ final class LinkListener
 
     protected function canHandleElement(Element $element) : bool
     {
-        return string_is(
-            $element->clarkNotation(),
-            '{http://jats.nlm.nih.gov}aff',
-            '{http://jats.nlm.nih.gov}given-names',
-            '{http://jats.nlm.nih.gov}kwd',
-            '{http://jats.nlm.nih.gov}prefix',
-            '{http://jats.nlm.nih.gov}subject',
-            '{http://jats.nlm.nih.gov}suffix',
-            '{http://jats.nlm.nih.gov}surname'
-        );
+        return '{http://jats.nlm.nih.gov}contrib' === $element->clarkNotation();
     }
 
     protected function canHandleArguments(array $arguments) : bool

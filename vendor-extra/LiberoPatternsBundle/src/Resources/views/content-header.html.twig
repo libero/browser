@@ -47,6 +47,26 @@
 
     {%- endwith -%}
 
+    {%- with authors|default({}) only -%}
+      {%- block authors -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false, alternativeSeparators: false} -%}
+        {%- endif -%}
+
+      {%- endblock authors -%}
+    {%- endwith -%}
+
+    {%- with affiliations|default({}) only -%}
+      {%- block affiliations -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true, alternativeSeparators: true} -%}
+        {%- endif -%}
+
+      {%- endblock affiliations -%}
+    {%- endwith -%}
+
     {%- with meta|default({}) only -%}
       {%- block meta -%}
 
@@ -57,6 +77,5 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
-  {%- endblock -%}
-
+  {%- endblock body -%}
 </header>
