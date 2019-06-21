@@ -35,7 +35,7 @@ final class FrontPdfContentHeaderListener
             return $view;
         }
 
-        return $view->withArgument('download', ['href' => (string) $uri]);
+        return $view->withArgument('download', ['link' => ['href' => (string) $uri]]);
     }
 
     protected function template() : string

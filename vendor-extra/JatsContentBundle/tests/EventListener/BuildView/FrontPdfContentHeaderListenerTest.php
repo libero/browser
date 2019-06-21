@@ -139,7 +139,7 @@ XML
 
         $this->assertInstanceOf(TemplateView::class, $view);
         $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
-        $this->assertEquals(['download' => $expected,], $view->getArguments());
+        $this->assertEquals(['download' => $expected], $view->getArguments());
         $this->assertSame(['bar' => 'baz'], $view->getContext());
     }
 
@@ -156,7 +156,9 @@ XML
 XML
             ,
             [
-                'href' => 'http://example.com/file.pdf',
+                'link' => [
+                    'href' => 'http://example.com/file.pdf',
+                ],
             ],
         ];
 
@@ -171,7 +173,9 @@ XML
 XML
             ,
             [
-                'href' => 'http://example.com/file.pdf',
+                'link' => [
+                    'href' => 'http://example.com/file.pdf',
+                ],
             ],
         ];
     }

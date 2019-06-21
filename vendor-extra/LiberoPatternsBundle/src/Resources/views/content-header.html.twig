@@ -53,18 +53,17 @@
 
     {%- endwith -%}
 
-    {%- with {download: download|default({}), html: html} only -%}
+    {%- with download|default({})|merge({html: html}) only -%}
       {%- block download -%}
 
-        {%- if download.href is defined -%}
-
+        {%- if link.href is defined -%}
           {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
 
           <div {{ html.attributes(attributes) }}>
-            <a {{ html.attributes(download) }}>
+            <a {{ html.attributes(link) }}>
               <picture>
                 <source srcset="{{ asset('images/download-full.svg', 'libero_patterns') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-                <img src="{{ asset('images/download.svg', 'libero_patterns') }}" class="content-header__download_icon" alt="">
+                <img src="{{ asset('images/download.svg', 'libero_patterns') }}" class="content-header__download_icon" alt="{{ alt|default('') }}">
               </picture>
             </a>
           </div>
