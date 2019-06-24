@@ -8,7 +8,7 @@
 
     </meta>
 
-    <jats:article article-type="research-article">
+    <jats:article article-type="research-article" xml:base="https://cdn.elifesciences.org/articles/09560/">
 
         <jats:front>
 
@@ -22,6 +22,8 @@
                     </jats:article-title>
 
                 </jats:title-group>
+
+                <jats:self-uri content-type="pdf" xlink:href="elife-09560-v1.pdf"/>
 
                 <jats:article-categories>
 

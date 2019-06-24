@@ -83,6 +83,10 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontPdfContentHeaderListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
