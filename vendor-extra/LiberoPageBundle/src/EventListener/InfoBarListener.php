@@ -7,7 +7,6 @@ namespace Libero\LiberoPageBundle\EventListener;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\TemplateView;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use const Libero\LiberoPatternsBundle\MAIN_GRID_FULL;
 
@@ -21,10 +20,9 @@ final class InfoBarListener
 
     private $urlGenerator;
 
-    public function __construct(TranslatorInterface $translator, UrlGeneratorInterface $urlGenerator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function onCreatePagePart(CreatePagePartEvent $event) : void
