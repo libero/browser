@@ -7,15 +7,17 @@ namespace Libero\LiberoPageBundle\EventListener;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
 use Libero\ViewsBundle\Views\ContextAwareTranslation;
 use Libero\ViewsBundle\Views\TemplateView;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use const Libero\LiberoPatternsBundle\MAIN_GRID_FULL;
 
 final class InfoBarListener
 {
     use ContextAwareTranslation;
-    public const ATTENTION = ['name' => 'attention', 'imagePath' => 'bundles/liberopatterns/images/attention.svg'];
-    public const INFO = ['name' => 'info', 'imagePath' => 'bundles/liberopatterns/images/info.svg'];
-    public const SUCCESS = ['name' => 'success', 'imagePath' => 'bundles/liberopatterns/images/success.svg'];
+    public const ATTENTION = ['name' => 'attention', 'imagePath' => 'attention.svg'];
+    public const INFO = ['name' => 'info', 'imagePath' => 'info.svg'];
+    public const SUCCESS = ['name' => 'success', 'imagePath' => 'success.svg'];
     public const WARNING = ['name' => 'warning', 'imagePath' => ''];
 
     private $urlGenerator;
@@ -28,12 +30,13 @@ final class InfoBarListener
     public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
         $context = ['area' => MAIN_GRID_FULL] + $event->getContext();
+        $package = new PathPackage('/images', new EmptyVersionStrategy());
 
         $event->addContent(
             new TemplateView(
                 '@LiberoPatterns/info-bar.html.twig',
                 [   'type' => self::INFO['name'],
-                    'imagePath' => self::INFO['imagePath'],
+                    'imagePath' => $package->getUrl(self::INFO['imagePath']),
                     'content' => [
                       'text' => $this->translate('libero.page.infobar.demo.text', $context),
                     ],
