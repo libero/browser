@@ -25,7 +25,7 @@
             </trans-unit>
 
             <trans-unit id="5" resname="libero.page.infobar.demo.text">
-                <source>This is a demo site</source>
+                <source>This is a demo journal</source>
             </trans-unit>
 
         </body>
