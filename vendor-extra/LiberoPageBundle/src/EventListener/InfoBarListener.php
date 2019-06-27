@@ -14,12 +14,12 @@ use const Libero\LiberoPatternsBundle\MAIN_GRID_FULL;
 final class InfoBarListener
 {
     use ContextAwareTranslation;
+
     public const ATTENTION = ['name' => 'attention', 'imagePath' => 'attention.svg'];
     public const INFO = ['name' => 'info', 'imagePath' => 'info.svg'];
     public const SUCCESS = ['name' => 'success', 'imagePath' => 'success.svg'];
     public const WARNING = ['name' => 'warning'];
 
-    private $urlGenerator;
     private $packages;
 
     public function __construct(TranslatorInterface $translator, Packages $packages)
@@ -35,13 +35,12 @@ final class InfoBarListener
         $event->addContent(
             new TemplateView(
                 '@LiberoPatterns/info-bar.html.twig',
-                [   'type' => self::INFO['name'],
+                [
+                    'type' => self::INFO['name'],
                     'image' => [
                         'src' => $this->packages->getUrl('images/info-bar/'.self::INFO['imagePath'], 'libero_patterns'),
                     ],
-                    'content' => [
-                      'text' => $this->translate('libero.page.infobar.demo.text', $context),
-                    ],
+                    'content' => $this->translate('libero.page.infobar.demo.text', $context),
                 ],
                 $context
             )
