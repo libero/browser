@@ -23,6 +23,7 @@
 
         <service id="Libero\LiberoPageBundle\EventListener\InfoBarListener">
             <argument type="service" id="translator"/>
+            <argument type="service" id="assets.packages"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="100"/>
         </service>
 
