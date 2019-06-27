@@ -42,7 +42,10 @@ final class InfoBarListener
                     'image' => [
                         'src' => $this->packages->getUrl('images/info-bar/info.svg', 'libero_patterns'),
                     ],
-                    'content' => $this->translate($this->key, $context),
+                    'content' => new TemplateView(
+                        '@LiberoPatterns/raw-html.html.twig',
+                        ['html' => $this->translate($this->key, $context)]
+                    ),
                 ],
                 $context
             )

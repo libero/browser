@@ -25,7 +25,7 @@
             </trans-unit>
 
             <trans-unit id="5" resname="libero.page.info_bar.demo">
-                <source>This is a demo site.</source>
+                <source><![CDATA[This is a <a href="#">demo site</a>.]]></source>
             </trans-unit>
 
         </body>
