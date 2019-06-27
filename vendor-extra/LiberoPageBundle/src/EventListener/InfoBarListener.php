@@ -30,13 +30,15 @@ final class InfoBarListener
     public function onCreatePagePart(CreatePagePartEvent $event) : void
     {
         $context = ['area' => MAIN_GRID_FULL] + $event->getContext();
-        $package = new PathPackage('/images', new EmptyVersionStrategy());
+        $package = new PathPackage('/images/info-bar', new EmptyVersionStrategy());
 
         $event->addContent(
             new TemplateView(
                 '@LiberoPatterns/info-bar.html.twig',
                 [   'type' => self::INFO['name'],
-                    'imagePath' => $package->getUrl(self::INFO['imagePath']),
+                    'image' => [
+                        'src' => $package->getUrl(self::INFO['imagePath']),
+                    ],
                     'content' => [
                       'text' => $this->translate('libero.page.infobar.demo.text', $context),
                     ],

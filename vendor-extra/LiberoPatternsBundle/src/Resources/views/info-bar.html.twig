@@ -1,27 +1,13 @@
 {%- import '@LiberoPatterns/html.html.twig' as html -%}
 
-{%- set type = type|default('info') -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type|default('info')]) }) -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
-{%- set infoBar = infoBar|default({})|merge({type: type, imagePath: imagePath|default(''), content: content|default([]), attributes: attributes, html: html}) -%}
+<div {{- html.attributes(attributes) }}>
 
-{%- with infoBar only -%}
-  {%- block infoBar -%}
-    <div {{- html.attributes(attributes) }}>
-      {% spaceless %}
+  {%- if image.src is defined -%}
+    <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['info-bar__image'])})) }}>
+  {%- endif -%}
 
-        <span class="info-bar__content">
+  <span>{{- html.content(content) -}}</span>
 
-          {%- if imagePath is defined -%}
-            {# no alt as decoration, not background image as background-position-inline not implemented anywhere #}
-             <img src="{{ imagePath }}" class="info-bar__image" alt="" />
-          {%- endif  -%}
-
-          <span>{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
-
-        </span>
-
-      {% endspaceless %}
-    </div >
-  {%- endblock -%}
-{%- endwith -%}
+</div>
