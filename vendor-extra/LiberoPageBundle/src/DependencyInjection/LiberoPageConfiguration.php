@@ -32,6 +32,7 @@ final class LiberoPageConfiguration implements ConfigurationInterface
                 ->scalarNode('page_template')
                     ->isRequired()
                 ->end()
+                ->append($this->getInfoBarDefinition())
             ->end()
         ;
         return $treeBuilder;
@@ -85,5 +86,20 @@ final class LiberoPageConfiguration implements ConfigurationInterface
             ->end()
         ;
         return $pagesNode;
+    }
+
+    private function getInfoBarDefinition() : ArrayNodeDefinition
+    {
+        $builder = new TreeBuilder();
+        /** @var ArrayNodeDefinition $infoBarNode */
+        $infoBarNode = $builder->root('info_bar');
+        $infoBarNode
+            ->children()
+                ->scalarNode('text')
+                    ->isRequired()
+                ->end()
+            ->end()
+        ;
+        return $infoBarNode;
     }
 }
