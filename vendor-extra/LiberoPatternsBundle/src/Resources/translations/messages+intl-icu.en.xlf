@@ -24,6 +24,22 @@
                 <source>Publication date</source>
             </trans-unit>
 
+            <trans-unit id="5" resname="libero.patterns.teaser.categories.label">
+                <source>Categories that include this item</source>
+            </trans-unit>
+
+            <trans-unit id="6" resname="libero.patterns.teaser.meta.label">
+                <source>Publication details</source>
+            </trans-unit>
+
+            <trans-unit id="7" resname="libero.patterns.teaser.meta.type.label">
+                <source>Type of article</source>
+            </trans-unit>
+
+            <trans-unit id="8" resname="libero.patterns.teaser.meta.date.label">
+                <source>Publication date</source>
+            </trans-unit>
+
         </body>
 
     </file>
