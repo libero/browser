@@ -140,6 +140,12 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontContribAuthorTeaserListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupTeaserListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>

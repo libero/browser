@@ -40,6 +40,14 @@
                 <source>Publication date</source>
             </trans-unit>
 
+            <trans-unit id="9" resname="libero.patterns.teaser.authors">
+                <source>{ count, plural,
+                    =1 {{author1}}
+                    =2 {{author1}, {author2}}
+                    other {{author1} et al.}
+                }</source>
+            </trans-unit>
+
         </body>
 
     </file>
