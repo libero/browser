@@ -24,10 +24,6 @@
                 <source>No items available.</source>
             </trans-unit>
 
-            <trans-unit id="5" resname="libero.page.info_bar.demo">
-                <source>This is a demo site.</source>
-            </trans-unit>
-
         </body>
 
     </file>
