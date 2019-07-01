@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\DependencyInjection;
 
 use Libero\LiberoPageBundle\Controller\PageController;
+use Libero\LiberoPageBundle\EventListener\InfoBarListener;
 use Libero\LiberoPageBundle\EventListener\LiberoPageListener;
 use Libero\LiberoPageBundle\Routing\PageRouteLoader;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -46,6 +47,9 @@ final class LiberoPageExtension extends Extension
 
         $container->findDefinition(LiberoPageListener::class)
             ->setArgument(0, array_column($pages, null, 'route'));
+
+        $container->findDefinition(InfoBarListener::class)
+            ->setArgument(0, $config['info_bar']['text'] ?? null);
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container) : ConfigurationInterface

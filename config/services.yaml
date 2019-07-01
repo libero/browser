@@ -1,5 +1,6 @@
 parameters:
     env(DEFAULT_LOCALE): 'en'
+    env(INFO_BAR): null
 
 services:
     _defaults:

@@ -1,0 +1,13 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type|default('info')]) }) -%}
+
+<div {{- html.attributes(attributes) }}>
+
+  {%- if image.src is defined -%}
+    <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['info-bar__image'])})) }}>
+  {%- endif -%}
+
+  <span>{{- html.content(content) -}}</span>
+
+</div>
