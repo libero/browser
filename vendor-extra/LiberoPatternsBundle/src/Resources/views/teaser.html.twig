@@ -2,7 +2,7 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
 
-<div {{- html.attributes(attributes) }}>
+<article {{- html.attributes(attributes) }}>
 
   {%- block body -%}
 
@@ -60,4 +60,4 @@
 
   {%- endblock body -%}
 
-</div>
+</article>
