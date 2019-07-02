@@ -42,7 +42,7 @@ final class FrontContentHeaderMetaListener
 
         if (!isset($meta['attributes']['aria-label'])) {
             $meta['attributes']['aria-label'] = $this->translate(
-                'libero.patterns.content_header.meta.label',
+                'libero.patterns.meta.label',
                 $view->getContext()
             );
         }

@@ -43,11 +43,7 @@ final class FrontContribAuthorTeaserListener
             return $view;
         }
 
-        $text = $this->translate(
-            'libero.patterns.teaser.authors',
-            $view->getContext(),
-            ['{count}' => count($contribs)]
-        );
+        $text = $this->translate('libero.patterns.authors', $view->getContext(), ['{count}' => count($contribs)]);
 
         /** @var array<string> $replacements */
         $replacements = preg_split(

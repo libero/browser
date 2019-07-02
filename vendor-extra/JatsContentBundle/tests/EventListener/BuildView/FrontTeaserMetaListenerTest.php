@@ -105,7 +105,7 @@ XML
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.teaser.meta.label' => 'meta label in es'],
+            ['libero.patterns.meta.label' => 'meta label in es'],
             'es',
             'messages'
         );

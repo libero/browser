@@ -165,7 +165,7 @@ XML
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.teaser.categories.label' => 'categories label in es'],
+            ['libero.patterns.categories.label' => 'categories label in es'],
             'es',
             'messages'
         );

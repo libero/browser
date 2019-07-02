@@ -45,10 +45,7 @@ final class FrontSubjectGroupContentHeaderListener
             'categories',
             [
                 'attributes' => [
-                    'aria-label' => $this->translate(
-                        'libero.patterns.content_header.categories.label',
-                        $view->getContext()
-                    ),
+                    'aria-label' => $this->translate('libero.patterns.categories.label', $view->getContext()),
                 ],
                 'items' => array_map(
                     static function (TemplateView $link) : array {

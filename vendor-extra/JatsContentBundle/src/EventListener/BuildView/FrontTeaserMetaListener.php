@@ -41,10 +41,7 @@ final class FrontTeaserMetaListener
         }
 
         if (!isset($meta['attributes']['aria-label'])) {
-            $meta['attributes']['aria-label'] = $this->translate(
-                'libero.patterns.teaser.meta.label',
-                $view->getContext()
-            );
+            $meta['attributes']['aria-label'] = $this->translate('libero.patterns.meta.label', $view->getContext());
         }
 
         return $view->withArgument('meta', $meta);

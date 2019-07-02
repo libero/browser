@@ -163,7 +163,7 @@ XML
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.content_header.meta.type.label' => 'type label in es'],
+            ['libero.patterns.meta.type.label' => 'type label in es'],
             'es',
             'messages'
         );

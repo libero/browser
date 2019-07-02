@@ -147,7 +147,7 @@ XML
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.teaser.authors' => '{count} {author1} {author2} {author3}'],
+            ['libero.patterns.authors' => '{count} {author1} {author2} {author3}'],
             'es',
             'messages'
         );
