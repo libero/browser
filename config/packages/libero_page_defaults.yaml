@@ -1,5 +1,5 @@
 libero_page:
     client: 'csa_guzzle.client.libero_api'
     info_bar:
-        text: '%env(INFO_BAR)%'
+        text: '%env(string:default::INFO_BAR)%'
     page_template: 'page.html.twig'
