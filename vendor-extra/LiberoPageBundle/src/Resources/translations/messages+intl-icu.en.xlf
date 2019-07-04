@@ -24,6 +24,11 @@
                 <source>No items available.</source>
             </trans-unit>
 
+
+            <trans-unit id="5" resname="libero.page.references">
+                <source>References</source>
+            </trans-unit>
+
         </body>
 
     </file>

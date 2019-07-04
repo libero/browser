@@ -604,6 +604,2350 @@
 
         </jats:body>
 
+        <jats:back>
+
+            <jats:ref-list>
+
+                <jats:title>References</jats:title>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Alemseged</jats:surname>
+                                <jats:given-names>Z</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Spoor</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kimbel</jats:surname>
+                                <jats:given-names>WH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Bobe</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Geraads</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Reed</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Wynn</jats:surname>
+                                <jats:given-names>JG</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A juvenile early hominin skeleton from Dikika, Ethiopia</jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature05047</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Almécija</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Alba</jats:surname>
+                                <jats:given-names>DM</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>On manual proportions and pad-to-pad precision grasping in <jats:italic>Austalopithecus
+                            afarensis</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2014.02.006</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Antón</jats:surname>
+                                <jats:given-names>SC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Natural history of <jats:italic>Homo erectus</jats:italic></jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.10399</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Antón</jats:surname>
+                                <jats:given-names>SC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Potts</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Aiello</jats:surname>
+                                <jats:given-names>LC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Human evolution. Evolution of early <jats:italic>Homo</jats:italic>: an
+                            integrated biological perspective
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1236828</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Asfaw</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>White</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lovejoy</jats:surname>
+                                <jats:given-names>O</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Latimer</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Simpson</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Suwa</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title><jats:italic>Australopithecus garhi</jats:italic>: a new species of early
+                            hominid from Ethiopia
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.284.5414.629</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>DJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Dirks</jats:surname>
+                                <jats:given-names>PH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kibii</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title><jats:italic>Australopithecus sediba</jats:italic>: a new species of
+                            <jats:italic>Homo</jats:italic>-like australopith from South Africa
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1184944</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Bermúdez de Castro</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Martinón-Torres</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sier</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Martín-Francés</jats:surname>
+                                <jats:given-names>L</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>On the variability of the Dmanisi mandibles</jats:article-title>
+                        <jats:source>PLOS ONE</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1371/journal.pone.0088212</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Blumenschine</jats:surname>
+                                <jats:given-names>RJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Peters</jats:surname>
+                                <jats:given-names>CR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Masao</jats:surname>
+                                <jats:given-names>FT</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Clarke</jats:surname>
+                                <jats:given-names>RJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Deino</jats:surname>
+                                <jats:given-names>AL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hay</jats:surname>
+                                <jats:given-names>RL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Swisher</jats:surname>
+                                <jats:given-names>CC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Stanistreet</jats:surname>
+                                <jats:given-names>IG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ashley</jats:surname>
+                                <jats:given-names>GM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>McHenry</jats:surname>
+                                <jats:given-names>LJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sikes</jats:surname>
+                                <jats:given-names>NE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Van Der Merwe</jats:surname>
+                                <jats:given-names>NJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tactikos</jats:surname>
+                                <jats:given-names>JC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Cushing</jats:surname>
+                                <jats:given-names>AE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Deocampo</jats:surname>
+                                <jats:given-names>DM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Njau</jats:surname>
+                                <jats:given-names>JK</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ebert</jats:surname>
+                                <jats:given-names>JI</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Late Pliocene <jats:italic>Homo</jats:italic> and hominid land use from
+                            western Olduvai Gorge, Tanzania
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1075374</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Boaz</jats:surname>
+                                <jats:given-names>NT</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Howell</jats:surname>
+                                <jats:given-names>FC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A gracile hominid cranium from upper member G of the Shungura formation,
+                            Ethiopia</jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.1330460113</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Brown</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Soejono</jats:surname>
+                                <jats:given-names>RP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saptomo</jats:surname>
+                                <jats:given-names>EW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Due</jats:surname>
+                                <jats:given-names>RA</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A new small-bodied hominin from the Late Pleistocene of Flores,
+                            Indonesia</jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature02999</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Stout</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jashashvili</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>DJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tafforeau</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>K</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The endocast of MH1, <jats:italic>Australopithecus sediba</jats:italic></jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1203922</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Holliday</jats:surname>
+                                <jats:given-names>TW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jashashvili</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Macias</jats:surname>
+                                <jats:given-names>ME</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mathews</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sparling</jats:surname>
+                                <jats:given-names>TL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>DJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The upper limb of <jats:italic>Australopithecus sediba</jats:italic></jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1233477</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Clarke</jats:surname>
+                                <jats:given-names>RJ</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Latest information on Sterkfontein's <jats:italic>Australopithecus</jats:italic>
+                            skeleton and a new look at <jats:italic>Australopithecus</jats:italic>
+                        </jats:article-title>
+                        <jats:source>South African Journal of Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1590/S0038-23532008000600015</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Dembo</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Matzke</jats:surname>
+                                <jats:given-names>NJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mooers</jats:surname>
+                                <jats:given-names>AØ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Collard</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Bayesian analysis of a morphological supermatrix sheds light on controversial
+                            fossil hominin relationships
+                        </jats:article-title>
+                        <jats:source>Proceedings of the Royal Society B</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1098/rspb.2015.0943</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>DeSilva</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Holt</jats:surname>
+                                <jats:given-names>KG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Walker</jats:surname>
+                                <jats:given-names>CS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Zipfel</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The lower limb and mechanics of walking in <jats:italic>Australopithecus
+                            sediba</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1232999</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Dirks</jats:surname>
+                                <jats:given-names>PHGM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Roberts</jats:surname>
+                                <jats:given-names>EM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kramers</jats:surname>
+                                <jats:given-names>JD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hawks</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Randolph-Quinney</jats:surname>
+                                <jats:given-names>PS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Elliott</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Musiba</jats:surname>
+                                <jats:given-names>CM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>DJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Backwell</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Belyanin</jats:surname>
+                                <jats:given-names>GA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Boshoff</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hunter</jats:surname>
+                                <jats:given-names>KL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Feuerriegel</jats:surname>
+                                <jats:given-names>EM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Gurtov</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>du G Harrison</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hunter</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kruger</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morris</jats:surname>
+                                <jats:given-names>H</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Makhubela</jats:surname>
+                                <jats:given-names>TV</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Peixotto</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tucker</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Geological and taphonomic evidence for deliberate body disposal by the
+                            primitive hominin species <jats:italic>Homo naledi</jats:italic> from the Dinaledi
+                            Chamber, South Africa
+                        </jats:article-title>
+                        <jats:source>eLife</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.7554/eLife.09561</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Domínguez-Rodrigo</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Pickering</jats:surname>
+                                <jats:given-names>TR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Baquedano</jats:surname>
+                                <jats:given-names>E</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mabulla</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mark</jats:surname>
+                                <jats:given-names>DF</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Musiba</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Bunn</jats:surname>
+                                <jats:given-names>HT</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Uribelarrea</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Smith</jats:surname>
+                                <jats:given-names>V</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Diez-Martin</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Pérez-González</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sánchez</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Santonja</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Barboni</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Gidna</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ashley</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Yravedra</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Heaton</jats:surname>
+                                <jats:given-names>JL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Arriaza</jats:surname>
+                                <jats:given-names>MC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>First partial skeleton of a 1.34-million-year-old <jats:italic>Paranthropus
+                            boisei</jats:italic> from Bed II, Olduvai Gorge, Tanzania
+                        </jats:article-title>
+                        <jats:source>PLOS ONE</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1371/journal.pone.0080347</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Drapeau</jats:surname>
+                                <jats:given-names>MS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ward</jats:surname>
+                                <jats:given-names>CV</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kimbel</jats:surname>
+                                <jats:given-names>WH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Johanson</jats:surname>
+                                <jats:given-names>DC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rak</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Associated cranial and forelimb remains attributed to <jats:italic>Australopithecus
+                            afarensis</jats:italic> from Hadar, Ethiopia
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2005.02.005</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Falk</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hildebolt</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Smith</jats:surname>
+                                <jats:given-names>K</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brown</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jatmiko</jats:surname>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saptomo</jats:surname>
+                                <jats:given-names>EW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brunsden</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Prior</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The brain of LB1,
+                            <jats:italic>Homo floresiensis</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1109727</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Fully</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Une nouvelle méthode de détermination de la taille</jats:article-title>
+                        <jats:source>Annales de Médecine Légale, Criminologie, Police Scientifique et Toxicologie</jats:source>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Gabunia</jats:surname>
+                                <jats:given-names>L</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Vekua</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lordkipanidze</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Swisher</jats:surname>
+                                <jats:given-names>CC</jats:given-names>
+                                <jats:suffix>III</jats:suffix>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ferring</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Justus</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nioradze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tvalchrelidze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Antón</jats:surname>
+                                <jats:given-names>SC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Bosinski</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jöris</jats:surname>
+                                <jats:given-names>O</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lumley</jats:surname>
+                                <jats:given-names>MA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Majsuradze</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mouskhelishvili</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Earliest Pleistocene hominid cranial remains from Dmanisi, Republic of
+                            Georgia: taxonomy, geological setting and age
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.288.5468.1019</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Grine</jats:surname>
+                                <jats:given-names>FE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Demes</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Cole</jats:surname>
+                                <jats:given-names>TM</jats:given-names>
+                                <jats:suffix>III</jats:suffix>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Taxonomic affinity of the early <jats:italic>Homo</jats:italic> cranium
+                            from Swartkrans, South Africa
+                        </jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.1330920402</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Grine</jats:surname>
+                                <jats:given-names>FE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tobias</jats:surname>
+                                <jats:given-names>PV</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Pearson</jats:surname>
+                                <jats:given-names>OM</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Fossil <jats:italic>Homo</jats:italic> femur from Berg Aukas, northern
+                            Namibia
+                        </jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.1330970207</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Grine</jats:surname>
+                                <jats:given-names>FE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schultz</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Phenetic affinities among early <jats:italic>Homo crania</jats:italic>
+                            from East and South Africa
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1006/jhev.1996.0019</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Haile-Selassie</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Latimer</jats:surname>
+                                <jats:given-names>BM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Alene</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Deino</jats:surname>
+                                <jats:given-names>AL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Gibert</jats:surname>
+                                <jats:given-names>L</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Melillo</jats:surname>
+                                <jats:given-names>SM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saylor</jats:surname>
+                                <jats:given-names>BZ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Scott</jats:surname>
+                                <jats:given-names>GR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lovejoy</jats:surname>
+                                <jats:given-names>CO</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>An early <jats:italic>Australopithecus afarensis</jats:italic>
+                            postcranium from Woranso-Mille, Ethiopia
+                        </jats:article-title>
+                        <jats:source>Proceedings of the National Academy of Sciences of USA</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1073/pnas.1004527107</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Harcourt-Smith</jats:surname>
+                                <jats:given-names>WEH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Throckmorton</jats:surname>
+                                <jats:given-names>Z</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Congdon</jats:surname>
+                                <jats:given-names>KA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Zipfel</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Deane</jats:surname>
+                                <jats:given-names>AS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Drapeau</jats:surname>
+                                <jats:given-names>MSM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>DeSilva</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The foot of
+                            <jats:italic>Homo naledi</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Nature Communications</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/ncomms9432</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Hawks</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hunley</jats:surname>
+                                <jats:given-names>K</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lee</jats:surname>
+                                <jats:given-names>SH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Wolpoff</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Population bottlenecks and Pleistocene human evolution</jats:article-title>
+                        <jats:source>Molecular Biology and Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1093/oxfordjournals.molbev.a026233</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Holliday</jats:surname>
+                                <jats:given-names>TW</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Body size, body shape, and the circumscription of the genus
+                            <jats:italic>Homo</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Current Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1086/667360</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Johanson</jats:surname>
+                                <jats:given-names>DC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Masao</jats:surname>
+                                <jats:given-names>FT</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Eck</jats:surname>
+                                <jats:given-names>GG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>White</jats:surname>
+                                <jats:given-names>TD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Walter</jats:surname>
+                                <jats:given-names>RC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kimbel</jats:surname>
+                                <jats:given-names>WH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Asfaw</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Manega</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ndessokia</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Suwa</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>New partial skeleton of <jats:italic>Homo habilis</jats:italic> from
+                            Olduvai Gorge, Tanzania
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/327205a0</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Johanson</jats:surname>
+                                <jats:given-names>DC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Taieb</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Coppens</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Pliocene hominids from the Hadar formation, Ethiopia (1973–1977):
+                            Stratigraphic, chronologic, and paleoenvironmental contexts, with notes on hominid
+                            morphology and systematics
+                        </jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.1330570402</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Harcourt-Smith</jats:surname>
+                                <jats:given-names>WE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Wunderlich</jats:surname>
+                                <jats:given-names>RE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Larson</jats:surname>
+                                <jats:given-names>SG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Due</jats:surname>
+                                <jats:given-names>RA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The foot of <jats:italic>Homo floresiensis</jats:italic></jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature07989</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Larson</jats:surname>
+                                <jats:given-names>SG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Harcourt-Smith</jats:surname>
+                                <jats:given-names>W</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Awe</jats:surname>
+                                <jats:given-names>RD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Djubiantono</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Descriptions of the lower limb skeleton of <jats:italic>Homo
+                            floresiensis</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2008.08.014</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Keyser</jats:surname>
+                                <jats:given-names>AW</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The Drimolen skull: the most complete australopithecine cranium and
+                            mandible to date
+                        </jats:article-title>
+                        <jats:source>South African Journal of Science</jats:source>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Keyser</jats:surname>
+                                <jats:given-names>AW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Menter</jats:surname>
+                                <jats:given-names>CG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Moggi-Cecchi</jats:surname>
+                                <jats:given-names>JJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Pickering</jats:surname>
+                                <jats:given-names>TR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Drimolen: a new hominin-bearing site in Gauteng, South Africa</jats:article-title>
+                        <jats:source>South African Journal of Science</jats:source>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Kimbel</jats:surname>
+                                <jats:given-names>WH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Johanson</jats:surname>
+                                <jats:given-names>DC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rak</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Systematic assessment of a maxilla of Homo from Hadar, Ethiopia</jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/(SICI)1096-8644(199706)103:2&lt;235::AID-AJPA8&gt;3.0.CO;2-S</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Kivell</jats:surname>
+                                <jats:given-names>TL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kibii</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title><jats:italic>Australopithecus sediba</jats:italic> hand demonstrates mosaic
+                            evolution of locomotor and manipulative abilities
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1202625</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Kivell</jats:surname>
+                                <jats:given-names>TL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Deane</jats:surname>
+                                <jats:given-names>AS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Orr</jats:surname>
+                                <jats:given-names>CM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hawks</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The hand of <jats:italic>Homo naledi</jats:italic></jats:article-title>
+                        <jats:source>Nature Communications</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/ncomms9431</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Leakey</jats:surname>
+                                <jats:given-names>MG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Spoor</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Dean</jats:surname>
+                                <jats:given-names>MC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Feibel</jats:surname>
+                                <jats:given-names>CS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Antón</jats:surname>
+                                <jats:given-names>SC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kiarie</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Leakey</jats:surname>
+                                <jats:given-names>LN</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>New fossils from Koobi Fora in northern Kenya confirm taxonomic diversity
+                            in early Homo
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature11322</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Lee</jats:surname>
+                                <jats:given-names>SH</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Assigned resampling method: a new method to estimate size sexual dimorphism
+                            in samples of unknown sex
+                        </jats:article-title>
+                        <jats:source>Przegląd Antropologiczny Anthropological Review</jats:source>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Lordkipanidze</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jashashvili</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Vekua</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ponce de León</jats:surname>
+                                <jats:given-names>MS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Zollikofer</jats:surname>
+                                <jats:given-names>CP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rightmire</jats:surname>
+                                <jats:given-names>GP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Pontzer</jats:surname>
+                                <jats:given-names>H</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ferring</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Oms</jats:surname>
+                                <jats:given-names>O</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tappen</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Bukhsianidze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Agusti</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kahlke</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kiladze</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Martinez-Navarro</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mouskhelishvili</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nioradze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rook</jats:surname>
+                                <jats:given-names>L</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Postcranial evidence from early <jats:italic>Homo</jats:italic> from
+                            Dmanisi, Georgia
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature06134</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Lordkipanidze</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ponce de León</jats:surname>
+                                <jats:given-names>MS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Margvelashvili</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rak</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rightmire</jats:surname>
+                                <jats:given-names>GP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Vekua</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Zollikofer</jats:surname>
+                                <jats:given-names>CP</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A complete skull from Dmanisi, Georgia, and the evolutionary biology of
+                            early <jats:italic>Homo</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1238484</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>McKellar</jats:surname>
+                                <jats:given-names>AE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hendry</jats:surname>
+                                <jats:given-names>AP</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>How humans differ from other animals in their levels of morphological
+                            variation
+                        </jats:article-title>
+                        <jats:source>PLOS ONE</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1371/journal.pone.0006876</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brown</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saptomo</jats:surname>
+                                <jats:given-names>EW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Westaway</jats:surname>
+                                <jats:given-names>KE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Due</jats:surname>
+                                <jats:given-names>RA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Roberts</jats:surname>
+                                <jats:given-names>RG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Maeda</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Wasisto</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Djubiantono</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Further evidence for small-bodied hominins from the Late Pleistocene of
+                            Flores, Indonesia
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature04022</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Orr</jats:surname>
+                                <jats:given-names>CM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Burnett</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Awe</jats:surname>
+                                <jats:given-names>RD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saptomo</jats:surname>
+                                <jats:given-names>EW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jatmiko</jats:surname>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Wasisto</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>New wrist bones for <jats:italic>Homo floresiensis</jats:italic> from
+                            liang bua (Flores, Indonesia)
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2012.10.003</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Raxter</jats:surname>
+                                <jats:given-names>MH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Auerbach</jats:surname>
+                                <jats:given-names>BM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ruff</jats:surname>
+                                <jats:given-names>CB</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Revision of the fully technique for estimating statures</jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.20361</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Rightmire</jats:surname>
+                                <jats:given-names>GP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lordkipadnize</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Vekua</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Anatomical descriptions, comparative studies and evolutionary significance
+                            of the hominin skulls from Dmanisi, Republic of Georgia
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2005.07.009</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Rolian</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Gordon</jats:surname>
+                                <jats:given-names>AD</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Reassessing manual proportions in <jats:italic>Australopithecus
+                            afarensis</jats:italic>
+                        </jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/ajpa.22365</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Ruff</jats:surname>
+                                <jats:given-names>CB</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Trinkaus</jats:surname>
+                                <jats:given-names>E</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Holliday</jats:surname>
+                                <jats:given-names>TW</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Body mass and encephalization in Pleistocene <jats:italic>Homo</jats:italic></jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/387173a0</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Schmid</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nalla</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Weissen</jats:surname>
+                                <jats:given-names>E</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>DJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Mosaic morphology in the thorax of <jats:italic>Australopithecus
+                            sediba</jats:italic>
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1234598</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Schrenk</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Bromage</jats:surname>
+                                <jats:given-names>TG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Betzler</jats:surname>
+                                <jats:given-names>CG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ring</jats:surname>
+                                <jats:given-names>U</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Juwayeyi</jats:surname>
+                                <jats:given-names>YM</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Oldest <jats:italic>Homo</jats:italic> and Pliocene biogeography of the
+                            Malawi rift
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/365833a0</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Spoor</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Leakey</jats:surname>
+                                <jats:given-names>MG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Gathogo</jats:surname>
+                                <jats:given-names>PN</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brown</jats:surname>
+                                <jats:given-names>FH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Antón</jats:surname>
+                                <jats:given-names>SC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>McDougall</jats:surname>
+                                <jats:given-names>I</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kiarie</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Manthi</jats:surname>
+                                <jats:given-names>FK</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Leakey</jats:surname>
+                                <jats:given-names>LN</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Implications of new early <jats:italic>Homo</jats:italic> fossils from
+                            Ileret, east of Lake Turkana, Kenya
+                        </jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/nature05986</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Stock</jats:surname>
+                                <jats:given-names>JT</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The skeletal phenotype of ‘Negritos’ from the Andaman Islands and
+                            Philippines relative to global variation among hunter-gatherers
+                        </jats:article-title>
+                        <jats:source>Human Biology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.3378/027.085.0304</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Susman</jats:surname>
+                                <jats:given-names>RL</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Hand of <jats:italic>Paranthropus robustus</jats:italic> from Member 1,
+                            Swartkrans: fossil evidence for tool behavior
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.3129783</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Susman</jats:surname>
+                                <jats:given-names>RL</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>de Ruiter</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brain</jats:surname>
+                                <jats:given-names>CK</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Recently identified postcranial remains of <jats:italic>Paranthropus</jats:italic>
+                            and early <jats:italic>Homo</jats:italic> from Swartkrans Cave, South Africa
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1006/jhev.2001.0510</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Suwa</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Asfaw</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Beyene</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>White</jats:surname>
+                                <jats:given-names>TD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Katoh</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nagaoka</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nakaya</jats:surname>
+                                <jats:given-names>H</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Uzawa</jats:surname>
+                                <jats:given-names>K</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Renne</jats:surname>
+                                <jats:given-names>P</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>WoldeGabriel</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The first skull of <jats:italic>Australopithecus boisei</jats:italic></jats:article-title>
+                        <jats:source>Nature</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1038/39037</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Suwa</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>White</jats:surname>
+                                <jats:given-names>TD</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Howell</jats:surname>
+                                <jats:given-names>FC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Mandibular postcanine dentition from the Shungura formation, Ethiopia:
+                            crown morphology, taxonomic allocations, and Plio-Pleistocene hominid evolution
+                        </jats:article-title>
+                        <jats:source>American Journal of Physical Anthropology</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1002/(SICI)1096-8644(199610)101:2&lt;247::AID-AJPA9&gt;3.0.CO;2-Z</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Suwa</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Asfaw</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Haile-Selassie</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>White</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Katoh</jats:surname>
+                                <jats:given-names>S</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Woldegabriel</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Hart</jats:surname>
+                                <jats:given-names>WK</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nakaya</jats:surname>
+                                <jats:given-names>H</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Beyene</jats:surname>
+                                <jats:given-names>Y</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Early pleistocene <jats:italic>Homo erectus</jats:italic> fossils from
+                            konso, southern Ethiopia
+                        </jats:article-title>
+                        <jats:source>Anthropological Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1537/ase.061203</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Orr</jats:surname>
+                                <jats:given-names>CM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Larson</jats:surname>
+                                <jats:given-names>SG</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Sutikna</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jatmiko</jats:surname>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Saptomo</jats:surname>
+                                <jats:given-names>EW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Due</jats:surname>
+                                <jats:given-names>RA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Djubiantono</jats:surname>
+                                <jats:given-names>T</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Morwood</jats:surname>
+                                <jats:given-names>MJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Jungers</jats:surname>
+                                <jats:given-names>WL</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The primitive wrist of <jats:italic>Homo floresiensis</jats:italic> and its
+                            implicatiosn for hominin evolution
+                        </jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1147143</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Razdan</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Williams</jats:surname>
+                                <jats:given-names>RC</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Marzke</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A 3D quantitative comparison of trapezium and trapezoid relative articular
+                            and nonarticular surface areas in modern humans and great apes
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2005.06.005</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Vekua</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Lordkipanidze</jats:surname>
+                                <jats:given-names>D</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Rightmire</jats:surname>
+                                <jats:given-names>GP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Agusti</jats:surname>
+                                <jats:given-names>J</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Ferring</jats:surname>
+                                <jats:given-names>R</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Maisuradze</jats:surname>
+                                <jats:given-names>G</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Mouskhelishvili</jats:surname>
+                                <jats:given-names>A</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Nioradze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>De Leon</jats:surname>
+                                <jats:given-names>MP</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tappen</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tvalchrelidze</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Zollikofer</jats:surname>
+                                <jats:given-names>C</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>A new skull of early <jats:italic>Homo</jats:italic> from Dmanisi, Georgia</jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1072953</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Ward</jats:surname>
+                                <jats:given-names>CV</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kimbel</jats:surname>
+                                <jats:given-names>WH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Harmon</jats:surname>
+                                <jats:given-names>EH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Johanson</jats:surname>
+                                <jats:given-names>DC</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>New postcranial fossils of <jats:italic>Australopithecus afarensis</jats:italic>
+                            from hadar, Ethiopia (1990–2007)
+                        </jats:article-title>
+                        <jats:source>Journal of Human Evolution</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1016/j.jhevol.2011.11.012</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Ward</jats:surname>
+                                <jats:given-names>CV</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Tocheri</jats:surname>
+                                <jats:given-names>MW</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Plavcan</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Brown</jats:surname>
+                                <jats:given-names>FH</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kyalo Manthi</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>Early Pleistocene third metacarpal from Kenya and the evolution of modern
+                            human-like hand morphology
+                        </jats:article-title>
+                        <jats:source>Proceedings of the National Academy of Sciences of USA</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1073/pnas.1316014110</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Weidenreich</jats:surname>
+                                <jats:given-names>F</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The skull of <jats:italic>Sinanthropus</jats:italic></jats:article-title>
+                        <jats:source>Palaeontologia Sinica</jats:source>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Wood</jats:surname>
+                                <jats:given-names>BA</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Collard</jats:surname>
+                                <jats:given-names>M</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The human genus</jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.284.5411.65</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+                <jats:ref>
+                    <jats:element-citation>
+                        <jats:person-group person-group-type="author">
+                            <jats:name>
+                                <jats:surname>Zipfel</jats:surname>
+                                <jats:given-names>B</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>DeSilva</jats:surname>
+                                <jats:given-names>JM</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Kidd</jats:surname>
+                                <jats:given-names>RS</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Carlson</jats:surname>
+                                <jats:given-names>KJ</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Churchill</jats:surname>
+                                <jats:given-names>SE</jats:given-names>
+                            </jats:name>
+                            <jats:name>
+                                <jats:surname>Berger</jats:surname>
+                                <jats:given-names>LR</jats:given-names>
+                            </jats:name>
+                        </jats:person-group>
+                        <jats:article-title>The foot and ankle of <jats:italic>Australopithecus sediba</jats:italic></jats:article-title>
+                        <jats:source>Science</jats:source>
+                        <jats:pub-id pub-id-type="doi">10.1126/science.1202703</jats:pub-id>
+                    </jats:element-citation>
+                </jats:ref>
+
+            </jats:ref-list>
+
+        </jats:back>
+
     </jats:article>
 
 </item>
