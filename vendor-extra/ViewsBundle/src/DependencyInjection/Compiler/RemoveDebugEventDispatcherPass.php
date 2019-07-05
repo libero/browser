@@ -7,7 +7,7 @@ namespace Libero\ViewsBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-final class DebugEventDispatcherPass implements CompilerPassInterface
+final class RemoveDebugEventDispatcherPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container) : void
     {
