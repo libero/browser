@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Libero\JatsContentBundle\EventListener;
 
+use DOMNodeList;
 use FluentDOM\DOM\Element;
 use Libero\LiberoPageBundle\Event\CreatePagePartEvent;
+use Libero\ViewsBundle\Views\ConvertsLists;
 use Libero\ViewsBundle\Views\ViewConverter;
+use function count;
 use const Libero\LiberoPatternsBundle\CONTENT_GRID_PRIMARY;
 
 final class ReferencesListener
 {
     private const REF_LIST_PATH = '/libero:item/jats:article/jats:back/jats:ref-list';
 
-    private $converter;
+    use ConvertsLists;
 
     public function __construct(ViewConverter $converter)
     {
@@ -26,9 +29,10 @@ final class ReferencesListener
             return;
         }
 
-        $refList = $event->getDocument('content_item')->xpath()->firstOf(self::REF_LIST_PATH);
+        /** @var DOMNodeList<Element> $refLists */
+        $refLists = $event->getDocument('content_item')(self::REF_LIST_PATH);
 
-        if (!$refList instanceof Element) {
+        if (0 === count($refLists)) {
             return;
         }
 
@@ -37,6 +41,6 @@ final class ReferencesListener
                 'level' => ($event->getContext()['level'] ?? 1) + 1,
             ] + $event->getContext();
 
-        $event->addContent($this->converter->convert($refList, '@LiberoPatterns/section.html.twig', $context));
+        $event->addContent(...$this->convertList($refLists, '@LiberoPatterns/section.html.twig', $context));
     }
 }
