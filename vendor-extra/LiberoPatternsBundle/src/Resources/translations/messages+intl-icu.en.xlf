@@ -8,20 +8,28 @@
 
         <body>
 
-            <trans-unit id="1" resname="libero.patterns.content_header.categories.label">
+            <trans-unit id="1" resname="libero.patterns.categories.label">
                 <source>Categories that include this item</source>
             </trans-unit>
 
-            <trans-unit id="2" resname="libero.patterns.content_header.meta.label">
+            <trans-unit id="2" resname="libero.patterns.meta.label">
                 <source>Publication details</source>
             </trans-unit>
 
-            <trans-unit id="3" resname="libero.patterns.content_header.meta.type.label">
+            <trans-unit id="3" resname="libero.patterns.meta.type.label">
                 <source>Type of article</source>
             </trans-unit>
 
-            <trans-unit id="4" resname="libero.patterns.content_header.meta.date.label">
+            <trans-unit id="4" resname="libero.patterns.meta.date.label">
                 <source>Publication date</source>
+            </trans-unit>
+
+            <trans-unit id="5" resname="libero.patterns.authors">
+                <source>{ count, plural,
+                    =1 {{author1}}
+                    =2 {{author1}, {author2}}
+                    other {{author1} et al.}
+                }</source>
             </trans-unit>
 
         </body>

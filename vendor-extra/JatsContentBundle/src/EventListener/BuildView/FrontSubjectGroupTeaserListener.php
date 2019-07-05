@@ -17,7 +17,7 @@ use function array_map;
 use function count;
 use function Libero\ViewsBundle\array_has_key;
 
-final class FrontSubjectGroupContentHeaderListener
+final class FrontSubjectGroupTeaserListener
 {
     use ContextAwareTranslation;
     use ConvertsLists;
@@ -59,7 +59,7 @@ final class FrontSubjectGroupContentHeaderListener
 
     protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/teaser.html.twig';
     }
 
     protected function canHandleElement(Element $element) : bool

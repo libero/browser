@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
-use Libero\JatsContentBundle\EventListener\BuildView\FrontSubjectGroupContentHeaderListener;
+use Libero\JatsContentBundle\EventListener\BuildView\FrontContribAuthorTeaserListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ use Symfony\Component\Translation\Translator;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
-final class FrontSubjectGroupContentHeaderListenerTest extends TestCase
+final class FrontContribAuthorTeaserListenerTest extends TestCase
 {
     use ViewConvertingTestCase;
     use XmlTestCase;
@@ -25,19 +25,16 @@ final class FrontSubjectGroupContentHeaderListenerTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $listener = new FrontSubjectGroupContentHeaderListener(
-            $this->createFailingConverter(),
-            new IdentityTranslator()
-        );
+        $listener = new FrontContribAuthorTeaserListener($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/teaser.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -51,23 +48,18 @@ final class FrontSubjectGroupContentHeaderListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_does_nothing_if_is_not_the_content_header_template() : void
+    public function it_does_nothing_if_is_not_the_teaser_template() : void
     {
-        $listener = new FrontSubjectGroupContentHeaderListener(
-            $this->createFailingConverter(),
-            new IdentityTranslator()
-        );
+        $listener = new FrontContribAuthorTeaserListener($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
     <article-meta>
-        <article-categories>
-            <subj-group subj-group-type="heading">
-                <subject>foo</subject>
-            </subj-group>
-        </article-categories>
+        <contrib-group>
+            <contrib contrib-type="author"/>
+        </contrib-group>
     </article-meta>
 </front>
 XML
@@ -86,34 +78,29 @@ XML
     /**
      * @test
      */
-    public function it_does_nothing_if_there_are_no_subject_groups() : void
+    public function it_does_nothing_if_there_is_no_author_contrib() : void
     {
-        $listener = new FrontSubjectGroupContentHeaderListener(
-            $this->createFailingConverter(),
-            new IdentityTranslator()
-        );
+        $listener = new FrontContribAuthorTeaserListener($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
     <article-meta>
-        <article-categories>
-            <subj-group subj-group-type="not-heading">
-                <subject>foo</subject>
-            </subj-group>
-        </article-categories>
+        <contrib-group>
+            <contrib contrib-type="not-author"/>
+        </contrib-group>
     </article-meta>
 </front>
 XML
         );
 
-        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/teaser.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -121,23 +108,18 @@ XML
     /**
      * @test
      */
-    public function it_does_nothing_if_there_is_already_categories_set() : void
+    public function it_does_nothing_if_there_is_already_details_set() : void
     {
-        $listener = new FrontSubjectGroupContentHeaderListener(
-            $this->createFailingConverter(),
-            new IdentityTranslator()
-        );
+        $listener = new FrontContribAuthorTeaserListener($this->createFailingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <front xmlns="http://jats.nlm.nih.gov">
     <article-meta>
-        <article-categories>
-            <subj-group subj-group-type="heading">
-                <subject>foo</subject>
-            </subj-group>
-        </article-categories>
+        <contrib-group>
+            <contrib contrib-type="author"/>
+        </contrib-group>
     </article-meta>
 </front>
 XML
@@ -145,93 +127,95 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/content-header.html.twig', ['categories' => 'bar'])
+            new TemplateView('@LiberoPatterns/teaser.html.twig', ['details' => 'bar'])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
-        $this->assertSame(['categories' => 'bar'], $view->getArguments());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
+        $this->assertSame(['details' => 'bar'], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
 
     /**
      * @test
      */
-    public function it_sets_the_categories_argument() : void
+    public function it_sets_the_details_argument() : void
     {
         $translator = new Translator('en');
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.categories.label' => 'categories label in es'],
+            ['libero.patterns.authors' => '{count} {author1} {author2} {author3}'],
             'es',
             'messages'
         );
 
-        $listener = new FrontSubjectGroupContentHeaderListener($this->createDumpingConverter(), $translator);
+        $listener = new FrontContribAuthorTeaserListener($this->createDumpingConverter(), $translator);
 
         $element = $this->loadElement(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <jats:front xmlns:jats="http://jats.nlm.nih.gov">
     <jats:article-meta>
-        <jats:article-categories>
-            <jats:subj-group subj-group-type="heading">
-                <jats:subject>foo</jats:subject>
-                <jats:subject>bar</jats:subject>
-            </jats:subj-group>
-            <jats:subj-group subj-group-type="heading">
-                <jats:subject>baz</jats:subject>
-            </jats:subj-group>
-        </jats:article-categories>
+        <jats:contrib-group>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
+            <jats:contrib contrib-type="author"/>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
+            <jats:contrib contrib-type="not-author"><jats:name/></jats:contrib>
+        </jats:contrib-group>
+        <jats:contrib-group>
+            <jats:contrib/>
+            <jats:contrib contrib-type="author"><jats:name/></jats:contrib>
+        </jats:contrib-group>
     </jats:article-meta>
 </jats:front>
 XML
         );
 
         $context = ['lang' => 'es'];
+
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/content-header.html.twig', [], $context)
+            new TemplateView('@LiberoPatterns/teaser.html.twig', [], $context)
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
-                'categories' => [
-                    'attributes' => [
-                        'aria-label' => 'categories label in es',
-                    ],
-                    'items' => [
-                        [
-                            'content' => [
-                                'node' => '/jats:front/jats:article-meta/jats:article-categories/'
-                                    .'jats:subj-group[1]/jats:subject[1]',
+                'details' => [
+                    'text' => [
+                        '3 ',
+                        new TemplateView(
+                            '',
+                            [
+                                'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[1]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => ['lang' => 'es'],
-                            ],
-                        ],
-                        [
-                            'content' => [
-                                'node' => '/jats:front/jats:article-meta/jats:article-categories/'
-                                    .'jats:subj-group[1]/jats:subject[2]',
+                            ]
+                        ),
+                        ' ',
+                        new TemplateView(
+                            '',
+                            [
+                                'node' => '/jats:front/jats:article-meta/jats:contrib-group[1]/jats:contrib[3]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => ['lang' => 'es'],
-                            ],
-                        ],
-                        [
-                            'content' => [
-                                'node' => '/jats:front/jats:article-meta/jats:article-categories/'
-                                    .'jats:subj-group[2]/jats:subject',
+                            ]
+                        ),
+                        ' ',
+                        new TemplateView(
+                            '',
+                            [
+                                'node' => '/jats:front/jats:article-meta/jats:contrib-group[2]/jats:contrib[2]',
                                 'template' => '@LiberoPatterns/link.html.twig',
                                 'context' => ['lang' => 'es'],
-                            ],
-                        ],
+                            ]
+                        ),
                     ],
                 ],
             ],

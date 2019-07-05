@@ -2,6 +2,10 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list']) }) -%}
 
+{%- if compact|default(false) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['tag-list--compact']) }) -%}
+{%- endif -%}
+
 <div {{- html.attributes(attributes) }}>
 
   {%- with title|default({}) only -%}

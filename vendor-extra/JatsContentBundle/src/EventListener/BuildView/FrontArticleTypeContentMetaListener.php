@@ -46,7 +46,7 @@ final class FrontArticleTypeContentMetaListener
 
         $items['type'] = [
             'attributes' => [
-                'aria-label' => $this->translate('libero.patterns.content_header.meta.type.label', $view->getContext()),
+                'aria-label' => $this->translate('libero.patterns.meta.type.label', $view->getContext()),
             ],
             'content' => [
                 'text' => $this->translate($this->translationKeys[$type], $view->getContext()),

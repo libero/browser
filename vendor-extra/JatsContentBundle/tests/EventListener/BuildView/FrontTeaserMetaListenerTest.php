@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Libero\JatsContentBundle\EventListener\BuildView;
 
-use Libero\JatsContentBundle\EventListener\BuildView\FrontContentHeaderMetaListener;
+use Libero\JatsContentBundle\EventListener\BuildView\FrontTeaserMetaListener;
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ use Symfony\Component\Translation\Translator;
 use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
-final class FrontContentHeaderMetaListenerTest extends TestCase
+final class FrontTeaserMetaListenerTest extends TestCase
 {
     use ViewConvertingTestCase;
     use XmlTestCase;
@@ -25,16 +25,16 @@ final class FrontContentHeaderMetaListenerTest extends TestCase
      */
     public function it_does_nothing_if_it_is_not_a_jats_front_element(string $xml) : void
     {
-        $listener = new FrontContentHeaderMetaListener($this->createDumpingConverter(), new IdentityTranslator());
+        $listener = new FrontTeaserMetaListener($this->createDumpingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement($xml);
 
-        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/content-header.html.twig'));
+        $event = new BuildViewEvent($element, new TemplateView('@LiberoPatterns/teaser.html.twig'));
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertEmpty($view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -48,9 +48,9 @@ final class FrontContentHeaderMetaListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_does_nothing_if_is_not_the_content_header_template() : void
+    public function it_does_nothing_if_is_not_the_teaser_template() : void
     {
-        $listener = new FrontContentHeaderMetaListener($this->createDumpingConverter(), new IdentityTranslator());
+        $listener = new FrontTeaserMetaListener($this->createDumpingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
@@ -74,7 +74,7 @@ XML
      */
     public function it_does_nothing_if_there_is_already_meta_set() : void
     {
-        $listener = new FrontContentHeaderMetaListener($this->createDumpingConverter(), new IdentityTranslator());
+        $listener = new FrontTeaserMetaListener($this->createDumpingConverter(), new IdentityTranslator());
 
         $element = $this->loadElement(
             <<<XML
@@ -85,13 +85,13 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/content-header.html.twig', ['meta' => ['foo']])
+            new TemplateView('@LiberoPatterns/teaser.html.twig', ['meta' => ['foo']])
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertSame(['meta' => ['foo']], $view->getArguments());
         $this->assertEmpty($view->getContext());
     }
@@ -110,7 +110,7 @@ XML
             'messages'
         );
 
-        $listener = new FrontContentHeaderMetaListener($this->createDumpingConverter(), $translator);
+        $listener = new FrontTeaserMetaListener($this->createDumpingConverter(), $translator);
 
         $element = $this->loadElement(
             <<<XML
@@ -123,13 +123,13 @@ XML
 
         $event = new BuildViewEvent(
             $element,
-            new TemplateView('@LiberoPatterns/content-header.html.twig', [], $context)
+            new TemplateView('@LiberoPatterns/teaser.html.twig', [], $context)
         );
         $listener->onBuildView($event);
         $view = $event->getView();
 
         $this->assertInstanceOf(TemplateView::class, $view);
-        $this->assertSame('@LiberoPatterns/content-header.html.twig', $view->getTemplate());
+        $this->assertSame('@LiberoPatterns/teaser.html.twig', $view->getTemplate());
         $this->assertEquals(
             [
                 'meta' => [

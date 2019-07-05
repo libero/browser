@@ -10,7 +10,7 @@
       {%- block categories -%}
 
         {%- if categories.items|default([])|length -%}
-          {%- include '@LiberoPatterns/tag-list.html.twig' with {list: categories|merge({singleLine: true})} only -%}
+          {%- include '@LiberoPatterns/tag-list.html.twig' with {compact: true, list: categories|merge({singleLine: true})} only -%}
         {%- endif -%}
 
       {%- endblock categories -%}
@@ -37,7 +37,7 @@
             {%- block details -%}
 
               {%- if text is defined -%}
-                {%- include '@LiberoPatterns/paragraph.html.twig' -%}
+                {%- include '@LiberoPatterns/paragraph.html.twig' with {attributes: attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__details'])})} -%}
               {%- endif -%}
 
             {%- endblock details -%}
