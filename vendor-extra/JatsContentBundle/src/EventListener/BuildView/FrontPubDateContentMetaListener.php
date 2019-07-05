@@ -49,7 +49,7 @@ final class FrontPubDateContentMetaListener
 
         $items['date'] = [
             'attributes' => [
-                'aria-label' => $this->translate('libero.patterns.content_header.meta.date.label', $view->getContext()),
+                'aria-label' => $this->translate('libero.patterns.meta.date.label', $view->getContext()),
             ],
             'content' => [
                 'text' => [$date->withArgument('format', 'medium')],

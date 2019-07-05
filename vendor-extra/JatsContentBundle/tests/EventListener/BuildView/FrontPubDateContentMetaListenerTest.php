@@ -153,7 +153,7 @@ XML
         $translator->addLoader('array', new ArrayLoader());
         $translator->addResource(
             'array',
-            ['libero.patterns.content_header.meta.date.label' => 'date label in es'],
+            ['libero.patterns.meta.date.label' => 'date label in es'],
             'es',
             'messages'
         );

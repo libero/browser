@@ -2,28 +2,62 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
 
-<div {{- html.attributes(attributes) }}>
+<article {{- html.attributes(attributes) }}>
 
-  {%- with {attributes: {class: []}} -%}
-    {%- block header -%}
+  {%- block body -%}
 
-      {%- set attributes = attributes|merge({class: attributes.class|merge(['teaser__header']) }) -%}
-      <header {{- html.attributes(attributes) }}>
+    {%- with {categories: categories|default({})} only -%}
+      {%- block categories -%}
 
-        {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
-          {%- block heading -%}
+        {%- if categories.items|default([])|length -%}
+          {%- include '@LiberoPatterns/tag-list.html.twig' with {compact: true, list: categories|merge({singleLine: true})} only -%}
+        {%- endif -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__heading']) }) -%}
-            {%- set level = level|default(3) -%}
+      {%- endblock categories -%}
+    {%- endwith -%}
 
-            {%- include '@LiberoPatterns/heading.html.twig' -%}
+    {%- with {attributes: {class: []}} -%}
+      {%- block header -%}
 
-          {%- endblock heading -%}
-        {%- endwith -%}
+        {%- set attributes = attributes|merge({class: attributes.class|merge(['teaser__header']) }) -%}
+        <header {{- html.attributes(attributes) }}>
 
-      </header>
+          {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
+            {%- block heading -%}
 
-    {%- endblock header -%}
-  {%- endwith -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__heading']) }) -%}
+              {%- set level = level|default(3) -%}
 
-</div>
+              {%- include '@LiberoPatterns/heading.html.twig' -%}
+
+            {%- endblock heading -%}
+          {%- endwith -%}
+
+          {%- with details|default({}) only -%}
+            {%- block details -%}
+
+              {%- if text is defined -%}
+                {%- include '@LiberoPatterns/paragraph.html.twig' with {attributes: attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__details'])})} -%}
+              {%- endif -%}
+
+            {%- endblock details -%}
+          {%- endwith -%}
+
+        </header>
+
+      {%- endblock header -%}
+    {%- endwith -%}
+
+    {%- with meta|default({}) only -%}
+      {%- block meta -%}
+
+        {%- if items|default([])|length -%}
+          {%- include '@LiberoPatterns/content-meta.html.twig' -%}
+        {%- endif -%}
+
+      {%- endblock meta -%}
+    {%- endwith -%}
+
+  {%- endblock body -%}
+
+</article>

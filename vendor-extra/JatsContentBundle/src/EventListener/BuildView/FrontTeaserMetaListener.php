@@ -13,7 +13,7 @@ use Libero\ViewsBundle\Views\ViewConverter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function Libero\ViewsBundle\array_has_key;
 
-final class FrontContentHeaderMetaListener
+final class FrontTeaserMetaListener
 {
     use ContextAwareTranslation;
     use ViewBuildingListener;
@@ -41,10 +41,7 @@ final class FrontContentHeaderMetaListener
         }
 
         if (!isset($meta['attributes']['aria-label'])) {
-            $meta['attributes']['aria-label'] = $this->translate(
-                'libero.patterns.meta.label',
-                $view->getContext()
-            );
+            $meta['attributes']['aria-label'] = $this->translate('libero.patterns.meta.label', $view->getContext());
         }
 
         return $view->withArgument('meta', $meta);
@@ -52,7 +49,7 @@ final class FrontContentHeaderMetaListener
 
     protected function template() : string
     {
-        return '@LiberoPatterns/content-header.html.twig';
+        return '@LiberoPatterns/teaser.html.twig';
     }
 
     protected function canHandleElement(Element $element) : bool
