@@ -8,12 +8,10 @@ use Libero\JatsContentBundle\EventListener\BuildView\ElementCitationDoiReference
 use Libero\ViewsBundle\Event\BuildViewEvent;
 use Libero\ViewsBundle\Views\TemplateView;
 use PHPUnit\Framework\TestCase;
-use tests\Libero\LiberoPageBundle\ViewConvertingTestCase;
 use tests\Libero\LiberoPageBundle\XmlTestCase;
 
 final class ElementCitationDoiReferenceListenerTest extends TestCase
 {
-    use ViewConvertingTestCase;
     use XmlTestCase;
 
     /**
