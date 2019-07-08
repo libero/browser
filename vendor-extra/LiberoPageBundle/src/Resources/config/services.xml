@@ -8,6 +8,14 @@
 
         <defaults public="false"/>
 
+        <service id="Libero\LiberoPageBundle\Controller\ExceptionController">
+            <argument type="service" id="twig"/>
+            <argument>%libero.page_template%</argument>
+            <argument type="service" id="event_dispatcher"/>
+            <argument>%kernel.debug%</argument>
+            <tag name="controller.service_arguments"/>
+        </service>
+
         <service id="Libero\LiberoPageBundle\Controller\PageController">
             <argument type="service" id="twig"/>
             <argument>%libero.page_template%</argument>
@@ -82,6 +90,30 @@
             <argument type="service" id="libero.client"/>
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\Error\NotFoundErrorListener">
+            <argument type="service" id="assets.packages"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.error.build" method="onBuildError"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\Error\ServiceUnavailableErrorListener">
+            <argument type="service" id="assets.packages"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.error.build" method="onBuildError"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\Error\ClientErrorListener">
+            <argument type="service" id="assets.packages"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.error.build" method="onBuildError" priority="-100"/>
+        </service>
+
+        <service id="Libero\LiberoPageBundle\EventListener\Error\ServerErrorListener">
+            <argument type="service" id="assets.packages"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.page.error.build" method="onBuildError" priority="-100"/>
         </service>
 
         <service id="libero.page.create.namespace.libero"

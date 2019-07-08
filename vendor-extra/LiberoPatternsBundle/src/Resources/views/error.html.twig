@@ -1,0 +1,32 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['error']) }) -%}
+
+<div {{- html.attributes(attributes|default({})) }}>
+
+  {%- if image.src is defined -%}
+    <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['error__image'])})) }}>
+  {%- endif -%}
+
+  {%- with heading only -%}
+    {%- block heading -%}
+
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['error__heading'])}) -%}
+      {%- set level = level|default(2) -%}
+
+      {%- include '@LiberoPatterns/heading.html.twig' -%}
+
+    {%- endblock heading -%}
+  {%- endwith -%}
+
+  {%- with details|default({}) only -%}
+    {%- block details -%}
+
+      {%- if text is defined -%}
+        {%- include '@LiberoPatterns/paragraph.html.twig' with {attributes: attributes|default({})|merge({class: attributes.class|default([])|merge(['error__details'])})} -%}
+      {%- endif -%}
+
+    {%- endblock details -%}
+  {%- endwith -%}
+
+</div>
