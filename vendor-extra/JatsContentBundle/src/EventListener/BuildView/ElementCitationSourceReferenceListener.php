@@ -33,7 +33,7 @@ final class ElementCitationSourceReferenceListener
 
         return $view->withArgument(
             'details',
-            ['text' => $this->converter->convert($source, '@LiberoPatterns/link.html.twig', $view->getContext())]
+            ['text' => $this->converter->convert($source, '@LiberoPatterns/italic.html.twig', $view->getContext())]
         );
     }
 

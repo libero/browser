@@ -147,7 +147,7 @@ XML
                         '',
                         [
                             'node' => '/jats:element-citation/jats:source',
-                            'template' => '@LiberoPatterns/link.html.twig',
+                            'template' => '@LiberoPatterns/italic.html.twig',
                             'context' => ['bar' => 'baz'],
                         ]
                     ),
