@@ -23,6 +23,11 @@
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="-10"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\ReferencesListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="-2"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\TitleListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.page.create" method="onCreatePage"/>
@@ -135,6 +140,25 @@
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView" priority="50"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ElementCitationArticleTitleReferenceListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ElementCitationAuthorReferenceListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ElementCitationDoiReferenceListener">
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ElementCitationSourceReferenceListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontArticleTitleTeaserListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
@@ -176,6 +200,18 @@
 
         <service id="Libero\JatsContentBundle\EventListener\BuildView\GraphicImageListener">
             <tag name="kernel.event_listener" event="libero.view.template" method="onChooseTemplate"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\ReferenceListListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\RefListSectionListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 
