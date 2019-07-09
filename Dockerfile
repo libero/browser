@@ -85,8 +85,8 @@ USER root
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN touch .phpcs-cache && \
     chown www-data:www-data .phpcs-cache
-COPY tests/ tests/
 COPY .docker/php-test.ini ${PHP_INI_DIR}/conf.d/01-app.ini
+COPY tests/ tests/
 COPY composer.json \
     composer.lock \
     phpcs.xml.dist \
