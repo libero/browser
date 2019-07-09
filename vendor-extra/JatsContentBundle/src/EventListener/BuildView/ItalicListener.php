@@ -11,6 +11,7 @@ use Libero\ViewsBundle\Views\TemplateView;
 use Libero\ViewsBundle\Views\ViewBuildingListener;
 use Libero\ViewsBundle\Views\ViewConverter;
 use function Libero\ViewsBundle\array_has_key;
+use function Libero\ViewsBundle\string_is;
 
 final class ItalicListener
 {
@@ -35,7 +36,11 @@ final class ItalicListener
 
     protected function canHandleElement(Element $element) : bool
     {
-        return '{http://jats.nlm.nih.gov}italic' === $element->clarkNotation();
+        return string_is(
+            $element->clarkNotation(),
+            '{http://jats.nlm.nih.gov}italic',
+            '{http://jats.nlm.nih.gov}source'
+        );
     }
 
     protected function canHandleArguments(array $arguments) : bool
