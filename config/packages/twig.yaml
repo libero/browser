@@ -2,4 +2,6 @@ twig:
     debug: '%kernel.debug%'
     default_path: '%kernel.project_dir%/templates'
     exception_controller: Libero\LiberoPageBundle\Controller\ExceptionController::showAction
+    globals:
+        gtm_id: '%env(GTM_ID)%'
     strict_variables: '%kernel.debug%'
