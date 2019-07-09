@@ -28,6 +28,38 @@
                 <source>References</source>
             </trans-unit>
 
+            <trans-unit id="6" resname="libero.page.error.server_error.heading">
+                <source>Kabooooooom!</source>
+            </trans-unit>
+
+            <trans-unit id="7" resname="libero.page.error.server_error.details">
+                <source>Something has gone seriously wrong. We’ve logged the problem and will look into it.</source>
+            </trans-unit>
+
+            <trans-unit id="8" resname="libero.page.error.client_error.heading">
+                <source>Say what?</source>
+            </trans-unit>
+
+            <trans-unit id="9" resname="libero.page.error.client_error.details">
+                <source>Your browser sent us something unexpected. We’ve logged the problem and will look into it.</source>
+            </trans-unit>
+
+            <trans-unit id="10" resname="libero.page.error.not_found.heading">
+                <source>Oops!</source>
+            </trans-unit>
+
+            <trans-unit id="11" resname="libero.page.error.not_found.details">
+                <source>The page you were looking for is not found.</source>
+            </trans-unit>
+
+            <trans-unit id="12" resname="libero.page.error.service_unavailable.heading">
+                <source>Back soon</source>
+            </trans-unit>
+
+            <trans-unit id="13" resname="libero.page.error.service_unavailable.details">
+                <source>We’re carrying out planned maintenance on this page.</source>
+            </trans-unit>
+
         </body>
 
     </file>
