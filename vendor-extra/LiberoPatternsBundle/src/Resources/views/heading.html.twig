@@ -11,7 +11,7 @@
   {%- with text only -%}
     {%- block text -%}
 
-      {%- if attributes.href is defined -%}
+      {%- if attributes.href|default(false) -%}
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['heading__link']) }) -%}
       {%- endif -%}
 

@@ -2,6 +2,10 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference']) }) -%}
 
+{%- if href is not defined and doi is defined -%}
+  {%- set href = 'https://doi.org/'~doi -%}
+{%- endif -%}
+
 <article {{- html.attributes(attributes) }}>
 
   {%- block body -%}
@@ -9,7 +13,7 @@
     {%- with {attributes: {class: []}} -%}
       {%- block header -%}
 
-        {%- with heading|merge({text: {text: heading.text} }) only -%}
+        {%- with heading|merge({text: {attributes: {href: href|default(false)}, text: heading.text}}) only -%}
           {%- block heading -%}
 
             {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference__heading']) }) -%}
@@ -24,6 +28,7 @@
           {%- block authors -%}
 
             {%- if items|default([])|length -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference__authors_list']) }) -%}
               {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true} -%}
             {%- endif -%}
 
@@ -34,6 +39,7 @@
           {%- block details -%}
 
             {%- if text is defined -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference__details']) }) -%}
               {%- include '@LiberoPatterns/paragraph.html.twig' -%}
             {%- endif -%}
 
@@ -44,7 +50,7 @@
           {%- block doi -%}
 
             {%- if doi -%}
-              {%- include '@LiberoPatterns/link.html.twig' with {attributes: {href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
+              {%- include '@LiberoPatterns/link.html.twig' with {attributes: {class: 'reference__doi', href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
             {%- endif -%}
 
           {%- endblock doi -%}
