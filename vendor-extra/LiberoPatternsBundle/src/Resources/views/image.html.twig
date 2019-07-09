@@ -1,12 +1,14 @@
 {%- import '@LiberoPatterns/html.html.twig' as html -%}
 
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['image']) }) -%}
+
 <picture {{- html.attributes(attributes|default({})) }}>
 
   {%- for source in sources|default([]) -%}
     <source {{- html.attributes(source) }}>
   {%- endfor -%}
 
-  {%- set image = image|default({})|merge({class: image.class|default([])|merge(['image']) }) -%}
+  {%- set image = image|default({})|merge({class: image.class|default([])|merge(['image__img']) }) -%}
 
   <img {{- html.attributes(image) }}>
 
