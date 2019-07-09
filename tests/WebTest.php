@@ -154,4 +154,19 @@ XML
         yield 'ID foo' => ['foo'];
         yield 'ID bar' => ['bar'];
     }
+
+    /**
+     * @test
+     */
+    public function it_shows_errors() : void
+    {
+        $client = self::createClient(['debug' => false]);
+
+        $crawler = $client->request('GET', '/foo');
+        $response = $client->getResponse();
+
+        $this->assertSame(404, $response->getStatusCode());
+        $this->assertSame('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
+        $this->assertContains('The page you were looking for is not found.', $crawler->text());
+    }
 }
