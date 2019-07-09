@@ -86,6 +86,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN touch .phpcs-cache && \
     chown www-data:www-data .phpcs-cache
 COPY tests/ tests/
+COPY .docker/php-test.ini ${PHP_INI_DIR}/conf.d/01-app.ini
 COPY composer.json \
     composer.lock \
     phpcs.xml.dist \
@@ -112,7 +113,7 @@ ENV APP_ENV=dev
 USER root
 ENV COMPOSER_ALLOW_SUPERUSER=true
 
-COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/01-app.ini
+COPY .docker/php-dev.ini ${PHP_INI_DIR}/conf.d/02-app.ini
 
 RUN bin/console assets:install && \
     rm -rf var/*
@@ -144,4 +145,4 @@ FROM dev AS debug
 COPY --from=xdebug ${PHP_EXTENSION_DIR}/*.so ${PHP_EXTENSION_DIR}/
 COPY --from=xdebug ${PHP_INI_DIR}/conf.d/*.ini ${PHP_INI_DIR}/conf.d/
 
-COPY .docker/php-debug.ini ${PHP_INI_DIR}/conf.d/02-app.ini
+COPY .docker/php-debug.ini ${PHP_INI_DIR}/conf.d/03-app.ini
