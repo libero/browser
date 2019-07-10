@@ -61,6 +61,8 @@ RUN bin/console assets:install && \
 
 USER www-data
 HEALTHCHECK --interval=5s CMD sh -c 'nc -z localhost 9000'
+ARG revision
+LABEL org.opencontainers.image.revision=${revision}
 
 
 
