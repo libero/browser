@@ -36,17 +36,25 @@ final class ExtLinkListenerTest extends TestCase
     public function templateChoiceProvider() : iterable
     {
         yield 'ext-link element' => [
-            <<<XML
-<ext-link xlink:href="http://example.com" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
-    foo
-</ext-link>
-XML
-            ,
+            '<ext-link xlink:href="http://example.com" xmlns="http://jats.nlm.nih.gov"
+                xmlns:xlink="http://www.w3.org/1999/xlink">foo</ext-link>',
             '@LiberoPatterns/link.html.twig',
         ];
-        yield 'ext-link element no href' => ['<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>', null];
-        yield 'different namespace' => ['<ext-link xmlns="http://example.com">foo</ext-link>', null];
-        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov">foo</italic>', null];
+
+        yield 'ext-link element no href' => [
+            '<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>',
+            null,
+        ];
+
+        yield 'different namespace' => [
+            '<ext-link xmlns="http://example.com">foo</ext-link>',
+            null,
+        ];
+
+        yield 'different element' => [
+            '<italic xmlns="http://jats.nlm.nih.gov">foo</italic>',
+            null,
+        ];
     }
 
     /**
