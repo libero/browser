@@ -22,4 +22,20 @@
     {%- endblock -%}
   {%- endwith -%}
 
+  {%- with {items: menu|default([]), html: html} only -%}
+    {%- block menu -%}
+
+      {%- if items|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['site-header__menu'])}) -%}
+
+        <div {{- html.attributes(attributes) }}>
+          {%- include '@LiberoPatterns/nav-bar.html.twig' with {attributes: {}} -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock menu -%}
+  {%- endwith -%}
+
 </header>

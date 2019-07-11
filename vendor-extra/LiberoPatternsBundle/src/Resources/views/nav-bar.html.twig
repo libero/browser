@@ -1,0 +1,45 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['nav-bar']) }) -%}
+
+<nav {{- html.attributes(attributes) }}>
+
+  {%- with {attributes: {}} -%}
+    {%- block list -%}
+
+      {%- set attributes = attributes|merge({class: attributes.class|default([])|merge(['nav-bar__list']) }) -%}
+
+      <ul {{- html.attributes(attributes) }}>
+
+        {%- for item in items -%}
+
+          {%- with {html: html, item: item} only -%}
+            {%- block item -%}
+
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['nav-bar__item']) }) -%}
+
+              <li {{- html.attributes(attributes) }}>
+
+                {%- with item only -%}
+                  {%- block content -%}
+
+                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['nav-bar__link']) }) -%}
+
+                    {%- include '@LiberoPatterns/link.html.twig' -%}
+
+                  {%- endblock content -%}
+                {%- endwith -%}
+
+              </li>
+
+            {%- endblock item -%}
+          {%- endwith -%}
+
+        {%- endfor -%}
+
+      </ul>
+
+    {%- endblock -%}
+  {%- endwith -%}
+
+</nav>

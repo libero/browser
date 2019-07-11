@@ -60,6 +60,10 @@
                 <source>We’re carrying out planned maintenance on this page.</source>
             </trans-unit>
 
+            <trans-unit id="14" resname="libero.page.menu.home">
+                <source>Home</source>
+            </trans-unit>
+
         </body>
 
     </file>
