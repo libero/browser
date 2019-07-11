@@ -71,17 +71,22 @@ XML
 
     public function nodeProvider() : iterable
     {
-        yield 'no href' => ['<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>'];
-        yield 'relative link' => [
-            <<<XML
-<ext-link xlink:href="bar" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
-    foo
-</ext-link>
-XML
-            ,
+        yield 'no href' => [
+            '<ext-link xmlns="http://jats.nlm.nih.gov">foo</ext-link>',
         ];
-        yield 'different namespace' => ['<ext-link xmlns="http://example.com">foo</ext-link>'];
-        yield 'different element' => ['<italic xmlns="http://jats.nlm.nih.gov">foo</italic>'];
+
+        yield 'relative link' => [
+            '<ext-link xlink:href="bar" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
+                foo</ext-link>',
+        ];
+
+        yield 'different namespace' => [
+            '<ext-link xmlns="http://example.com">foo</ext-link>',
+        ];
+
+        yield 'different element' => [
+            '<italic xmlns="http://jats.nlm.nih.gov">foo</italic>',
+        ];
     }
 
     /**
