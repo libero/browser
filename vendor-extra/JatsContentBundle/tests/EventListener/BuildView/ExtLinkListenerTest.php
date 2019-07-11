@@ -37,7 +37,7 @@ final class ExtLinkListenerTest extends TestCase
     {
         yield 'ext-link element' => [
             <<<XML
-<ext-link xlink:href="bar" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
+<ext-link xlink:href="http://example.com" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
     foo
 </ext-link>
 XML
@@ -93,7 +93,7 @@ XML
 
         $element = $this->loadElement(
             <<<XML
-<ext-link xlink:href="bar" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
+<ext-link xlink:href="http://example.com" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
     foo
 </ext-link>
 XML
@@ -118,7 +118,7 @@ XML
 
         $element = $this->loadElement(
             <<<XML
-<ext-link xlink:href="bar" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
+<ext-link xlink:href="http://example.com" xmlns="http://jats.nlm.nih.gov" xmlns:xlink="http://www.w3.org/1999/xlink">
     foo
 </ext-link>
 XML
