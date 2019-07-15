@@ -23,7 +23,9 @@
                 {%- with item only -%}
                   {%- block content -%}
 
-                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['nav-bar__link']) }) -%}
+                    {%- if attributes.href is defined -%}
+                      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['nav-bar__link']) }) -%}
+                    {%- endif -%}
 
                     {%- include '@LiberoPatterns/link.html.twig' -%}
 
