@@ -37,6 +37,12 @@ final class SiteHeaderListener
                             'alt' => $this->translate('libero.page.site_name', $context),
                         ],
                     ],
+                    'menu' => [
+                        [
+                            'attributes' => ['href' => $this->urlGenerator->generate('libero.page.homepage')],
+                            'text' => $this->translate('libero.page.menu.home', $context),
+                        ],
+                    ],
                 ],
                 $context
             )

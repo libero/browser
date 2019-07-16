@@ -55,4 +55,32 @@ final class SiteHeaderListenerTest extends TestCase
             $event->getContent()[0]['content'][0]['arguments']['logo']['href']
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_sets_the_menu() : void
+    {
+        $translator = new Translator('es');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource('array', ['libero.page.menu.home' => 'home in es'], 'es');
+
+        $siteHeaderListener = new SiteHeaderListener($translator, $this->createDumpingUrlGenerator());
+
+        $event = new CreatePagePartEvent('template', $this->createRequest('page'), [], ['lang' => 'es']);
+
+        $siteHeaderListener->onCreatePagePart($event);
+
+        $this->assertSame(
+            [
+                [
+                    'attributes' => [
+                        'href' => 'libero.page.homepage/{}',
+                    ],
+                    'text' => 'home in es',
+                ],
+            ],
+            $event->getContent()[0]['content'][0]['arguments']['menu']
+        );
+    }
 }
