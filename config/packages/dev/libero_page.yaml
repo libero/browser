@@ -3,6 +3,17 @@ libero_page:
         homepage:
             path: '/'
             primary_listing: 'scholarly-articles/items'
+            header_image:
+                src: https://picsum.photos/1114/336
+                sources:
+                    - media: '(max-width: 450px)'
+                      srcset: https://picsum.photos/450/336
+                    - media: '(max-width: 729px)'
+                      srcset: https://picsum.photos/729/336
+                    - media: '(max-width: 899px)'
+                      srcset: https://picsum.photos/899/336
+                    - media: '(max-width: 1023px)'
+                      srcset: https://picsum.photos/1023/336
         content:
             blog-articles:
                 path: '/blog/{id}'

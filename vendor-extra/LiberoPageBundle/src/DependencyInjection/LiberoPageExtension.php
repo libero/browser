@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libero\LiberoPageBundle\DependencyInjection;
 
 use Libero\LiberoPageBundle\Controller\PageController;
+use Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener;
 use Libero\LiberoPageBundle\EventListener\InfoBarListener;
 use Libero\LiberoPageBundle\EventListener\LiberoPageListener;
 use Libero\LiberoPageBundle\Routing\PageRouteLoader;
@@ -50,6 +51,9 @@ final class LiberoPageExtension extends Extension
 
         $container->findDefinition(InfoBarListener::class)
             ->setArgument(0, $config['info_bar']['text'] ?? null);
+
+        $container->findDefinition(HomepageContentHeaderListener::class)
+            ->setArgument(0, $config['pages']['homepage']['homepage']['header_image'] ?? []);
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container) : ConfigurationInterface

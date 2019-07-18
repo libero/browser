@@ -2,110 +2,160 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
 
+{%- if image is defined -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-header--image']) }) -%}
+{%- endif -%}
+
 {%- if hasHeader|default(categories.items|default([])|length or download.link.href is defined) -%}
   {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--has-header']) }) -%}
 {%- endif -%}
 
+{%- if hasFooter|default(meta.items|default([])|length) -%}
+  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--has-footer']) }) -%}
+{%- endif -%}
+
 <header {{- html.attributes(attributes) }}>
 
-  {%- block body -%}
+  {%- with image|default({})|merge({html: html}) only -%}
+    {%- block image -%}
 
-    {%- with {categories: categories|default({}), html: html} only -%}
-      {%- block categories -%}
+      {%- if image.src is defined -%}
 
-        {%- if categories.items|default([])|length -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
 
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
+        <picture {{- html.attributes(attributes|default({})) }}>
 
-          <div {{ html.attributes(attributes) }}>
-            {%- include '@LiberoPatterns/tag-list.html.twig' with {list: categories|merge({singleLine: true})} only -%}
-          </div>
+          {%- for source in sources|default([]) -%}
+            <source {{- html.attributes(source) }}>
+          {%- endfor -%}
 
-        {%- endif -%}
+          {%- set image = image|merge({class: image.class|default([])|merge(['content-header__image']) }) -%}
 
-      {%- endblock categories -%}
-    {%- endwith -%}
+          <img {{- html.attributes(image) }}>
 
-    {%- with contentTitle only -%}
+        </picture>
 
-      {%- block title -%}
+      {%- endif -%}
 
-        {% set length = include('@LiberoPatterns/heading.html.twig')|striptags|trim|length %}
+    {%- endblock -%}
+  {%- endwith -%}
 
-        {% if length < 20 %}
-          {% set lengthClass = 'xx-short' %}
-        {% elseif length < 36 %}
-          {% set lengthClass = 'x-short' %}
-        {% elseif length < 46 %}
-          {% set lengthClass = 'short' %}
-        {% elseif length < 57 %}
-          {% set lengthClass = 'medium' %}
-        {% elseif length < 80 %}
-          {% set lengthClass = 'long' %}
-        {% elseif length < 120 %}
-          {% set lengthClass = 'x-long' %}
-        {% else %}
-          {% set lengthClass = 'xx-long' %}
-        {% endif %}
+  {%- with {categories: categories|default({}), hasImage: image is defined, html: html} only -%}
+    {%- block categories -%}
 
-        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
-        {% set level = 1 %}
+      {%- if categories.items|default([])|length -%}
 
-        {% include '@LiberoPatterns/heading.html.twig' %}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
 
-      {%- endblock -%}
+        <div {{ html.attributes(attributes) }}>
+          {%- include '@LiberoPatterns/tag-list.html.twig' with {list: categories|merge({singleLine: true}), reverse: hasImage} only -%}
+        </div>
 
-    {%- endwith -%}
+      {%- endif -%}
 
-    {%- with download|default({})|merge({html: html}) only -%}
-      {%- block download -%}
+    {%- endblock categories -%}
+  {%- endwith -%}
 
-        {%- if link.href is defined -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
+  {%- with download|default({})|merge({hasImage: image is defined, html: html}) only -%}
+    {%- block download -%}
 
-          <div {{ html.attributes(attributes) }}>
-            <a {{ html.attributes(link) }}>
-              <picture>
-                <source srcset="{{ asset('images/download-full.svg', 'libero_patterns') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-                <img src="{{ asset('images/download.svg', 'libero_patterns') }}" class="content-header__download_icon" alt="{{ alt|default('') }}">
-              </picture>
-            </a>
-          </div>
+      {%- if link.href is defined -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
 
-        {%- endif -%}
+        <div {{ html.attributes(attributes) }}>
+          <a {{ html.attributes(link) }}>
+            <picture>
+              {%- set image = hasImage ? 'download-reverse' : 'download' -%}
+              <source srcset="{{ asset('images/content-header/' ~ image ~ '-full.svg', 'libero_patterns') }}" type="image/svg+xml"
+                      media="(min-width: 45.625em)">
+              <img src="{{ asset('images/content-header/' ~ image ~ '.svg', 'libero_patterns') }}" class="content-header__download_icon"
+                   alt="{{ alt|default('') }}">
+            </picture>
+          </a>
+        </div>
 
-      {%- endblock download -%}
-    {%- endwith -%}
+      {%- endif -%}
 
-    {%- with authors|default({}) only -%}
-      {%- block authors -%}
+    {%- endblock download -%}
+  {%- endwith -%}
 
-        {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false, alternativeSeparators: false} -%}
-        {%- endif -%}
+  {%- with {attributes: {}} -%}
+    {%- block body -%}
 
-      {%- endblock authors -%}
-    {%- endwith -%}
+      {%- set attributes = attributes|merge({class: attributes.class|default([])|merge(['content-header__body']) }) -%}
 
-    {%- with affiliations|default({}) only -%}
-      {%- block affiliations -%}
+      <div {{ html.attributes(attributes) }}>
 
-        {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true, alternativeSeparators: true} -%}
-        {%- endif -%}
+        {%- with contentTitle only -%}
 
-      {%- endblock affiliations -%}
-    {%- endwith -%}
+          {%- block title -%}
 
-    {%- with meta|default({}) only -%}
-      {%- block meta -%}
+            {% set length = include('@LiberoPatterns/heading.html.twig')|striptags|trim|length %}
 
-        {%- if items|default([])|length -%}
-          {%- include '@LiberoPatterns/content-meta.html.twig' -%}
-        {%- endif -%}
+            {% if length < 20 %}
+              {% set lengthClass = 'xx-short' %}
+            {% elseif length < 36 %}
+              {% set lengthClass = 'x-short' %}
+            {% elseif length < 46 %}
+              {% set lengthClass = 'short' %}
+            {% elseif length < 57 %}
+              {% set lengthClass = 'medium' %}
+            {% elseif length < 80 %}
+              {% set lengthClass = 'long' %}
+            {% elseif length < 120 %}
+              {% set lengthClass = 'x-long' %}
+            {% else %}
+              {% set lengthClass = 'xx-long' %}
+            {% endif %}
 
-      {%- endblock meta -%}
-    {%- endwith -%}
+            {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
+            {% set level = 1 %}
 
-  {%- endblock body -%}
+            {% include '@LiberoPatterns/heading.html.twig' %}
+
+          {%- endblock -%}
+
+        {%- endwith -%}
+
+        {%- with authors|default({}) only -%}
+          {%- block authors -%}
+
+            {%- if items|default([])|length -%}
+              {%- include '@LiberoPatterns/inline-list.html.twig' with {small: false, alternativeSeparators: false} -%}
+            {%- endif -%}
+
+          {%- endblock authors -%}
+        {%- endwith -%}
+
+        {%- with affiliations|default({}) only -%}
+          {%- block affiliations -%}
+
+            {%- if items|default([])|length -%}
+              {%- include '@LiberoPatterns/inline-list.html.twig' with {small: true, alternativeSeparators: true} -%}
+            {%- endif -%}
+
+          {%- endblock affiliations -%}
+        {%- endwith -%}
+
+      </div>
+
+    {%- endblock body -%}
+  {%- endwith -%}
+
+  {%- with {meta: meta|default({}), hasImage: image is defined, html: html} only -%}
+    {%- block meta -%}
+
+      {%- if meta.items|default([])|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__meta']) }) -%}
+
+        <div {{ html.attributes(attributes) }}>
+          {%- include '@LiberoPatterns/content-meta.html.twig' with meta|merge({reverse: hasImage}) only -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock meta -%}
+  {%- endwith -%}
+
 </header>
