@@ -6,6 +6,10 @@
   {%- set attributes = attributes|merge({class: attributes.class|merge(['tag-list--compact']) }) -%}
 {%- endif -%}
 
+{%- if reverse|default(false) -%}
+  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list--reverse']) }) -%}
+{%- endif -%}
+
 <div {{- html.attributes(attributes) }}>
 
   {%- with title|default({}) only -%}

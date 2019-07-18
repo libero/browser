@@ -2,6 +2,10 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
+{%- if reverse|default(false) -%}
+  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta--reverse']) }) -%}
+{%- endif -%}
+
 <ul {{- html.attributes(attributes) }}>
   {%- for item in items -%}
 

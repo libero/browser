@@ -37,6 +37,7 @@
         </service>
 
         <service id="Libero\LiberoPageBundle\EventListener\HomepageContentHeaderListener">
+            <argument/>
             <argument type="service" id="translator"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
         </service>

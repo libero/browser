@@ -65,9 +65,38 @@ final class LiberoPageConfiguration implements ConfigurationInterface
                 ->scalarNode('primary_listing')
                     ->isRequired()
                 ->end()
+                ->append($this->getHomepageHeaderImageDefinition())
             ->end()
         ;
         return $pagesNode;
+    }
+
+    private function getHomepageHeaderImageDefinition() : ArrayNodeDefinition
+    {
+        $builder = new TreeBuilder();
+        /** @var ArrayNodeDefinition $headerImageNode */
+        $headerImageNode = $builder->root('header_image');
+        $headerImageNode
+            ->children()
+                ->scalarNode('src')
+                    ->isRequired()
+                ->end()
+                ->arrayNode('sources')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('srcset')
+                                ->isRequired()
+                            ->end()
+                            ->scalarNode('media')
+                            ->end()
+                            ->scalarNode('type')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+        return $headerImageNode;
     }
 
     private function getContentPagesDefinition() : ArrayNodeDefinition
