@@ -6,6 +6,10 @@
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-header--image']) }) -%}
 {%- endif -%}
 
+{%- if compact|default(false) -%}
+  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--compact']) }) -%}
+{%- endif -%}
+
 {%- if hasHeader|default(categories.items|default([])|length or download.link.href is defined) -%}
   {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--has-header']) }) -%}
 {%- endif -%}

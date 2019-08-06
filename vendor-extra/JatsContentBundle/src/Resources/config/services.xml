@@ -18,6 +18,11 @@
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="50"/>
         </service>
 
+        <service id="Libero\JatsContentBundle\EventListener\ContextualDataListener">
+            <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
+            <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="49"/>
+        </service>
+
         <service id="Libero\JatsContentBundle\EventListener\ItemTagsListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <tag name="kernel.event_listener" event="libero.page.create.main" method="onCreatePagePart" priority="-10"/>
@@ -120,6 +125,10 @@
         <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontDisplayChannelContentMetaListener">
             <argument type="service" id="Libero\ViewsBundle\Views\ViewConverter"/>
             <argument type="service" id="translator"/>
+            <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
+        </service>
+
+        <service id="Libero\JatsContentBundle\EventListener\BuildView\FrontDoiContextualDataListener">
             <tag name="kernel.event_listener" event="libero.view.build" method="onBuildView"/>
         </service>
 

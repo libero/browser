@@ -1,0 +1,15 @@
+{%- import '@LiberoPatterns/html.html.twig' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['contextual-data']) }) -%}
+
+<div {{- html.attributes(attributes|default({})) }}>
+  {%- with {doi: doi} only -%}
+    {%- block doi -%}
+
+      {%- if doi -%}
+       {%- include '@LiberoPatterns/link.html.twig' with {attributes: {class: 'contextual-data__doi', href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
+      {%- endif -%}
+
+    {%- endblock doi -%}
+  {%- endwith -%}
+</div>
